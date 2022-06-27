@@ -1,0 +1,24 @@
+.BoxRow1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.BoxRow2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.Row1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.BoxHeader {
+    color: white;
+    font-weight: 700;
+}
+
+.BoxSubHeader {
+    line-height: 4;
+    font-weight: 700;
+}

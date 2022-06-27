@@ -1,0 +1,10 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+input[type='submit'] {
+  height: 36px;
+  width: 124px;
+}
