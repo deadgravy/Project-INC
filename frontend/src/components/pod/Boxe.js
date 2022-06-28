@@ -1,101 +1,60 @@
 import React, { useRef } from "react";
 import Box from "@mui/material/Box";
+// import "../pod/styles/box.css";
 
-
-const Boxe = ({data}) => {
+const Boxe = ({ data }) => {
   const ref = useRef(null);
-  return(
-      <div>
-               {/* Start of boxes */}
-        <div className="Boxes">
-          <div className="BoxRow1">
-            <Box
-              sx={{
-                width: 135,
-                height: 70,
-                backgroundColor: "#0CA85D",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-                padding: 1.2,
-                fontSize: 12,
-                borderRadius: 1,
-                marginTop: 15,
-                marginLeft: 40,
-              }}
-            >
-               <div className="BoxHeader">{data?.data[0].process_name}</div>
-              {/* <div className="BoxSubHeader">{data.data[0].avg}</div> */}
-              {/* {data && <div className="BoxHeader">{data.data[0].process_name}</div>} */}
-            
-            </Box>
-            <Box
-              sx={{
-                width: 135,
-                height: 70,
-                backgroundColor: "#9F43CC",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-                padding: 1.2,
-                fontSize: 12,
-                borderRadius: 1,
-                marginLeft: 3,
-                marginTop: 15,
-              }}
-            >
-              <div className="BoxHeader">Mixing (2nd Step)</div>
-              <div className="BoxSubHeader">35 minutes</div>
-            </Box>
-          </div>
+  const bgColor = [
+    "#0CA85D",
+    "#9F43CC",
+    "#EBA10F",
+    "#2B87E3",
+    "#fc0303",
+    "#31ebf5",
+  ];
 
-          <div className="BoxRow2">
-            <Box
-              sx={{
-                width: 135,
-                height: 70,
-                backgroundColor: "#EBA10F",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-                padding: 1.2,
-                fontSize: 12,
-                borderRadius: 1,
-                marginTop: 3,
-                marginLeft: 40,
-              }}
-            >
-              <div className="BoxHeader">Baking (3rd Step)</div>
-              <div className="BoxSubHeader">15 minutes</div>
-            </Box>
-            <Box
-              sx={{
-                width: 135,
-                height: 70,
-                backgroundColor: "#2B87E3",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-                padding: 1.2,
-                fontSize: 12,
-                borderRadius: 1,
-                marginLeft: 3,
-                marginTop: 3,
-              }}
-            >
-              <div className="BoxHeader">Packing (4th Step)</div>
-              <div className="BoxSubHeader">45 minutes</div>
-            </Box>
-          </div>
+  return (
+    <div className="boxes">
+      {data.data.map((adeebisking, count) => (
+        <div>
+          <Box
+            sx={{
+              height: 70,
+              backgroundColor: bgColor[count],
+              "&:hover": {
+                backgroundColor: "primary.main",
+                opacity: [0.9, 0.8, 0.7],
+              },
+              padding: 1.2,
+              fontSize: 12,
+              borderRadius: 1,
+              marginTop: 5,
+              marginLeft: 30,
+            }}
+          >
+            <div className="BoxHeader">{data?.data[count].process_name}</div>
+            <div className="BoxSubHeader">
+              {data?.data[count].avg.days
+                ? `${data?.data[count].avg.days} days`
+                : ""}{" "}
+              {data?.data[count].avg.hours
+                ? `${data?.data[count].avg.hours} hours`
+                : ""}{" "}
+              {data?.data[count].avg.minutes
+                ? `${data?.data[count].avg.minutes} minutes`
+                : ""}{" "}
+              {data?.data[count].avg.seconds
+                ? `${data?.data[count].avg.seconds} seconds`
+                : ""}{" "}
+              {data?.data[count].avg.milliseconds
+                ? `${data?.data[count].avg.milliseconds} milliseconds`
+                : ""}{" "}
+            </div>
+          </Box>
         </div>
-        {/* End of boxes */}
-      </div>
-  )
-
-}
+      ))}
+    </div>
+  );
+};
 
 export default Boxe;
