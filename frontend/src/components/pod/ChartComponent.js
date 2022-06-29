@@ -8,6 +8,8 @@ const colors = [
   "#2B87E3",
   "#fc0303",
   "#31ebf5",
+  "#ff895c",
+  "#3e2d2d",
 ];
 const boxSize = 500;
 
