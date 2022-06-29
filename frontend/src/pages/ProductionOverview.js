@@ -19,7 +19,7 @@ const ProductionOverview = () => {
 
   function getData(data) {
     let dataArr = [];
-    console.log(data.data.length);
+    // console.log(data.data.length);
     for (let i = 0; i < data.data.length; i++) {
       const avg = data.data[i].avg;
       let mins = avg?.minutes;
