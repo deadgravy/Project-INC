@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import ChartComponent from "../components/pod/ChartComponent";
 import Boxe from "../components/pod/Boxe";
+import { Link } from "react-router-dom";
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
@@ -26,19 +27,19 @@ const ProductionOverview = () => {
       let hours = avg?.hours;
       let days = avg?.days;
 
-      if (hours == undefined || hours == null) {
+      if (hours === undefined || hours === null) {
         hours = 0;
       }
 
-      if (days == undefined || days == null) {
+      if (days === undefined || days === null) {
         days = 0;
       }
 
-      if (mins == undefined || mins == null) {
+      if (mins === undefined || mins === null) {
         mins = 0;
       }
 
-      if (seconds == undefined || seconds == null) {
+      if (seconds === undefined || seconds === null) {
         seconds = 0;
       }
 

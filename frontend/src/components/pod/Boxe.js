@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 // import "../pod/styles/box.css";
 
 const Boxe = ({ data }) => {
-  const ref = useRef(null);
+  // const ref = useRef(null);
   const bgColor = [
     "#0CA85D",
     "#9F43CC",
