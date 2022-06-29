@@ -9,6 +9,6 @@ router.get('/data/data1', dataController.getData1);
 router.get('/data/data2', dataController.getRecipebyRecipeID); 
 
 // login
-//router.get('/login', dataController.verify)
+// router.get('/login', dataController.verify)
 
 module.exports = router;
