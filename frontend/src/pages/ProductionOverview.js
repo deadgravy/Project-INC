@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import ChartComponent from "../components/pod/ChartComponent";
 import Boxe from "../components/pod/Boxe";
+import { Link } from "react-router-dom";
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
