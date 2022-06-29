@@ -1,7 +1,14 @@
 import React, { useRef } from "react";
 import * as d3 from "d3";
 
-const colors = ["#0CA85D", "#9F43CC", "#2B87E3", "#EBA10F"];
+const colors = [
+  "#0CA85D",
+  "#9F43CC",
+  "#EBA10F",
+  "#2B87E3",
+  "#fc0303",
+  "#31ebf5",
+];
 const boxSize = 500;
 
 const DonutChart = ({ data }) => {
