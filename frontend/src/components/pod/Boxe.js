@@ -70,28 +70,24 @@ const Boxe = ({ data }) => {
                 marginLeft: 30,
               }}
             >
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <div className="BoxHeader">
-                  {data?.data[count].process_name}
-                </div>
+              <div className="BoxHeader">{data?.data[count].process_name}</div>
 
-                <div className="BoxSubHeader">
-                  {data?.data[count].avg.days
-                    ? `${data?.data[count].avg.days} days`
-                    : ""}{" "}
-                  {data?.data[count].avg.hours
-                    ? `${data?.data[count].avg.hours} hours`
-                    : ""}{" "}
-                  {data?.data[count].avg.minutes
-                    ? `${data?.data[count].avg.minutes} minutes`
-                    : ""}{" "}
-                  {data?.data[count].avg.seconds
-                    ? `${data?.data[count].avg.seconds} seconds`
-                    : ""}{" "}
-                  {data?.data[count].avg.milliseconds
-                    ? `${data?.data[count].avg.milliseconds} milliseconds`
-                    : ""}{" "}
-                </div>
+              <div className="BoxSubHeader">
+                {data?.data[count].avg.days
+                  ? `${data?.data[count].avg.days} days`
+                  : ""}{" "}
+                {data?.data[count].avg.hours
+                  ? `${data?.data[count].avg.hours} hours`
+                  : ""}{" "}
+                {data?.data[count].avg.minutes
+                  ? `${data?.data[count].avg.minutes} minutes`
+                  : ""}{" "}
+                {data?.data[count].avg.seconds
+                  ? `${data?.data[count].avg.seconds} seconds`
+                  : ""}{" "}
+                {data?.data[count].avg.milliseconds
+                  ? `${data?.data[count].avg.milliseconds} milliseconds`
+                  : ""}{" "}
               </div>
             </Box>
           )}
