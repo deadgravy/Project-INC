@@ -26,19 +26,19 @@ const ProductionOverview = () => {
       let hours = avg?.hours;
       let days = avg?.days;
 
-      if (hours == undefined || hours == null) {
+      if (hours === undefined || hours === null) {
         hours = 0;
       }
 
-      if (days == undefined || days == null) {
+      if (days === undefined || days === null) {
         days = 0;
       }
 
-      if (mins == undefined || mins == null) {
+      if (mins === undefined || mins === null) {
         mins = 0;
       }
 
-      if (seconds == undefined || seconds == null) {
+      if (seconds === undefined || seconds === null) {
         seconds = 0;
       }
 
