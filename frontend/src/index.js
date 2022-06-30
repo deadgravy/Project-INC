@@ -14,7 +14,3 @@ root.render(
   </BrowserRouter>
 );
 //hello world
-<<<<<<< Updated upstream
-=======
-//Javier
->>>>>>> Stashed changes
