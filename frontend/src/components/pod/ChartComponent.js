@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
-import * as d3 from "d3";
+import React, { useRef } from 'react';
+import * as d3 from 'd3';
 
 const colors = [
-  "#0CA85D",
-  "#9F43CC",
-  "#EBA10F",
-  "#2B87E3",
-  "#fc0303",
-  "#31ebf5",
-  "#ff895c",
-  "#3e2d2d",
+  '#0CA85D',
+  '#9F43CC',
+  '#EBA10F',
+  '#2B87E3',
+  '#fc0303',
+  '#31ebf5',
+  '#ff895c',
+  '#3e2d2d',
 ];
 const boxSize = 500;
 
@@ -17,18 +17,18 @@ const DonutChart = ({ data }) => {
   const ref = useRef(null);
 
   if (data) {
-    d3.select(ref.current).select("svg").remove(); // Remove the old svg
+    d3.select(ref.current).select('svg').remove(); // Remove the old svg
 
     // Create new svg
     const svg = d3
       .select(ref.current)
-      .append("svg")
-      .attr("preserveAspectRatio", "xMidYMid meet")
-      .attr("height", "130%")
-      .attr("width", "130%")
-      .attr("viewBox", `0 0 ${boxSize} ${boxSize}`)
-      .append("g")
-      .attr("transform", `translate(${boxSize / 2}, ${boxSize / 2})`);
+      .append('svg')
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .attr('height', '130%')
+      .attr('width', '130%')
+      .attr('viewBox', `0 0 ${boxSize} ${boxSize}`)
+      .append('g')
+      .attr('transform', `translate(${boxSize / 2}, ${boxSize / 2})`);
 
     const arcGenerator = d3.arc().innerRadius(150).outerRadius(220);
 
@@ -38,33 +38,33 @@ const DonutChart = ({ data }) => {
 
     //recipe label
     const recipe = svg
-      .append("g")
-      .attr("class", "bar-header")
-      .attr("transform", `translate(-80, 2)`)
-      .attr("font-weight", 900)
-      .style("font-size", "2.5em")
-      .append("text");
+      .append('g')
+      .attr('class', 'bar-header')
+      .attr('transform', `translate(-80, 2)`)
+      .attr('font-weight', 900)
+      .style('font-size', '2.5em')
+      .append('text');
 
-    recipe.append("tspan").text(data?.data[0].name);
+    recipe.append('tspan').text(data?.data[0].name);
 
     recipe
-      .append("tspan")
-      .attr("x", 35)
-      .attr("dy", "1.8em")
-      .style("font-size", "0.6em")
-      .style("fill", "#555")
-      .attr("font-weight", 400)
-      .text("2 Hours");
+      .append('tspan')
+      .attr('x', 35)
+      .attr('dy', '1.8em')
+      .style('font-size', '0.6em')
+      .style('fill', '#555')
+      .attr('font-weight', 400)
+      .text('2 Hours');
 
     arcs
-      .append("path")
-      .attr("d", arcGenerator)
-      .style("fill", (d, i) => colors[i % data.value.length]);
+      .append('path')
+      .attr('d', arcGenerator)
+      .style('fill', (d, i) => colors[i % data.value.length]);
   }
 
   return (
-    <div className="container">
-      <div className="graph" ref={ref} />
+    <div className='container'>
+      <div className='graph' ref={ref} />
     </div>
   );
 };

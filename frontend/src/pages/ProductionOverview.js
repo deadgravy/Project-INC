@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
-import ChartComponent from "../components/pod/ChartComponent";
-import Boxe from "../components/pod/Boxe";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import '../styles/styles.css';
+import ChartComponent from '../components/pod/ChartComponent';
+import Boxe from '../components/pod/Boxe';
+import { Link } from 'react-router-dom';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
@@ -43,10 +43,10 @@ const ProductionOverview = () => {
         seconds = 0;
       }
 
-      console.log("Days: " + days);
-      console.log("Hours: " + hours);
-      console.log("Mins: " + mins);
-      console.log("Seconds: " + seconds);
+      console.log('Days: ' + days);
+      console.log('Hours: ' + hours);
+      console.log('Mins: ' + mins);
+      console.log('Seconds: ' + seconds);
 
       const milliseconds = convertToMilli(days, hours, seconds, mins);
 
@@ -59,7 +59,7 @@ const ProductionOverview = () => {
   // useEffect
   useEffect(() => {
     setIsloading(true);
-    fetch("http://localhost:4000/api/data/data2")
+    fetch('http://localhost:4000/api/data/data2')
       .then((res) => res.json())
       .then((data) => {
         // Below should be just setProdOverviewData(data), where data is your full backend data.
@@ -73,9 +73,9 @@ const ProductionOverview = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       {!isLoading ? (
-        <div className="Row1">
+        <div className='Row1'>
           {/* <FetchData data={data} /> */}
           {/* <div> {milliseconds} </div> */}
           <ChartComponent data={prodOverviewData} />

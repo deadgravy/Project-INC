@@ -1,19 +1,18 @@
-const { Client } = require("pg");
+const { Client } = require('pg');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
   const client = new Client({
-    host: "localhost",
-    user: "postgres",
+    host: 'localhost',
+    user: 'postgres',
     port: 5432,
-    password: "root",
-    database: "firc_v3",
+    password: 'root',
+    database: 'firc_v3',
   });
 
   client.connect();
   try {
-    const { rows } =
-      await client.query(`SELECT 
+    const { rows } = await client.query(`SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -57,17 +56,16 @@ module.exports.getData1 = async function () {
 
 module.exports.getRecipebyRecipeID = async function () {
   const client = new Client({
-    host: "localhost",
-    user: "postgres",
+    host: 'localhost',
+    user: 'postgres',
     port: 5432,
-    password: "root",
-    database: "firc_v3",
+    password: 'root',
+    database: 'firc_v3',
   });
 
   client.connect();
   try {
-    const { rows } =
-      await client.query(`SELECT 
+    const { rows } = await client.query(`SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -108,5 +106,3 @@ module.exports.getRecipebyRecipeID = async function () {
     console.log(error);
   }
 };
-
-
