@@ -5,7 +5,7 @@ import Boxe from '../components/pod/Boxe';
 import { Link } from 'react-router-dom';
 
 const ProductionOverview = () => {
-  const [prodOverviewData, setProdOverviewData] = useState(null);
+  const [prodOverviewData, setProdOverviewData] = useState('');
   const [isLoading, setIsloading] = useState(true);
 
   function convertToMilli(days, hours, seconds, mins) {
