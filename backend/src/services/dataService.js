@@ -6,8 +6,8 @@ module.exports.getData1 = async function () {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-    password: 'root',
-    database: 'firc_v3',
+    password: 'gyx915826',
+    database: 'FIRC',
   });
 
   client.connect();
@@ -60,8 +60,8 @@ module.exports.getRecipebyRecipeID = async function (id) {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-    password: 'root',
-    database: 'firc_v3',
+    password: 'gyx915826',
+    database: 'FIRC',
   });
 
   client.connect();

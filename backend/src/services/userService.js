@@ -7,7 +7,7 @@ module.exports.addUser = async function (email, contact_number, first_name, last
       host: 'localhost',
       user: 'postgres',
       port: 5432,
-      password: 'root',
+      password: 'gyx915826',
       database: 'user_management',
     });
   
