@@ -7,7 +7,7 @@ module.exports.verify = async function (email) {
       host: 'localhost',
       user: 'postgres',
       port: 5432,
-      password: 'root',
+      password: 'gyx915826',
       database: 'user_management',
     });
   
