@@ -11,9 +11,28 @@ const SignUp = () => {
   // Reading form inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    const postData = { firstName, lastName, email, contact, password };
+    const postData = {
+      email,
+      contact_number: contact,
+      first_name: firstName,
+      last_name: lastName,
+      password
+    };
 
-    console.log(postData);
+    fetch('http://localhost:4000/api/addUser', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postData)
+    })
+    .then((response) => {
+      if (response.status === 201) {
+        // TODO: Redirect to EUS
+        console.log("Successful sign up, redirect to EUS");
+        return;
+      } else {
+        // TODO: An error pop up will show
+      }
+    })
   };
 
   return (
