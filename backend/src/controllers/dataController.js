@@ -19,6 +19,7 @@ module.exports.createTeamAndTeamMemberData = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+
 module.exports.getData1 = async function (req, res, next) {
   try {
     const results = await dataManager.getData1();

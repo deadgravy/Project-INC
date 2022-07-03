@@ -2,7 +2,7 @@ const userService = require('../services/userService');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-module.exports.addUser = async function (req, res, next) {
+module.exports.addUser = async function (req, res) {
 
     try {
         const {email, contact_number, first_name, last_name, password} = req.body;
