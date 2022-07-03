@@ -13,6 +13,6 @@ router.get('/data/data2', dataController.getRecipebyRecipeID);
 // router.get('/login', dataController.verify)
 
 // add user
-router.post('/adduser', userController.addUser)
+router.post('/addUser', userController.addUser)
 
 module.exports = router;
