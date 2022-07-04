@@ -6,12 +6,13 @@ import ProductionOverview from "./pages/ProductionOverview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="productionOverview" element={<ProductionOverview />} />
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="productionOverview" element={<ProductionOverview />} />
+        <Route path="productionOverview/:id" element={<ProductionOverview />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
-//hello world
-//Javier
