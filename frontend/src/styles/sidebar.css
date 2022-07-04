@@ -1,0 +1,18 @@
+#sidebar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+}
+
+#sidebar .row:hover {
+    background-color: #F4BC47;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#sidebar #active {
+    color: white;
+    background-color: #EB3D46;
+    border-radius: 8px;
+}
