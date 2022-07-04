@@ -4,6 +4,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';   
 import WaterfallChartIcon from '@mui/icons-material/WaterfallChart'; 
 import TodayIcon from '@mui/icons-material/Today';
+import DonutLarge from '@mui/icons-material/DonutLarge'
+import InventoryIcon from '@mui/icons-material/Inventory'
 
 export const SidebarData = [
     {
@@ -23,12 +25,12 @@ export const SidebarData = [
     },
     {
         title: "Single Product Flow",
-        icon: <HomeIcon />,
+        icon: <InventoryIcon />,
         link: "/singleProduct"
     },
     {
         title: "Production Overview",
-        icon: <HomeIcon />,
+        icon: <DonutLarge />,
         link: "/productionOverview"
     },
     {
