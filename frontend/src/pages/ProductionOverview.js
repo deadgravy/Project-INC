@@ -75,7 +75,7 @@ const ProductionOverview = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       {!isLoading ? (
         <div>
           <div className="Row1">
