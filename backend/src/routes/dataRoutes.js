@@ -4,6 +4,7 @@ router.use(express.json());
 
 const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
+const userController = require('../controllers/userController');
 
 router.get('/data/data1', dataController.getData1);
 
