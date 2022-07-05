@@ -3,8 +3,31 @@
   justify-content: center;
   position: fixed;
   top: 50%;
-  -webkit-transform: translate(0,-50%);
-  transform: translate(0,-50%);
+  -webkit-transform: translate(-16%, -50%);
+  transform: translate(-16%, -50%);
+}
+
+.loginContainer .card {
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  background: rgba(225, 225, 225, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  color: #ffffff;
+}
+
+.icon {
+  color: #202020;
+}
+
+.row.loginPage {
+  background: url('https://i1.adis.ws/i/canon/get-inspired-food-photography-tips-1-f9283f1f-d5f8-11ea-bea9-f8bc127793a9?qlt=80&w=1920&sm=aspect&aspect=16:9&scaleFit=poi&poi=0.20190540313720703,0.3765632234151173,0.125,0.15698587127158556&fmt=webp&bg=rgb(255,255,255)')
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
 }
 
 input[type='submit'] {

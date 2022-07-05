@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
-import ChartComponent from "../components/pod/ChartComponent";
-import BoxComponent from "../components/pod/BoxComponent";
-import LineChart from "../components/pod/LineChart.js";
-import { Route, Link, Routes, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import '../styles/styles.css';
+import ChartComponent from '../components/pod/ChartComponent';
+import BoxComponent from '../components/pod/BoxComponent';
+import LineChart from '../components/pod/LineChart.js';
+import { Route, Link, Routes, useParams } from 'react-router-dom';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
@@ -45,10 +45,10 @@ const ProductionOverview = () => {
         seconds = 0;
       }
 
-      // console.log("Days: " + days);
-      // console.log("Hours: " + hours);
-      // console.log("Mins: " + mins);
-      // console.log("Seconds: " + seconds);
+      console.log('Days: ' + days);
+      console.log('Hours: ' + hours);
+      console.log('Mins: ' + mins);
+      console.log('Seconds: ' + seconds);
 
       const milliseconds = convertToMilli(days, hours, seconds, mins);
 
@@ -75,14 +75,14 @@ const ProductionOverview = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       {!isLoading ? (
         <div>
-          <div className="Row1">
+          <div className='Row1'>
             <ChartComponent data={prodOverviewData} />
             <BoxComponent data={prodOverviewData} />
           </div>
-          <div className="Row3">
+          <div className='Row3'>
             <LineChart />
           </div>
         </div>
