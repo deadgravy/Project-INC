@@ -13,6 +13,7 @@ import moment from 'moment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+<<<<<<< HEAD
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -25,4 +26,12 @@ root.render(
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
+=======
+  <BrowserRouter>
+    <Routes>
+      <Route path="login" element={<App />} />
+      <Route path="productionOverview" element={<ProductionOverview />} />
+    </Routes>
+  </BrowserRouter>
+>>>>>>> 7ae010e4 (changed path to login in index.js line 11)
 );
