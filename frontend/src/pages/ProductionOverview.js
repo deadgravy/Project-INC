@@ -6,7 +6,7 @@ import LineChart from '../components/pod/LineChart.js';
 import { Route, Link, Routes, useParams } from 'react-router-dom';
 
 const ProductionOverview = () => {
-  const [prodOverviewData, setProdOverviewData] = useState(null);
+  const [prodOverviewData, setProdOverviewData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
 
