@@ -14,8 +14,6 @@ router.get('/data/data2/:id', dataController.getRecipebyRecipeID);
 // login
 router.post('/login', loginController.verify);
 
-
-
 // add user
 router.post('/addUser', userController.addUser)
 
