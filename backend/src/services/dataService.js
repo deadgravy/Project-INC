@@ -54,7 +54,8 @@ module.exports.getData1 = async function () {
   }
 };
 
-module.exports.getRecipebyRecipeID = async function () {
+module.exports.getRecipebyRecipeID = async function (id) {
+  console.log(id + "testing");
   const client = new Client({
     host: 'localhost',
     user: 'postgres',
@@ -65,7 +66,8 @@ module.exports.getRecipebyRecipeID = async function () {
 
   client.connect();
   try {
-    const { rows } = await client.query(`SELECT 
+    const { rows } = await client.query(
+                        `SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -94,13 +96,15 @@ module.exports.getRecipebyRecipeID = async function () {
                             ) AS T 
                         ) AS t
                         INNER JOIN recipe_flows rf
-                        ON rf.id = t.fr_process_steps and rf.fr_recipe_id = 53
+                        ON rf.id = t.fr_process_steps and rf.fr_recipe_id = $1 
                         INNER JOIN recipes r
                         ON r.id = rf.fr_recipe_id
                         INNER JOIN process_steps ps
                         ON ps.id = rf.fr_process_step
                         GROUP BY fr_recipe_id, r.name, rf.queue, fr_process_steps, ps.process_name, rf.desc_translate;
-                        `); // end of sql query
+                        `,
+      [id]
+    ); // end of sql query
     return rows;
   } catch (error) {
     console.log(error);

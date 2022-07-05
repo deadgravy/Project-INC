@@ -1,4 +1,4 @@
-const dataManager = require('../services/dataService');
+const dataManager = require("../services/dataService");
 
 module.exports.createTeamAndTeamMemberData = async function (req, res, next) {
   //console.log(req.headers['content-type']);
@@ -19,7 +19,6 @@ module.exports.createTeamAndTeamMemberData = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
-
 module.exports.getData1 = async function (req, res, next) {
   try {
     const results = await dataManager.getData1();
