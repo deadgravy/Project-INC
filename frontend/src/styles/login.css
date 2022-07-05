@@ -34,3 +34,7 @@ input[type='submit'] {
   height: 36px;
   width: 124px;
 }
+
+#sidebar {
+  display: none;
+}
