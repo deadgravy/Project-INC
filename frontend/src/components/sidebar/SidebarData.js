@@ -1,0 +1,44 @@
+import React from "react";
+import HomeIcon from '@mui/icons-material/Home';
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';   
+import WaterfallChartIcon from '@mui/icons-material/WaterfallChart'; 
+import TodayIcon from '@mui/icons-material/Today';
+
+export const SidebarData = [
+    {
+        title: "Home",
+        icon: <HomeIcon />,
+        link: "/equipmentUtilisationSnapshot"
+    },
+    {
+        title: "Equipment Utilisation",
+        icon: <WaterfallChartIcon />,
+        link: "/equipmentUtilisationDashboard"
+    },
+    {
+        title: "Today's Production",
+        icon: <TodayIcon />,
+        link: "/todayProduction"
+    },
+    {
+        title: "Single Product Flow",
+        icon: <HomeIcon />,
+        link: "/singleProduct"
+    },
+    {
+        title: "Production Overview",
+        icon: <HomeIcon />,
+        link: "/productionOverview"
+    },
+    {
+        title: "Settings",
+        icon: <SettingsIcon />,
+        link: "/settings"
+    },
+    {
+        title: "Profile",
+        icon: <PersonIcon />,
+        link: "/profile"
+    },
+]
