@@ -10,7 +10,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="productionOverview" element={<ProductionOverview />} />
+        {/* <Route path="productionOverview" element={<ProductionOverview />} /> */}
         <Route path="productionOverview/:id" element={<ProductionOverview />} />
       </Routes>
     </BrowserRouter>

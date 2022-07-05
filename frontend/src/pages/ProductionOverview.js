@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import ChartComponent from "../components/pod/ChartComponent";
-import BoxComponent from "../components/pod/BoxComponent";
+import BoxComponent from "../components/pod/Boxe";
 import LineChart from "../components/pod/LineChart.js";
 import { Route, Link, Routes, useParams } from "react-router-dom";
+import Modal from "../components/pod/Modal";
+import ErrorPage from "../components/pod/ErrorPage.js";
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
@@ -73,23 +75,29 @@ const ProductionOverview = () => {
         setIsloading(false);
       });
   }, []);
+  const [modal, setModal] = useState(false);
 
   return (
-    <div className="App">
-      {!isLoading ? (
-        <div>
-          <div className="Row1">
-            <ChartComponent data={prodOverviewData} />
-            <BoxComponent data={prodOverviewData} />
+    <React.StrictMode>
+      <div className="App">
+        {!isLoading ? (
+          <div>
+            <div className="Row1">
+              <ChartComponent data={prodOverviewData} />
+              <BoxComponent data={prodOverviewData} />
+            </div>
+            <div className="Row2">
+              <LineChart />
+            </div>
+            <div>
+              <Modal />
+            </div>
           </div>
-          <div className="Row3">
-            <LineChart />
-          </div>
-        </div>
-      ) : (
-        <div> Loading... </div> // TODO: Loading loading spinner or loading component
-      )}
-    </div>
+        ) : (
+          <div> Loading... </div> // TODO: Loading loading spinner or loading component
+        )}
+      </div>
+    </React.StrictMode>
   );
 };
 
