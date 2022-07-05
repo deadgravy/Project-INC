@@ -45,10 +45,10 @@ const ProductionOverview = () => {
         seconds = 0;
       }
 
-      // console.log("Days: " + days);
-      // console.log("Hours: " + hours);
-      // console.log("Mins: " + mins);
-      // console.log("Seconds: " + seconds);
+      console.log('Days: ' + days);
+      console.log('Hours: ' + hours);
+      console.log('Mins: ' + mins);
+      console.log('Seconds: ' + seconds);
 
       const milliseconds = convertToMilli(days, hours, seconds, mins);
 
