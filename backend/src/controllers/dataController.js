@@ -1,4 +1,4 @@
-const dataManager = require("../services/dataService");
+const dataManager = require('../services/dataService');
 
 module.exports.createTeamAndTeamMemberData = async function (req, res, next) {
   //console.log(req.headers['content-type']);
@@ -19,7 +19,6 @@ module.exports.createTeamAndTeamMemberData = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
-
 module.exports.getData1 = async function (req, res, next) {
   try {
     const results = await dataManager.getData1();
@@ -38,8 +37,10 @@ module.exports.getData1 = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getRecipebyRecipeID = async function (req, res, next) {
+  console.log(req.params);
+
   try {
-    const results = await dataManager.getRecipebyRecipeID();
+    const results = await dataManager.getRecipebyRecipeID(req.params.id);
     console.log(results);
     res.status(200).json({
       status: 'success',
