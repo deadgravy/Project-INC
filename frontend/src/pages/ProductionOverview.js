@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
-import ChartComponent from "../components/pod/ChartComponent";
-import BoxComponent from "../components/pod/BoxComponent";
-import LineChart from "../components/pod/LineChart.js";
-import { Route, Link, Routes, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import '../styles/styles.css';
+import ChartComponent from '../components/pod/ChartComponent';
+import BoxComponent from '../components/pod/BoxComponent';
+import LineChart from '../components/pod/LineChart.js';
+import { Route, Link, Routes, useParams } from 'react-router-dom';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState(null);
@@ -78,11 +78,11 @@ const ProductionOverview = () => {
     <div className='App'>
       {!isLoading ? (
         <div>
-          <div className="Row1">
+          <div className='Row1'>
             <ChartComponent data={prodOverviewData} />
             <BoxComponent data={prodOverviewData} />
           </div>
-          <div className="Row3">
+          <div className='Row3'>
             <LineChart />
           </div>
         </div>
