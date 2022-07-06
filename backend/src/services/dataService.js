@@ -1,13 +1,13 @@
-const { Client } = require('pg');
+const { Client } = require("pg");
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
   const client = new Client({
-    host: 'localhost',
-    user: 'postgres',
+    host: "localhost",
+    user: "postgres",
     port: 5432,
-    password: 'gyx915826',
-    database: 'FIRC',
+    password: "postgres",
+    database: "FIRC_v3",
   });
 
   client.connect();
@@ -57,16 +57,17 @@ module.exports.getData1 = async function () {
 module.exports.getRecipebyRecipeID = async function (id) {
   console.log(id + "testing");
   const client = new Client({
-    host: 'localhost',
-    user: 'postgres',
+    host: "localhost",
+    user: "postgres",
     port: 5432,
-    password: 'gyx915826',
-    database: 'FIRC',
+    password: "postgres",
+    database: "FIRC_v3",
   });
 
   client.connect();
   try {
-    const { rows } = await client.query(`SELECT 
+    const { rows } = await client.query(
+      `SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -107,5 +108,83 @@ module.exports.getRecipebyRecipeID = async function (id) {
     return rows;
   } catch (error) {
     console.log(error);
+  }
+};
+
+module.exports.getCompletedProducts = async function () {
+
+
+  const client = new Client({
+      host: "localhost",
+      user: "postgres",
+      port: 5432,
+      password: "postgres",
+      database: "FIRC_v3"
+  })
+
+  client.connect();
+  try {
+
+
+      const { rows } = await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
+      FROM log_times lt
+      INNER JOIN recipes rp
+      ON lt.recipe_id = rp.id
+      INNER JOIN recipe_flows AS rf
+      ON lt.recipe_id = rf.fr_recipe_id
+      WHERE lt.log_time BETWEEN '2021-08-21 00:00:00' AND '2021-08-21 08:00:00'
+      AND rf.queue = 1
+      AND lt.log_action = 2
+      GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
+      ORDER BY lt.recipe_id;
+      `);
+
+      client.end();
+
+      return rows;
+
+  } catch (error) {
+      console.log(error);
+  } finally {
+      client.end();
+  }
+};
+
+module.exports.getProductsToComplete = async function () {
+
+
+  const client = new Client({
+      host: "localhost",
+      user: "postgres",
+      port: 5432,
+      password: "postgres",
+      database: "FIRC_v3"
+  })
+
+  client.connect();
+  try {
+
+
+      const { rows } = await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
+      FROM log_times lt
+      INNER JOIN recipes rp
+      ON lt.recipe_id = rp.id
+      INNER JOIN recipe_flows AS rf
+      ON lt.recipe_id = rf.fr_recipe_id
+      WHERE lt.log_time BETWEEN '2021-08-21 00:00:00' AND '2021-08-21 23:59:59'
+      AND rf.queue = 1
+      AND lt.log_action = 2
+      GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
+      ORDER BY lt.recipe_id;
+      `);
+
+      client.end();
+
+      return rows;
+
+  } catch (error) {
+      console.log(error);
+  } finally {
+      client.end();
   }
 };
