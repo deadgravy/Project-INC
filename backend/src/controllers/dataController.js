@@ -54,3 +54,43 @@ module.exports.getRecipebyRecipeID = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+
+module.exports.getCompletedProducts = async function (req, res, next) {
+
+  try {
+      const results = await dataManager.getCompletedProducts();
+      console.log(results);
+      res.status(200).json({
+          status: 'success',
+          data: results
+      });
+  } catch (error) {
+      console.log(error)
+      res.status(500).json({
+          status: 'fail',
+          data: null
+      });
+
+  }
+
+} // End of async function(req,res,next)
+
+module.exports.getProductsToComplete = async function (req, res, next) {
+
+  try {
+      const results = await dataManager.getProductsToComplete();
+      console.log(results);
+      res.status(200).json({
+          status: 'success',
+          data: results
+      });
+  } catch (error) {
+      console.log(error)
+      res.status(500).json({
+          status: 'fail',
+          data: null
+      });
+
+  }
+
+} // End of async function(req,res,next)
