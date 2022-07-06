@@ -18,4 +18,10 @@ router.post('/login', loginController.verify);
 // add user
 router.post('/addUser', userController.addUser)
 
+//getting completed products
+router.get('/getCompletedProducts', dataController.getCompletedProducts);
+
+//getting products to complete
+router.get('/getProductsToComplete', dataController.getProductsToComplete);
+
 module.exports = router;
