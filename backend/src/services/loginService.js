@@ -1,21 +1,20 @@
-const { Client } = require("pg");
-
+const { Client } = require('pg');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.verify = async function (email) {
-    const client = new Client({
-      host: 'localhost',
-      user: 'postgres',
-      port: 5432,
-      password: 'gyx915826',
-      database: 'user_management',
-    });
-  
-    client.connect();
-    console.log('Connected!')
-    try {
-      const { rows } =
-        await client.query(`
+  const client = new Client({
+    host: 'localhost',
+    user: 'postgres',
+    port: 5432,
+    password: 'adeeb1234',
+    database: 'user_management',
+  });
+
+  client.connect();
+  console.log('Connected!');
+  try {
+    const { rows } = await client.query(
+      `
         SELECT
           u.user_id,
           u.email,
@@ -27,11 +26,11 @@ module.exports.verify = async function (email) {
           public.account a
         WHERE
           u.user_id = a.user_id 
-          AND u.email = $1` // end of sql query
-          , [email]);
-      return rows;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
+          AND u.email = $1`, // end of sql query
+      [email]
+    );
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};

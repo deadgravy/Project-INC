@@ -1,13 +1,13 @@
-const { Client } = require("pg");
+const { Client } = require('pg');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
   const client = new Client({
-    host: "localhost",
-    user: "postgres",
+    host: 'localhost',
+    user: 'postgres',
     port: 5432,
-    password: "gyx915826",
-    database: "FIRC",
+    password: 'adeeb1234',
+    database: 'FIRC',
   });
 
   client.connect();
@@ -55,13 +55,13 @@ module.exports.getData1 = async function () {
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
-  console.log(id + "testing");
+  console.log(id + 'testing');
   const client = new Client({
-    host: "localhost",
-    user: "postgres",
+    host: 'localhost',
+    user: 'postgres',
     port: 5432,
-    password: "gyx915826",
-    database: "FIRC",
+    password: 'adeeb1234',
+    database: 'FIRC',
   });
 
   client.connect();
