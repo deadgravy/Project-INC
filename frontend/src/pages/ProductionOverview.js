@@ -6,6 +6,7 @@ import LineChart from '../components/pod/LineChart.js';
 import { Route, Link, Routes, useParams } from 'react-router-dom';
 import Modal from '../components/pod/Modal';
 import ErrorPage from '../components/pod/ErrorPage.js';
+import Loading from '../components/pod/loading';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
@@ -76,37 +77,37 @@ const ProductionOverview = () => {
       });
   }, []);
   const [modal, setModal] = useState(false);
-  class ErrorBoundary extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { hasError: false };
-    }
+  // class ErrorBoundary extends React.Component {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = { hasError: false };
+  //   }
 
-    componentDidCatch(error, info) {
-      // Display fallback UI
-      this.setState({ hasError: true });
-      // You can also log the error to an error reporting service
-      console.log(error, info);
-    }
+  //   componentDidCatch(error, info) {
+  //     // Display fallback UI
+  //     this.setState({ hasError: true });
+  //     // You can also log the error to an error reporting service
+  //     console.log(error, info);
+  //   }
 
-    render() {
-      if (this.state.hasError) {
-        // You can render any custom fallback UI
-        return <h1>Something went wrong.</h1>;
-      }
-      return this.props.children;
-    }
-  }
+  //   render() {
+  //     if (this.state.hasError) {
+  //       // You can render any custom fallback UI
+  //       return <h1>No recipes found.</h1>;
+  //     }
+  //     return this.props.children;
+  //   }
+  // }
   return (
     <React.StrictMode>
       <div className='App'>
         {!isLoading ? (
           <div>
             <div className='Row1'>
-              <ErrorBoundary>
+              <ErrorPage>
                 <ChartComponent data={prodOverviewData} />
                 <BoxComponent data={prodOverviewData} />
-              </ErrorBoundary>
+              </ErrorPage>
             </div>
             <div className='Row2'>
               <LineChart />
@@ -116,7 +117,10 @@ const ProductionOverview = () => {
             </div>
           </div>
         ) : (
-          <div> Loading... </div> // TODO: Loading loading spinner or loading component
+          <div>
+            {' '}
+            <Loading />{' '}
+          </div> // TODO: Loading loading spinner or loading component
         )}
       </div>
     </React.StrictMode>

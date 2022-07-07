@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "../pod/styles/model.css";
+import React, { useState } from 'react';
+import '../pod/styles/model.css';
 
 export default function Modal() {
   const [modal, setModal] = useState(false);
@@ -9,31 +9,57 @@ export default function Modal() {
   };
 
   if (modal) {
-    document.body.classList.add("active-modal");
+    document.body.classList.add('active-modal');
   } else {
-    document.body.classList.remove("active-modal");
+    document.body.classList.remove('active-modal');
   }
 
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal">
+      <button onClick={toggleModal} className='btn-modal'>
         Open
       </button>
 
       {modal && (
-        <div className="">
-          <div onClick={toggleModal} className="overlay"></div>
-          <div className="modal-content">
+        <div className=''>
+          <div onClick={toggleModal} className='overlay'></div>
+          <div className='modal-content'>
             <h2>Hello Modal</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-              perferendis suscipit officia recusandae, eveniet quaerat assumenda
-              id fugit, dignissimos maxime non natus placeat illo iusto!
-              Sapiente dolorum id maiores dolores? Illum pariatur possimus
-              quaerat ipsum quos molestiae rem aspernatur dicta tenetur. Sunt
-              placeat tempora vitae enim incidunt porro fuga ea.
-            </p>
-            <button className="close-modal" onClick={toggleModal}>
+            <div class='form-ext-control form-ext-radio'>
+              <input
+                id='radio-1a'
+                name='customRadio1'
+                class='form-ext-input'
+                type='radio'
+              />
+              <label class='form-ext-label' for='radio-1a'>
+                Unselected
+              </label>
+            </div>
+            <div class='form-ext-control form-ext-radio'>
+              <input
+                id='radio-2a'
+                name='customRadio1'
+                class='form-ext-input'
+                type='radio'
+                checked
+              />
+              <label class='form-ext-label' for='radio-2a'>
+                Selected
+              </label>
+            </div>
+            <div class='form-ext-control form-ext-radio'>
+              <input
+                id='radio-3a'
+                name='customRadio1'
+                class='form-ext-input'
+                type='radio'
+              />
+              <label class='form-ext-label' for='radio-3a'>
+                Unselected
+              </label>
+            </div>
+            <button className='close-modal' onClick={toggleModal}>
               CLOSE
             </button>
           </div>

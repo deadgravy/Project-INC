@@ -6,13 +6,8 @@ module.exports.getData1 = async function () {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-<<<<<<< HEAD
-    password: 'postgres',
-    database: 'FIRC_v3',
-=======
     password: 'adeeb1234',
     database: 'FIRC',
->>>>>>> abe131742f83e56ebf860bda6185447a3a21a49e
   });
 
   client.connect();
@@ -65,13 +60,8 @@ module.exports.getRecipebyRecipeID = async function (id) {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-<<<<<<< HEAD
-    password: 'postgres',
-    database: 'FIRC_v3',
-=======
     password: 'adeeb1234',
     database: 'FIRC',
->>>>>>> abe131742f83e56ebf860bda6185447a3a21a49e
   });
 
   client.connect();
@@ -120,7 +110,6 @@ module.exports.getRecipebyRecipeID = async function (id) {
     console.log(error);
   }
 };
-<<<<<<< HEAD
 
 module.exports.getCompletedProducts = async function () {
   const client = new Client({
@@ -191,5 +180,3 @@ module.exports.getProductsToComplete = async function () {
     client.end();
   }
 };
-=======
->>>>>>> abe131742f83e56ebf860bda6185447a3a21a49e
