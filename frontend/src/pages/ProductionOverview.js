@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
-import ChartComponent from "../components/pod/ChartComponent";
-import BoxComponent from "../components/pod/Boxe";
-import LineChart from "../components/pod/LineChart.js";
-import { Route, Link, Routes, useParams } from "react-router-dom";
-import Modal from "../components/pod/Modal";
-import ErrorPage from "../components/pod/ErrorPage.js";
+import React, { useEffect, useState } from 'react';
+import '../styles/styles.css';
+import ChartComponent from '../components/pod/ChartComponent';
+import BoxComponent from '../components/pod/Boxe';
+import LineChart from '../components/pod/LineChart.js';
+import { Route, Link, Routes, useParams } from 'react-router-dom';
+import Modal from '../components/pod/Modal';
+import ErrorPage from '../components/pod/ErrorPage.js';
+import SideBar from '../components/sidebar/Sidebar';
 
 const ProductionOverview = () => {
-  const [prodOverviewData, setProdOverviewData] = useState("");
+  const [prodOverviewData, setProdOverviewData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
 
@@ -47,10 +48,10 @@ const ProductionOverview = () => {
         seconds = 0;
       }
 
-      console.log("Days: " + days);
-      console.log("Hours: " + hours);
-      console.log("Mins: " + mins);
-      console.log("Seconds: " + seconds);
+      console.log('Days: ' + days);
+      console.log('Hours: ' + hours);
+      console.log('Mins: ' + mins);
+      console.log('Seconds: ' + seconds);
 
       const milliseconds = convertToMilli(days, hours, seconds, mins);
 
@@ -78,26 +79,31 @@ const ProductionOverview = () => {
   const [modal, setModal] = useState(false);
 
   return (
-    <React.StrictMode>
-      <div className='App'>
-        {!isLoading ? (
-          <div>
-            <div className='Row1'>
-              <ChartComponent data={prodOverviewData} />
-              <BoxComponent data={prodOverviewData} />
-            </div>
-            <div className='Row2'>
-              <LineChart />
-            </div>
-            <div>
-              <Modal />
-            </div>
-          </div>
-        ) : (
-          <div> Loading... </div> // TODO: Loading loading spinner or loading component
-        )}
+    <div className='productionOverview row p-0 w-100p'>
+      <div className='po-sidebar sidebar col-2'>
+        <SideBar />
       </div>
-    </React.StrictMode>
+      <div className='po-display col-12'>
+        <div className='App'>
+          {!isLoading ? (
+            <div>
+              <div className='Row1'>
+                <ChartComponent data={prodOverviewData} />
+                <BoxComponent data={prodOverviewData} />
+              </div>
+              <div className='Row2'>
+                <LineChart />
+              </div>
+              <div>
+                <Modal />
+              </div>
+            </div>
+          ) : (
+            <div> Loading... </div> // TODO: Loading loading spinner or loading component
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
