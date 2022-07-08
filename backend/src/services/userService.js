@@ -1,20 +1,18 @@
-const { Client } = require("pg");
-
+const client = require('../config/userDatabase');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
-module.exports.addUser = async function (email, contact_number, first_name, last_name, password_hash) {
-    const client = new Client({
-      host: 'localhost',
-      user: 'postgres',
-      port: 5432,
-      password: 'gyx915826',
-      database: 'user_management',
-    });
-  
-    client.connect();
-    console.log('Connected!')
-    try {
-        client.query(`
+module.exports.addUser = async function (
+  email,
+  contact_number,
+  first_name,
+  last_name,
+  password_hash
+) {
+  client.connect();
+  console.log('Connected!');
+  try {
+    client.query(
+      `
         WITH ins1 AS (
             INSERT INTO public."user"(email, contact_number, first_name, last_name)
             VALUES ($1, $2, $3, $4)
@@ -22,16 +20,17 @@ module.exports.addUser = async function (email, contact_number, first_name, last
             )
          INSERT INTO public.account(user_id, password_hash)
          SELECT sample_id, $5 FROM ins1;`, // end of sql query
-         [email, contact_number, first_name, last_name, password_hash], (err, results) => {
-            if(err){
-                console.log(err);
-            } else {
-                console.log(results);
-                console.log(results.rows)            
-            }
-         }); 
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+      [email, contact_number, first_name, last_name, password_hash],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(results);
+          console.log(results.rows);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
