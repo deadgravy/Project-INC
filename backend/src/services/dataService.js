@@ -152,6 +152,43 @@ module.exports.getCompletedProducts = async function () {
   }
 };
 
+module.exports.getCompletedProducts = async function () {
+
+
+  const client = new Client({
+      host: "localhost",
+      user: "postgres",
+      port: 5432,
+      password: "postgres",
+      database: "FIRC_v3"
+  })
+
+  client.connect();
+  try {
+
+
+      const { rows } = await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
+      FROM log_times lt
+      INNER JOIN recipes rp
+      ON lt.recipe_id = rp.id
+      INNER JOIN recipe_flows AS rf
+      ON lt.recipe_id = rf.fr_recipe_id
+      WHERE lt.log_time BETWEEN '2021-08-21 00:00:00' AND '2021-08-21 08:00:00'
+      AND rf.queue = 1
+      AND lt.log_action = 2
+      GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
+      ORDER BY lt.recipe_id;
+      `);
+      
+      return rows;
+
+  } catch (error) {
+      console.log(error);
+  } finally {
+      client.end();
+  }
+};
+
 module.exports.getProductsToComplete = async function () {
 
 
