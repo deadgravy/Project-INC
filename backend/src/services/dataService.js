@@ -116,8 +116,8 @@ module.exports.getCompletedProducts = async function () {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-    password: 'postgres',
-    database: 'FIRC_v3',
+    password: 'adeeb1234',
+    database: 'FIRC',
   });
 
   client.connect();
@@ -151,8 +151,8 @@ module.exports.getProductsToComplete = async function () {
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-    password: 'postgres',
-    database: 'FIRC_v3',
+    password: 'adeeb1234',
+    database: 'FIRC',
   });
 
   client.connect();

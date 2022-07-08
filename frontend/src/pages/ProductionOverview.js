@@ -10,6 +10,7 @@ import Loading from '../components/pod/loading';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
+  const [allProductData, setAllProductData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
 
@@ -64,20 +65,37 @@ const ProductionOverview = () => {
   // useEffect
   useEffect(() => {
     setIsloading(true);
-    fetch(`http://localhost:4000/api/data/data2/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // Below should be just setProdOverviewData(data), where data is your full backend data.
-        // console.log(data);
+    Promise.all([
+      fetch(`http://localhost:4000/api/data/data2/${params.id}`).then((res) =>
+        res.json()
+      ),
+      fetch('http://localhost:4000/api/data/data1').then((res) => res.json()),
+    ])
+      .then(([result1, result2]) => {
         setProdOverviewData({
-          data: data.data,
-          value: getData(data),
+          data: result1.data,
+          value: getData(result1),
+        });
+        setAllProductData({
+          data: result2.data,
         });
         setIsloading(false);
-      });
+      })
+      .catch((error) => console.log('error', error));
+    // fetch(`http://localhost:4000/api/data/data2/${params.id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // Below should be just setProdOverviewData(data), where data is your full backend data.
+    //     // console.log(data);
+    //     setProdOverviewData({
+    //       data: data.data,
+    //       value: getData(data),
+    //     });
+    //     setIsloading(false);
+    //   });
   }, []);
   const [modal, setModal] = useState(false);
-
+  //http://localhost:4000/api/data/data1
   return (
     <React.StrictMode>
       <div className='App'>
@@ -93,7 +111,7 @@ const ProductionOverview = () => {
               <LineChart />
             </div>
             <div>
-              <Modal />
+              <Modal data1={allProductData} />
             </div>
           </div>
         ) : (
