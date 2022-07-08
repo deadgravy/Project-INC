@@ -51,7 +51,9 @@ module.exports.getData1 = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
@@ -108,7 +110,9 @@ module.exports.getRecipebyRecipeID = async function (id) {
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getCompletedProducts = async function () {
@@ -138,8 +142,6 @@ module.exports.getCompletedProducts = async function () {
       GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
       ORDER BY lt.recipe_id;
       `);
-
-      client.end();
 
       return rows;
 
@@ -177,8 +179,6 @@ module.exports.getProductsToComplete = async function () {
       GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
       ORDER BY lt.recipe_id;
       `);
-
-      client.end();
 
       return rows;
 
