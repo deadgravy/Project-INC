@@ -15,6 +15,7 @@ const boxSize = 500;
 
 const DonutChart = ({ data }) => {
   const ref = useRef(null);
+  console.log('fku');
 
   if (data) {
     d3.select(ref.current).select('svg').remove(); // Remove the old svg
