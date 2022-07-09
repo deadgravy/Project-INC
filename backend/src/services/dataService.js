@@ -98,7 +98,7 @@ module.exports.getRecipebyRecipeID = async function (id) {
     console.log(error);
   } finally {
     client.end();
-}
+  }
 };
 
 module.exports.getCompletedProducts = async function () {
