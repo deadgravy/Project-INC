@@ -47,7 +47,7 @@ export default function Modal({ data1 }) {
                 class='form-ext-input'
                 type='radio'
                 checked
-              />
+              /> te
               <label class='form-ext-label' for='radio-2a'>
                 Selected
               </label>
