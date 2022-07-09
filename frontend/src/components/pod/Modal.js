@@ -18,7 +18,6 @@ export default function Modal({ data1 }) {
     <>
       <button onClick={toggleModal} className='btn-modal'>
         Open
-        {data1.data[20].name}
       </button>
 
       {modal && (
@@ -26,17 +25,21 @@ export default function Modal({ data1 }) {
           <div onClick={toggleModal} className='overlay'></div>
           <div className='modal-content'>
             <h2>Hello Modal</h2>
-            <div class='form-ext-control form-ext-radio'>
-              <input
-                id='radio-1a'
-                name='customRadio1'
-                class='form-ext-input'
-                type='radio'
-              />
-              <label class='form-ext-label' for='radio-1a'>
-                Unselected
-              </label>
-            </div>
+            {data1.data.map((item, count) => {
+              return (
+                <div class='form-ext-control form-ext-radio'>
+                  <input
+                    id='radio-1a'
+                    name='customRadio1'
+                    class='form-ext-input'
+                    type='radio'
+                  />
+                  <label class='form-ext-label' for='radio-1a'>
+                    {data1.data[count].name}
+                  </label>
+                </div>
+              );
+            })}
             <div class='form-ext-control form-ext-radio'>
               <input
                 id='radio-2a'
