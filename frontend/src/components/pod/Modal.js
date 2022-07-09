@@ -8,11 +8,11 @@ export default function Modal({ data1 }) {
     setModal(!modal);
   };
 
-  if (modal) {
-    document.body.classList.add('active-modal');
-  } else {
-    document.body.classList.remove('active-modal');
-  }
+  // if (modal) {
+  //   document.body.classList.add('active-modal');
+  // } else {
+  //   document.body.classList.remove('active-modal');
+  // }
 
   return (
     <>
@@ -29,18 +29,18 @@ export default function Modal({ data1 }) {
               return (
                 <div class='form-ext-control form-ext-radio'>
                   <input
-                    id='radio-1a'
+                    id={data1.data[count].name}
                     name='customRadio1'
                     class='form-ext-input'
                     type='radio'
                   />
-                  <label class='form-ext-label' for='radio-1a'>
+                  <label class='form-ext-label' for={data1.data[count].name}>
                     {data1.data[count].name}
                   </label>
                 </div>
               );
             })}
-            <div class='form-ext-control form-ext-radio'>
+            {/* <div class='form-ext-control form-ext-radio'>
               <input
                 id='radio-2a'
                 name='customRadio1'
@@ -62,7 +62,7 @@ export default function Modal({ data1 }) {
               <label class='form-ext-label' for='radio-3a'>
                 Unselected
               </label>
-            </div>
+            </div> */}
             <button className='close-modal' onClick={toggleModal}>
               CLOSE
             </button>
