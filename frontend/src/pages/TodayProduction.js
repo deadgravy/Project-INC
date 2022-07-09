@@ -5,6 +5,7 @@ import TableComponent from "../components/tpd/TableComponent";
 import TextField from "@mui/material/TextField";
 import HorizontalScroller from 'react-horizontal-scroll-container';
 import { Tab } from "@mui/material";
+import Sidebar from "../components/sidebar/Sidebar";
 // import "../styles/todayProduction.css"
 
 const TodayProduction = () => {

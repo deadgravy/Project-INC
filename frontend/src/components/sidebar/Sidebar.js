@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/sidebar.css';
-import { SidebarData } from "./SidebarData"
+import { SidebarData } from './SidebarData';
 
 const Sidebar = () => {
   return (
@@ -19,7 +19,7 @@ const Sidebar = () => {
             })}
         </ul>
     </div>
-  )
+  );
 };
 
 export default Sidebar;
