@@ -1,15 +1,8 @@
-const { Client } = require("pg");
+const { Client } = require('pg');
+const client = require('../config/database');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
-  const client = new Client({
-    host: "localhost",
-    user: "postgres",
-    port: 5432,
-    password: "postgres",
-    database: "FIRC_v3",
-  });
-
   client.connect();
   try {
     const { rows } = await client.query(`SELECT 
@@ -55,14 +48,7 @@ module.exports.getData1 = async function () {
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
-  console.log(id + "testing");
-  const client = new Client({
-    host: "localhost",
-    user: "postgres",
-    port: 5432,
-    password: "postgres",
-    database: "FIRC_v3",
-  });
+  console.log(id + 'testing');
 
   client.connect();
   try {
@@ -112,21 +98,10 @@ module.exports.getRecipebyRecipeID = async function (id) {
 };
 
 module.exports.getCompletedProducts = async function () {
-
-
-  const client = new Client({
-      host: "localhost",
-      user: "postgres",
-      port: 5432,
-      password: "postgres",
-      database: "FIRC_v3"
-  })
-
   client.connect();
   try {
-
-
-      const { rows } = await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
+    const { rows } =
+      await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
       FROM log_times lt
       INNER JOIN recipes rp
       ON lt.recipe_id = rp.id
@@ -139,33 +114,21 @@ module.exports.getCompletedProducts = async function () {
       ORDER BY lt.recipe_id;
       `);
 
-      client.end();
+    client.end();
 
-      return rows;
-
+    return rows;
   } catch (error) {
-      console.log(error);
+    console.log(error);
   } finally {
-      client.end();
+    client.end();
   }
 };
 
 module.exports.getProductsToComplete = async function () {
-
-
-  const client = new Client({
-      host: "localhost",
-      user: "postgres",
-      port: 5432,
-      password: "postgres",
-      database: "FIRC_v3"
-  })
-
   client.connect();
   try {
-
-
-      const { rows } = await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
+    const { rows } =
+      await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
       FROM log_times lt
       INNER JOIN recipes rp
       ON lt.recipe_id = rp.id
@@ -178,13 +141,12 @@ module.exports.getProductsToComplete = async function () {
       ORDER BY lt.recipe_id;
       `);
 
-      client.end();
+    client.end();
 
-      return rows;
-
+    return rows;
   } catch (error) {
-      console.log(error);
+    console.log(error);
   } finally {
-      client.end();
+    client.end();
   }
 };

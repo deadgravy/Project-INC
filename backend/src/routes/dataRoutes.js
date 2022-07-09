@@ -16,7 +16,7 @@ router.get('/data/data2/:id', dataController.getRecipebyRecipeID);
 router.post('/login', loginController.verify);
 
 // add user
-router.post('/addUser', userController.addUser)
+router.post('/addUser', userController.addUser);
 
 //getting completed products
 router.get('/getCompletedProducts', dataController.getCompletedProducts);
