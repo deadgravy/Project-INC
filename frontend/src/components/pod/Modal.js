@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../pod/styles/model.css';
 
-export default function Modal() {
+export default function Modal({ data1 }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -18,6 +18,7 @@ export default function Modal() {
     <>
       <button onClick={toggleModal} className='btn-modal'>
         Open
+        {data1.data[20].name}
       </button>
 
       {modal && (
