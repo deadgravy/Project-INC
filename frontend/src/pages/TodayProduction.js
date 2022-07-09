@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/styles.css";
 import ProductChart from "../components/tpd/ProductChart";
 // import "../styles/todayProduction.css"
-// testing
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
   const [toBeCompletedProductsData, setToBeCompletedProductsData] = useState(null);
