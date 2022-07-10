@@ -35,6 +35,7 @@ module.exports.getData1 = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+//
 
 module.exports.getRecipebyRecipeID = async function (req, res, next) {
   console.log(req.params);

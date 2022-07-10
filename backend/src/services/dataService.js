@@ -6,7 +6,7 @@ module.exports.getData1 = async function () {
   client.connect();
   try {
     const { rows } = await client.query(`SELECT 
-                            rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
+                            rf.fr_recipe_id, r.name
                         FROM (SELECT  equip_id,
                             log_action,
                             fr_process_steps,
@@ -39,12 +39,15 @@ module.exports.getData1 = async function () {
                         ON r.id = rf.fr_recipe_id
                         INNER JOIN process_steps ps
                         ON ps.id = rf.fr_process_step
-                        GROUP BY fr_recipe_id, r.name, rf.queue, fr_process_steps, ps.process_name, rf.desc_translate;
+                        GROUP BY fr_recipe_id, r.name 
+						ORDER BY fr_recipe_id ASC;
         `); // end of SQL query
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
@@ -94,7 +97,9 @@ module.exports.getRecipebyRecipeID = async function (id) {
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getCompletedProducts = async function () {

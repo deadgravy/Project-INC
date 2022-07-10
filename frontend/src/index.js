@@ -5,10 +5,8 @@ import App from './App';
 import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SignUp from './pages/SignUp';
-import Sidebar from './components/sidebar/Sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const sidebar = ReactDOM.createRoot(document.getElementById('sidebar'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -19,11 +17,5 @@ root.render(
         <Route path='signUp' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
-);
-
-sidebar.render(
-  <React.StrictMode>
-    <Sidebar />
   </React.StrictMode>
 );
