@@ -99,9 +99,9 @@ const ProductionOverview = () => {
   //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0 w-100p'>
-      <div className='po-sidebar sidebar col-2'>
+      {/* <div className='po-sidebar sidebar col-2'>
         <SideBar />
-      </div>
+      </div> */}
       <div className='po-display col-12'>
         <div className='App'>
           {!isLoading ? (
@@ -114,12 +114,12 @@ const ProductionOverview = () => {
                 <LineChart />
               </div>
               <div>
-                <Modal />
+                <Modal data1={allProductData} />
               </div>
             </div>
           ) : (
             <div>
-              <Modal data1={allProductData} />
+              <Loading />
             </div>
           )}
         </div>
