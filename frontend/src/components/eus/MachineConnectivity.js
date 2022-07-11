@@ -16,10 +16,6 @@ const MachineConnectivity = () => {
         <Typography className='text-xl font-bold pl-2'>Machine Connectivity</Typography>
       </AccordionSummary>
       <AccordionDetails className='row'>
-        {/* <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography> */}
         <div className='col-3'>
             <MachineCards />
         </div>
