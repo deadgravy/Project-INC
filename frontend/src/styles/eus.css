@@ -1,0 +1,15 @@
+.machineStatus {
+    height: 35px;
+}
+
+.disconnected {
+    background-color: #8C0014;
+}
+
+.connected {
+    background-color: #22C55E;
+}
+
+.card {
+    border-radius: 16px;
+}
