@@ -1,10 +1,9 @@
-const { Client } = require('pg');
-const client = require('../config/database');
+const pool = require('../config/database');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
   try {
-    const { rows } = await client.query(`SELECT 
+    const { rows } = await pool.query(`SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -48,8 +47,8 @@ module.exports.getData1 = async function () {
 
 module.exports.getRecipebyRecipeID = async function (id) {
   try {
-    const { rows } = await client.query(
-      `SELECT 
+    const { rows } = await pool.query(
+                        `SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -96,7 +95,9 @@ module.exports.getRecipebyRecipeID = async function (id) {
 module.exports.getCompletedProducts = async function () {
   try {
     const { rows } =
-      await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
+      await pool.query(
+      `
+      SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
       FROM log_times lt
       INNER JOIN recipes rp
       ON lt.recipe_id = rp.id
@@ -118,7 +119,9 @@ module.exports.getCompletedProducts = async function () {
 module.exports.getProductsToComplete = async function () {
   try {
     const { rows } =
-      await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
+      await pool.query(
+      `
+      SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
       FROM log_times lt
       INNER JOIN recipes rp
       ON lt.recipe_id = rp.id
