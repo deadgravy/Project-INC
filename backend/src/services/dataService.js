@@ -3,7 +3,6 @@ const client = require('../config/database');
 
 // const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
-  client.connect();
   try {
     const { rows } = await client.query(`SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
@@ -44,15 +43,10 @@ module.exports.getData1 = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
-}
+  }
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
-  console.log(id + 'testing');
-
-  client.connect();
   try {
     const { rows } = await client.query(
       `SELECT 
@@ -96,13 +90,10 @@ module.exports.getRecipebyRecipeID = async function (id) {
     return rows;
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
   }
 };
 
 module.exports.getCompletedProducts = async function () {
-  client.connect();
   try {
     const { rows } =
       await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
@@ -121,13 +112,10 @@ module.exports.getCompletedProducts = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
   }
 };
 
 module.exports.getProductsToComplete = async function () {
-  client.connect();
   try {
     const { rows } =
       await client.query(`SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
@@ -146,13 +134,10 @@ module.exports.getProductsToComplete = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
   }
 };
 
 module.exports.getEquipmentStatus = async function () {
-  client.connect();
   try {
     const { rows } =
       await client.query(`SELECT pd.name, r.name AS productName, t.fr_process_steps, lt.log_time, pd.mac_property AS singleOrMultiple, lt.log_action, ('2021-08-21 08:00:00' - lt.log_time) AS timeToStarted, rf.queue, ps.process_name, rf.desc_translate, AVG(t.duration)
@@ -200,7 +185,5 @@ module.exports.getEquipmentStatus = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } finally {
-    client.end();
-  }
+  } 
 };
