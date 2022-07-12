@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import '../pod/styles/model.css';
 
 export default function Modal({ data1 }) {
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
 
   const toggleModal = () => {
     setModal(!modal);
@@ -13,7 +15,10 @@ export default function Modal({ data1 }) {
   // } else {
   //   document.body.classList.remove('active-modal');
   // }
-
+  const navigateToContacts = () => {
+    // 👇️ navigate to /contacts
+    navigate('/productionOverview/55', { replace: true });
+  };
   return (
     <>
       <button onClick={toggleModal} className='btn-modal'>
@@ -63,6 +68,10 @@ export default function Modal({ data1 }) {
                 Unselected
               </label>
             </div> */}
+            <form method='GET' action='63'>
+              <button class='btn-info btn--pilled'>Test</button>
+            </form>
+
             <button className='close-modal' onClick={toggleModal}>
               CLOSE
             </button>
