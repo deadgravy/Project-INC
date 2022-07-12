@@ -5,6 +5,7 @@ import App from './App';
 import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SignUp from './pages/SignUp';
+import EquipUtilDashboard from './pages/EquipUtilDashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,10 @@ root.render(
         <Route path='productionOverview/:id' element={<ProductionOverview />} />
         <Route path='todaysProduction' element={<TodayProduction />} />
         <Route path='signUp' element={<SignUp />} />
+        <Route
+          path='equipmentUtilisationDashboard'
+          element={<EquipUtilDashboard />}
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

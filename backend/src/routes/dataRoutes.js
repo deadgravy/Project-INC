@@ -5,6 +5,7 @@ router.use(express.json());
 const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
+const eudController = require('../controllers/eudController');
 
 router.get('/data/data1', dataController.getData1);
 
@@ -23,5 +24,11 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 
 //getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
+
+//getting single recipe equipment usage
+router.get('/getSingleUsage', eudController.getSingleUsage);
+
+// getting multiple recipe equipment usage
+router.get('/getMultipleUsage', eudController.getMultipleUsage);
 
 module.exports = router;
