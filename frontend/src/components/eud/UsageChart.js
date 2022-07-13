@@ -19,12 +19,8 @@ export const options = {
 export function UsageChart(data) {
   let data1 = data.data.data;
   for (let i = 0; i < data1.length; i++) {
-    console.log(data1[i][2]);
-    console.log(data1[i][3]);
     data1[i][2] = new Date(data1[i][2]);
     data1[i][3] = new Date(data1[i][3]);
-    console.log(data1[i][2]);
-    console.log(data1[i][3]);
   }
 
   return (

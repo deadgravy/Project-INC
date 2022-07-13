@@ -26,9 +26,9 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
 //getting single recipe equipment usage
-router.get('/getSingleUsage', eudController.getSingleUsage);
+router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
-router.get('/getMultipleUsage', eudController.getMultipleUsage);
+router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
 
 module.exports = router;
