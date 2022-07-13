@@ -107,3 +107,20 @@ module.exports.getMachineConnectivity = async function (req, res, next) {
     });
   }
 };
+
+module.exports.getMachines = async function (req, res, next) {
+  try {
+    const results = await dataManager.getMachines();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+};

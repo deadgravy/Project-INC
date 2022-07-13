@@ -27,4 +27,7 @@ router.get('/getProductsToComplete', dataController.getProductsToComplete);
 //getting machine connectivity (eus)
 router.get('/machineConnectivity', dataController.getMachineConnectivity);
 
+//get all machines from db (eus)
+router.get('/machines', dataController.getMachines);
+
 module.exports = router;
