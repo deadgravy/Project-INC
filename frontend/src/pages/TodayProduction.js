@@ -11,6 +11,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
   const [toBeCompletedProductsData, setToBeCompletedProductsData] = useState(null);
+  const [equipmentStatusData, setEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
 
   // useEffect
@@ -21,14 +22,18 @@ const TodayProduction = () => {
     Promise.all([
       fetch("http://localhost:4000/api/getCompletedProducts").then((res) => res.json()),
       fetch("http://localhost:4000/api/getProductsToComplete").then((res) => res.json()),
+      fetch("http://localhost:4000/api/getEquipmentStatus").then((res) => res.json()),
     ])
-      .then(([result1, result2]) => {
+      .then(([result1, result2, result3]) => {
         setCompletedProductsData({
           data: result1.data,
           value: [{ value: 50 }, { value: 50 }],
         });
         setToBeCompletedProductsData({
           data: result2.data
+        });
+        setEquipmentStatusData({
+          data: result3.data
         });
         setIsloading(false);
       })
@@ -57,7 +62,7 @@ const TodayProduction = () => {
                 />
           </div>
           <div className="Row1">
-              <TableComponent />
+              <TableComponent data={equipmentStatusData}/>
           </div>
           <div className="productHeader">
             Completed Products as of Today

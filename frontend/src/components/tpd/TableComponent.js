@@ -1,6 +1,39 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import "../tpd/styles/table.css";
 
-const TableComponent = () => {
+const TableComponent = ({data}) => {
+    
+    const [filteredData, setFilteredData] = useState([])
+
+    const countData = (data=[], processStep) => {
+        return data.filter((value) => {
+            if (value.fr_process_steps === processStep) {
+                return value
+            }
+        }).length
+    }
+
+    const dataFilter = (data=[]) => {
+        return data.filter((eachArrayItem) => {
+            // for 
+            // if (countData(data?.data, ) % 2 == 0){
+
+            if (eachArrayItem.log_action) {
+                return eachArrayItem;
+            }
+            
+            // else {
+            //     return ""
+            // }
+        })
+    }
+
+    useEffect(() => {
+        console.log(countData(data?.data, 241))
+        const filteredData1 = dataFilter(data?.data)
+        setFilteredData(filteredData1)
+    }, [])
+
   return (
     <div className='table'>
     <div class="p-4 bg-white-500 u-shadow-lg u-round-xs">
@@ -15,48 +48,40 @@ const TableComponent = () => {
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Row:1 Cell:1</td>
-            <td>Row:1 Cell:2</td>
-            <td>Row:1 Cell:3</td>
-            <td>Row:1 Cell:4</td>
-            <td>S</td>
-        </tr>
-        <tr>
-            <td>Row:2 Cell:1</td>
-            <td>Row:2 Cell:2</td>
-            <td>Row:2 Cell:3</td>
-            <td>Row:2 Cell:4</td>
-            <td>S</td>
-        </tr>
-        <tr>
-            <td>Row:3 Cell:1</td>
-            <td>Row:3 Cell:2</td>
-            <td>Row:3 Cell:3</td>
-            <td>Row:3 Cell:4</td>
-            <td>S</td>
-        </tr>
-        <tr>
-            <td>Row:4 Cell:1</td>
-            <td>Row:4 Cell:2</td>
-            <td>Row:4 Cell:3</td>
-            <td>Row:4 Cell:4</td>
-            <td>S</td>
-        </tr>
-        <tr>
-            <td>Row:5 Cell:1</td>
-            <td>Row:5 Cell:2</td>
-            <td>Row:5 Cell:3</td>
-            <td>Row:5 Cell:4</td>
-            <td>S</td>
-        </tr>
-        <tr>
-            <td>Row:6 Cell:1</td>
-            <td>Row:6 Cell:2</td>
-            <td>Row:6 Cell:3</td>
-            <td>Row:6 Cell:4</td>
-            <td>S</td>
-        </tr>
+    {filteredData.map((value) => {
+        // for(var i = 0; i < data?.data.length; i++)
+        // var counter = data?.data[i].fr_process_steps.length;
+        // if(data?.data[i].fr_process_steps)
+        return(
+                <tr>
+                    <td>{value.name}</td>
+                    <td>{value.productname}</td>
+                    <td>
+                    {value.timetostarted.days
+                        ? `${value.timetostarted.days} days`
+                        : ""}{" "}
+                    {value.timetostarted.hours
+                        ? `${value.timetostarted.hours} hours`
+                        : ""}{" "}
+                    {value.timetostarted.minutes
+                        ? `${value.timetostarted.minutes} mins`
+                        : ""}{" "}
+                    </td>
+                    <td>{value.queue}</td>
+                    <td>
+                    {value.avg.days
+                        ? `${value.avg.days} days`
+                        : ""}{" "}
+                    {value.avg.hours
+                        ? `${value.avg.hours} hours`
+                        : ""}{" "}
+                    {value.avg.minutes
+                        ? `${value.avg.minutes} mins`
+                        : ""}{" "}
+                    </td>
+                </tr>
+        )
+    })}
     </tbody>
 </table>
 </div>
