@@ -107,8 +107,10 @@ const ProductionOverview = () => {
           {!isLoading ? (
             <div>
               <div className='Row1'>
-                <ChartComponent data={prodOverviewData} />
-                <BoxComponent data={prodOverviewData} />
+                <ErrorPage>
+                  <ChartComponent data={prodOverviewData} />
+                  <BoxComponent data={prodOverviewData} />
+                </ErrorPage>
               </div>
               <div className='Row2'>
                 <LineChart />
