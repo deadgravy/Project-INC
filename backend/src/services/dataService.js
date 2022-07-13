@@ -140,3 +140,30 @@ module.exports.getProductsToComplete = async function () {
     console.log(error);
   }
 };
+
+module.exports.getMachineConnectivity = async function () {
+  try {
+    const { rows } = 
+      await pool.query(`
+      SELECT DISTINCT ON (client_no) 
+        a.client_no, 
+        a.ttl, 
+        a.created_at,
+        b.machine_name,
+        b.location_id
+      FROM 
+        client_health_statuses as a
+      JOIN 
+        log_station_clients as b 
+      ON 
+        a.client_no = b.machine_id
+      WHERE 
+        a.created_at >= '2021-08-21 00:00:00' AND a.created_at < '2021-08-22 00:00:00'
+      ORDER BY 
+        client_no, created_at DESC;
+      `)
+      return rows;
+  } catch (error) {
+    console.log(error)
+  }
+}
