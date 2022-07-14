@@ -31,5 +31,7 @@
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-horizontal-scroll-container": "^1.0.1"
+  }
 }
