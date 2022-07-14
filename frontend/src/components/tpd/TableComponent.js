@@ -21,7 +21,6 @@ const TableComponent = ({ data }) => {
             if (eachArrayItem.log_action) {
                 return eachArrayItem;
             }
-
             // else {
             //     return ""
             // }

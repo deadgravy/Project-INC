@@ -7,9 +7,11 @@ import { Route, Link, Routes, useParams } from 'react-router-dom';
 import Modal from '../components/pod/Modal';
 import ErrorPage from '../components/pod/ErrorPage.js';
 import SideBar from '../components/sidebar/Sidebar';
+import Loading from '../components/pod/loading';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
+  const [allProductData, setAllProductData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
 
@@ -64,42 +66,63 @@ const ProductionOverview = () => {
   // useEffect
   useEffect(() => {
     setIsloading(true);
-    fetch(`http://localhost:4000/api/data/data2/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // Below should be just setProdOverviewData(data), where data is your full backend data.
-        // console.log(data);
+    Promise.all([
+      fetch(`http://localhost:4000/api/data/data2/${params.id}`).then((res) =>
+        res.json()
+      ),
+      fetch('http://localhost:4000/api/data/data1').then((res) => res.json()),
+    ])
+      .then(([result1, result2]) => {
         setProdOverviewData({
-          data: data.data,
-          value: getData(data),
+          data: result1.data,
+          value: getData(result1),
+        });
+        setAllProductData({
+          data: result2.data,
         });
         setIsloading(false);
-      });
+      })
+      .catch((error) => console.log('error', error));
+    // fetch(`http://localhost:4000/api/data/data2/${params.id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // Below should be just setProdOverviewData(data), where data is your full backend data.
+    //     // console.log(data);
+    //     setProdOverviewData({
+    //       data: data.data,
+    //       value: getData(data),
+    //     });
+    //     setIsloading(false);
+    //   });
   }, []);
   const [modal, setModal] = useState(false);
-
+  //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0 w-100p'>
-      <div className='po-sidebar sidebar col-2'>
+      {/* <div className='po-sidebar sidebar col-2'>
         <SideBar />
-      </div>
+      </div> */}
       <div className='po-display col-12'>
         <div className='App'>
           {!isLoading ? (
             <div>
               <div className='Row1'>
-                <ChartComponent data={prodOverviewData} />
-                <BoxComponent data={prodOverviewData} />
+                <ErrorPage>
+                  <ChartComponent data={prodOverviewData} />
+                  <BoxComponent data={prodOverviewData} />
+                </ErrorPage>
               </div>
               <div className='Row2'>
                 <LineChart />
               </div>
               <div>
-                <Modal />
+                <Modal data1={allProductData} />
               </div>
             </div>
           ) : (
-            <div> Loading... </div> // TODO: Loading loading spinner or loading component
+            <div>
+              <Loading />
+            </div>
           )}
         </div>
       </div>

@@ -1,13 +1,24 @@
-// function NotFound(props) {
-//   return (
-//     <div className="page-container">
-//       <div
-//         className="bg"
-//         style={{ backgroundImage: "url(" + broken + ")" }}
-//       ></div>
-//       <h1 className="title">404</h1>
-//     </div>
-//   );
-// }
+import React, { useRef } from 'react';
+import * as d3 from 'd3';
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-// export default NotFound;
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
+    console.log(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>No recipes found.</h1>;
+    }
+    return this.props.children;
+  }
+}
+export default ErrorBoundary;
