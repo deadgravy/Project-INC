@@ -6,6 +6,7 @@ import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SignUp from './pages/SignUp';
 import EUS from './pages/EUS';
+import moment from 'moment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
