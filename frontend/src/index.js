@@ -5,10 +5,11 @@ import App from './App';
 import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SignUp from './pages/SignUp';
+import SingleProductFlow from './pages/SingleProductFlow';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<<<<<<< HEAD
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -16,15 +17,8 @@ root.render(
         <Route path='productionOverview/:id' element={<ProductionOverview />} />
         <Route path='todaysProduction' element={<TodayProduction />} />
         <Route path='signUp' element={<SignUp />} />
+        <Route path='singleProductFlow' element={<SingleProductFlow />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
-=======
-  <BrowserRouter>
-    <Routes>
-      <Route path="login" element={<App />} />
-      <Route path="productionOverview" element={<ProductionOverview />} />
-    </Routes>
-  </BrowserRouter>
->>>>>>> 7ae010e4 (changed path to login in index.js line 11)
 );

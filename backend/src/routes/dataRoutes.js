@@ -5,6 +5,7 @@ router.use(express.json());
 const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
+const spfdController = require('../controllers/spfdController');
 
 router.get('/data/data1', dataController.getData1);
 
@@ -26,5 +27,8 @@ router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
 //getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+
+//getting single product by recipe id
+router.get('/getSingleProductbyRecipeID', spfdController.getSingleProductbyRecipeID)
 
 module.exports = router;
