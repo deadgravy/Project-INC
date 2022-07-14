@@ -10,9 +10,9 @@ import EUS from './pages/EUS';
 import moment from 'moment';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
