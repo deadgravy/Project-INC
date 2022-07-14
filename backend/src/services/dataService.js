@@ -43,7 +43,9 @@ module.exports.getData1 = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getRecipebyRecipeID = async function (id) {
@@ -90,7 +92,9 @@ module.exports.getRecipebyRecipeID = async function (id) {
     return rows;
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    client.end();
+}
 };
 
 module.exports.getCompletedProducts = async function () {
