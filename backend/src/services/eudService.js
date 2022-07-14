@@ -1,17 +1,16 @@
-const client = require('../config/database');
+const pool = require('../config/database');
 
-module.exports.getSingleUsage = async function () {
-  client.connect();
+module.exports.getSingleUsage = async function (date) {
   try {
-    const { rows } = await client.query(`WITH query as (
+    const { rows } = await pool.query(
+      `WITH query as (
     SELECT id, equip_id, recipe_id, log_action,
     LAG(log_time,1) OVER (
         ORDER BY recipe_id asc, id
     ) start_time, log_time as end_time, DATE(log_time) as date
     FROM 
     log_times
-    WHERE DATE(log_time) >= '2021-08-12'
-    AND DATE(log_time) < '2021-08-13'
+    WHERE DATE(log_time) = $1
     )
 
     SELECT pd.name as equipment, r.name as recipe, start_time, end_time
@@ -21,25 +20,31 @@ module.exports.getSingleUsage = async function () {
     AND q.recipe_id = r.id
     AND pd.mac_property = 1
     ORDER BY equip_id, recipe_id;
-    `);
-    return rows;
+    `,
+      [date]
+    );
+
+    let singleArr = [];
+    for (let i = 0; i < rows.length; i++) {
+      singleArr.push(Object.values(rows[i]));
+    }
+    return singleArr;
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports.getMultipleUsage = async function () {
-  client.connect();
+module.exports.getMultipleUsage = async function (date) {
   try {
-    const { rows } = await client.query(`WITH query as (
+    const { rows } = await pool.query(
+      `WITH query as (
     SELECT id, equip_id, recipe_id, log_action,
     LAG(log_time,1) OVER (
         ORDER BY recipe_id asc, id
     ) start_time, log_time as end_time, DATE(log_time) as date
     FROM 
     log_times
-    WHERE DATE(log_time) >= '2021-08-12' 
-    AND DATE(log_time) < '2021-08-13'
+    WHERE DATE(log_time) = $1 
     )
 
     SELECT pd.name as equipment, r.name as recipe, start_time, end_time
@@ -49,8 +54,15 @@ module.exports.getMultipleUsage = async function () {
     AND q.recipe_id = r.id
     AND pd.mac_property = 2
     ORDER BY equip_id, recipe_id;
-    `);
-    return rows;
+    `,
+      [date]
+    );
+
+    let multipleArr = [];
+    for (let i = 0; i < rows.length; i++) {
+      multipleArr.push(Object.values(rows[i]));
+    }
+    return multipleArr;
   } catch (error) {
     console.log(error);
   }
