@@ -5,11 +5,14 @@ import TableComponent from '../components/tpd/TableComponent';
 import TextField from '@mui/material/TextField';
 import HorizontalScroller from 'react-horizontal-scroll-container';
 import { Tab } from '@mui/material';
+import Sidebar from '../components/sidebar/Sidebar';
 // import "../styles/todayProduction.css"
-// testing
+
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
-  const [toBeCompletedProductsData, setToBeCompletedProductsData] = useState(null);
+
+  const [toBeCompletedProductsData, setToBeCompletedProductsData] =
+    useState(null);
   const [equipmentStatusData, setEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
 
@@ -18,9 +21,15 @@ const TodayProduction = () => {
     setIsloading(true);
 
     Promise.all([
-      fetch("http://localhost:4000/api/getCompletedProducts").then((res) => res.json()),
-      fetch("http://localhost:4000/api/getProductsToComplete").then((res) => res.json()),
-      fetch("http://localhost:4000/api/getEquipmentStatus").then((res) => res.json()),
+      fetch('http://localhost:4000/api/getCompletedProducts').then((res) =>
+        res.json()
+      ),
+      fetch('http://localhost:4000/api/getProductsToComplete').then((res) =>
+        res.json()
+      ),
+      fetch('http://localhost:4000/api/getEquipmentStatus').then((res) =>
+        res.json()
+      ),
     ])
       .then(([result1, result2, result3]) => {
         setCompletedProductsData({
@@ -31,7 +40,7 @@ const TodayProduction = () => {
           data: result2.data,
         });
         setEquipmentStatusData({
-          data: result3.data
+          data: result3.data,
         });
         setIsloading(false);
       })
@@ -52,8 +61,17 @@ const TodayProduction = () => {
               label='Search'
             />
           </div>
+
+          <div className='textField'>
+            <TextField
+              id='outlined-basic'
+              variant='outlined'
+              fullWidth
+              label='Search'
+            />
+          </div>
           <div className='Row1'>
-            <TableComponent />
+            <TableComponent data={equipmentStatusData} />
           </div>
           <div className='productHeader'>Completed Products as of Today</div>
           <div className='textField'>

@@ -5,6 +5,8 @@ router.use(express.json());
 const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
+const spfdController = require('../controllers/spfdController');
+const eudController = require('../controllers/eudController');
 
 router.get('/data/data1', dataController.getData1);
 
@@ -24,7 +26,31 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 //getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
+//getting single recipe equipment usage
+router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+
+// getting multiple recipe equipment usage
+router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
+
 //getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+
+//getting machine connectivity (eus)
+router.get('/machineConnectivity', dataController.getMachineConnectivity);
+
+//getting machines (eus)
+router.get('/machines', dataController.getMachines);
+
+//getting single product by recipe id
+router.get(
+  '/getSingleProductbyRecipeID',
+  spfdController.getSingleProductbyRecipeID
+);
+
+//getting single recipe equipment usage
+router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+
+// getting multiple recipe equipment usage
+router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
 
 module.exports = router;
