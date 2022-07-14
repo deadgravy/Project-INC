@@ -6,6 +6,7 @@ const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
+const eudController = require('../controllers/eudController');
 
 router.get('/data/data1', dataController.getData1);
 
@@ -35,6 +36,15 @@ router.get('/machineConnectivity', dataController.getMachineConnectivity);
 router.get('/machines', dataController.getMachines);
 
 //getting single product by recipe id
-router.get('/getSingleProductbyRecipeID', spfdController.getSingleProductbyRecipeID)
+router.get(
+  '/getSingleProductbyRecipeID',
+  spfdController.getSingleProductbyRecipeID
+);
+
+//getting single recipe equipment usage
+router.get('/getSingleUsage', eudController.getSingleUsage);
+
+// getting multiple recipe equipment usage
+router.get('/getMultipleUsage', eudController.getMultipleUsage);
 
 module.exports = router;

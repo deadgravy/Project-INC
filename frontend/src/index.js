@@ -7,12 +7,11 @@ import TodayProduction from './pages/TodayProduction';
 import SingleProductFlow from './pages/SingleProductFlow';
 import SignUp from './pages/SignUp';
 import EUS from './pages/EUS';
+import EquipUtilDashboard from './pages/EquipUtilDashboard';
 import moment from 'moment';
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -22,6 +21,10 @@ root.render(
         <Route path='signUp' element={<SignUp />} />
         <Route path='equipmentUtilisationSnapshot' element={<EUS />} />
         <Route path='singleProductFlow' element={<SingleProductFlow />} />
+        <Route
+          path='equipmentUtilisationDashboard'
+          element={<EquipUtilDashboard />}
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
