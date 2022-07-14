@@ -31,4 +31,7 @@ router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 // getting multiple recipe equipment usage
 router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
 
+//getting equipment status
+router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+
 module.exports = router;
