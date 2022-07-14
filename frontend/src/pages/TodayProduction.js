@@ -33,6 +33,9 @@ const TodayProduction = () => {
         setEquipmentStatusData({
           data: result3.data
         });
+        setEquipmentStatusData({
+          data: result3.data
+        });
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
