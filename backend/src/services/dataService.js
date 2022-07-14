@@ -171,7 +171,8 @@ module.exports.getMachines = async function () {
   try {
     const { rows } = await pool.query(`
       SELECT
-        machine_name
+        machine_name,
+        machine_id
       FROM
         log_station_clients
       `);
