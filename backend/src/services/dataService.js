@@ -217,3 +217,18 @@ module.exports.getMachineConnectivity = async function () {
     console.log(error)
   }
 }
+
+module.exports.getMachines = async function () {
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        machine_name,
+        machine_id
+      FROM
+        log_station_clients
+      `);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
