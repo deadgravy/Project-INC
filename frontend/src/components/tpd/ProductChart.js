@@ -30,7 +30,7 @@ const DonutChart = ({ data1, data2 }) => { //data1 is batches completed and data
           .attr("width", "130%")
           .attr("viewBox", `0 0 ${boxSize} ${boxSize}`)
           .append("g")
-          .attr("transform", `translate(${boxSize / 2}, ${boxSize / 2})`);
+          .attr("transform", `translate(${boxSize/2}, ${boxSize/2})`);
 
         const arcGenerator = d3.arc().innerRadius(160).outerRadius(220);
 
