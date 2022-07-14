@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MachineCards from './MachineCards';
 
-const MachineConnectivity = () => {
+const MachineConnectivity = (props) => {
+  const machinesData = props.data.data;
   return (
     <Accordion>
       <AccordionSummary
@@ -13,12 +14,18 @@ const MachineConnectivity = () => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <Typography className='text-xl font-bold pl-2'>Machine Connectivity</Typography>
+        <Typography className='text-xl font-bold pl-2'>
+          Machine Connectivity
+        </Typography>
       </AccordionSummary>
-      <AccordionDetails className='row'>
-        <div className='col-3'>
-            <MachineCards />
-        </div>
+      <AccordionDetails className='row py-2'>
+        {machinesData.map((item, count) => {
+          return (
+            <div className='col-4' key={count}>
+              <MachineCards data={item}/>
+            </div>
+          );
+        })}
       </AccordionDetails>
     </Accordion>
   );
