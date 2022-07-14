@@ -38,7 +38,8 @@ function App() {
             placeholderText='End Date'
             dateFormat='dd/MM/yyyy'
             selected={endDate}
-            minDate={startDate} isClearable
+            minDate={startDate}
+            isClearable
             onChange={handleEndDate}
           />
           <p style={{ fontSize: 15, color: 'grey', width: 200 }}>Up to 5 days</p>
@@ -46,7 +47,7 @@ function App() {
         <div className='dropdown'>
 
         </div>
-      </div>
+      </div >
     </div >
 
   );
