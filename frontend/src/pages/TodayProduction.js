@@ -10,6 +10,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
+
   const [toBeCompletedProductsData, setToBeCompletedProductsData] =
     useState(null);
   const [equipmentStatusData, setEquipmentStatusData] = useState(null);
@@ -52,6 +53,15 @@ const TodayProduction = () => {
         <div>
           <div className='tpdHeader'>Today's Production Dashboard</div>
           <div className='liveEquipHeader'>Live Equipment Usage</div>
+          <div className='textField'>
+            <TextField
+              id='outlined-basic'
+              variant='outlined'
+              fullWidth
+              label='Search'
+            />
+          </div>
+
           <div className='textField'>
             <TextField
               id='outlined-basic'
