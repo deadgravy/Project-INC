@@ -48,7 +48,7 @@ module.exports.getData1 = async function () {
 module.exports.getRecipebyRecipeID = async function (id) {
   try {
     const { rows } = await pool.query(
-                        `SELECT 
+      `SELECT 
                             rf.fr_recipe_id, r.name, rf.queue, t.fr_process_steps, ps.process_name, rf.desc_translate, AVG(t.duration)
                         FROM (SELECT  equip_id,
                             log_action,
@@ -94,8 +94,7 @@ module.exports.getRecipebyRecipeID = async function (id) {
 
 module.exports.getCompletedProducts = async function () {
   try {
-    const { rows } =
-      await pool.query(
+    const { rows } = await pool.query(
       `
       SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesCompleted
       FROM log_times lt
@@ -108,7 +107,8 @@ module.exports.getCompletedProducts = async function () {
       AND lt.log_action = 2
       GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
       ORDER BY lt.recipe_id;
-      `);
+      `
+    );
 
     return rows;
   } catch (error) {
@@ -118,8 +118,7 @@ module.exports.getCompletedProducts = async function () {
 
 module.exports.getProductsToComplete = async function () {
   try {
-    const { rows } =
-      await pool.query(
+    const { rows } = await pool.query(
       `
       SELECT lt.recipe_id, rp.name, COUNT(*) AS batchesToComplete
       FROM log_times lt
@@ -132,7 +131,8 @@ module.exports.getProductsToComplete = async function () {
       AND lt.log_action = 2
       GROUP BY lt.recipe_id, rf.id, rp.name, rf.queue, rf.id
       ORDER BY lt.recipe_id;
-      `);
+      `
+    );
 
     return rows;
   } catch (error) {
@@ -189,4 +189,60 @@ module.exports.getEquipmentStatus = async function () {
   } catch (error) {
     console.log(error);
   } 
+};
+
+module.exports.getMachineConnectivity = async function () {
+  try {
+    const { rows } = await pool.query(`
+      SELECT DISTINCT ON (client_no) 
+        a.client_no, 
+        a.ttl, 
+        a.created_at,
+        b.machine_name,
+        b.location_id
+      FROM 
+        client_health_statuses as a
+      JOIN 
+        log_station_clients as b 
+      ON 
+        a.client_no = b.machine_id
+      WHERE 
+        a.created_at >= '2021-08-21 00:00:00' AND a.created_at < '2021-08-22 00:00:00'
+      ORDER BY 
+        client_no, created_at DESC;
+      `);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getMachines = async function () {
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        machine_name,
+        machine_id
+      FROM
+        log_station_clients
+      `);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports.getMachines = async function () {
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        machine_name,
+        machine_id
+      FROM
+        log_station_clients
+      `);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
 };

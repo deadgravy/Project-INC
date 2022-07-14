@@ -6,6 +6,9 @@ import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SignUp from './pages/SignUp';
 import EquipUtilDashboard from './pages/EquipUtilDashboard';
+import EUS from './pages/EUS';
+import moment from 'moment';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +23,7 @@ root.render(
           path='equipmentUtilisationDashboard'
           element={<EquipUtilDashboard />}
         />
+        <Route path='equipmentUtilisationSnapshot' element={<EUS />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -34,4 +34,10 @@ router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
 //getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
 
+//getting machine connectivity (eus)
+router.get('/machineConnectivity', dataController.getMachineConnectivity);
+
+//getting machines (eus)
+router.get('/machines', dataController.getMachines);
+
 module.exports = router;
