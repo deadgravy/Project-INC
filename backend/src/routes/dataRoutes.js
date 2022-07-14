@@ -24,4 +24,7 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 //getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
+//getting equipment status
+router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+
 module.exports = router;
