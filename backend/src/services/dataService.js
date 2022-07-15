@@ -1,9 +1,8 @@
 const pool = require('../config/database');
 
-// const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.getData1 = async function () {
   try {
-    const { rows } = await client.query(`SELECT 
+    const { rows } = await pool.query(`SELECT 
                             rf.fr_recipe_id, r.name
                         FROM (SELECT  equip_id,
                             log_action,
@@ -144,7 +143,7 @@ module.exports.getProductsToComplete = async function () {
 module.exports.getEquipmentStatus = async function () {
   try {
     const { rows } =
-      await client.query(`SELECT pd.name, r.name AS productName, t.fr_process_steps, lt.log_time, pd.mac_property AS singleOrMultiple, lt.log_action, ('2021-08-21 08:00:00' - lt.log_time) AS timeToStarted, rf.queue, ps.process_name, rf.desc_translate, AVG(t.duration)
+      await pool.query(`SELECT pd.name, r.name AS productName, t.fr_process_steps, lt.log_time, pd.mac_property AS singleOrMultiple, lt.log_action, ('2021-08-21 08:00:00' - lt.log_time) AS timeToStarted, rf.queue, ps.process_name, rf.desc_translate, AVG(t.duration)
       FROM ( SELECT  equip_id,
       log_action,
       fr_process_steps,
@@ -236,7 +235,7 @@ module.exports.getMachines = async function () {
 module.exports.getEquipmentStatus = async function () {
   try {
     const { rows } =
-      await client.query(`SELECT pd.name, r.name AS productName, t.fr_process_steps, lt.log_time, pd.mac_property AS singleOrMultiple, lt.log_action, ('2021-08-21 08:00:00' - lt.log_time) AS timeToStarted, rf.queue, ps.process_name, rf.desc_translate, AVG(t.duration)
+      await pool.query(`SELECT pd.name, r.name AS productName, t.fr_process_steps, lt.log_time, pd.mac_property AS singleOrMultiple, lt.log_action, ('2021-08-21 08:00:00' - lt.log_time) AS timeToStarted, rf.queue, ps.process_name, rf.desc_translate, AVG(t.duration)
       FROM ( SELECT  equip_id,
       log_action,
       fr_process_steps,
