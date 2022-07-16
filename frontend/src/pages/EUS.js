@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar/Sidebar';
 import MachineConnectivity from '../components/eus/MachineConnectivity';
+import EquipmentDetails from '../components/eus/EquipmentDetails';
 import '../styles/eus.css';
+import '../styles/toggler.css'
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
@@ -24,7 +26,10 @@ const EUS = () => {
         for (let m = 0; m < machinesData.data.length; m++) {
           let found = false;
           for (let mcd = 0; mcd < machineConnectivityData.data.length; mcd++) {
-            if (machinesData.data[m].machine_id === machineConnectivityData.data[mcd].client_no) {
+            if (
+              machinesData.data[m].machine_id ===
+              machineConnectivityData.data[mcd].client_no
+            ) {
               found = true;
             }
           }
@@ -58,8 +63,17 @@ const EUS = () => {
       <div className='eus-display col-10 px-4 py-6'>
         <h1>Equipment Utilisation Snapshot</h1>
         {!isLoading ? (
-          <MachineConnectivity data={machineConnectivityData}/>
-        ) : (<div> Loading... </div>)}
+          <div className='eus-components'>
+            <div className='machineConnectivity'>
+              <MachineConnectivity data={machineConnectivityData} />
+            </div>
+            <div className='equipmentDetails mt-4'>
+              <EquipmentDetails />
+            </div>
+          </div>
+        ) : (
+          <div> Loading... </div>
+        )}
       </div>
     </div>
   );
