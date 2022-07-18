@@ -109,7 +109,7 @@ const DonutChart = ({ data1, data2 }) => { //data1 is batches completed and data
   }, []);  
 
   return (
-    <div className="container">
+    <div className="containerChart">
       <div className="graph" ref={ref} />
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
+import "../styles/tpd.css";
 import ProductChart from "../components/tpd/ProductChart";
 import TableComponent from "../components/tpd/TableComponent";
+import Modal from '../components/tpd/Modal';
 import TextField from "@mui/material/TextField";
 import { Tab } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -61,11 +62,12 @@ const TodayProduction = () => {
                 />
           </div>
           <div className="Row1">
-              <TableComponent data={equipmentStatusData}/>
+              {/* <TableComponent data={equipmentStatusData}/> */}
           </div>
           <div className="productHeader">
             Completed Products as of Today
           </div>
+          <div className="searchAndButtonRow">
           <div className="textField">
                 <TextField 
                 id="outlined-basic"
@@ -73,6 +75,8 @@ const TodayProduction = () => {
                 fullWidth
                 label="Search"
                 />
+          </div>
+          <Modal data={toBeCompletedProductsData}/>
           </div>
           <div className="Row2">
             <div className="chartContainer">
