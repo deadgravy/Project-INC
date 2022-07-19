@@ -3,7 +3,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentDetails from '../components/eus/EquipmentDetails';
 import '../styles/eus.css';
-import '../styles/toggler.css'
+import '../styles/toggler.css';
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
