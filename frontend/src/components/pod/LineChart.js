@@ -1,12 +1,12 @@
-import * as d3 from "d3";
-import React, { useEffect, useRef } from "react";
+import * as d3 from 'd3';
+import React, { useEffect, useRef } from 'react';
 
 // import "./index.css";
 
 function LineChart() {
   const isMounted = useRef(false);
   useEffect(() => {
-    console.log("LineChart");
+    console.log('LineChart');
 
     if (!isMounted.current) {
       isMounted.current = true;
@@ -17,20 +17,20 @@ function LineChart() {
 
       // append the svg object to the body of the page
       const svg = d3
-        .select("#LineGraph")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+        .select('#LineGraph')
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
       //Read the data
       d3.csv(
-        "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+        'https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv',
 
         // When reading the csv, I must format variables:
         function (d) {
-          return { date: d3.timeParse("%Y-%m-%d")(d.date), value: d.value };
+          return { date: d3.timeParse('%Y-%m-%d')(d.date), value: d.value };
         }
       ).then(
         // Now I can use this dataset:
@@ -45,8 +45,8 @@ function LineChart() {
             )
             .range([0, width]);
           svg
-            .append("g")
-            .attr("transform", `translate(0, ${height})`)
+            .append('g')
+            .attr('transform', `translate(0, ${height})`)
             .call(d3.axisBottom(x));
 
           // Add Y axis
@@ -59,17 +59,17 @@ function LineChart() {
               }),
             ])
             .range([height, 0]);
-          svg.append("g").call(d3.axisLeft(y));
+          svg.append('g').call(d3.axisLeft(y));
 
           // Add the line
           svg
-            .append("path")
+            .append('path')
             .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "steelblue")
-            .attr("stroke-width", 1.5)
+            .attr('fill', 'none')
+            .attr('stroke', 'steelblue')
+            .attr('stroke-width', 1.5)
             .attr(
-              "d",
+              'd',
               d3
                 .line()
                 .x(function (d) {
@@ -83,7 +83,7 @@ function LineChart() {
       );
     }
   }, []);
-  return <div id="LineGraph" />;
+  return <div id='LineGraph' />;
 }
 
 export default LineChart;
