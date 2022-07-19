@@ -46,7 +46,7 @@ const DonutChart = ({ data }) => {
       .style('font-size', '2.5em')
       .append('text');
 
-    recipe.append('tspan').text(data?.data[0].name);
+    recipe.append('tspan').text(data.data[0].name);
 
     recipe
       .append('tspan')
