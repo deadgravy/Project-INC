@@ -3,7 +3,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Toggler from './Toggler';
+import Toggler from '../general/Toggler';
 import CounterToggle from './CounterToggle';
 
 const EquipmentDetails = () => {
