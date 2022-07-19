@@ -30,10 +30,7 @@ export default function Modal({ data1 }) {
           <div onClick={toggleModal} className='overlay'></div>
           <div className='modal-content'>
             <h2>Hello Modal</h2>
-            <form
-              action={`http://localhost:3000/productionOverview/53`}
-              method='get'
-            >
+            <form>
               {data1.data.map((item, count) => {
                 return (
                   <div class='form-ext-control form-ext-radio'>
@@ -42,6 +39,9 @@ export default function Modal({ data1 }) {
                       name={data1.data[count].fr_recipe_id}
                       class='form-ext-input'
                       type='radio'
+                      onChange={() =>
+                        (window.location.href = `/productionOverview/${data1.data[count].fr_recipe_id}`)
+                      }
                     />
                     <label class='form-ext-label' for={data1.data[count].name}>
                       {data1.data[count].name}
@@ -49,10 +49,6 @@ export default function Modal({ data1 }) {
                   </div>
                 );
               })}
-
-              <button class='btn-info btn--pilled' type='submit'>
-                Test
-              </button>
             </form>
 
             <button className='close-modal' onClick={toggleModal}>
