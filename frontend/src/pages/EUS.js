@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar/Sidebar';
 import MachineConnectivity from '../components/eus/MachineConnectivity';
-import EquipmentDetails from '../components/eus/EquipmentFrequency';
+import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
 
@@ -68,7 +68,7 @@ const EUS = () => {
               <MachineConnectivity data={machineConnectivityData} />
             </div>
             <div className='equipmentDetails mt-4'>
-              <EquipmentDetails />
+              <EquipmentFrequency />
             </div>
           </div>
         ) : (
