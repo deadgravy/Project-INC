@@ -26,21 +26,26 @@ function LineChart() {
 
       //Read the data
       d3.csv(
+        // 'http://localhost:4000/api/prodCount',
         'https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv',
 
         // When reading the csv, I must format variables:
         function (d) {
-          return { date: d3.timeParse('%Y-%m-%d')(d.date), value: d.value };
+          return {
+            date: d3.timeParse('%Y-%m-%d')(d.date),
+            count: d.count,
+          };
         }
       ).then(
         // Now I can use this dataset:
         function (data) {
+          console.log(data);
           // Add X axis --> it is a date format
           const x = d3
             .scaleTime()
             .domain(
               d3.extent(data, function (d) {
-                return d.date;
+                return d.data_trunc;
               })
             )
             .range([0, width]);
