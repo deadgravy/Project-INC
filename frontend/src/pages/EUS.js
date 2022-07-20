@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar/Sidebar';
 import MachineConnectivity from '../components/eus/MachineConnectivity';
-import EquipmentDetails from '../components/eus/EquipmentDetails';
+import EquipmentDetails from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
 
