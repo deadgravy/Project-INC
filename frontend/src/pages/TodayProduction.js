@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "../styles/styles.css";
-import ProductChart from "../components/tpd/ProductChart";
-import TableComponent from "../components/tpd/TableComponent";
-import TextField from "@mui/material/TextField";
-import { Tab } from "@mui/material";
-import Sidebar from "../components/sidebar/Sidebar";
-// import "../styles/todayProduction.css"
+import React, { useEffect, useState } from 'react';
+import '../styles/styles.css';
+import ProductChart from '../components/tpd/ProductChart';
+import TableComponent from '../components/tpd/TableComponent';
+import TextField from '@mui/material/TextField';
+import { Tab } from '@mui/material';
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
