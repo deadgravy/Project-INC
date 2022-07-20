@@ -43,7 +43,7 @@ router.get('/machines', dataController.getMachines);
 
 //getting single product by recipe id
 router.get(
-  '/getSingleProductbyRecipeID',
+  '/getSingleProductbyRecipeID/:id',
   spfdController.getSingleProductbyRecipeID
 );
 

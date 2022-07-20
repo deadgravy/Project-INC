@@ -23,7 +23,7 @@ module.exports.getSingleProductbyRecipeID = async function () {
     )
     SELECT id, equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as total_time, date 
     FROM OMG 
-    WHERE log_action = 2 AND recipe_id = $1;`, [id]
+    WHERE log_action = 2 AND recipe_id = ?;`
     ); // end of SQL query
     return rows;
   } catch (error) {
