@@ -21,9 +21,9 @@ module.exports.getSingleProductbyRecipeID = async function () {
       INNER JOIN recipes
       ON log_times.recipe_id = recipes.id
     )
-    SELECT id, equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as total_time, date 
+    SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as total_time, date 
     FROM OMG 
-    WHERE log_action = 2 AND recipe_id = ?;`
+    WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '$1' and '$1');`
     ); // end of SQL query
     return rows;
   } catch (error) {
