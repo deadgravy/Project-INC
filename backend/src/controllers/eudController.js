@@ -41,7 +41,6 @@ module.exports.getMultipleUsage = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getSingleUsageDetails = async function (req, res, next) {
-
   let startdate = req.params.startdate;
   let enddate = req.params.enddate;
   let hour = req.params.hour;
@@ -87,7 +86,6 @@ module.exports.getSingleUsageDetails = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getMultipleUsageDetails = async function (req, res, next) {
-
   let startdate = req.params.startdate;
   let enddate = req.params.enddate;
   let hour = req.params.hour;
