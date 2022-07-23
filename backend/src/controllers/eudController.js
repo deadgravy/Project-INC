@@ -305,7 +305,6 @@ module.exports.getSingleWeeklyDetails = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
-
 module.exports.getMultipleWeeklyDetails = async function (req, res, next) {
   let startdate = req.params.startdate;
   let enddate = req.params.enddate;
