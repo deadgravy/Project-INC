@@ -3,10 +3,10 @@ const config = require('./config');
 
 const db = new Pool({
   user: config.databaseUsername,
-  host: 'localhost',
+  host: config.databaseHost,
   password: config.databasePassword,
   database: config.userDBName,
-  port: 5432,
+  port: config.portname,
 });
 
 module.exports = db;
