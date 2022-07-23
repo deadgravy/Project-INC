@@ -17,7 +17,14 @@ const EquipmentDetails = () => {
     { x: 10, y: 20 },
   ];
 
-  const colorScheme = ['#39CEF3', 'orange', 'gold', '#0066FF', 'navy', '#800080'];
+  const colorScheme = [
+    '#39CEF3',
+    'orange',
+    'gold',
+    '#0066FF',
+    'navy',
+    '#800080',
+  ];
   return (
     <Accordion>
       <AccordionSummary
@@ -41,7 +48,7 @@ const EquipmentDetails = () => {
               data={equipmentFrequencyData}
               innerRadius={100}
               padAngle={5}
-              labelRadius={({ innerRadius }) => innerRadius + 15 }
+              labelRadius={({ innerRadius }) => innerRadius + 15}
               cornerRadius={5}
               style={{
                 labels: { fill: 'white', fontSize: 20, fontWeight: 'bold' },
