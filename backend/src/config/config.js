@@ -6,6 +6,7 @@ module.exports = {
   databaseHost: process.env.DB_HOST,
   databaseName: process.env.DB_DATABASE_NAME,
   userDBName: process.env.DB_USERDB_NAME,
+  portname: process.env.PORT_NAME,
 
   JWTKey: process.env.JWTKEY,
 };
