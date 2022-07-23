@@ -1,0 +1,57 @@
+.Row1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.Row2 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.tpdHeader {
+    font-size: 2.3em;
+    font-weight: 600;
+    margin-top: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.liveEquipHeader {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.productHeader {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.chartContainer {
+    width: 950px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}
+
+.scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+} 
+
+.textField {
+    display: flex;
+    width: 20%;
+    margin-top: 10px;
+}
+
+.searchAndButtonRow {
+    flex-direction: row;
+}
