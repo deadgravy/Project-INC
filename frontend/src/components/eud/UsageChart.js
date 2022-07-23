@@ -28,7 +28,7 @@ export function UsageChart(data) {
       <Chart
         chartType='Timeline'
         data={data.data.data}
-        width='100%'
+        width='95%'
         height='500px'
         options={{
           colors: [
