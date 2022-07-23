@@ -1,57 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import DatePicker from 'react-datepicker'
+import SideBar from '../components/sidebar/Sidebar';
 import '../styles/spfd.css';
+import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-
-// still in progress
-function App() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
-  const handleStartDate = (date) => {
-    setStartDate(date);
-    setEndDate(null);
-  };
-
-  const handleEndDate = (date) => {
-    setEndDate(date);
-  };
+import {GanttChart } from "../components/spfd/ganttChart";
+import { addDays } from 'date-fns';
 
 
+const SingleProductFlow = () => {
+ 
+
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+  
+  
   return (
-    <div className="App" id="container">
-      <div className="input-container">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></link>
-        <h3 id="font-style">SSingle Product Flow Dashboard</h3>
-        <div id="light" style={{ display: 'flex', float: 'left' }}>
-          <DatePicker id="startDate-css"
-            placeholderText='Start Date'
-            dateFormat='dd/MM/yyyy'
-            selected={startDate}
-            onChange={handleStartDate}
-            isClearable
-            showYearDropdown
-            scrollableMonthYearDropdown
-          />
-          <span>   <b> - </b>    </span>
-          <DatePicker id="endDate-css"
-            placeholderText='End Date'
-            dateFormat='dd/MM/yyyy'
-            selected={endDate}
-            minDate={startDate}
-            isClearable
-            onChange={handleEndDate}
-          />
-          <p style={{ fontSize: 15, color: 'grey', width: 200 }}>Up to 5 days</p>
+    <React.StrictMode>
+      <div className='singlProductFlow row p-0 w-100p'>
+
+        <div className='po-sidebar sidebar col-2'>    {/* sidebar */}
+            <SideBar />
         </div>
-        <div className='dropdown'>
+        
+        <div className='po-display col-10'>
+          
+          <div className='pt-2 Row1'>                 {/* Title */}
+            <h3>Single Product Flow Dashboard</h3>
+          </div>
+          
+          <div className='Row2'>                      {/* DatePicker */}
+            <div className='col-2'>
+              <DatePicker
+              placeholderText="Please Select Date"
+              dateFormat="dd/MM/yyyy"
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              maxDate={addDays(startDate, 4)}
+              onChange={(update) => {
+                setDateRange(update);
+              }}
+              isClearable={true}
+              />    
+            </div>
+          </div>
+          
+          <div className='Row 3'>                    {/*  GanttChart */}
+            <div className='col-12'>
+              <GanttChart />
+            </div>
+          </div>
+
+          <div className='pt-5 Row4'>                      {/* Title (Equipment Production Analysis) */}
+            <h4>Equipment Prodcution Analysis</h4 >
+          </div>
 
         </div>
-      </div >
-    </div >
-
-  );
+      </div>
+    </React.StrictMode>
+  )
 }
 
-
-export default App;
+export default SingleProductFlow;

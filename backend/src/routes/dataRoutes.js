@@ -43,7 +43,7 @@ router.get('/machines', dataController.getMachines);
 
 //getting single product by recipe id
 router.get(
-  '/getSingleProductbyRecipeID',
+  '/getSingleProductbyRecipeID/:id',
   spfdController.getSingleProductbyRecipeID
 );
 
@@ -52,5 +52,18 @@ router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
 router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
+
+router.get('/prodCount', dataController.prodCount);
+// getting single recipe equipment usage details
+router.get(
+  '/getSingleUsageDetails/:date/:hour',
+  eudController.getSingleUsageDetails
+);
+
+// getting multiple recipe equipment usage details
+router.get(
+  '/getMultipleUsageDetails/:date/:hour',
+  eudController.getMultipleUsageDetails
+);
 
 module.exports = router;
