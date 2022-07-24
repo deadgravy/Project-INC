@@ -31,7 +31,7 @@ const SingleProductFlow = () => {
             <div className='col-2'>
               <DatePicker
               placeholderText="Please Select Date"
-              dateFormat="dd/MM/yyyy"
+              dateFormat="yyyy/MM/dd"
               selectsRange={true}
               startDate={startDate}
               endDate={endDate}
