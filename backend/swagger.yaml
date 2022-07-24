@@ -1,0 +1,55 @@
+swagger: '2.0'
+info:
+  title: FIRC Express API Documentation with Swagger
+  description: This is a simple CRUD API application to help document the API's we create for FIRC
+  version: 1.0.0
+
+host: 'localhost:4000'
+basePath: '/'
+schemes:
+- 'http'
+
+paths:
+  /api/login:
+    post:
+      summary: API to login to the FIRC management system
+      tags:
+        - users
+      parameters:
+        - in: body
+          name: requestBody
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Successfully logged in
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        401:
+          description: Invalid password / email
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+      500:
+        description: Error
+        schema:
+          type: object:
+          properties:
+            status:
+              type: string
+            data:
+              type: string
+
