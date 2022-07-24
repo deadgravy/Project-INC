@@ -43,6 +43,7 @@ module.exports.getAllRecipeName = async function () {
       INNER JOIN recipes
       ON log_times.recipe_id = recipes.id
     )
+<<<<<<< HEAD
     SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as duration, date 
     FROM OMG 
 <<<<<<< HEAD
@@ -50,6 +51,11 @@ module.exports.getAllRecipeName = async function () {
 =======
     WHERE log_action = 2 AND recipe_id = ?;`
 >>>>>>> ac2a8846 (fix merge conflic)
+=======
+    SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as total_time, date 
+    FROM OMG 
+    WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '$1' and '$1');`
+>>>>>>> 4e5f1779 (Edited query)
     ); // end of SQL query
 >>>>>>> fe855c15 (resolve rebase conflics)
     return rows;
