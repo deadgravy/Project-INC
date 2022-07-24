@@ -22,7 +22,11 @@ module.exports.getSingleProductbyRecipeID = async function () {
       ON log_times.recipe_id = recipes.id
     )
     SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as duration, date 
+<<<<<<< HEAD
     FROM OMG
+=======
+    FROM OMG 
+>>>>>>> 13362ac9 (updated on UI of gantt chart)
     WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '$1' and '$1');`
     ); // end of SQL query
     return rows;
