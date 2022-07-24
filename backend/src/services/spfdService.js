@@ -23,7 +23,11 @@ module.exports.getSingleProductbyRecipeID = async function () {
     )
     SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as duration, date 
     FROM OMG 
+<<<<<<< HEAD
     WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '$1' and '$1');`
+=======
+    WHERE log_action = 2 AND recipe_id = ?;`
+>>>>>>> ac2a8846 (fix merge conflic)
     ); // end of SQL query
     return rows;
   } catch (error) {
