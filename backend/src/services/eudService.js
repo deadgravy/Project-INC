@@ -23,12 +23,7 @@ module.exports.getSingleUsage = async function (date) {
     `,
       [date]
     );
-
-    let singleArr = [];
-    for (let i = 0; i < rows.length; i++) {
-      singleArr.push(Object.values(rows[i]));
-    }
-    return singleArr;
+    return rows;
   } catch (error) {
     console.log(error);
   }
@@ -58,11 +53,7 @@ module.exports.getMultipleUsage = async function (date) {
       [date]
     );
 
-    let multipleArr = [];
-    for (let i = 0; i < rows.length; i++) {
-      multipleArr.push(Object.values(rows[i]));
-    }
-    return multipleArr;
+    return rows;
   } catch (error) {
     console.log(error);
   }
