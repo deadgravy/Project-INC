@@ -13,38 +13,33 @@ export const data = [
 export const options = {
   timeline: {
     groupByRowLabel: true,
+    showBarLabels: false,
   },
 };
 
 export function UsageChart(data) {
   let data1 = data.data.data;
+  console.log('hello');
+  console.log(data1);
+  let usageArr = [];
   for (let i = 0; i < data1.length; i++) {
-    data1[i][2] = new Date(data1[i][2]);
-    data1[i][3] = new Date(data1[i][3]);
+    usageArr.push(Object.values(data1[i]));
+  }
+  console.log(usageArr);
+
+  for (let i = 0; i < usageArr.length; i++) {
+    usageArr[i][2] = new Date(usageArr[i][2]);
+    usageArr[i][3] = new Date(usageArr[i][3]);
   }
 
   return (
     <>
       <Chart
         chartType='Timeline'
-        data={data.data.data}
+        data={usageArr}
         width='95%'
-        height='500px'
-        options={{
-          colors: [
-            '#9f8059',
-            '#2f4f4f',
-            '#556b2f',
-            '#8b4513',
-            '#6b8e23',
-            '#2e8b57',
-            '#7f0000',
-            '#191970',
-            '#006400',
-            '#708090',
-            '#bc8f8f',
-          ],
-        }}
+        height='450px'
+        options={options}
       />
     </>
   );
