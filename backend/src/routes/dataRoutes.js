@@ -47,12 +47,6 @@ router.get(
   spfdController.getSingleProductbyRecipeID
 );
 
-//getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
-
-// getting multiple recipe equipment usage
-router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
-
 router.get('/prodCount', dataController.prodCount);
 // getting single recipe equipment usage details
 router.get(

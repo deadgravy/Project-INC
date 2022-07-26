@@ -14,7 +14,7 @@ paths:
     post:
       summary: API to login to the FIRC management system
       tags:
-        - users
+        - User
       parameters:
         - in: body
           name: requestBody
@@ -52,4 +52,273 @@ paths:
               type: string
             data:
               type: string
+
+  /api/addUser:
+    post:
+      summary: Adding of user
+      tags:
+        - User
+      parameters:
+        - in: body
+          name: requestBody
+          schema:
+            type: object
+            required:
+              - email
+              - contact_number
+              - first_name
+              - last_name
+              - password
+            properties:
+              email:
+                type: string
+              contact_number: 
+                type: string
+              first_name:
+                type: string
+              last_name:  
+                type: string
+              password:
+                type: string
+      responses:
+        201:
+          description: User successfully added
+          schema: 
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          description: Error (Failed to add user)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/getEquipmentStatus:
+    get:
+      summary: Getting Equipment Status
+      tags:
+        - Today's Production Dashboard
+      responses:
+        200:
+          description: Able to retrieve equipment status
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    productname:
+                      type: string
+                    fr_process_steps:
+                      type: string
+                    log_time:
+                      type: string
+                    singleormultiple:
+                      type: integer
+                    timetostarted:
+                      type: object
+                      properties:
+                        hours:
+                          type: integer
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                    queue:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg: 
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        milliseconds: 
+                          type: number
+        500:
+          description: Error (Failed to fetch items)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/machineConnectivity:
+    get:
+      summary: Getting machine connectivity of all logging machines
+      tags:
+      - Equipment Utilisation Snapshot
+      responses:
+        200:
+          description: Able to get machine connecitivity
+          schema:
+            type: object
+            properties:
+              status: 
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    client_no: 
+                      type: string
+                    ttl:
+                      type: integer
+                    created_at:
+                      type: string
+                    machine_name:
+                      type: string
+                    location_id:
+                      type: string
+        500:
+          description: Error (Failed to add user)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/machines:
+    get:
+      summary: Getting all logging machines
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          description: Successfully got all machines
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    machine_name:
+                      type: string
+                    machine_id:
+                      type: string        
+        500:
+          description: Error (Failed to add user)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/getCompletedProducts:
+    get:
+      summary: Getting completed products in terms of batches
+      tags:
+        - Today's Production Dashboard
+      responses:
+        200:
+          description: Successfully got completed products
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id:
+                      type: integer
+                    name:
+                      type: string  
+                    batchescompleted:
+                      type: string      
+        500:
+          description: Error (Failed to add user)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/getProductsToComplete:
+    get: 
+      summary: Getting products to complete in terms of batches
+      tags:
+        - Today's Production Dashboard
+      responses:
+        200:
+          description: Successfully got products to be completed
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id:
+                      type: integer
+                    name:
+                      type: string  
+                    batchestocomplete:
+                      type: string      
+        500:
+          description: Error (Failed to add user)
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: null
+
+  /api/getSingleProductByRecipeID/{id}:
+    get:
+      summary: Getting single product by recipe ID
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        200:
+          description: Got the single Product
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: object
+                properties:
+                  # Awaiting response
+        
+  # TODO: Equipment Utilisation Dashboard and Production Overview not done
+
 
