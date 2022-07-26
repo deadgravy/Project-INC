@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import "../tpd/styles/table.css";
+import "../tpd/styles/table.css";
 
 const TableComponent = ({ data }) => {
 
@@ -15,20 +15,13 @@ const TableComponent = ({ data }) => {
 
     const dataFilter = (data = []) => {
         return data.filter((eachArrayItem) => {
-            // for 
-            // if (countData(data?.data, ) % 2 == 0){
-
-            if (eachArrayItem.log_action) {
+            if (eachArrayItem.log_action == 1) {
                 return eachArrayItem;
             }
-            // else {
-            //     return ""
-            // }
         })
     }
 
     useEffect(() => {
-        console.log(countData(data?.data, 241))
         const filteredData1 = dataFilter(data?.data)
         setFilteredData(filteredData1)
     }, [])
@@ -36,6 +29,7 @@ const TableComponent = ({ data }) => {
     return (
         <div className='table'>
             <div class="p-4 bg-white-500 u-shadow-lg u-round-xs">
+                <div className='table'>
                 <table class="table">
                     <thead>
                         <tr>
@@ -48,12 +42,11 @@ const TableComponent = ({ data }) => {
                     </thead>
                     <tbody>
                         {filteredData.map((value) => {
-                            // for(var i = 0; i < data?.data.length; i++)
-                            // var counter = data?.data[i].fr_process_steps.length;
-                            // if(data?.data[i].fr_process_steps)
+                            while(countData(data?.data, value.fr_process_steps) % 2 !== 0 && Math.max(value.id))
                             return (
+                                
                                 <tr>
-                                    <td>{value.name}</td>
+                                    <td>{value.name} + {value.id}</td>
                                     <td>{value.productname}</td>
                                     <td>
                                         {value.timetostarted.days
@@ -83,6 +76,7 @@ const TableComponent = ({ data }) => {
                         })}
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     )

@@ -48,7 +48,10 @@
 
 .textField {
     display: flex;
-    flex: 1;
     width: 20%;
     margin-top: 10px;
+}
+
+.searchAndButtonRow {
+    flex-direction: row;
 }

@@ -93,7 +93,7 @@ module.exports.getProductsToComplete = async function (req, res, next) {
 
 module.exports.getEquipmentStatus = async function (req, res, next) {
   try {
-    const results = await dataManager.getProductsToComplete();
+    const results = await dataManager.getEquipmentStatus();
     console.log(results);
     res.status(200).json({
       status: 'success',
