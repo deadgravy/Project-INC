@@ -2,7 +2,7 @@ const Pool = require('../config/database');
 
 // still in progress
 
-module.exports.getSingleProductbyRecipeID = async function () {
+module.exports.getSingleProductbyRecipeID = async function (id) {
   try {
     const { rows } = await Pool.query(
       `WITH OMG as (
@@ -23,7 +23,8 @@ module.exports.getSingleProductbyRecipeID = async function () {
       )
       SELECT equip_id, equip_name, recipe_id, recipe_name, start_time, end_time, -(start_time - end_time) as total_time, date 
       FROM OMG 
-      WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '2021-08-10' and '2021-08-13');`
+      WHERE log_action = 2 AND recipe_id = $1 AND (date BETWEEN '2021-08-10' and '2021-08-13');`,
+      [id]
     ); // end of SQL query
     return rows;
   } catch (error) {
