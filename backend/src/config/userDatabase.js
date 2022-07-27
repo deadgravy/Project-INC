@@ -4,7 +4,11 @@ const config = require('./config');
 const db = new Pool({
   user: config.databaseUsername,
 <<<<<<< HEAD
+<<<<<<< HEAD
   host: config.databaseHost,
+=======
+  host: 'localhost',
+>>>>>>> 013d1181 (update for SPFD)
 =======
   host: 'localhost',
 >>>>>>> 013d1181 (update for SPFD)

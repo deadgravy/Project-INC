@@ -4,9 +4,14 @@ import '../styles/spfd.css';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {GanttChart } from "../components/spfd/ganttChart";
+<<<<<<< HEAD
 import { addDays } from 'date-fns';
 
 
+=======
+import { addDays, subDays } from 'date-fns';
+
+>>>>>>> 013d1181 (update for SPFD)
 
 const SingleProductFlow = () => {
  
