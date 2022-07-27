@@ -53,7 +53,7 @@ const SingleProductFlow = () => {
           </div>
 
           <div className='pt-5 Row4'>                      {/* Title (Equipment Production Analysis) */}
-            <h4>Equipment Prodcution Analysis</h4 >
+            <h4>Equipment Prodcution Analysis</h4>
           </div>
 
         </div>
