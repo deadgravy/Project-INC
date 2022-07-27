@@ -26,8 +26,12 @@ module.exports.getSingleProductbyRecipeID = async function () {
     FROM OMG
 =======
     FROM OMG 
+<<<<<<< HEAD
 >>>>>>> 13362ac9 (updated on UI of gantt chart)
     WHERE log_action = 2 AND recipe_name = '$1' AND (date BETWEEN '$1' and '$1');`
+=======
+    WHERE log_action = 2 AND recipe_id = ?;`
+>>>>>>> ac2a8846 (fix merge conflic)
     ); // end of SQL query
     return rows;
   } catch (error) {
