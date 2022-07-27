@@ -26,21 +26,21 @@ const EquipUtilDashboard = () => {
     var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = startDate.getFullYear();
 
-    let date = yyyy + '-' + mm + '-' + dd;
-    console.log(date);
+    let enddate = yyyy + '-' + mm + '-' + dd;
+    let startdate = `${yyyy}-${mm}-${dd - 1}`;
 
     Promise.all([
-      fetch(`http://localhost:4000/api/getSingleUsage/${date}`).then((res) =>
-        res.json()
-      ),
-      fetch(`http://localhost:4000/api/getMultipleUsage/${date}`).then((res) =>
-        res.json()
-      ),
       fetch(
-        `http://localhost:4000/api/getSingleUsageDetails/${date}/${hour}`
+        `http://localhost:4000/api/getSingleUsage/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsageDetails/${date}/${hour}`
+        `http://localhost:4000/api/getMultipleUsage/${startdate}/${enddate}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getSingleUsageDetails/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUsageDetails/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4]) => {
       setSingleUsage({
