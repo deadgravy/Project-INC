@@ -57,15 +57,16 @@ router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
 
 router.get('/prodCount', dataController.prodCount);
+
 // getting single recipe equipment usage details
 router.get(
-  '/getSingleUsageDetails/:date/:hour',
+  '/getSingleUsageDetails/:enddate/:hour',
   eudController.getSingleUsageDetails
 );
 
 // getting multiple recipe equipment usage details
 router.get(
-  '/getMultipleUsageDetails/:date/:hour',
+  '/getMultipleUsageDetails/:enddate/:hour',
   eudController.getMultipleUsageDetails
 );
 
