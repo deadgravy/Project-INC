@@ -41,7 +41,7 @@ module.exports.getMultipleUsage = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getSingleUsageDetails = async function (req, res, next) {
-  let date = req.params.date;
+  let date = req.params.enddate;
   let hour = req.params.hour;
   try {
     const results = await eudManager.getSingleUsageDetails(date, hour);
@@ -75,7 +75,7 @@ module.exports.getSingleUsageDetails = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getMultipleUsageDetails = async function (req, res, next) {
-  let date = req.params.date;
+  let date = req.params.enddate;
   let hour = req.params.hour;
 
   try {
