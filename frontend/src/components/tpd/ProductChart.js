@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import CloseIcon from '@mui/icons-material/Close';
 import "./styles/container.css";
-import "./styles/modal.css";
+// import "./styles/modal.css";
 
 const colors = ["#22C55E", "#8C0014"];
 const boxSize = 500;

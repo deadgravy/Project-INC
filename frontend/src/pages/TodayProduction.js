@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../styles/tpd.css";
 import ProductChart from "../components/tpd/ProductChart";
 import TableComponent from "../components/tpd/TableComponent";
-import Modal from '../components/tpd/Modal';
+// import Modal from '../components/tpd/Modal';
 import TextField from "@mui/material/TextField";
 import { Tab } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+// import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 // import "../styles/todayProduction.css"
 
 const TodayProduction = () => {
