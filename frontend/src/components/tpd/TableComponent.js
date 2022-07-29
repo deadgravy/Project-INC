@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "../tpd/styles/table.css";
+// import "../tpd/styles/table.css";
 
 const TableComponent = ({ data }) => {
 
