@@ -1,0 +1,6 @@
+.search,
+.usersChoice {
+    display: flex;
+    justify-content: space-between;
+}
+

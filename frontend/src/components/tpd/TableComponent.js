@@ -28,9 +28,9 @@ const TableComponent = ({ data }) => {
 
     return (
         <div className='table'>
-            <div class="p-4 bg-white-500 u-shadow-lg u-round-xs">
+            <div className="p-4 bg-white-500 u-shadow-lg u-round-xs">
                 <div className='table'>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Equipment:</th>

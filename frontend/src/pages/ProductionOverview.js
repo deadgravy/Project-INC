@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/styles.css';
 import ChartComponent from '../components/pod/ChartComponent';
 import BoxComponent from '../components/pod/Boxe';
 import LineChart from '../components/pod/LineChart.js';
@@ -8,12 +7,18 @@ import Modal from '../components/pod/Modal';
 import ErrorPage from '../components/pod/ErrorPage.js';
 import SideBar from '../components/sidebar/Sidebar';
 import Loading from '../components/pod/loading';
+import '../styles/pod.css';
+import Toggler from '../components/general/Toggler';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
   const [allProductData, setAllProductData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
+  // This is for the select (Do it yourself) - George
+  const graph = 'Line Chart';
+  function handleChange() {}
 
   function convertToMilli(days, hours, seconds, mins) {
     const daysToMilli = days * 24 * 60 * 60 * 1000;
@@ -34,19 +39,19 @@ const ProductionOverview = () => {
       let hours = avg?.hours;
       let days = avg?.days;
 
-      if (hours == undefined || hours == null) {
+      if (hours === undefined || hours == null) {
         hours = 0;
       }
 
-      if (days == undefined || days == null) {
+      if (days === undefined || days == null) {
         days = 0;
       }
 
-      if (mins == undefined || mins == null) {
+      if (mins === undefined || mins == null) {
         mins = 0;
       }
 
-      if (seconds == undefined || seconds == null) {
+      if (seconds === undefined || seconds == null) {
         seconds = 0;
       }
 
@@ -98,25 +103,54 @@ const ProductionOverview = () => {
   const [modal, setModal] = useState(false);
   //http://localhost:4000/api/data/data1
   return (
-    <div className='productionOverview row p-0 w-100p'>
-      {/* <div className='po-sidebar sidebar col-2'>
+    <div className='productionOverview row p-0'>
+      <div className='po-sidebar sidebar col-2'>
         <SideBar />
-      </div> */}
-      <div className='po-display col-12'>
+      </div>
+      <div className='po-display col-10 px-4 py-6'>
+        <h1>Production Overview Dashboard</h1>
+        <div className='row level mb-2'>
+          <div className='col-12 search w-100p'>
+            <div className='col-3'>
+              <input type='search' placeholder='Search' />
+            </div>
+            <div>
+              <Modal data1={allProductData} />
+            </div>
+          </div>
+        </div>
         <div className='App'>
           {!isLoading ? (
             <div>
-              <div className='Row1'>
+              <div className='row'>
                 <ErrorPage>
                   <ChartComponent data={prodOverviewData} />
                   <BoxComponent data={prodOverviewData} />
                 </ErrorPage>
               </div>
-              <div className='Row2'>
-                <LineChart />
+              <div className='usersChoice col-12 w-100p mt-4'>
+                <div>
+                  <Toggler />
+                </div>
+                  <FormControl className='col-3'>
+                    <InputLabel id='demo-simple-select-label'>
+                      Pick a Graph
+                    </InputLabel>
+                    <Select
+                      labelId='demo-simple-select-label'
+                      id='demo-simple-select'
+                      value={graph}
+                      label='Age'
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={10}>Ten</MenuItem>
+                      <MenuItem value={20}>Twenty</MenuItem>
+                      <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                  </FormControl>
               </div>
-              <div>
-                <Modal data1={allProductData} />
+              <div className='row'>
+                <LineChart />
               </div>
             </div>
           ) : (

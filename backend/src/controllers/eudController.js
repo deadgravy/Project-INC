@@ -2,7 +2,10 @@ const eudManager = require('../services/eudService');
 
 module.exports.getSingleUsage = async function (req, res, next) {
   try {
-    const results = await eudManager.getSingleUsage(req.params.date);
+    const results = await eudManager.getSingleUsage(
+      req.params.startdate,
+      req.params.enddate
+    );
     console.log(results);
     res.status(200).json({
       status: 'success',
@@ -19,7 +22,10 @@ module.exports.getSingleUsage = async function (req, res, next) {
 
 module.exports.getMultipleUsage = async function (req, res, next) {
   try {
-    const results = await eudManager.getMultipleUsage(req.params.date);
+    const results = await eudManager.getMultipleUsage(
+      req.params.startdate,
+      req.params.enddate
+    );
     console.log(results);
     res.status(200).json({
       status: 'success',
@@ -35,16 +41,28 @@ module.exports.getMultipleUsage = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getSingleUsageDetails = async function (req, res, next) {
-  let date = req.params.date;
+
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
   let hour = req.params.hour;
   try {
-    const results = await eudManager.getSingleUsageDetails(date, hour);
+    const results = await eudManager.getSingleUsageDetails(
+      startdate,
+      enddate,
+      hour
+    );
 
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {
       let time = results[i].duration;
       for (let x = 0; x < Object.keys(time).length; x++) {
-        if (time.hours.toString().length === 1) {
+        if (time.hours === undefined) {
+          time.hours = `00`;
+        } else if (time.minutes === undefined) {
+          time.minutes = `00`;
+        } else if (time.seconds === undefined) {
+          time.seconds = `00`;
+        } else if (time.hours.toString().length === 1) {
           time.hours = `0${time.hours}`;
         } else if (time.minutes.toString().length === 1) {
           time.minutes = `0${time.minutes}`;
@@ -69,17 +87,31 @@ module.exports.getSingleUsageDetails = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getMultipleUsageDetails = async function (req, res, next) {
-  let date = req.params.date;
+
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
   let hour = req.params.hour;
 
   try {
-    const results = await eudManager.getMultipleUsageDetails(date, hour);
+    const results = await eudManager.getMultipleUsageDetails(
+      startdate,
+      enddate,
+      hour
+    );
 
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {
       let time = results[i].duration;
       for (let x = 0; x < Object.keys(time).length; x++) {
-        if (time.hours.toString().length === 1) {
+        // if for eg, time taken is 01:00:32, minutes will return undefined
+        // line 85 to 90 makes it such that it returns 00
+        if (time.hours === undefined) {
+          time.hours = `00`;
+        } else if (time.minutes === undefined) {
+          time.minutes = `00`;
+        } else if (time.seconds === undefined) {
+          time.seconds = `00`;
+        } else if (time.hours.toString().length === 1) {
           time.hours = `0${time.hours}`;
         } else if (time.minutes.toString().length === 1) {
           time.minutes = `0${time.minutes}`;

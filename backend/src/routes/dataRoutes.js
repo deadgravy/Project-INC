@@ -30,7 +30,10 @@ router.get('/getProductsToComplete', dataController.getProductsToComplete);
 router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
-router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
+router.get(
+  '/getMultipleUsage/:startdate/:enddate',
+  eudController.getMultipleUsage
+);
 
 // getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
@@ -51,19 +54,22 @@ router.get(
 router.get('/getSingleUsage/:date', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
-router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
+router.get(
+  '/getMultipleUsage/:startdate/:enddate',
+  eudController.getMultipleUsage
+);
 
 router.get('/prodCount', dataController.prodCount);
 
 // getting single recipe equipment usage details
 router.get(
-  '/getSingleUsageDetails/:date/:hour',
+  '/getSingleUsageDetails/:startdate/:enddate/:hour',
   eudController.getSingleUsageDetails
 );
 
 // getting multiple recipe equipment usage details
 router.get(
-  '/getMultipleUsageDetails/:date/:hour',
+  '/getMultipleUsageDetails/:startdate/:enddate/:hour',
   eudController.getMultipleUsageDetails
 );
 
