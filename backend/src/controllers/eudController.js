@@ -41,16 +41,28 @@ module.exports.getMultipleUsage = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getSingleUsageDetails = async function (req, res, next) {
-  let date = req.params.enddate;
+
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
   let hour = req.params.hour;
   try {
-    const results = await eudManager.getSingleUsageDetails(date, hour);
+    const results = await eudManager.getSingleUsageDetails(
+      startdate,
+      enddate,
+      hour
+    );
 
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {
       let time = results[i].duration;
       for (let x = 0; x < Object.keys(time).length; x++) {
-        if (time.hours.toString().length === 1) {
+        if (time.hours === undefined) {
+          time.hours = `00`;
+        } else if (time.minutes === undefined) {
+          time.minutes = `00`;
+        } else if (time.seconds === undefined) {
+          time.seconds = `00`;
+        } else if (time.hours.toString().length === 1) {
           time.hours = `0${time.hours}`;
         } else if (time.minutes.toString().length === 1) {
           time.minutes = `0${time.minutes}`;
@@ -75,11 +87,17 @@ module.exports.getSingleUsageDetails = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getMultipleUsageDetails = async function (req, res, next) {
-  let date = req.params.enddate;
+
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
   let hour = req.params.hour;
 
   try {
-    const results = await eudManager.getMultipleUsageDetails(date, hour);
+    const results = await eudManager.getMultipleUsageDetails(
+      startdate,
+      enddate,
+      hour
+    );
 
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {

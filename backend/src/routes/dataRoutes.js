@@ -51,22 +51,25 @@ router.get(
 );
 
 //getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
-router.get('/getMultipleUsage/:date', eudController.getMultipleUsage);
+router.get(
+  '/getMultipleUsage/:startdate/:enddate',
+  eudController.getMultipleUsage
+);
 
 router.get('/prodCount', dataController.prodCount);
 
 // getting single recipe equipment usage details
 router.get(
-  '/getSingleUsageDetails/:enddate/:hour',
+  '/getSingleUsageDetails/:startdate/:enddate/:hour',
   eudController.getSingleUsageDetails
 );
 
 // getting multiple recipe equipment usage details
 router.get(
-  '/getMultipleUsageDetails/:enddate/:hour',
+  '/getMultipleUsageDetails/:startdate/:enddate/:hour',
   eudController.getMultipleUsageDetails
 );
 
