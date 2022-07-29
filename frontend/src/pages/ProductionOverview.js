@@ -8,12 +8,17 @@ import ErrorPage from '../components/pod/ErrorPage.js';
 import SideBar from '../components/sidebar/Sidebar';
 import Loading from '../components/pod/loading';
 import '../styles/pod.css';
+import Toggler from '../components/general/Toggler';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
   const [allProductData, setAllProductData] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
+  // This is for the select (Do it yourself) - George
+  const graph = 'Line Chart';
+  function handleChange() {}
 
   function convertToMilli(days, hours, seconds, mins) {
     const daysToMilli = days * 24 * 60 * 60 * 1000;
@@ -110,22 +115,43 @@ const ProductionOverview = () => {
               <input type='search' placeholder='Search' />
             </div>
             <div>
-              <Modal data1={allProductData}/>
+              <Modal data1={allProductData} />
             </div>
           </div>
         </div>
         <div className='App'>
           {!isLoading ? (
             <div>
-              <div className='Row1'>
+              <div className='row'>
                 <ErrorPage>
                   <ChartComponent data={prodOverviewData} />
                   <BoxComponent data={prodOverviewData} />
                 </ErrorPage>
               </div>
-              {/* <div className='Row2'>
+              <div className='usersChoice col-12 w-100p mt-4'>
+                <div>
+                  <Toggler />
+                </div>
+                  <FormControl className='col-3'>
+                    <InputLabel id='demo-simple-select-label'>
+                      Pick a Graph
+                    </InputLabel>
+                    <Select
+                      labelId='demo-simple-select-label'
+                      id='demo-simple-select'
+                      value={graph}
+                      label='Age'
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={10}>Ten</MenuItem>
+                      <MenuItem value={20}>Twenty</MenuItem>
+                      <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                  </FormControl>
+              </div>
+              <div className='row'>
                 <LineChart />
-              </div> */}
+              </div>
             </div>
           ) : (
             <div>

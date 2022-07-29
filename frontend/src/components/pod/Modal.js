@@ -33,11 +33,11 @@ export default function Modal({ data1 }) {
             <form>
               {data1.data.map((item, count) => {
                 return (
-                  <div class='form-ext-control form-ext-radio'>
+                  <div className='form-ext-control form-ext-radio'>
                     <input
                       id={data1.data[count].name}
                       name={data1.data[count].fr_recipe_id}
-                      class='form-ext-input'
+                      className='form-ext-input'
                       type='radio'
                       onChange={() =>
                         (window.location.href = `/productionOverview/${data1.data[count].fr_recipe_id}`)
