@@ -7,13 +7,9 @@ import 'react-datepicker/dist/react-datepicker.css'
 import {GanttChart } from "../components/spfd/ganttChart";
 import { addDays } from 'date-fns';
 
-
 const SingleProductFlow = () => {
- 
-
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  
   
   return (
     <React.StrictMode>
