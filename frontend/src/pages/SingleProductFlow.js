@@ -5,8 +5,18 @@ import '../styles/spfd.css';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {GanttChart } from "../components/spfd/ganttChart";
+<<<<<<< HEAD
 import { addDays } from 'date-fns';
 
+<<<<<<< HEAD
+=======
+
+=======
+import { addDays, subDays } from 'date-fns';
+
+>>>>>>> 013d1181 (update for SPFD)
+
+>>>>>>> 42d523bf (fix merge conflics)
 const SingleProductFlow = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
