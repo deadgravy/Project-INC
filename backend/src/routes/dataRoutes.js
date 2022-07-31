@@ -26,15 +26,6 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 // getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
-
-// getting multiple recipe equipment usage
-router.get(
-  '/getMultipleUsage/:startdate/:enddate',
-  eudController.getMultipleUsage
-);
-
 // getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
 

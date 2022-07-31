@@ -12,15 +12,12 @@ export const options = {
 
 export function UsageChart(data) {
   let data1 = data.data.data;
-  console.log('hello');
-  console.log(data1);
   let usageArr = [];
   usageArr.push(headerdata);
   for (let i = 0; i < data1.length; i++) {
     console.log(data1[i]);
     usageArr.push(Object.values(data1[i]));
   }
-  console.log('is the mistake here?');
 
   console.log(usageArr);
 
@@ -28,9 +25,6 @@ export function UsageChart(data) {
     usageArr[i][2] = new Date(usageArr[i][2]);
     usageArr[i][3] = new Date(usageArr[i][3]);
   }
-
-  console.log('pls help');
-  console.log(usageArr[0]);
 
   return (
     <>
