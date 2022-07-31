@@ -31,10 +31,16 @@ router.get('/getCompletedProducts/:date', tpdController.getCompletedProducts);
 router.get('/getProductsToComplete/:date', tpdController.getProductsToComplete);
 
 //getting single equipment status
-router.get('/getSingleEquipmentStatus/:date', tpdController.getSingleEquipmentStatus);
+router.get(
+  '/getSingleEquipmentStatus/:date',
+  tpdController.getSingleEquipmentStatus
+);
 
 //getting multi equipment status
-router.get('/getMultiEquipmentStatus/:date', tpdController.getMultiEquipmentStatus);
+router.get(
+  '/getMultiEquipmentStatus/:date',
+  tpdController.getMultiEquipmentStatus
+);
 
 //==================================================================================
 
@@ -59,12 +65,7 @@ router.get(
   eudController.getMultipleUsage
 );
 
-router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
-// getting single recipe equipment usage details
-router.get(
-  '/getSingleUsageDetails/:date/:hour',
-  eudController.getSingleUsageDetails
-);
+router.get('/prodCount', dataController.prodCount);
 
 // getting multiple recipe equipment usage details
 router.get(
