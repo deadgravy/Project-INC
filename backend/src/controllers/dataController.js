@@ -91,9 +91,26 @@ module.exports.getProductsToComplete = async function (req, res, next) {
   }
 }; // End of async function(req,res,next)
 
-module.exports.getEquipmentStatus = async function (req, res, next) {
+module.exports.getSingleEquipmentStatus = async function (req, res, next) {
   try {
-    const results = await dataManager.getEquipmentStatus();
+    const results = await dataManager.getSingleEquipmentStatus();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)
+
+module.exports.getMultiEquipmentStatus = async function (req, res, next) {
+  try {
+    const results = await dataManager.getMultiEquipmentStatus();
     console.log(results);
     res.status(200).json({
       status: 'success',

@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../styles/tpd.css";
 import ProductChart from "../components/tpd/ProductChart";
 import TableComponent from "../components/tpd/TableComponent";
-// import Modal from '../components/tpd/Modal';
 import TextField from "@mui/material/TextField";
 import { Tab } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
-// import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 // import "../styles/todayProduction.css"
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
   const [toBeCompletedProductsData, setToBeCompletedProductsData] = useState(null);
-  const [equipmentStatusData, setEquipmentStatusData] = useState(null);
+  const [singleEquipmentStatusData, setSingleEquipmentStatusData] = useState(null);
+  const [multiEquipmentStatusData, setMultiEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
 
   // useEffect
@@ -23,9 +22,10 @@ const TodayProduction = () => {
     Promise.all([
       fetch("http://localhost:4000/api/getCompletedProducts").then((res) => res.json()),
       fetch("http://localhost:4000/api/getProductsToComplete").then((res) => res.json()),
-      fetch("http://localhost:4000/api/getEquipmentStatus").then((res) => res.json()),
+      fetch("http://localhost:4000/api/getSingleEquipmentStatus").then((res) => res.json()),
+      fetch("http://localhost:4000/api/getMultiEquipmentStatus").then((res) => res.json()),
     ])
-      .then(([result1, result2, result3]) => {
+      .then(([result1, result2, result3, result4]) => {
         setCompletedProductsData({
           data: result1.data,
           value: [{ value: 50 }, { value: 50 }],
@@ -33,8 +33,11 @@ const TodayProduction = () => {
         setToBeCompletedProductsData({
           data: result2.data
         });
-        setEquipmentStatusData({
+        setSingleEquipmentStatusData({
           data: result3.data
+        });
+        setMultiEquipmentStatusData({
+          data: result4.data
         });
         setIsloading(false);
       })
@@ -68,7 +71,7 @@ const TodayProduction = () => {
                 />
           </div>
           <div className="Row1">
-              <TableComponent data={equipmentStatusData}/>
+              <TableComponent data1={singleEquipmentStatusData} data2={multiEquipmentStatusData}/>
           </div>
           <div className="productHeader">
             Completed Products as of Today

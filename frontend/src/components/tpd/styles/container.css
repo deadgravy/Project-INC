@@ -1,5 +1,14 @@
-.tpd-container {
+.containerChart {
     display: flex;
-    width: 100%;
     overflow-x: scroll;
+}
+
+/* .row1 {
+    display: flex;
+    flex-direction: row;
+} */
+
+.productStatus {
+    display: flex;
+    flex-direction: row;
 }
