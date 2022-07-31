@@ -26,15 +26,6 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 // getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
-
-// getting multiple recipe equipment usage
-router.get(
-  '/getMultipleUsage/:startdate/:enddate',
-  eudController.getMultipleUsage
-);
-
 // getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
 
@@ -50,10 +41,10 @@ router.get(
   spfdController.getSingleProductWithNameDate
 );
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+// getting single recipe equipment usage (eud)
+router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
 
-// getting multiple recipe equipment usage
+// getting multiple recipe equipment usage (eud)
 router.get(
   '/getMultipleUsage/:startdate/:enddate',
   eudController.getMultipleUsage
@@ -61,22 +52,19 @@ router.get(
 
 router.get('/prodCount', dataController.prodCount);
 
-// getting single recipe equipment usage details
+// getting single recipe equipment usage details (eud)
 router.get(
   '/getSingleUsageDetails/:startdate/:enddate/:hour',
   eudController.getSingleUsageDetails
 );
 
-// getting multiple recipe equipment usage details
+// getting multiple recipe equipment usage details (eud)
 router.get(
   '/getMultipleUsageDetails/:startdate/:enddate/:hour',
   eudController.getMultipleUsageDetails
 );
 
 // getting the name of all recipes
-router.get(
-  '/getAllRecipeName',
-  spfdController.getAllRecipeName
-);
+router.get('/getAllRecipeName', spfdController.getAllRecipeName);
 
 module.exports = router;
