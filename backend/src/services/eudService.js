@@ -132,6 +132,7 @@ module.exports.getMultipleUsageDetails = async function (
     console.log(error);
   }
 };
+<<<<<<< HEAD
 
 module.exports.getSingleEquipmentLeftUnused = async function (
   startdate,

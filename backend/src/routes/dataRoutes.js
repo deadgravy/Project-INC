@@ -58,7 +58,7 @@ router.get(
 
 router.get('/prodCount', dataController.prodCount);
 
-// getting the name of all recipes
+// getting the name of all recipes (eud)
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
 
 // Getting all equipments from log times table
@@ -77,5 +77,7 @@ router.post(
 
 // get all equipment
 router.get('/getAllEquipment', eudController.getAllEquipment);
+
+router.post('/getAnomolies', dataController.getAnomolies);
 
 module.exports = router;
