@@ -46,7 +46,7 @@ router.get('/machines', dataController.getMachines);
 
 // getting single product by recipe id
 router.get(
-  '/getSingleProductWithNameDate/:name/:startDate/:endDate',
+  '/getSingleProductWithNameDate/:startDate/:endDate/:name',
   spfdController.getSingleProductWithNameDate
 );
 

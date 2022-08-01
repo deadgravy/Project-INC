@@ -34,6 +34,7 @@ module.exports.getAllRecipeName = async function () {
     const { rows } = await Pool.query(
       `SELECT name FROM public.recipes`
     );
+    return rows
   } catch (error) {
     console.log(error);
   }

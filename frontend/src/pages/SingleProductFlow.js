@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
 import Modal from '../components/spfd/modal';
 import '../styles/spfd.css';
@@ -6,32 +6,50 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {GanttChart } from "../components/spfd/ganttChart";
 import { addDays } from 'date-fns';
+import { modalClasses } from '@mui/material';
 
 const SingleProductFlow = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [isOpen, setIsOpen] = useState(false)
-  const [modal, setModal] = useState([])
+  const [recipes, setRecipes] = useState([])
+  const [selectedProductFlow, setSelectedProductFlow] = useState({
+    "recipeName": "",
+    "startDate": null,
+    "endDate": null,
+
+  })
   
   useEffect(() =>{
     
-  })
+    fetch('http://localhost:4000/api/getAllRecipeName')
+      .then((res) => res.json())
+      .then(data => {
+        console.log(data);
+        if(data.status === "success") {
+          setRecipes(data.data)
+        }
+      })
+   
+  },[])
 
+
+  console.log("selectedProductFlow: ", selectedProductFlow);
   return (
     <React.StrictMode>
       <div className='singlProductFlow row p-0 w-100p'>
 
-        <div className='po-sidebar sidebar col-2'>    {/* sidebar */}
-            <SideBar/>
+        <div className='po-sidebar sidebar col-2'>         {/* sidebar */}
+          <SideBar/>
         </div>
         
         <div className='po-display col-10'>
           
-          <div className='pt-2 Row1'>                 {/* Title */}
+          <div className='pt-2 Row1'>                      {/* Title */}
             <h3>Single Product Flow Dashboard</h3>
           </div>
           
-          <div className='Row2'>                      {/* DatePicker */}
+          <div className='Row2'>                           {/* DatePicker */}
             <div className='col-3'>
               <DatePicker
               placeholderText="Please Select Date"
@@ -52,7 +70,31 @@ const SingleProductFlow = () => {
           <div className='Row3'>                           {/*  Modal */}
             <div className='col-2'>
               <button onClick={() => setIsOpen(true)}>Select Recipe</button>
-              <Modal open = {isOpen} onClose = {() => setIsOpen(false)}modal/>
+              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <div>
+                  {
+                    recipes.map((recipe, index) => {
+                      return (
+                        <div>
+                          <input
+                      id={recipe.name}
+                      name={recipe.name}
+                      className='form-ext-input'
+                      type='radio'
+                      onChange={() => {
+                        setSelectedProductFlow({...selectedProductFlow, recipeName: recipe.name })
+                        setIsOpen(false)
+                      }}
+                    />
+                    <label class='form-ext-label' htmlFor={recipe.name}>
+                      {recipe.name}
+                    </label>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </Modal>
             </div>
           </div>
           

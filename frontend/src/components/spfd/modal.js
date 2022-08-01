@@ -30,7 +30,7 @@ export default function Modal({ open, children, onClose }) {
       <div style={MODAL_STYLES}>
         {
           <form>
-            {modal}
+            {children}
           </form>
         }
         <button onClick={onClose}>Close</button>
