@@ -2,41 +2,51 @@ import React, { useState, useEffect } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
 import Modal from '../components/spfd/modal';
 import '../styles/spfd.css';
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import {GanttChart } from "../components/spfd/ganttChart";
-import { addDays } from 'date-fns';
-import { modalClasses } from '@mui/material';
 
 const SingleProductFlow = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
   const [isOpen, setIsOpen] = useState(false)
-  const [recipes, setRecipes] = useState([])
   const [selectedProductFlow, setSelectedProductFlow] = useState({
     "recipeName": "",
     "startDate": null,
-    "endDate": null,
-
+    "endDate": null
   })
+  console.log("selectedProductFlow: ", selectedProductFlow);
+  // const [selectedEquipment, setSelectedEquipment] = useState([])
+  // const [ganttChart, setGanttChart] = useState([])
   
   useEffect(() =>{
-    
-    fetch('http://localhost:4000/api/getAllRecipeName')
-      .then((res) => res.json())
-      .then(data => {
-        console.log(data);
-        if(data.status === "success") {
-          setRecipes(data.data)
-        }
-      })
-   
-  },[])
+    Promise.all([
+        // fetch('http://localhost:4000/api/getAllRecipeName').then((res) => res.json()),
+
+        // fetch('http://localhost:4000/api/getSingleProductWithNameDate/${dateRange[0]}/${dateRange[1]}/${recipe.name}').then((res) => res.json()),
+
+        // fetch('http://localhost:4000/api/getSingleProductEquipment/:startDate/:endDate/:name').then((res) => res.json()),
+
+        // fetch('http://localhost:4000/api/getEquipmentUsageByName/:name/:ename').then((res) => res.json())
+        
+        ])
+        // .then(([result1, result2, result3, result4]) => {
+        //   console.log("result1", result1);
+        //   setRecipes(result1.data);
+        //   const recipes = result1.data
+          
+        //   // setGanttChart({
+        //   //   data: result2.data
+        //   // })
+        // })
+        .catch((error) => console.log('error', error));
+},[])
 
 
-  console.log("selectedProductFlow: ", selectedProductFlow);
+
+// const radioButtonStyle = {
+//   hight: 
+// }
+
+
+
   return (
-    <React.StrictMode>
       <div className='singlProductFlow row p-0 w-100p'>
 
         <div className='po-sidebar sidebar col-2'>         {/* sidebar */}
@@ -48,69 +58,29 @@ const SingleProductFlow = () => {
           <div className='pt-2 Row1'>                      {/* Title */}
             <h3>Single Product Flow Dashboard</h3>
           </div>
-          
-          <div className='Row2'>                           {/* DatePicker */}
-            <div className='col-3'>
-              <DatePicker
-              placeholderText="Please Select Date"
-              dateFormat="yyyy/MM/dd"
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-              maxDate={addDays(startDate, 4)}
-              onChange={(update) => {
-                setDateRange(update);
-              }}
-              isClearable={true}
-              />    
-            </div>
-          </div>
 
           <div className='Row3'>                           {/*  Modal */}
-            <div className='col-2'>
-              <button onClick={() => setIsOpen(true)}>Select Recipe</button>
-              <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                <div>
-                  {
-                    recipes.map((recipe, index) => {
-                      return (
-                        <div>
-                          <input
-                      id={recipe.name}
-                      name={recipe.name}
-                      className='form-ext-input'
-                      type='radio'
-                      onChange={() => {
-                        setSelectedProductFlow({...selectedProductFlow, recipeName: recipe.name })
-                        setIsOpen(false)
-                      }}
-                    />
-                    <label class='form-ext-label' htmlFor={recipe.name}>
-                      {recipe.name}
-                    </label>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-              </Modal>
+            <div className='col-3'>
+
+              <button onClick={() => setIsOpen(true)}>Select Date and Recipe</button>
+              { isOpen && <Modal open={isOpen} onClose={() => setIsOpen(false)} selectedProductFlow={selectedProductFlow} setSelectedProductFlow={setSelectedProductFlow} setIsOpen={setIsOpen} />}
+              
             </div>
           </div>
           
           <div className='pt-2 Row4'>                      {/*  GanttChart */}
             <div className='col-12'>
-              <GanttChart/>
+              {
+                selectedProductFlow.startDate !== null && (
+                  <GanttChart selectedProductFlow={selectedProductFlow} setSelectedProductFlow={setSelectedProductFlow}/>
+                )
+              }
+              
             </div>
-          </div>
-
-          <div className='pt-5 Row5'>                      {/* Title (Equipment Production Analysis) */}
-            <h4>Equipment Prodcution Analysis</h4>
           </div>
 
         </div>
       </div>
-    </React.StrictMode>
   )
 }
 
