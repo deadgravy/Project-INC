@@ -31,10 +31,16 @@ router.get('/getCompletedProducts/:date', tpdController.getCompletedProducts);
 router.get('/getProductsToComplete/:date', tpdController.getProductsToComplete);
 
 //getting single equipment status
-router.get('/getSingleEquipmentStatus/:date', tpdController.getSingleEquipmentStatus);
+router.get(
+  '/getSingleEquipmentStatus/:date',
+  tpdController.getSingleEquipmentStatus
+);
 
 //getting multi equipment status
-router.get('/getMultiEquipmentStatus/:date', tpdController.getMultiEquipmentStatus);
+router.get(
+  '/getMultiEquipmentStatus/:date',
+  tpdController.getMultiEquipmentStatus
+);
 
 //==================================================================================
 
