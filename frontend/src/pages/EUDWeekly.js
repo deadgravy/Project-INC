@@ -7,14 +7,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
 
-const EquipUtilDashboard = () => {
+const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
   const [multipleUsage, setMultipleUsage] = useState(null);
   const [singleDetails, setSingleDetails] = useState(null);
   const [multipleDetails, setMultipleDetails] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-09'));
+  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 
@@ -26,22 +26,22 @@ const EquipUtilDashboard = () => {
     var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = startDate.getFullYear();
 
-    let enddate = yyyy + '-' + mm + '-' + dd;
-    let startdate = `${yyyy}-${mm}-${dd - 1}`;
+    let startdate = yyyy + '-' + mm + '-' + dd;
+    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 6}`;
 
     Promise.all([
       fetch(
-        `http://localhost:4000/api/getSingleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getSingleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getMultipleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleUsageDetails/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
+      fetch(`http://localhost:4000/api/getSingleUsageDetailsWeekly`).then(
+        (res) => res.json()
+      ),
+      fetch(`http://localhost:4000/api/getMultipleUsageDetailsWeekly`).then(
+        (res) => res.json()
+      ),
     ]).then(([result1, result2, result3, result4]) => {
       setSingleUsage({
         data: result1.data,
@@ -144,7 +144,7 @@ const EquipUtilDashboard = () => {
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
+                                <b>{data.recipe}</b> on {data.date}, {data.day}.
                               </p>
                             </div>
                           ))
@@ -165,7 +165,7 @@ const EquipUtilDashboard = () => {
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
+                                <b>{data.recipe}</b> on {data.date}, {data.day}.
                               </p>
                             </div>
                           ))
@@ -185,4 +185,4 @@ const EquipUtilDashboard = () => {
   );
 };
 
-export default EquipUtilDashboard;
+export default EUDWeekly;

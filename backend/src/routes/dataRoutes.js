@@ -26,15 +26,6 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 // getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
-
-// getting multiple recipe equipment usage
-router.get(
-  '/getMultipleUsage/:startdate/:enddate',
-  eudController.getMultipleUsage
-);
-
 // getting equipment status
 router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
 
@@ -51,7 +42,7 @@ router.get(
 );
 
 // getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
 
 // getting multiple recipe equipment usage
 router.get(
@@ -74,9 +65,30 @@ router.get(
 );
 
 // getting the name of all recipes
+router.get('/getAllRecipeName', spfdController.getAllRecipeName);
+
+// get weekly usage for single recipe equipment
 router.get(
-  '/getAllRecipeName',
-  spfdController.getAllRecipeName
+  '/getSingleUsageWeekly/:startdate/:enddate',
+  eudController.getSingleWeekly
+);
+
+// get weekly usage for multiple recipe equipment
+router.get(
+  '/getMultipleUsageWeekly/:startdate/:enddate',
+  eudController.getMultipleWeekly
+);
+
+// get weekly usage details  for single recipe equipment
+router.get(
+  '/getSingleUsageDetailsWeekly',
+  eudController.getSingleWeeklyDetails
+);
+
+// get weekly usage details for multiple recipe equipment
+router.get(
+  '/getMultipleUsageDetailsWeekly',
+  eudController.getMultipleWeeklyDetails
 );
 
 module.exports = router;
