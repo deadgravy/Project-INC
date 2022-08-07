@@ -2,27 +2,11 @@ import React, { useEffect, useState } from 'react';
 import '../styles/tpd.css';
 import ProductChart from '../components/tpd/ProductChart';
 import TableComponent from '../components/tpd/TableComponent';
-<<<<<<< HEAD
 // import Modal from '../components/tpd/Modal';
 import TextField from '@mui/material/TextField';
 import { Tab } from '@mui/material';
 import Sidebar from '../components/sidebar/Sidebar';
 // import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
-=======
-import Modal from '../components/tpd/Modal';
-import TextField from '@mui/material/TextField';
-import { Tab } from '@mui/material';
-import Sidebar from '../components/sidebar/Sidebar';
-import {
-  Link,
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from 'react-scroll';
->>>>>>> 08190f34c260c3cc0249c291abc0ad327186ed7c
 // import "../styles/todayProduction.css"
 
 const TodayProduction = () => {
