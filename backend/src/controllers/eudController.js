@@ -173,8 +173,15 @@ module.exports.getMultipleWeekly = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getSingleWeeklyDetails = async function (req, res, next) {
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
+  let hour = req.params.hour;
   try {
-    const results = await eudManager.getSingleWeeklyDetails();
+    const results = await eudManager.getSingleWeeklyDetails(
+      startdate,
+      enddate,
+      hour
+    );
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {
       let time = results[i].duration;
@@ -211,8 +218,15 @@ module.exports.getSingleWeeklyDetails = async function (req, res, next) {
 }; // End of async function(req,res,next)
 
 module.exports.getMultipleWeeklyDetails = async function (req, res, next) {
+  let startdate = req.params.startdate;
+  let enddate = req.params.enddate;
+  let hour = req.params.hour;
   try {
-    const results = await eudManager.getMultipleWeeklyDetails();
+    const results = await eudManager.getMultipleWeeklyDetails(
+      startdate,
+      enddate,
+      hour
+    );
     // add extra 0 if hours/minutes/seconds is single digit
     for (let i = 0; i < results.length; i++) {
       let time = results[i].duration;

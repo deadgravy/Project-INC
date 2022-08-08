@@ -14,7 +14,7 @@ const EquipUtilDashboard = () => {
   const [multipleDetails, setMultipleDetails] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-09'));
+  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 

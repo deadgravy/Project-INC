@@ -196,7 +196,11 @@ module.exports.getMultipleWeekly = async function (startdate, enddate) {
   }
 };
 
-module.exports.getSingleWeeklyDetails = async function () {
+module.exports.getSingleWeeklyDetails = async function (
+  startdate,
+  enddate,
+  hour
+) {
   try {
     const { rows } = await pool.query(
       `WITH query as (
@@ -221,7 +225,7 @@ module.exports.getSingleWeeklyDetails = async function () {
     AND end_time - start_time > $3
     ORDER BY DATE(start_time), start_time asc;
     `,
-      ['2021-08-10', '2021-08-16', '02:00:00']
+      [startdate, enddate, hour]
     );
 
     return rows;
@@ -230,7 +234,11 @@ module.exports.getSingleWeeklyDetails = async function () {
   }
 };
 
-module.exports.getMultipleWeeklyDetails = async function () {
+module.exports.getMultipleWeeklyDetails = async function (
+  startdate,
+  enddate,
+  hour
+) {
   try {
     const { rows } = await pool.query(
       `WITH query as (
@@ -255,7 +263,7 @@ module.exports.getMultipleWeeklyDetails = async function () {
     AND end_time - start_time > $3
     ORDER BY DATE(start_time), start_time asc;
     `,
-      ['2021-08-10', '2021-08-16', '02:00:00']
+      [startdate, enddate, hour]
     );
 
     return rows;

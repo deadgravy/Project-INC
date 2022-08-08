@@ -36,12 +36,12 @@ const EUDWeekly = () => {
       fetch(
         `http://localhost:4000/api/getMultipleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
-      fetch(`http://localhost:4000/api/getSingleUsageDetailsWeekly`).then(
-        (res) => res.json()
-      ),
-      fetch(`http://localhost:4000/api/getMultipleUsageDetailsWeekly`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `http://localhost:4000/api/getSingleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4]) => {
       setSingleUsage({
         data: result1.data,

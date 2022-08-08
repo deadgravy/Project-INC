@@ -81,13 +81,13 @@ router.get(
 
 // get weekly usage details  for single recipe equipment
 router.get(
-  '/getSingleUsageDetailsWeekly',
+  '/getSingleUsageDetailsWeekly/:startdate/:enddate/:hour',
   eudController.getSingleWeeklyDetails
 );
 
 // get weekly usage details for multiple recipe equipment
 router.get(
-  '/getMultipleUsageDetailsWeekly',
+  '/getMultipleUsageDetailsWeekly/:startdate/:enddate/:hour',
   eudController.getMultipleWeeklyDetails
 );
 
