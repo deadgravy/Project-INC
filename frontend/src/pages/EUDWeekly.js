@@ -6,9 +6,8 @@ import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-const EquipUtilDashboard = () => {
+const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
   const [multipleUsage, setMultipleUsage] = useState(null);
   const [singleDetails, setSingleDetails] = useState(null);
@@ -27,21 +26,21 @@ const EquipUtilDashboard = () => {
     var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = startDate.getFullYear();
 
-    let enddate = yyyy + '-' + mm + '-' + dd;
-    let startdate = `${yyyy}-${mm}-${dd - 1}`;
+    let startdate = yyyy + '-' + mm + '-' + dd;
+    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 6}`;
 
     Promise.all([
       fetch(
-        `http://localhost:4000/api/getSingleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getSingleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getMultipleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getSingleUsageDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getSingleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4]) => {
       setSingleUsage({
@@ -132,7 +131,7 @@ const EquipUtilDashboard = () => {
                   <div className='card eudCard'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname' className='title mb-1'>
+                        <h6 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
                         </h6>
 
@@ -140,21 +139,20 @@ const EquipUtilDashboard = () => {
                           <p>NO DATA</p>
                         ) : (
                           singleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
+                            <div>
+                              <p key={data.toString()}>
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>.
-                              </span>
+                                <b>{data.recipe}</b> on {data.date}, {data.day}.
+                              </p>
                             </div>
                           ))
                         )}
                       </div>
 
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname2' className='title mb-1'>
+                        <h6 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
                         </h6>
 
@@ -162,14 +160,13 @@ const EquipUtilDashboard = () => {
                           <p>NO DATA</p>
                         ) : (
                           multipleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
+                            <div>
+                              <p key={data.toString()}>
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
-                              </span>
+                                <b>{data.recipe}</b> on {data.date}, {data.day}.
+                              </p>
                             </div>
                           ))
                         )}
@@ -188,4 +185,4 @@ const EquipUtilDashboard = () => {
   );
 };
 
-export default EquipUtilDashboard;
+export default EUDWeekly;
