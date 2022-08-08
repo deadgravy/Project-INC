@@ -6,8 +6,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Toggler from '../general/Toggler';
 import CounterToggle from './CounterToggle';
 import { VictoryPie } from 'victory';
+import Legend from './Legend';
+import { useEffect, useState } from 'react';
 
-const EquipmentDetails = () => {
+const EquipmentDetails = ({ allEquipments }) => {
+  const allEquipmentsData = allEquipments.data.data;
   const equipmentFrequencyData = [
     { x: 5, y: 10 },
     { x: 14, y: 25 },
@@ -19,11 +22,24 @@ const EquipmentDetails = () => {
 
   const colorScheme = [
     '#39CEF3',
-    'orange',
-    'gold',
+    '#f03d4d',
+    '#5e5cc7',
     '#0066FF',
-    'navy',
+    '#4643e2',
     '#800080',
+    '#2972fa',
+    '#0dd157',
+    '#fab633',
+    '#fb4143',
+    '#ffdadd',
+    '#5468ff',
+    '#34568B',
+    '#FF6F61',
+    '#6B5B95',
+    '#92A8D1',
+    '#F7CAC9',
+    '#009B77',
+    '#DFCFBE'
   ];
   return (
     <Accordion>
@@ -37,7 +53,7 @@ const EquipmentDetails = () => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails className='row py-2'>
-        <div className='col-10'>
+        <div className='col-10' align='center'>
           <div className='toggler'>
             <Toggler />
           </div>
@@ -58,6 +74,7 @@ const EquipmentDetails = () => {
         </div>
         <div className='col-2'>
           <CounterToggle />
+          <Legend allEquipmentData={allEquipmentsData} colorScheme={colorScheme}/>
         </div>
       </AccordionDetails>
     </Accordion>
