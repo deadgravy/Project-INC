@@ -91,4 +91,10 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
+// Getting all equipments from log times table
+router.get('/getAllEquipments', dataController.getAllEquipments);
+
+// Getting start / stop count of specific equipment
+router.get('/equipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop', dataController.getEquipmentStartOrStopCount)
+
 module.exports = router;
