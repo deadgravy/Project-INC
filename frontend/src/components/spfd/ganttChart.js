@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 
 
 export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
-  const [ganttChart, setGanttChart] = useState([]);
+  // const [ganttChart, setGanttChart] = useState([]);
   const columns = [
     { type: "string", id: "Equipment" },
     { type: "string", id: "Recipe" },
@@ -12,13 +12,15 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
   ];
   
   const rows = [
-    ['Coconut Grater','Sub E', new Date (2021,8,10), new Date (2021,8,10)],
-    ['Small Cooker Mixer', 'Sub E', new Date (2021,8,10,12,1,0), new Date (2021,8,11,17,11,0)],
-    ['Coconut Grater', 'Sub E', new Date (2021,8,13,14,11,0), new Date (2021,8,13,18,40,0)],
-    ['Small Cooker Mixer', 'Sub E', new Date (2021,8,13,12,11,0), new Date (2021,8,13,20,40,0)]
+    ['Coconut Grater','Sub E', new Date ('2021-08-09T19:25:56.000Z'), new Date ('2021-08-09T19:59:32.000Z')],
+    ['Small Cooker Mixer', 'Sub E', new Date ('2021-08-09T21:32:21.000Z'), new Date ('2021-08-09T22:03:11.000Z')],
+    ['Coconut Grater', 'Sub E', new Date ('2021-08-12T19:36:33.000Z'), new Date ('2021-08-12T19:57:27.000Z')],
+    ['Small Cooker Mixer', 'Sub E', new Date ('2021-08-12T21:59:35.000Z'), new Date ('2021-08-12T22:04:42.000Z')]
   ]
-  // const rows = ganttChart.map(flow => Object.values(flow)) ;
-  const data = [columns, ...rows];
+  // const rows = ganttChart.map(item => Object.values(item)) ;
+  // let rows = [];
+  // const data = [columns, ...rows]
+  const [ganttData, setGanttData] = useState([]);
   const options = {height: 400, gantt: {trackHeight: 30}};
   const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
   const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
@@ -27,27 +29,66 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
     fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
       .then((res) => res.json())
       .then(data => {
-        if(data.status === "success") {
-          const t = data.data.map(flow => Object.values(flow))
-          if(t < 1) {
-            console.log('No Data Found')
-          } else {
-          console.log(t)
-          }    
-          setGanttChart(data.data)
+        if (data.status === "success") {
+          console.log('data ', data)
+          const formattedRows = data.data.map((item) => Object.values(item));
+          console.log(formattedRows)
+          const rows = formattedRows.map((row) => {
+            const formattedStartDate = new Date(row[2]);
+            const formattedEndDate = new Date(row[3]);
+            return row
+              .slice(0, 2)
+              .concat([formattedStartDate, formattedEndDate]);
+          });
+          console.log("rows", rows);
+          setGanttData([columns, ...rows]);
+          
+          // if(l < 1) {
+          //   console.log('No Data Found')
+          // } else {
+          // console.log(l)
+          // }
+          // setGanttChart(data.data)
         }
+        // if(data.status === "success") {
+        //   const FormattedRows = data.data.map(item => {
+        //     const l = Object.values(item);
+        //     console.log('before '+l)
+        //     const tempEndDate = new Date(l.pop());
+        //     const tempStartDate = new Date(l.pop());
+        //     const endDate = new Date (tempEndDate.getFullYear(), tempEndDate.getMonth(), tempEndDate.getDay(), tempEndDate.getHours(), tempEndDate.getMinutes(), tempEndDate.getSeconds());
+        //     const startDate = new Date (tempStartDate.getFullYear(), tempStartDate.getMonth(), tempStartDate.getDay(), tempStartDate.getHours(), tempStartDate.getMinutes(), tempStartDate.getSeconds());
+        //     l.push(startDate);
+        //     l.push(endDate);
+        //     console.log(l);
+        //     return l
+        //   })
+          
+        //   // setGanttData([columns, ...ganttData])
+        //   // if(l < 1) {
+        //   //   console.log('No Data Found')
+        //   // } else {
+        //   // console.log(l)
+        //   // }    
+        //   // setGanttChart(data.data)
+        // }
     })
   },[])
 
   return (
+    
+      ganttData.length > 0 ? (
+        <Chart
+          chartType="Timeline"
+          width="100%"
+          height="50%"
+          data={ganttData}
+          options={options}
+        />
+      ) : ()//err message) 
+     
+    
 
-    <Chart
-      chartType="Timeline"
-      width="100%"
-      height="50%"
-      data={data}
-      options={options}
-    />
   );
 }
 

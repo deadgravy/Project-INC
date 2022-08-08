@@ -63,7 +63,7 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
                     onChange={(update) => {
                       setDateRange(update)
                     }}
-                    isClearable={true}      
+                    isClearable={true}
                   />
                 </div>
 
@@ -89,6 +89,8 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
                 </div>
           </form> 
         }
+        {}
+        <button onClick={() => setIsOpen(false)}>Continue</button>
         <button onClick={() => setIsOpen(false)}>Close</button>
       </div>
     </>,
