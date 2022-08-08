@@ -85,7 +85,7 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
           data={ganttData}
           options={options}
         />
-      ) : ()//err message) 
+      ) : (console.log('No Data Found'))//err message stuff
      
     
 
