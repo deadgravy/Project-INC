@@ -95,6 +95,8 @@ router.get(
 router.get('/getAllEquipments', dataController.getAllEquipments);
 
 // Getting start / stop count of specific equipment
-router.get('/equipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop', dataController.getEquipmentStartOrStopCount)
+router.get('/getEquipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop', dataController.getEquipmentStartOrStopCount)
+
+router.get('/getAllEquipmentStartOrStop/:start/:end/:startOrStop', dataController.getAllEquipmentStartOrStopCount)
 
 module.exports = router;
