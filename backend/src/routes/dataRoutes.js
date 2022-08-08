@@ -35,9 +35,9 @@ router.get('/machineConnectivity', dataController.getMachineConnectivity);
 // getting machines (eus)
 router.get('/machines', dataController.getMachines);
 
-// getting single product by recipe id
+// getting single product by recipe Name
 router.get(
-  '/getSingleProductWithNameDate/:name/:startDate/:endDate',
+  '/getSingleProductWithNameDate/:startDate/:endDate/:name',
   spfdController.getSingleProductWithNameDate
 );
 
@@ -89,6 +89,18 @@ router.get(
 router.get(
   '/getMultipleUsageDetailsWeekly/:startdate/:enddate/:hour',
   eudController.getMultipleWeeklyDetails
+);
+
+// getting the equipment name for single product
+router.get(
+  '/getSingleProductEquipment/:startDate/:endDate/:name',
+  spfdController.getSingleProductEquipment
+);
+
+// getting the equipment usage by name for single product
+router.get(
+  '/getEquipmentUsageByName/:name/:ename',
+  spfdController.getEquipmentUsageByName
 );
 
 module.exports = router;
