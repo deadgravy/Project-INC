@@ -305,3 +305,21 @@ module.exports.getEquipmentStatus = async function () {
     console.log(error);
   }
 };
+
+module.exports.getAllEquipments = async function () {
+  try {
+    const { rows } = await pool.query(`
+      SELECT DISTINCT 
+          lt.equip_id as equipmentID,
+          pd.name as equipment_name
+      FROM
+          log_times as lt
+      INNER JOIN
+          physical_devices as pd
+      ON lt.equip_id = pd.id
+      `);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};

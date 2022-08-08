@@ -74,9 +74,8 @@ router.get(
 );
 
 // getting the name of all recipes
-router.get(
-  '/getAllRecipeName',
-  spfdController.getAllRecipeName
-);
+router.get('/getAllRecipeName', spfdController.getAllRecipeName);
+
+router.get('/getAllEquipments', dataController.getAllEquipments);
 
 module.exports = router;

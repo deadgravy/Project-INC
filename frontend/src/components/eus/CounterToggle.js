@@ -14,7 +14,7 @@ const CounterToggle = () => {
         labelId='demo-simple-select-label'
         id='demo-simple-select'
         value={counter}
-        label='Age'
+        label='Count'
         onChange={handleChange}
       >
         <MenuItem value={'start'}>Start</MenuItem>
