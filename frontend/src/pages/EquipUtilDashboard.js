@@ -6,6 +6,7 @@ import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -131,7 +132,7 @@ const EquipUtilDashboard = () => {
                   <div className='card eudCard'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname' className='title mb-0'>
+                        <h6 id='projectname' className='title mb-1'>
                           Single Recipe Equipment
                         </h6>
 
@@ -139,20 +140,21 @@ const EquipUtilDashboard = () => {
                           <p>NO DATA</p>
                         ) : (
                           singleDetails.data.map((data) => (
-                            <div>
-                              <p key={data.toString()}>
+                            <div className='usageDetails'>
+                              <ErrorOutlineIcon />
+                              <span key={data.toString()} className='ml-1'>
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
-                              </p>
+                                <b>{data.recipe}</b>.
+                              </span>
                             </div>
                           ))
                         )}
                       </div>
 
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname2' className='title mb-0'>
+                        <h6 id='projectname2' className='title mb-1'>
                           Multiple Recipe Equipment
                         </h6>
 
@@ -160,13 +162,14 @@ const EquipUtilDashboard = () => {
                           <p>NO DATA</p>
                         ) : (
                           multipleDetails.data.map((data) => (
-                            <div>
-                              <p key={data.toString()}>
+                            <div className='usageDetails'>
+                              <ErrorOutlineIcon />
+                              <span key={data.toString()} className='ml-1'>
                                 <b>{data.equipment}</b> was used for{' '}
                                 {data.duration.hours}:{data.duration.minutes}:
                                 {data.duration.seconds} producing{' '}
                                 <b>{data.recipe}</b>
-                              </p>
+                              </span>
                             </div>
                           ))
                         )}
