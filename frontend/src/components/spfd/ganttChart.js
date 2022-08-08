@@ -93,35 +93,23 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
 =======
   const [ganttChart, setGanttChart] = useState([]);
   const columns = [
-    { type: "string", label: "LogTimes ID" },
-    { type: "string", label: "Equipment Name" },
-    { type: "string", label: "Recipe Name" },
-    { type: "date", label: "Start Time" },
-    { type: "date", label: "End Time" },
-    { type: "number", label: "Total Duration" },
-    { type: "number", label: "Percent Complete" },
-    { type: "string", label: "Dependencies" },
-    // { type: "string", label: "Equipment Name" },
-    // { type: "string", label: "Recipe Name" },
-    // { type: "date", label: "Start Time" },
-    // { type: "date", label: "End Time" },
-    // { type: "object", label: "Total Duration" },
-    // { type: 'number', label: "Date" },
+    { type: "string", id: "Equipment" },
+    { type: "string", id: "Recipe" },
+    { type: "datetime", id: "Start" },
+    { type: "datetime", id: "End" }
   ];
-  // const rows = ganttChart.map(flow => Object.values(flow)) ;
-  const rows = [
-    ['4', 'Coconut Grater','Sub E', new Date (2021,8,10,0,10), new Date (2021,8,11,0,40), null, 50, null ],
-    ['9', 'Small Cooker Mixer', 'Sub E', new Date (2021,8,10), new Date (2021,8,11), null, 100, null],
-    ['203', 'Coconut Grater', 'Sub E', new Date (2021,8,13), new Date (2021,8,14), null, 100, null]
-  ]
   
+  const rows = [
+    ['Coconut Grater','Sub E', new Date (2021,8,10), new Date (2021,8,10)],
+    ['Small Cooker Mixer', 'Sub E', new Date (2021,8,10,12,1,0), new Date (2021,8,11,17,11,0)],
+    ['Coconut Grater', 'Sub E', new Date (2021,8,13,14,11,0), new Date (2021,8,13,18,40,0)],
+    ['Small Cooker Mixer', 'Sub E', new Date (2021,8,13,12,11,0), new Date (2021,8,13,20,40,0)]
+  ]
+  // const rows = ganttChart.map(flow => Object.values(flow)) ;
   const data = [columns, ...rows];
   const options = {height: 400, gantt: {trackHeight: 30}};
-// 2021-08-10/2021-08-13/Sub%20E
-
-const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
-
-const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+  const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+  const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
 
   useEffect(() =>{
     fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
@@ -129,7 +117,11 @@ const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN')
       .then(data => {
         if(data.status === "success") {
           const t = data.data.map(flow => Object.values(flow))
-          console.log(t)       
+          if(t < 1) {
+            console.log('No Data Found')
+          } else {
+          console.log(t)
+          }    
           setGanttChart(data.data)
         }
     })
@@ -138,7 +130,7 @@ const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN')
   return (
 
     <Chart
-      chartType="Gantt"
+      chartType="Timeline"
       width="100%"
       height="50%"
       data={data}
