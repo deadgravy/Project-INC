@@ -1,13 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
-const leng = [
-  ['Year', 'Sales'],
-  ['2014', 1000],
-  ['2015', 1170],
-  ['2016', 660],
-  ['2017', 1030],
-];
 function DataForGraph(data) {
   var dataArr = [['Date', 'Production Count']];
   console.log(data.data.length + 'fkkkkk');
@@ -20,8 +13,8 @@ function DataForGraph(data) {
 
 export const options = {
   chart: {
-    title: 'Company Performance',
-    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+    title: 'Production Count for FIRC',
+    subtitle: 'Recipes produced',
   },
 };
 
