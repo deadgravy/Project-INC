@@ -76,7 +76,7 @@ const ProductionOverview = () => {
       fetch(`http://localhost:4000/api/data/data2/${params.id}`).then((res) =>
         res.json()
       ),
-      fetch('http://localhost:4000/api/data/data1').then((res) => res.json()),
+      fetch('http://localhost:4000/api/getAllRecipe').then((res) => res.json()),
       fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
     ])
       .then(([result1, result2, result3]) => {
