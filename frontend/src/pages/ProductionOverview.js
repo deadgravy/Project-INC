@@ -73,10 +73,12 @@ const ProductionOverview = () => {
   useEffect(() => {
     setIsloading(true);
     Promise.all([
-      fetch(`http://localhost:4000/api/data/data2/${params.id}`).then((res) =>
+      fetch(`http://localhost:4000/api/getRecipesById/${params.id}`).then(
+        (res) => res.json()
+      ),
+      fetch('http://localhost:4000/api/getAllRecipeAndID').then((res) =>
         res.json()
       ),
-      fetch('http://localhost:4000/api/getAllRecipe').then((res) => res.json()),
       fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
     ])
       .then(([result1, result2, result3]) => {

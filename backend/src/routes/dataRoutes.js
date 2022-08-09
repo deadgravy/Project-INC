@@ -9,7 +9,7 @@ const spfdController = require('../controllers/spfdController');
 const eudController = require('../controllers/eudController');
 
 // get all recipes and ID
-router.get('/getAllRecipe', dataController.getData1);
+router.get('/getAllRecipeAndID', dataController.getData1);
 
 // getting recipe by ID
 // router.get('/data/data2', dataController.getRecipebyRecipeID);
