@@ -9,10 +9,14 @@ const spfdController = require('../controllers/spfdController');
 
 // get all recipes and ID
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.get('/getAllRecipeAndID', dataController.getData1);
 =======
 router.get('/getAllRecipe', dataController.getData1);
 >>>>>>> 8815b3dc (fixing data1 endpoint for api documentation)
+=======
+router.get('/getAllRecipeAndID', dataController.getData1);
+>>>>>>> b3c7bd23 (fixing data2 endpoint for api documentation)
 
 // getting recipe by ID
 // router.get('/data/data2', dataController.getRecipebyRecipeID);
