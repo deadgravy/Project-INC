@@ -17,7 +17,9 @@ const EUS = () => {
         res.json()
       ),
       fetch('http://localhost:4000/api/machines').then((res) => res.json()),
-      fetch('http://localhost:4000/api/getAllEquipments').then((res) => res.json()),
+      fetch('http://localhost:4000/api/getAllEquipments').then((res) =>
+        res.json()
+      ),
     ])
       .then(([machineConnectivityData, machinesData, allEquipments]) => {
         let tempArr = machineConnectivityData.data;
@@ -49,8 +51,8 @@ const EUS = () => {
           data: tempArr,
         });
         setAllEquipments({
-          data: allEquipments
-        })
+          data: allEquipments,
+        });
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
