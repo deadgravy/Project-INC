@@ -7,7 +7,6 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Legend = ({ allEquipmentData, colorScheme }) => {
-  console.log(allEquipmentData.length);
   const equipments = [];
   for (let i = 0; i < allEquipmentData.length; i++) {
     equipments.push(

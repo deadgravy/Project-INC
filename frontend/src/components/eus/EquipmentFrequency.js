@@ -11,14 +11,12 @@ import { useEffect, useState } from 'react';
 
 const EquipmentDetails = ({ allEquipments }) => {
   const allEquipmentsData = allEquipments.data.data;
-  const equipmentFrequencyData = [
-    { x: 5, y: 10 },
-    { x: 14, y: 25 },
-    { x: 9, y: 20 },
-    { x: 11, y: 20 },
-    { x: 3, y: 5 },
-    { x: 10, y: 20 },
+  const [totalData, setTotalData] = useState(null);
+  let equipmentFrequencyData = [
+    
   ];
+
+  let tempData = null;
 
   const colorScheme = [
     '#39CEF3',
@@ -39,8 +37,37 @@ const EquipmentDetails = ({ allEquipments }) => {
     '#92A8D1',
     '#F7CAC9',
     '#009B77',
-    '#DFCFBE'
+    '#DFCFBE',
   ];
+
+  useEffect(() => {
+    Promise.all([
+      fetch(
+        'http://localhost:4000/api/getAllEquipmentStartOrStop/2021-08-01/2021-08-31/2'
+      ).then((res) => res.json()),
+    ])
+      .then(([totalData]) => {
+        setTotalData(totalData.data);
+        // 1. I will have to run through all equipments to get the id
+        // 2. Then I will have to pass in the id into /equipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop
+        // 3. Get the information of the data
+        allEquipmentsData.map((equipment) => {
+          Promise.all([
+            fetch(
+              `http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`
+            ).then((res) => res.json()),
+          ]).then(([equipmentData]) => {
+            let x = equipmentData.data.length;
+            let y = (equipmentData.data.length / totalData.data.length) * 100;
+
+            equipmentFrequencyData.push({x: x, y: Math.round(y)})
+          });
+        });
+      })
+      .catch((error) => console.log('error', error));
+  }, []);
+
+  console.log(equipmentFrequencyData);
   return (
     <Accordion>
       <AccordionSummary
@@ -74,7 +101,10 @@ const EquipmentDetails = ({ allEquipments }) => {
         </div>
         <div className='col-2'>
           <CounterToggle />
-          <Legend allEquipmentData={allEquipmentsData} colorScheme={colorScheme}/>
+          <Legend
+            allEquipmentData={allEquipmentsData}
+            colorScheme={colorScheme}
+          />
         </div>
       </AccordionDetails>
     </Accordion>
