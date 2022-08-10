@@ -27,8 +27,11 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 // getting products to complete
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
-// getting equipment status
-router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+//getting single equipment status
+router.get('/getSingleEquipmentStatus', dataController.getSingleEquipmentStatus);
+
+//getting multi equipment status
+router.get('/getMultiEquipmentStatus', dataController.getMultiEquipmentStatus);
 
 // getting machine connectivity (eus)
 router.get('/machineConnectivity', dataController.getMachineConnectivity);

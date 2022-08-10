@@ -31,20 +31,20 @@
 }
 
 .chartContainer {
-    width: 950px;
+    width:950px;
     overflow-x: scroll;
-    scrollbar-width: none;
+    /* scrollbar-width: none; */
 }
 
 ::-webkit-scrollbar {
-    display:none;
-}
+    display: flex;
+} 
 
-.scrolling-wrapper-flexbox {
+/* .scrolling-wrapper-flexbox {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-} 
+}  */
 
 .textField {
     display: flex;
