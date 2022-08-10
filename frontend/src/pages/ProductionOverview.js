@@ -9,11 +9,13 @@ import SideBar from '../components/sidebar/Sidebar';
 import Loading from '../components/pod/loading';
 import '../styles/pod.css';
 import Toggler from '../components/general/Toggler';
+import BarChart from '../components/pod/BarChart'; // import BarChart from '../components/pod/BarChart';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
   const [allProductData, setAllProductData] = useState('');
+  const [prodCount, setProdCount] = useState('');
   const [isLoading, setIsloading] = useState(true);
   const params = useParams();
   // This is for the select (Do it yourself) - George
@@ -68,22 +70,27 @@ const ProductionOverview = () => {
     return dataArr;
   }
 
-  // useEffect
   useEffect(() => {
     setIsloading(true);
     Promise.all([
-      fetch(`http://localhost:4000/api/data/data2/${params.id}`).then((res) =>
+      fetch(`http://localhost:4000/api/getRecipesById/${params.id}`).then(
+        (res) => res.json()
+      ),
+      fetch('http://localhost:4000/api/getAllRecipeAndID').then((res) =>
         res.json()
       ),
-      fetch('http://localhost:4000/api/data/data1').then((res) => res.json()),
+      fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
     ])
-      .then(([result1, result2]) => {
+      .then(([result1, result2, result3]) => {
         setProdOverviewData({
           data: result1.data,
           value: getData(result1),
         });
         setAllProductData({
           data: result2.data,
+        });
+        setProdCount({
+          data: result3.data,
         });
         setIsloading(false);
       })
@@ -132,25 +139,26 @@ const ProductionOverview = () => {
                 <div>
                   <Toggler />
                 </div>
-                  <FormControl className='col-3'>
-                    <InputLabel id='demo-simple-select-label'>
-                      Pick a Graph
-                    </InputLabel>
-                    <Select
-                      labelId='demo-simple-select-label'
-                      id='demo-simple-select'
-                      value={graph}
-                      label='Age'
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                  </FormControl>
+                <FormControl className='col-3'>
+                  <InputLabel id='demo-simple-select-label'>
+                    Pick a Graph
+                  </InputLabel>
+                  <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={graph}
+                    label='Age'
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               <div className='row'>
-                <LineChart />
+                {console.log(prodCount.data.length + 'jessie')}
+                <BarChart data={prodCount} />
               </div>
             </div>
           ) : (

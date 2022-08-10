@@ -8,11 +8,12 @@ const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
 const eudController = require('../controllers/eudController');
 
-router.get('/data/data1', dataController.getData1);
+// get all recipes and ID
+router.get('/getAllRecipeAndID', dataController.getData1);
 
 // getting recipe by ID
 // router.get('/data/data2', dataController.getRecipebyRecipeID);
-router.get('/data/data2/:id', dataController.getRecipebyRecipeID);
+router.get('/getRecipesById/:id', dataController.getRecipebyRecipeID);
 
 // login
 router.post('/login', loginController.verify);
