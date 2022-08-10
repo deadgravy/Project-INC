@@ -12,11 +12,7 @@ import { useEffect, useState } from 'react';
 const EquipmentDetails = ({ allEquipments }) => {
   const allEquipmentsData = allEquipments.data.data;
   const [totalData, setTotalData] = useState(null);
-  let equipmentFrequencyData = [
-    
-  ];
-
-  let tempData = null;
+  const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([])
 
   const colorScheme = [
     '#39CEF3',
@@ -51,25 +47,45 @@ const EquipmentDetails = ({ allEquipments }) => {
         // 1. I will have to run through all equipments to get the id
         // 2. Then I will have to pass in the id into /equipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop
         // 3. Get the information of the data
-        allEquipmentsData.map((equipment) => {
-          Promise.all([
-            fetch(
-              `http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`
-            ).then((res) => res.json()),
-          ]).then(([equipmentData]) => {
-            let x = equipmentData.data.length;
-            let y = (equipmentData.data.length / totalData.data.length) * 100;
+        // allEquipmentsData.map((equipment) => {
+        //   Promise.all([
+        //     fetch(
+        //       `http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`
+        //     ).then((res) => res.json()),
+        //   ]).then(([equipmentData]) => {
+        //     let x = equipmentData.data.length;
+        //     let y = (equipmentData.data.length / totalData.data.length) * 100;
 
-            equipmentFrequencyData.push({x: x, y: Math.round(y)})
-          });
-        });
+        //     setEquipmentFrequencyData([...equipmentFrequencyData, {x: x, y: y}])
+        //   });
+        // });
       })
       .catch((error) => console.log('error', error));
   }, []);
 
-  console.log(equipmentFrequencyData);
+  useEffect(() => {
+    if (totalData) {
+      let tempArr = [];
+      allEquipmentsData.map((equipment) => {
+        fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`)
+        .then((res) => res.json())
+        .then((result) => {
+          let x = result.data.length;
+          let y = (result.data.length / totalData.length) * 100;
+          tempArr.push({x: x, y: Math.round(y)})
+        })
+      })
+      setEquipmentFrequencyData(tempArr);
+    }
+  }, [totalData])
+
   return (
+
     <Accordion>
+      {equipmentFrequencyData.map((data)=> {
+        console.log(data)
+        console.log(equipmentFrequencyData.length)
+      })}
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls='panel1a-content'
