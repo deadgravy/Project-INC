@@ -195,15 +195,32 @@ module.exports.getAllEquipments = async function (req, res, next) {
 
 module.exports.getEquipmentStartOrStopCount = async function (req, res, next) {
   try {
-    console.log(req.params.start + ' 00:00:00');
-    console.log(req.params.end + ' 23:59:59');
-    console.log('SS', req.params.startOrStop);
-    console.log(req.params.equipmentid);
     const results = await dataManager.getStartOfEquipment(
       req.params.start + ' 00:00:00',
       req.params.end + ' 23:59:59',
       req.params.startOrStop,
       req.params.equipmentid
+    );
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+};
+
+module.exports.getAllEquipmentStartOrStopCount = async function (req, res, next) {
+  try {
+    const results = await dataManager.getAllEquipmentStartOrStop(
+      req.params.start + ' 00:00:00',
+      req.params.end + ' 23:59:59',
+      req.params.startOrStop
     );
     console.log(results);
     res.status(200).json({

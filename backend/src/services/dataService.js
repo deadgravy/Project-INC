@@ -349,20 +349,27 @@ module.exports.getStartOfEquipment = async function (start, end, startOrStop, eq
   }
 };
 
-module.exports.getAllEquipments = async function () {
+module.exports.getAllEquipmentStartOrStop = async function (start, end, startOrStop) {
   try {
     const { rows } = await pool.query(`
-      SELECT DISTINCT 
+      SELECT
           lt.equip_id as equipmentID,
-          pd.name as equipment_name
+          lt.recipe_id as recipeID,
+          pd.name as equipment_name,
+          lt.log_action,
+          lt.log_time
       FROM
           log_times as lt
       INNER JOIN
           physical_devices as pd
       ON lt.equip_id = pd.id
-      `);
+      WHERE
+          lt.log_time >= $1 AND lt.log_time <= $2 AND log_action = $3
+    `,
+    [start, end, startOrStop]
+    )
     return rows;
   } catch (error) {
     console.log(error);
   }
-};
+}
