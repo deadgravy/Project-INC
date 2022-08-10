@@ -95,16 +95,12 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
-// getting the equipment name for single product
-router.get(
-  '/getSingleProductEquipment/:startDate/:endDate/:name',
-  spfdController.getSingleProductEquipment
-);
+// Getting all equipments from log times table
+router.get('/getAllEquipments', dataController.getAllEquipments);
 
-// getting the equipment usage by name for single product
-router.get(
-  '/getEquipmentUsageByName/:name/:ename',
-  spfdController.getEquipmentUsageByName
-);
+// Getting start / stop count of specific equipment
+router.post('/getEquipmentStartOrStopCount', dataController.getEquipmentStartOrStopCount)
+
+router.post('/getAllEquipmentStartOrStop', dataController.getAllEquipmentStartOrStopCount)
 
 module.exports = router;

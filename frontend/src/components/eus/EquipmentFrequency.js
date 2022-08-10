@@ -8,10 +8,12 @@ import CounterToggle from './CounterToggle';
 import { VictoryPie } from 'victory';
 import Legend from './Legend';
 import { useEffect, useState } from 'react';
+import moment from 'moment';
 
 const EquipmentDetails = ({ allEquipments }) => {
   const allEquipmentsData = allEquipments.data.data;
   const [totalData, setTotalData] = useState(null);
+  const [date, setDate] = useState(moment().format('YYYY-MM-DD'))
   const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([])
 
   const colorScheme = [
@@ -39,44 +41,44 @@ const EquipmentDetails = ({ allEquipments }) => {
   useEffect(() => {
     Promise.all([
       fetch(
-        'http://localhost:4000/api/getAllEquipmentStartOrStop/2021-08-01/2021-08-31/2'
+        'http://localhost:4000/api/getAllEquipmentStartOrStop', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "start": "2021-08-01",
+            "end": "2021-08-31",
+            "startOrStop": "2"
+          })
+        }
       ).then((res) => res.json()),
     ])
       .then(([totalData]) => {
         setTotalData(totalData.data);
-        // 1. I will have to run through all equipments to get the id
-        // 2. Then I will have to pass in the id into /equipmentStartOrStopCount/:start/:end/:equipmentid/:startOrStop
-        // 3. Get the information of the data
-        // allEquipmentsData.map((equipment) => {
-        //   Promise.all([
-        //     fetch(
-        //       `http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`
-        //     ).then((res) => res.json()),
-        //   ]).then(([equipmentData]) => {
-        //     let x = equipmentData.data.length;
-        //     let y = (equipmentData.data.length / totalData.data.length) * 100;
-
-        //     setEquipmentFrequencyData([...equipmentFrequencyData, {x: x, y: y}])
-        //   });
-        // });
       })
       .catch((error) => console.log('error', error));
   }, []);
 
   useEffect(() => {
     if (totalData) {
-      let tempArr = [];
-      allEquipmentsData.map((equipment) => {
-        fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount/2021-08-01/2021-08-31/${equipment.equipmentid}/2`)
-        .then((res) => res.json())
-        .then((result) => {
-          let x = result.data.length;
-          let y = (result.data.length / totalData.length) * 100;
-          tempArr.push({x: x, y: Math.round(y)})
+      fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "start": "2021-08-01",
+          "end": "2021-08-31",
+          "startOrStop": "2",
+          "equipmentid": allEquipmentsData.map(eq => eq.equipmentid),
+          "totalDataLength": totalData.length
         })
       })
-      setEquipmentFrequencyData(tempArr);
+      .then((res) => res.json())
+      .then((res) => setEquipmentFrequencyData(res.data))
     }
+
   }, [totalData])
 
   return (
@@ -96,17 +98,14 @@ const EquipmentDetails = ({ allEquipments }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails className='row py-2'>
-        <div className='col-10' align='center'>
-          <div className='toggler'>
-            <Toggler />
-          </div>
+        <div className='col-10'>
           <div className='w-60p u-text-center'>
-            <h4 className='mt-2'>From 10th of August to 17th of August</h4>
+            <h4 className='mt-2'>{date}</h4>
             <VictoryPie
               colorScale={colorScheme}
               data={equipmentFrequencyData}
               innerRadius={100}
-              padAngle={5}
+              padAngle={2}
               labelRadius={({ innerRadius }) => innerRadius + 15}
               cornerRadius={5}
               style={{
@@ -115,8 +114,8 @@ const EquipmentDetails = ({ allEquipments }) => {
             />
           </div>
         </div>
-        <div className='col-2'>
-          <CounterToggle />
+        <div className='col-2' align="center">
+          <h4>Start Count</h4>
           <Legend
             allEquipmentData={allEquipmentsData}
             colorScheme={colorScheme}
