@@ -16,17 +16,17 @@ export let options = {
 
 const colourAndRecipeArr = [];
 Promise.all([
-  fetch(`http://localhost:4000/api/getAllRecipeName`).then((res) => res.json()),
+  fetch(`http://localhost:4000/api/getAllEquipment`).then((res) => res.json()),
 ]).then(([recipes]) => {
   for (let i = 0; i < recipes.data.length; i++) {
     colourAndRecipeArr.push({
-      recipe: recipes.data[i].name,
+      equipment: recipes.data[i].name,
       colour: UsageChartColours[i],
     });
   }
 });
 
-export function UsageChart(data) {
+export function MREWeeklyChart(data) {
   const data1 = data.data.data; // returns equipment, recipe, start_time, end_time
   let usageArr = [];
   let recipeArr = [];
@@ -40,9 +40,35 @@ export function UsageChart(data) {
     usageArr.push(Object.values(data1[i]));
   }
 
-  for (let i = 1; i < usageArr.length; i++) {
-    usageArr[i][2] = new Date(usageArr[i][2]);
-    usageArr[i][3] = new Date(usageArr[i][3]);
+  if (Object.keys(data1[0])[0] === 'day') {
+    var first = new Date(usageArr[1][2]);
+    for (let i = 1; i < usageArr.length; i++) {
+      var firstDay = first.getDay();
+      var startdate = new Date(usageArr[i][2]);
+      var enddate = new Date(usageArr[i][3]);
+      var startMilli = startdate.getTime();
+      var endMilli = enddate.getTime();
+      var dayNum = startdate.getDay();
+
+      if (dayNum !== firstDay) {
+        if (dayNum === 0) {
+          dayNum = 7;
+        } else if (dayNum < firstDay) {
+          dayNum += 7;
+        }
+        let diff = dayNum - firstDay;
+        let diffInMs = diff * 86400000;
+        startMilli -= diffInMs;
+        endMilli -= diffInMs;
+      }
+      usageArr[i][2] = startMilli;
+      usageArr[i][3] = endMilli;
+    }
+  } else {
+    for (let i = 1; i < usageArr.length; i++) {
+      usageArr[i][2] = new Date(usageArr[i][2]);
+      usageArr[i][3] = new Date(usageArr[i][3]);
+    }
   }
 
   // takes all recipe names from chart and pushes to new array
@@ -54,16 +80,15 @@ export function UsageChart(data) {
   let uniqueRecipe = [...new Set(recipeArr)];
   console.log(uniqueRecipe);
 
-  console.log(options.colors);
   if (coloursArr.length > uniqueRecipe.length || coloursArr.length > 0) {
     coloursArr = [];
   }
   console.log(options.colors);
   for (let x = 0; x < uniqueRecipe.length; x++) {
     for (let y = 0; y < colourAndRecipeArr.length; y++) {
-      if (uniqueRecipe[x] === colourAndRecipeArr[y].recipe) {
+      if (uniqueRecipe[x] === colourAndRecipeArr[y].equipment) {
         uniqueColourAndRecipes.push({
-          recipe: uniqueRecipe[x],
+          equipment: uniqueRecipe[x],
           colour: colourAndRecipeArr[y].colour,
         });
         coloursArr.push(colourAndRecipeArr[y].colour);
@@ -84,7 +109,7 @@ export function UsageChart(data) {
           uniqueColourAndRecipes.map((data) => (
             <div className='alignIcon mr-2'>
               <CircleIcon className='mr-1' style={{ fill: data.colour }} />
-              {data.recipe}
+              {data.equipment}
             </div>
           ))
         )}

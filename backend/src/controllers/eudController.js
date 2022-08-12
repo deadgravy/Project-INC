@@ -261,3 +261,20 @@ module.exports.getMultipleWeeklyDetails = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+
+module.exports.getAllEquipment = async function (req, res, next) {
+  try {
+    const results = await eudManager.getAllEquipment();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)

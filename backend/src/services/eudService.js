@@ -271,3 +271,16 @@ module.exports.getMultipleWeeklyDetails = async function (
     console.log(error);
   }
 };
+
+module.exports.getAllEquipment = async function () {
+  try {
+    const { rows } = await pool.query(
+      `SELECT name from physical_devices ORDER BY mac_property, name
+    `
+    );
+
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};

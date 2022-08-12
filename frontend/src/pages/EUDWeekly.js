@@ -1,4 +1,3 @@
-import { UsageChart } from '../components/eud/UsageChart';
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
 import DatePicker from 'react-datepicker';
@@ -6,6 +5,10 @@ import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
+import { WeeklyChart } from '../components/eud/weeklyChart';
+import { MREWeeklyChart } from '../components/eud/MREWeeklyChart';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { WeeklyDetails } from '../components/eud/UsageDetails';
 
 const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -27,7 +30,7 @@ const EUDWeekly = () => {
     var yyyy = startDate.getFullYear();
 
     let startdate = yyyy + '-' + mm + '-' + dd;
-    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 6}`;
+    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 7}`;
 
     Promise.all([
       fetch(
@@ -105,13 +108,13 @@ const EUDWeekly = () => {
                   <h3>Single Recipe Equipment</h3>
                 </div>
                 <div className='Row4'>
-                  <UsageChart data={singleUsage} />
+                  <WeeklyChart data={singleUsage} />
                 </div>
                 <div className='Row5'>
                   <h3>Multiple Recipe Equipment</h3>
                 </div>
                 <div className='Row6'>
-                  <UsageChart data={multipleUsage} />
+                  <MREWeeklyChart data={multipleUsage} />
                 </div>
                 <div className='row'>
                   <h5 className='col-9'>Equipment Usage Details</h5>
@@ -128,47 +131,23 @@ const EUDWeekly = () => {
                   {/* End of Input Box code */}
                 </div>
                 <div className='Row8'>
-                  <div className='card eudCard'>
+                  <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
                         <h6 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
                         </h6>
-
-                        {singleDetails.data.length === 0 ? (
-                          <p>NO DATA</p>
-                        ) : (
-                          singleDetails.data.map((data) => (
-                            <div>
-                              <p key={data.toString()}>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b> on {data.date}, {data.day}.
-                              </p>
-                            </div>
-                          ))
-                        )}
+                        <WeeklyDetails data={singleDetails} />
                       </div>
 
                       <div className='singleContent mb-4'>
                         <h6 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
                         </h6>
-
-                        {multipleDetails.data.length === 0 ? (
+                        {multipleDetails.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          multipleDetails.data.map((data) => (
-                            <div>
-                              <p key={data.toString()}>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b> on {data.date}, {data.day}.
-                              </p>
-                            </div>
-                          ))
+                          <WeeklyDetails data={multipleDetails} />
                         )}
                       </div>
                     </div>
