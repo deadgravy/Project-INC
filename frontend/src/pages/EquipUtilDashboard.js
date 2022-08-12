@@ -112,8 +112,8 @@ const EquipUtilDashboard = () => {
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
-                      minDate={new Date('2021-08-10')}
-                      maxDate={new Date('2021-08-22')}
+                      // minDate={new Date()}
+                      // maxDate={new Date()}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}

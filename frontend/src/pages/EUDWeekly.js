@@ -17,7 +17,7 @@ const EUDWeekly = () => {
   const [multipleDetails, setMultipleDetails] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
+  const [startDate, setStartDate] = useState(new Date());
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 
@@ -108,13 +108,23 @@ const EUDWeekly = () => {
                   <h3>Single Recipe Equipment</h3>
                 </div>
                 <div className='Row4'>
-                  <WeeklyChart data={singleUsage} />
+                  {singleUsage.data.length === 0 ||
+                  singleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <WeeklyChart data={singleUsage} />
+                  )}
                 </div>
                 <div className='Row5'>
                   <h3>Multiple Recipe Equipment</h3>
                 </div>
                 <div className='Row6'>
-                  <MREWeeklyChart data={multipleUsage} />
+                  {multipleUsage.data.length === 0 ||
+                  multipleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <WeeklyChart data={multipleUsage} />
+                  )}
                 </div>
                 <div className='row'>
                   <h5 className='col-9'>Equipment Usage Details</h5>
@@ -137,14 +147,20 @@ const EUDWeekly = () => {
                         <h6 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
                         </h6>
-                        <WeeklyDetails data={singleDetails} />
+                        {singleDetails.length === 0 ||
+                        singleDetails.length === undefined ? (
+                          <p>NO DATA</p>
+                        ) : (
+                          <WeeklyDetails data={singleDetails} />
+                        )}
                       </div>
 
                       <div className='singleContent mb-4'>
                         <h6 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
                         </h6>
-                        {multipleDetails.length === 0 ? (
+                        {multipleDetails.length === 0 ||
+                        multipleDetails.length === undefined ? (
                           <p>NO DATA</p>
                         ) : (
                           <WeeklyDetails data={multipleDetails} />
