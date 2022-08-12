@@ -40,34 +40,38 @@ export function WeeklyChart(data) {
     usageArr.push(Object.values(data1[i]));
   }
 
-  if (Object.keys(data1[0])[0] === 'day') {
-    var first = new Date(usageArr[1][2]);
-    for (let i = 1; i < usageArr.length; i++) {
-      var firstDay = first.getDay();
-      var startdate = new Date(usageArr[i][2]);
-      var enddate = new Date(usageArr[i][3]);
-      var startMilli = startdate.getTime();
-      var endMilli = enddate.getTime();
-      var dayNum = startdate.getDay();
-
-      if (dayNum !== firstDay) {
-        if (dayNum === 0) {
-          dayNum = 7;
-        } else if (dayNum < firstDay) {
-          dayNum += 7;
-        }
-        let diff = dayNum - firstDay;
-        let diffInMs = diff * 86400000;
-        startMilli -= diffInMs;
-        endMilli -= diffInMs;
-      }
-      usageArr[i][2] = startMilli;
-      usageArr[i][3] = endMilli;
-    }
+  if (data1.length === 0) {
+    return;
   } else {
-    for (let i = 1; i < usageArr.length; i++) {
-      usageArr[i][2] = new Date(usageArr[i][2]);
-      usageArr[i][3] = new Date(usageArr[i][3]);
+    if (Object.keys(data1[0])[0] === 'day') {
+      var first = new Date(usageArr[1][2]);
+      for (let i = 1; i < usageArr.length; i++) {
+        var firstDay = first.getDay();
+        var startdate = new Date(usageArr[i][2]);
+        var enddate = new Date(usageArr[i][3]);
+        var startMilli = startdate.getTime();
+        var endMilli = enddate.getTime();
+        var dayNum = startdate.getDay();
+
+        if (dayNum !== firstDay) {
+          if (dayNum === 0) {
+            dayNum = 7;
+          } else if (dayNum < firstDay) {
+            dayNum += 7;
+          }
+          let diff = dayNum - firstDay;
+          let diffInMs = diff * 86400000;
+          startMilli -= diffInMs;
+          endMilli -= diffInMs;
+        }
+        usageArr[i][2] = startMilli;
+        usageArr[i][3] = endMilli;
+      }
+    } else {
+      for (let i = 1; i < usageArr.length; i++) {
+        usageArr[i][2] = new Date(usageArr[i][2]);
+        usageArr[i][3] = new Date(usageArr[i][3]);
+      }
     }
   }
 
