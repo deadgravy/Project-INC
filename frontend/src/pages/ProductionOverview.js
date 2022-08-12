@@ -11,13 +11,23 @@ import '../styles/pod.css';
 import Toggler from '../components/general/Toggler';
 import BarChart from '../components/pod/BarChart'; // import BarChart from '../components/pod/BarChart';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import DatePicker from 'react-datepicker';
+import { addDays } from 'date-fns';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
   const [allProductData, setAllProductData] = useState('');
-  const [prodCount, setProdCount] = useState('');
+  const [prodCount, setProdCount] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [graph, setGraph] = useState('LineChart');
+  const [selectedProductFlow, setSelectedProductFlow] = useState({
+    startDate: '2021-08-10',
+    endDate: '2021-08-21',
+  });
+  const [dateRange, setDateRange] = useState(['2021-08-10', '2021-08-21']);
+  // const [startDate, endDate] = [];
+
   const params = useParams();
   // This is for the select (Do it yourself) - George
 
@@ -73,6 +83,9 @@ const ProductionOverview = () => {
     return dataArr;
   }
 
+  console.log(dateRange[0] + 'shelby');
+  console.log(selectedProductFlow.startDate);
+
   useEffect(() => {
     setIsloading(true);
     Promise.all([
@@ -82,7 +95,9 @@ const ProductionOverview = () => {
       fetch('http://localhost:4000/api/getAllRecipeAndID').then((res) =>
         res.json()
       ),
-      fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/prodCount/${dateRange[0]}/${dateRange[0]}`
+      ).then((res) => res.json()),
     ])
       .then(([result1, result2, result3]) => {
         setProdOverviewData({
@@ -95,6 +110,7 @@ const ProductionOverview = () => {
         setProdCount({
           data: result3.data,
         });
+        console.log(result3.data);
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
@@ -109,7 +125,7 @@ const ProductionOverview = () => {
     //     });
     //     setIsloading(false);
     //   });
-  }, []);
+  }, [dateRange[1]]);
   const [modal, setModal] = useState(false);
   var x = 30;
 
@@ -144,7 +160,19 @@ const ProductionOverview = () => {
               </div>
               <div className='usersChoice col-12 w-100p mt-4'>
                 <div>
-                  <Toggler />
+                  <DatePicker
+                    placeholderText='Please Select Date'
+                    dateFormat='yyyy-MM-dd'
+                    selectsRange={true}
+                    startDate={dateRange[0]}
+                    endDate={dateRange[1]}
+                    // minDate={startDate}
+                    // maxDate={addDays(startDate, 4)}
+                    onChange={(update) => {
+                      setDateRange(update);
+                    }}
+                    isClearable={true}
+                  />
                 </div>
                 <FormControl className='col-3'>
                   <InputLabel id='demo-simple-select-label'>

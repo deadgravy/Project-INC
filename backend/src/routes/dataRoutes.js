@@ -51,7 +51,7 @@ router.get(
   eudController.getMultipleUsage
 );
 
-router.get('/prodCount', dataController.prodCount);
+router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
 
 // getting single recipe equipment usage details (eud)
 router.get(

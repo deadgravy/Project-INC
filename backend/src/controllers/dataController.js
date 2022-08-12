@@ -143,8 +143,10 @@ module.exports.getMachines = async function (req, res, next) {
 };
 
 module.exports.prodCount = async function (req, res, next) {
+  let startDate = req.params.startDate;
+  let endDate = req.params.endDate;
   try {
-    const results = await dataManager.prodCount();
+    const results = await dataManager.prodCount(startDate, endDate);
     console.log(results);
     res.status(200).json({
       status: 'success',

@@ -92,11 +92,35 @@ module.exports.getRecipebyRecipeID = async function (id) {
   }
 };
 
+// // query for production Count
+// module.exports.prodCount = async function () {
+//   try {
+//     const { rows } =
+//       await pool.query(`SELECT TO_CHAR(DATE_TRUNC('DAY', p.log_time), 'DD/MM/YYYY') as date, COUNT(*)
+// FROM
+// 	(SELECT lt.fr_process_steps, lt.log_action, lt.log_time::timestamp FROM log_times lt
+// 	UNION ALL
+// 	SELECT mlt.work_type, mlt.action, mlt.log_time::timestamp FROM manual_log_times mlt) AS p,
+// 	(SELECT *, ROW_NUMBER() OVER (PARTITION BY fr_recipe_id ORDER BY id DESC) AS rn
+//   	FROM recipe_flows) ls
+// WHERE log_action = 2
+// AND ls.rn = 1
+// AND p.fr_process_steps = ls.id
+
+// GROUP BY DATE_TRUNC('DAY', p.log_time);
+
+//         `); // end of SQL query
+//     return rows;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 // query for production Count
-module.exports.prodCount = async function () {
+module.exports.prodCount = async function (startDate, endDate) {
   try {
-    const { rows } =
-      await pool.query(`SELECT TO_CHAR(DATE_TRUNC('DAY', p.log_time), 'DD/MM/YYYY') as date, COUNT(*)
+    const { rows } = await pool.query(
+      `SELECT TO_CHAR(DATE_TRUNC('DAY', p.log_time), 'DD/MM/YYYY') as date, COUNT(*)
 FROM 
 	(SELECT lt.fr_process_steps, lt.log_action, lt.log_time::timestamp FROM log_times lt
 	UNION ALL
@@ -106,9 +130,13 @@ FROM
 WHERE log_action = 2
 AND ls.rn = 1
 AND p.fr_process_steps = ls.id
+AND p.log_time BETWEEN $1 AND $2
+
 GROUP BY DATE_TRUNC('DAY', p.log_time);
 
-        `); // end of SQL query
+        `,
+      [startDate, endDate]
+    ); // end of SQL query
     return rows;
   } catch (error) {
     console.log(error);
