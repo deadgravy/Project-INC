@@ -151,7 +151,7 @@ const EquipUtilDashboard = () => {
                   {/* End of Input Box code */}
                 </div>
                 <div className='Row8'>
-                  <div className='card eudCard'>
+                  <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
                         <h6 id='projectname' className='title mb-1'>
@@ -174,7 +174,7 @@ const EquipUtilDashboard = () => {
                           Multiple Recipe Equipment
                         </h6>
 
-                        {multipleDetails.data.length === 0 ? (
+                        {singleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>
