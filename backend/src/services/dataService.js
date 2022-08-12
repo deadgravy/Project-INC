@@ -467,4 +467,8 @@ module.exports.getAnomolies = async function (start, end, equipmentId) {
   for (let j = 0; j < anomoliesArr.length; j++) {
     anomoliesArr[j].y = (anomoliesArr[j].x / tempTotalY) * 100;
   }
+
+  console.log(anomoliesArr);
+
+  return anomoliesArr;
 };

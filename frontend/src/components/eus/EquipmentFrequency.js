@@ -16,11 +16,16 @@ const EquipmentDetails = ({ allEquipments }) => {
   const [totalData, setTotalData] = useState(null);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
   const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([]);
-  const [startDate, setStartDate] = useState(moment('2021-08-12').format('YYYY-MM-DD'));
-  const [endDate, setEndDate] = useState(moment('2021-08-12').format('YYYY-MM-DD'));
+  const [startDate, setStartDate] = useState(
+    moment('2021-08-12').format('YYYY-MM-DD')
+  );
+  const [endDate, setEndDate] = useState(
+    moment('2021-08-12').format('YYYY-MM-DD')
+  );
   const [counter, setCounter] = useState(1);
   const [parentCounter, setParentCounter] = useState(1);
   const [update, setUpdate] = useState(false);
+  const [counterType, setCounterType] = useState('Start');
 
   const handleUserUpdate = (startDate, endDate, counter) => {
     setUpdate(true);
@@ -29,7 +34,16 @@ const EquipmentDetails = ({ allEquipments }) => {
     setStartDate(startDate);
     setEndDate(endDate);
     setCounter(counter);
-    setDate(startDate + ' to ' + endDate)
+    setDate(startDate + ' to ' + endDate);
+    if (counter === '1') {
+      setCounterType('Start');
+    } else if (counter === '2') {
+      setCounterType('Stop');
+    } else if (counter === '3') {
+      setCounterType('Completed');
+    } else {
+      setCounterType('Anomolies');
+    }
   };
 
   const colorScheme = [
@@ -54,32 +68,28 @@ const EquipmentDetails = ({ allEquipments }) => {
     '#DFCFBE',
   ];
 
-  console.log(allEquipmentsData);
-
   useEffect(() => {
-    if (counter !== '4') {
-      Promise.all([
-        fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            start: `${startDate}`,
-            end: `${endDate}`,
-            startOrStop: `${counter}`,
-          }),
-        }).then((res) => res.json()),
-      ])
-        .then(([totalData]) => {
-          setTotalData(totalData.data);
-        })
-        .catch((error) => console.log('error', error));
-    }
+    Promise.all([
+      fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          start: `${startDate}`,
+          end: `${endDate}`,
+          startOrStop: `${counter}`,
+        }),
+      }).then((res) => res.json()),
+    ])
+      .then(([totalData]) => {
+        setTotalData(totalData.data);
+      })
+      .catch((error) => console.log('error', error));
   }, [update]);
 
   useEffect(() => {
-    if (totalData && update && counter != '4') {
+    if (totalData && update && counter !== '4') {
       fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
         method: 'POST',
         headers: {
@@ -100,9 +110,12 @@ const EquipmentDetails = ({ allEquipments }) => {
           setUpdate(false);
         });
     }
-  }, [totalData, update]);
+  }, [totalData, update, counter]);
 
   useEffect(() => {
+    console.log(allEquipmentsData);
+    console.log(startDate);
+    console.log(endDate);
     if (counter === '4') {
       fetch(`http://localhost:4000/api/getAnomolies`, {
         method: 'POST',
@@ -119,9 +132,10 @@ const EquipmentDetails = ({ allEquipments }) => {
         .then((res) => {
           console.log(res.data);
           setEquipmentFrequencyData(res.data);
+          setUpdate(false);
         });
     }
-  }, [counter]);
+  }, [update, counter]);
 
   return (
     <Accordion defaultExpanded={true}>
@@ -138,21 +152,34 @@ const EquipmentDetails = ({ allEquipments }) => {
         <div className='col-10'>
           <div className='w-60p u-text-center'>
             <h4 className='mt-2'>{date}</h4>
-            <VictoryPie
-              colorScale={colorScheme}
-              data={equipmentFrequencyData}
-              innerRadius={100}
-              padAngle={2}
-              labelRadius={({ innerRadius }) => innerRadius + 15}
-              cornerRadius={5}
+            <div
               style={{
-                labels: { fill: 'white', fontSize: 20, fontWeight: 'bold' },
+                display: equipmentFrequencyData.length > 0 ? 'block' : 'none',
               }}
-            />
+            >
+              <VictoryPie
+                colorScale={colorScheme}
+                data={equipmentFrequencyData}
+                innerRadius={100}
+                padAngle={2}
+                labelRadius={({ innerRadius }) => innerRadius + 15}
+                cornerRadius={5}
+                style={{
+                  labels: { fill: 'white', fontSize: 20, fontWeight: 'bold' },
+                }}
+              />
+            </div>
+            <div
+              style={{
+                display: equipmentFrequencyData.length == 0 ? 'block' : 'none',
+              }}
+            >
+              <h4 className='text-danger'>No Data Found</h4>
+            </div>
           </div>
         </div>
         <div className='col-2' align='center'>
-          <h4>Start Count</h4>
+          <h4>{counterType} Count</h4>
           <Modal
             handleUserUpdate={handleUserUpdate}
             parentCounter={parentCounter}
