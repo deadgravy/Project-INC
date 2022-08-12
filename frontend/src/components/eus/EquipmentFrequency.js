@@ -54,7 +54,10 @@ const EquipmentDetails = ({ allEquipments }) => {
     '#DFCFBE',
   ];
 
+  console.log(allEquipmentsData);
+
   useEffect(() => {
+    if (counter !== '4') {
       Promise.all([
         fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
           method: 'POST',
@@ -70,13 +73,13 @@ const EquipmentDetails = ({ allEquipments }) => {
       ])
         .then(([totalData]) => {
           setTotalData(totalData.data);
-          console.log(totalData);
         })
         .catch((error) => console.log('error', error));
+    }
   }, [update]);
 
   useEffect(() => {
-    if (totalData && update) {
+    if (totalData && update && counter != '4') {
       fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
         method: 'POST',
         headers: {
@@ -100,8 +103,8 @@ const EquipmentDetails = ({ allEquipments }) => {
   }, [totalData, update]);
 
   useEffect(() => {
-    if (totalData) {
-      fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
+    if (counter === '4') {
+      fetch(`http://localhost:4000/api/getAnomolies`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,9 +112,7 @@ const EquipmentDetails = ({ allEquipments }) => {
         body: JSON.stringify({
           start: `${startDate}`,
           end: `${endDate}`,
-          startOrStop: `${counter}`,
           equipmentid: allEquipmentsData.map((eq) => eq.equipmentid),
-          totalDataLength: totalData.length,
         }),
       })
         .then((res) => res.json())
@@ -120,7 +121,7 @@ const EquipmentDetails = ({ allEquipments }) => {
           setEquipmentFrequencyData(res.data);
         });
     }
-  }, [totalData]);
+  }, [counter]);
 
   return (
     <Accordion defaultExpanded={true}>

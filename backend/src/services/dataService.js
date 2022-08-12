@@ -211,7 +211,7 @@ module.exports.getSingleEquipmentStatus = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } 
+  }
 };
 
 module.exports.getMultiEquipmentStatus = async function () {
@@ -262,7 +262,7 @@ module.exports.getMultiEquipmentStatus = async function () {
     return rows;
   } catch (error) {
     console.log(error);
-  } 
+  }
 };
 
 module.exports.getMachineConnectivity = async function () {
@@ -324,12 +324,19 @@ module.exports.getAllEquipments = async function () {
   }
 };
 
-module.exports.getStartOfEquipment = async function (start, end, startOrStop, equipmentId, totalDataLength) {
-  console.log(equipmentId)
+module.exports.getStartOfEquipment = async function (
+  start,
+  end,
+  startOrStop,
+  equipmentId,
+  totalDataLength
+) {
+  console.log(equipmentId);
   let tempArr = [];
   for (let i = 0; i < equipmentId.length; i++) {
     try {
-      const { rows } = await pool.query(`
+      const { rows } = await pool.query(
+        `
         SELECT
             lt.equip_id as equipmentID,
             lt.recipe_id as recipeID,
@@ -344,13 +351,17 @@ module.exports.getStartOfEquipment = async function (start, end, startOrStop, eq
         WHERE
             lt.log_time >= $1 AND lt.log_time <= $2 AND log_action = $3 AND lt.equip_id = $4
       `,
-      [start, end, startOrStop, equipmentId[i]]
+        [start, end, startOrStop, equipmentId[i]]
       );
       let x = rows.length;
       let y = (rows.length / totalDataLength) * 100;
       console.log(rows);
       if (y != 0) {
-        tempArr.push({x: x, y: Math.round(y), equipmentName: rows[0].equipment_name})
+        tempArr.push({
+          x: x,
+          y: Math.round(y),
+          equipmentName: rows[0].equipment_name,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -359,9 +370,14 @@ module.exports.getStartOfEquipment = async function (start, end, startOrStop, eq
   return tempArr;
 };
 
-module.exports.getAllEquipmentStartOrStop = async function (start, end, startOrStop) {
+module.exports.getAllEquipmentStartOrStop = async function (
+  start,
+  end,
+  startOrStop
+) {
   try {
-    const { rows } = await pool.query(`
+    const { rows } = await pool.query(
+      `
       SELECT
           lt.equip_id as equipmentID,
           lt.recipe_id as recipeID,
@@ -376,12 +392,79 @@ module.exports.getAllEquipmentStartOrStop = async function (start, end, startOrS
       WHERE
           lt.log_time >= $1 AND lt.log_time <= $2 AND log_action = $3
     `,
-    [start, end, startOrStop]
-    )
+      [start, end, startOrStop]
+    );
     return rows;
   } catch (error) {
     console.log(error);
   }
-}
+};
 
+module.exports.getAnomolies = async function (start, end, equipmentId) {
+  let anomoliesArr = [];
+  let anomoliesX = 0;
+  let tempTotalY = 0;
+  let startRows = null;
+  let endRows = null;
+  for (let i = 0; i < equipmentId.length; i++) {
+    try {
+      const { rows } = await pool.query(
+        `
+        SELECT
+            lt.equip_id as equipmentID,
+            lt.recipe_id as recipeID,
+            pd.name as equipment_name,
+            lt.log_action,
+            lt.log_time
+        FROM
+            log_times as lt
+        INNER JOIN
+            physical_devices as pd
+        ON lt.equip_id = pd.id
+        WHERE
+            lt.log_time >= $1 AND lt.log_time <= $2 AND log_action = 1 AND lt.equip_id = $3
+      `,
+        [start, end, equipmentId[i]]
+      );
+      
+      startRows = rows;
+    } catch (error) {
+      console.log(error);
+    }
 
+    try {
+      const { rows } = await pool.query(
+        `
+        SELECT
+            lt.equip_id as equipmentID,
+            lt.recipe_id as recipeID,
+            pd.name as equipment_name,
+            lt.log_action,
+            lt.log_time
+        FROM
+            log_times as lt
+        INNER JOIN
+            physical_devices as pd
+        ON lt.equip_id = pd.id
+        WHERE
+            lt.log_time >= $1 AND lt.log_time <= $2 AND log_action = 2 AND lt.equip_id = $3
+      `,
+        [start, end, equipmentId[i]]
+      );
+      
+      endRows = rows;
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (startRows.length > endRows.length) {
+      anomoliesX = startRows.length - endRows.length;
+      tempTotalY += anomoliesX;
+      anomoliesArr.push({x: anomoliesX, equipmentName: startRows[i].equipment_name})
+    }
+  }
+  
+  for (let j = 0; j < anomoliesArr.length; j++) {
+    anomoliesArr[j].y = (anomoliesArr[j].x / tempTotalY) * 100;
+  }
+};

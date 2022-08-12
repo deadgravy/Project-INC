@@ -218,7 +218,6 @@ module.exports.getEquipmentStartOrStopCount = async function (req, res, next) {
 
 module.exports.getAllEquipmentStartOrStopCount = async function (req, res, next) {
   try {
-    console.log(req.body.start)
     const results = await dataManager.getAllEquipmentStartOrStop(
       req.body.start + ' 00:00:00',
       req.body.end + ' 23:59:59',
@@ -237,3 +236,23 @@ module.exports.getAllEquipmentStartOrStopCount = async function (req, res, next)
     });
   }
 };
+
+module.exports.getAnomolies = async function (req, res, next) {
+  try {
+    const results = await dataManager.getAnomolies(
+      req.body.start + ' 00:00:00',
+      req.body.end + ' 23:59:59',
+      req.body.equipmentid,
+    );
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}

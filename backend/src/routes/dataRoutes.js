@@ -103,4 +103,6 @@ router.post('/getEquipmentStartOrStopCount', dataController.getEquipmentStartOrS
 
 router.post('/getAllEquipmentStartOrStop', dataController.getAllEquipmentStartOrStopCount)
 
+router.post('/getAnomolies', dataController.getAnomolies)
+
 module.exports = router;
