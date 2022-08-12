@@ -76,19 +76,22 @@ export function WeeklyChart({ data }) {
   if (data1.length === 0) {
     return;
   } else {
+    if (data1.length === 0) {
+    return;
+  } else {
           // ensures rows all start from the same point
         if (data1.length === 0) {
           return;
         } else {
           if (Object.keys(data1[0])[0] === 'day') {
-              var first = new Date(usageArr[1][3]);
-              for (let i = 1; i < usageArr.length; i++) {
-                var firstDay = first.getDay();
-                var startdate = new Date(usageArr[i][3]);
-                var enddate = new Date(usageArr[i][4]);
-                var startMilli = startdate.getTime();
-                var endMilli = enddate.getTime();
-                var dayNum = startdate.getDay();
+                var first = new Date(usageArr[1][3]);
+                for (let i = 1; i < usageArr.length; i++) {
+                  var firstDay = first.getDay();
+                  var startdate = new Date(usageArr[i][3]);
+                  var enddate = new Date(usageArr[i][4]);
+                  var startMilli = startdate.getTime();
+                  var endMilli = enddate.getTime();
+                  var dayNum = startdate.getDay();
 
               if (dayNum !== firstDay) {
                 if (dayNum === 0) {
