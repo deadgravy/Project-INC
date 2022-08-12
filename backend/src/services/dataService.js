@@ -96,7 +96,7 @@ module.exports.getRecipebyRecipeID = async function (id) {
 module.exports.prodCount = async function () {
   try {
     const { rows } =
-      await pool.query(`SELECT DATE_TRUNC('DAY', p.log_time), COUNT(*)
+      await pool.query(`SELECT TO_CHAR(DATE_TRUNC('DAY', p.log_time), 'DD/MM/YYYY') as date, COUNT(*)
 FROM 
 	(SELECT lt.fr_process_steps, lt.log_action, lt.log_time::timestamp FROM log_times lt
 	UNION ALL
