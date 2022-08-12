@@ -75,7 +75,7 @@ const EquipmentDetails = ({ allEquipments }) => {
         })
         .catch((error) => console.log('error', error));
     }
-  }, []);
+  }, [update]);
 
   useEffect(() => {
     if (totalData && update) {
@@ -93,7 +93,11 @@ const EquipmentDetails = ({ allEquipments }) => {
         }),
       })
         .then((res) => res.json())
-        .then((res) => setEquipmentFrequencyData(res.data));
+        .then((res) => {
+          console.log(res.data);
+          setEquipmentFrequencyData(res.data);
+          setUpdate(false);
+        });
     }
   }, [totalData, update]);
 
@@ -133,7 +137,7 @@ const EquipmentDetails = ({ allEquipments }) => {
             setParentCounter={setParentCounter}
           />
           <Legend
-            allEquipmentData={allEquipmentsData}
+            equipmentFrequencyData={equipmentFrequencyData}
             colorScheme={colorScheme}
           />
         </div>

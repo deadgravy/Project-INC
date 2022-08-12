@@ -348,7 +348,10 @@ module.exports.getStartOfEquipment = async function (start, end, startOrStop, eq
       );
       let x = rows.length;
       let y = (rows.length / totalDataLength) * 100;
-      tempArr.push({x: x, y: Math.round(y)})
+      console.log(rows);
+      if (y != 0) {
+        tempArr.push({x: x, y: Math.round(y), equipmentName: rows[0].equipment_name})
+      }
     } catch (error) {
       console.log(error);
     }

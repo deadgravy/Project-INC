@@ -6,13 +6,13 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const Legend = ({ allEquipmentData, colorScheme }) => {
+const Legend = ({ equipmentFrequencyData, colorScheme }) => {
   const equipments = [];
-  for (let i = 0; i < allEquipmentData.length; i++) {
+  for (let i = 0; i < equipmentFrequencyData.length; i++) {
     equipments.push(
       <span style={{display: 'flex', verticalAlign: 'middle'}} key={i}>
         <i className='fas fa-circle mt-1' style={{ color: colorScheme[i] }}></i>
-        <p className='ml-1'>{allEquipmentData[i].equipment_name}</p>
+        <p className='ml-1'>{equipmentFrequencyData[i].equipmentName}</p>
       </span>
     );
   }
