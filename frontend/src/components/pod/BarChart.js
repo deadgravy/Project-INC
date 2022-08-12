@@ -3,9 +3,9 @@ import { Chart } from 'react-google-charts';
 
 function DataForGraph(data) {
   var dataArr = [['Date', 'Production Count']];
-  console.log(data.data.length + 'fkkkkk');
+
   for (let i = 0; i < data.data.length; i++) {
-    dataArr.push([data.data[i].date_trunc, data.data[i].count]);
+    dataArr.push([data.data[i].date, data.data[i].count]);
   }
   return dataArr;
 }

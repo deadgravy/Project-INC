@@ -17,10 +17,13 @@ const ProductionOverview = () => {
   const [allProductData, setAllProductData] = useState('');
   const [prodCount, setProdCount] = useState('');
   const [isLoading, setIsloading] = useState(true);
+  const [graph, setGraph] = useState('LineChart');
   const params = useParams();
   // This is for the select (Do it yourself) - George
-  const graph = 'Line Chart';
-  function handleChange() {}
+
+  function handleChange(e) {
+    setGraph(() => e.target.value);
+  }
 
   function convertToMilli(days, hours, seconds, mins) {
     const daysToMilli = days * 24 * 60 * 60 * 1000;
@@ -108,6 +111,8 @@ const ProductionOverview = () => {
     //   });
   }, []);
   const [modal, setModal] = useState(false);
+  var x = 30;
+
   //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0'>
@@ -119,7 +124,9 @@ const ProductionOverview = () => {
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
             <div className='col-3'>
-              <input type='search' placeholder='Search' />
+              <form action='53'>
+                <input type='search' placeholder='Search' />
+              </form>
             </div>
             <div>
               <Modal data1={allProductData} />
@@ -150,14 +157,21 @@ const ProductionOverview = () => {
                     label='Age'
                     onChange={handleChange}
                   >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value='LineChart'> Line Chart</MenuItem>
+                    <MenuItem value='BarChart'>Bar Chart</MenuItem>
                   </Select>
                 </FormControl>
               </div>
-              <div className='row'>
-                {console.log(prodCount.data.length + 'jessie')}
+              <div
+                className='row'
+                style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
+              >
+                <LineChart data={prodCount} />
+              </div>
+              <div
+                className='row'
+                style={{ display: graph === 'BarChart' ? 'block' : 'none' }}
+              >
                 <BarChart data={prodCount} />
               </div>
             </div>
