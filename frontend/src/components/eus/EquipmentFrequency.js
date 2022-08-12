@@ -9,12 +9,28 @@ import { VictoryPie } from 'victory';
 import Legend from './Legend';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
+import Modal from './Modal';
 
 const EquipmentDetails = ({ allEquipments }) => {
   const allEquipmentsData = allEquipments.data.data;
   const [totalData, setTotalData] = useState(null);
-  const [date, setDate] = useState(moment().format('YYYY-MM-DD'))
-  const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([])
+  const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+  const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [counter, setCounter] = useState(-1);
+  const [parentCounter, setParentCounter] = useState(-1);
+  const [update, setUpdate] = useState(false);
+
+  const handleUserUpdate = (startDate, endDate, counter) => {
+    setUpdate(true);
+    startDate = moment(startDate).format('YYYY-MM-DD');
+    endDate = moment(endDate).format('YYYY-MM-DD');
+    console.log(startDate)
+    setStartDate(startDate);
+    setEndDate(endDate);
+    setCounter(counter);
+  };
 
   const colorScheme = [
     '#39CEF3',
@@ -39,55 +55,50 @@ const EquipmentDetails = ({ allEquipments }) => {
   ];
 
   useEffect(() => {
-    Promise.all([
-      fetch(
-        'http://localhost:4000/api/getAllEquipmentStartOrStop', {
+    if (update) {
+      Promise.all([
+        fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            "start": "2021-08-01",
-            "end": "2021-08-31",
-            "startOrStop": "2"
-          })
-        }
-      ).then((res) => res.json()),
-    ])
-      .then(([totalData]) => {
-        setTotalData(totalData.data);
-      })
-      .catch((error) => console.log('error', error));
+            start: `${startDate}`,
+            end: `${endDate}`,
+            startOrStop: `${counter}`,
+          }),
+        }).then((res) => res.json()),
+      ])
+        .then(([totalData]) => {
+          setTotalData(totalData.data);
+          console.log(totalData);
+        })
+        .catch((error) => console.log('error', error));
+    }
   }, []);
 
   useEffect(() => {
-    if (totalData) {
+    if (totalData && update) {
       fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          "start": "2021-08-01",
-          "end": "2021-08-31",
-          "startOrStop": "2",
-          "equipmentid": allEquipmentsData.map(eq => eq.equipmentid),
-          "totalDataLength": totalData.length
-        })
+          start: `${startDate}`,
+          end: `${endDate}`,
+          startOrStop: `${counter}`,
+          equipmentid: allEquipmentsData.map((eq) => eq.equipmentid),
+          totalDataLength: totalData.length,
+        }),
       })
-      .then((res) => res.json())
-      .then((res) => setEquipmentFrequencyData(res.data))
+        .then((res) => res.json())
+        .then((res) => setEquipmentFrequencyData(res.data));
     }
-
-  }, [totalData])
+  }, [totalData, update]);
 
   return (
-
     <Accordion>
-      {equipmentFrequencyData.map((data)=> {
-        console.log(data)
-        console.log(equipmentFrequencyData.length)
-      })}
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls='panel1a-content'
@@ -114,8 +125,13 @@ const EquipmentDetails = ({ allEquipments }) => {
             />
           </div>
         </div>
-        <div className='col-2' align="center">
+        <div className='col-2' align='center'>
           <h4>Start Count</h4>
+          <Modal
+            handleUserUpdate={handleUserUpdate}
+            parentCounter={parentCounter}
+            setParentCounter={setParentCounter}
+          />
           <Legend
             allEquipmentData={allEquipmentsData}
             colorScheme={colorScheme}

@@ -1,11 +1,10 @@
 import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 import { useState } from 'react';
 
-const CounterToggle = () => {
-  let [counter, setCounter] = useState('');
+const CounterToggle = ({ parentCounter, setParentCounter }) => {
 
   function handleChange(e) {
-    setCounter(() => e.target.value);
+    setParentCounter(() => e.target.value);
   }
   return (
     <FormControl fullWidth>
@@ -13,7 +12,7 @@ const CounterToggle = () => {
       <Select
         labelId='demo-simple-select-label'
         id='demo-simple-select'
-        value={counter}
+        value={parentCounter}
         label='Count'
         onChange={handleChange}
       >
