@@ -383,3 +383,5 @@ module.exports.getAllEquipmentStartOrStop = async function (start, end, startOrS
     console.log(error);
   }
 }
+
+

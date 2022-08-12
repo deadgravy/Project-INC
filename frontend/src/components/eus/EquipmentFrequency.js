@@ -16,20 +16,20 @@ const EquipmentDetails = ({ allEquipments }) => {
   const [totalData, setTotalData] = useState(null);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
   const [equipmentFrequencyData, setEquipmentFrequencyData] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [counter, setCounter] = useState(-1);
-  const [parentCounter, setParentCounter] = useState(-1);
+  const [startDate, setStartDate] = useState(moment('2021-08-12').format('YYYY-MM-DD'));
+  const [endDate, setEndDate] = useState(moment('2021-08-12').format('YYYY-MM-DD'));
+  const [counter, setCounter] = useState(1);
+  const [parentCounter, setParentCounter] = useState(1);
   const [update, setUpdate] = useState(false);
 
   const handleUserUpdate = (startDate, endDate, counter) => {
     setUpdate(true);
     startDate = moment(startDate).format('YYYY-MM-DD');
     endDate = moment(endDate).format('YYYY-MM-DD');
-    console.log(startDate)
     setStartDate(startDate);
     setEndDate(endDate);
     setCounter(counter);
+    setDate(startDate + ' to ' + endDate)
   };
 
   const colorScheme = [
@@ -55,7 +55,6 @@ const EquipmentDetails = ({ allEquipments }) => {
   ];
 
   useEffect(() => {
-    if (update) {
       Promise.all([
         fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
           method: 'POST',
@@ -74,7 +73,6 @@ const EquipmentDetails = ({ allEquipments }) => {
           console.log(totalData);
         })
         .catch((error) => console.log('error', error));
-    }
   }, [update]);
 
   useEffect(() => {
@@ -101,8 +99,31 @@ const EquipmentDetails = ({ allEquipments }) => {
     }
   }, [totalData, update]);
 
+  useEffect(() => {
+    if (totalData) {
+      fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          start: `${startDate}`,
+          end: `${endDate}`,
+          startOrStop: `${counter}`,
+          equipmentid: allEquipmentsData.map((eq) => eq.equipmentid),
+          totalDataLength: totalData.length,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res.data);
+          setEquipmentFrequencyData(res.data);
+        });
+    }
+  }, [totalData]);
+
   return (
-    <Accordion>
+    <Accordion defaultExpanded={true}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls='panel1a-content'

@@ -3,20 +3,27 @@ import Toggler from '../general/Toggler';
 import DatePicker from 'react-datepicker';
 import CounterToggle from './CounterToggle';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
   const [compare, setCompare] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [buttonState, setButtonState] = useState('toggle-button1');
 
-  var dd = String(startDate.getDate()).padStart(2, '0');
-  var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = startDate.getFullYear();
-  let enddate = yyyy + '-' + mm + '-' + dd;
-  let startdate = `${yyyy}-${mm}-${dd - 1}`;
+  let endDate = '';
 
   function tempFunction() {
     if (!compare) {
-      handleUserUpdate(startDate, startDate, parentCounter)
+      if (buttonState === 'toggle-button1') {
+        handleUserUpdate(startDate, startDate, parentCounter)
+      } else if (buttonState === 'toggle-button2') {
+        endDate = moment(moment(startDate, 'YYYY-MM-DD').add(6, 'days')).format('YYYY-MM-DD');
+        handleUserUpdate(startDate, endDate, parentCounter)
+      } else if (buttonState === 'toggle-button3') {
+        let selectedStartMonth = moment(startDate, 'YYYY-MM-DD').startOf('month').format('YYYY-MM-DD')
+        endDate = moment(startDate, 'YYYY-MM-DD').endOf('month').format('YYYY-MM-DD');
+        handleUserUpdate(selectedStartMonth, endDate, parentCounter)
+      }
     }
   }
 
@@ -85,7 +92,7 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
               className='oneDate'
               style={{ display: compare ? 'none' : 'block' }}
             >
-              <Toggler />
+              <Toggler buttonState={buttonState} setButtonState={setButtonState}/>
               <h6 className='mt-2'>Please select a start date</h6>
               <DatePicker
                 selected={startDate}

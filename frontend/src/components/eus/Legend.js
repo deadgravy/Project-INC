@@ -18,7 +18,7 @@ const Legend = ({ equipmentFrequencyData, colorScheme }) => {
   }
   return (
     <div className='mt-4'>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel1a-content'
