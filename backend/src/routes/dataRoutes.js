@@ -28,7 +28,10 @@ router.get('/getCompletedProducts', dataController.getCompletedProducts);
 router.get('/getProductsToComplete', dataController.getProductsToComplete);
 
 //getting single equipment status
-router.get('/getSingleEquipmentStatus', dataController.getSingleEquipmentStatus);
+router.get(
+  '/getSingleEquipmentStatus',
+  dataController.getSingleEquipmentStatus
+);
 
 //getting multi equipment status
 router.get('/getMultiEquipmentStatus', dataController.getMultiEquipmentStatus);
