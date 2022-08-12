@@ -4,6 +4,11 @@ import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
+<style>
+  .modal {{
+    top: '0 !important'
+  }}
+</style>
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);

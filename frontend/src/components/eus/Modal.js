@@ -30,7 +30,7 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
   return (
     <div>
       <div
-        className='modal modal-animated--zoom-in modal-large'
+        className='modal modal-large'
         id='basic-modal'
       >
         <a
