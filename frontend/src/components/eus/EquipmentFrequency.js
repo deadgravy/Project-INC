@@ -98,12 +98,7 @@ const EquipmentDetails = ({ allEquipments }) => {
   }, [totalData, update]);
 
   return (
-
     <Accordion>
-      {equipmentFrequencyData.map((data)=> {
-        console.log(data)
-        console.log(equipmentFrequencyData.length)
-      })}
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls='panel1a-content'
