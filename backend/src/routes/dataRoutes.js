@@ -56,45 +56,7 @@ router.get(
   spfdController.getSingleProductWithNameDate
 );
 
-// getting single recipe equipment usage (eud)
-router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
-
-// getting multiple recipe equipment usage (eud)
-router.get(
-  '/getMultipleUsage/:startdate/:enddate',
-  eudController.getMultipleUsage
-);
-
 router.get('/prodCount', dataController.prodCount);
-// getting single recipe equipment usage details
-router.get(
-  '/getSingleUsageDetails/:date/:hour',
-  eudController.getSingleUsageDetails
-);
-
-// getting multiple recipe equipment usage details
-router.get(
-  '/getMultipleUsageDetails/:date/:hour',
-  eudController.getMultipleUsageDetails
-);
-
-// getting multiple recipe equipment usage details
-router.get(
-  '/getMultipleUsageDetails/:date/:hour',
-  eudController.getMultipleUsageDetails
-);
-
-// getting single recipe equipment usage details (eud)
-router.get(
-  '/getSingleUsageDetails/:startdate/:enddate/:hour',
-  eudController.getSingleUsageDetails
-);
-
-// getting multiple recipe equipment usage details (eud)
-router.get(
-  '/getMultipleUsageDetails/:startdate/:enddate/:hour',
-  eudController.getMultipleUsageDetails
-);
 
 // getting the name of all recipes
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
@@ -123,16 +85,18 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
-// getting the equipment name for single product
-router.get(
-  '/getSingleProductEquipment/:startDate/:endDate/:name',
-  spfdController.getSingleProductEquipment
+// Getting all equipments from log times table
+router.get('/getAllEquipments', dataController.getAllEquipments);
+
+// Getting start / stop count of specific equipment
+router.post(
+  '/getEquipmentStartOrStopCount',
+  dataController.getEquipmentStartOrStopCount
 );
 
-// getting the equipment usage by name for single product
-router.get(
-  '/getEquipmentUsageByName/:name/:ename',
-  spfdController.getEquipmentUsageByName
+router.post(
+  '/getAllEquipmentStartOrStop',
+  dataController.getAllEquipmentStartOrStopCount
 );
 
 // get all equipment

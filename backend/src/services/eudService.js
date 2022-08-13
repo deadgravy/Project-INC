@@ -349,7 +349,6 @@ module.exports.getMultipleWeeklyDetails = async function (
     console.log(error);
   }
 };
-
 module.exports.getSingleUnusedWeekly = async function (
   startdate,
   enddate,
