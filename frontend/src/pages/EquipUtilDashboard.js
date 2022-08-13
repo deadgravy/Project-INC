@@ -94,6 +94,11 @@ const EquipUtilDashboard = () => {
     setHours(hourinput);
   }
 
+  let singleData = {
+    data: singleUsage,
+    date: startDate,
+  };
+
   return (
     <React.StrictMode>
       <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
