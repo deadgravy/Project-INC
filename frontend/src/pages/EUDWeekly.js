@@ -152,7 +152,7 @@ const EUDWeekly = () => {
                   multipleUsage.data.length === undefined ? (
                     <p>NO DATA</p>
                   ) : (
-                    <MREWeeklyChart data={multipleUsage} />
+                    <WeeklyChart data={multipleUsage} />
                   )}
                 </div>
                 <div className='row mt-4'>
