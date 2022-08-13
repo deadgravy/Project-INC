@@ -3,6 +3,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import './styles/style.css';
 import { UsageChartColours } from './UsageChartData';
 import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function WeeklyChart({ data }) {
   let data1 = data.data; // returns equipment, equipment, start_time, end_time
@@ -34,9 +35,9 @@ export function WeeklyChart({ data }) {
           let foundCR = colourAndEquipArr.find(
             (cr) => cr.equipment === item.equipment
           );
-          // console.log(
-          //   `equipment: ${item.equipment} color is ${foundCR.colour}`
-          // );
+          console.log(
+            `equipment: ${item.equipment} color is ${foundCR.colour}`
+          );
           return foundCR.colour;
         });
 
@@ -69,29 +70,28 @@ export function WeeklyChart({ data }) {
           const arr = Object.values(data1[i]);
           arr.splice(2, 0, `color: ${colorArr[i]}`);
           // console.log(arr);
+          //       console.log(Object.values(data1[i]));
+          const arr = Object.values(data1[i]);
+          arr.splice(2, 0, `color: ${colorArr[i]}`);
+          console.log(arr);
           // usageArr.push(Object.values(data1[i]));
+          usageArr.push(arr);
           usageArr.push(arr);
         }
 
-  if (data1.length === 0) {
-    return;
-  } else {
-    if (data1.length === 0) {
-    return;
-  } else {
-          // ensures rows all start from the same point
+        // ensures rows all start from the same point
         if (data1.length === 0) {
           return;
         } else {
           if (Object.keys(data1[0])[0] === 'day') {
-                var first = new Date(usageArr[1][3]);
-                for (let i = 1; i < usageArr.length; i++) {
-                  var firstDay = first.getDay();
-                  var startdate = new Date(usageArr[i][3]);
-                  var enddate = new Date(usageArr[i][4]);
-                  var startMilli = startdate.getTime();
-                  var endMilli = enddate.getTime();
-                  var dayNum = startdate.getDay();
+            var first = new Date(usageArr[1][3]);
+            for (let i = 1; i < usageArr.length; i++) {
+              var firstDay = first.getDay();
+              var startdate = new Date(usageArr[i][3]);
+              var enddate = new Date(usageArr[i][4]);
+              var startMilli = startdate.getTime();
+              var endMilli = enddate.getTime();
+              var dayNum = startdate.getDay();
 
               if (dayNum !== firstDay) {
                 if (dayNum === 0) {
@@ -125,9 +125,11 @@ export function WeeklyChart({ data }) {
             <div className='alignIcon mr-2'>
               <CircleIcon
                 className='mr-1'
-                style={{ fill: data.colour, fontSize: 20 }}
+                style={{ fill: data.colour, fontSize: 20, fontSize: 20 }}
               />
-              <span>{data.equipment}</span>
+              <span>
+                <span>{data.equipment}</span>
+              </span>
             </div>
           ))
         )}
