@@ -7,6 +7,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import {
+  UsageDetails,
+  UsageDetailsForNotUsed,
+} from '../components/eud/UsageDetails';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -15,7 +19,7 @@ const EquipUtilDashboard = () => {
   const [multipleDetails, setMultipleDetails] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
+  const [startDate, setStartDate] = useState(new Date('2021-08-11'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 
@@ -71,6 +75,11 @@ const EquipUtilDashboard = () => {
     console.log(hourinput);
     setHours(hourinput);
   }
+
+  let singleData = {
+    data: singleUsage,
+    date: startDate,
+  };
 
   return (
     <React.StrictMode>
@@ -136,20 +145,12 @@ const EquipUtilDashboard = () => {
                           Single Recipe Equipment
                         </h6>
 
+                        <UsageDetailsForNotUsed {...singleData} />
+
                         {singleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          singleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>.
-                              </span>
-                            </div>
-                          ))
+                          <UsageDetails data={singleDetails} />
                         )}
                       </div>
 
@@ -161,17 +162,7 @@ const EquipUtilDashboard = () => {
                         {multipleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          multipleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
-                              </span>
-                            </div>
-                          ))
+                          <UsageDetails data={multipleDetails} />
                         )}
                       </div>
                     </div>
