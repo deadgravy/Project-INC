@@ -6,8 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
 import { WeeklyChart } from '../components/eud/weeklyChart';
-import { MREWeeklyChart } from '../components/eud/MREWeeklyChart';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { WeeklyDetails } from '../components/eud/UsageDetails';
 
 const EUDWeekly = () => {
@@ -123,7 +121,7 @@ const EUDWeekly = () => {
                   multipleUsage.data.length === undefined ? (
                     <p>NO DATA</p>
                   ) : (
-                    <MREWeeklyChart data={multipleUsage} />
+                    <WeeklyChart data={multipleUsage} />
                   )}
                 </div>
                 <div className='row'>
@@ -147,8 +145,7 @@ const EUDWeekly = () => {
                         <h6 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
                         </h6>
-                        {singleDetails.length === 0 ||
-                        singleDetails.length === undefined ? (
+                        {singleDetails.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <WeeklyDetails data={singleDetails} />
@@ -159,8 +156,7 @@ const EUDWeekly = () => {
                         <h6 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
                         </h6>
-                        {multipleDetails.length === 0 ||
-                        multipleDetails.length === undefined ? (
+                        {multipleDetails.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <WeeklyDetails data={multipleDetails} />
