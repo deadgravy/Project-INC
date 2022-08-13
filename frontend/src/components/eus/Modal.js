@@ -9,30 +9,85 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
   const [compare, setCompare] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [buttonState, setButtonState] = useState('toggle-button1');
+  const [firstStartDate, setFirstStartDate] = useState(new Date());
+  const [secondStartDate, setSecondStartDate] = useState(new Date());
 
   let endDate = '';
 
   function tempFunction() {
     if (!compare) {
       if (buttonState === 'toggle-button1') {
-        handleUserUpdate(startDate, startDate, parentCounter)
+        handleUserUpdate(startDate, startDate, parentCounter, false);
       } else if (buttonState === 'toggle-button2') {
-        endDate = moment(moment(startDate, 'YYYY-MM-DD').add(6, 'days')).format('YYYY-MM-DD');
-        handleUserUpdate(startDate, endDate, parentCounter)
+        endDate = moment(moment(startDate, 'YYYY-MM-DD').add(6, 'days')).format(
+          'YYYY-MM-DD'
+        );
+        handleUserUpdate(startDate, endDate, parentCounter, false);
       } else if (buttonState === 'toggle-button3') {
-        let selectedStartMonth = moment(startDate, 'YYYY-MM-DD').startOf('month').format('YYYY-MM-DD')
-        endDate = moment(startDate, 'YYYY-MM-DD').endOf('month').format('YYYY-MM-DD');
-        handleUserUpdate(selectedStartMonth, endDate, parentCounter)
+        let selectedStartMonth = moment(startDate, 'YYYY-MM-DD')
+          .startOf('month')
+          .format('YYYY-MM-DD');
+        endDate = moment(startDate, 'YYYY-MM-DD')
+          .endOf('month')
+          .format('YYYY-MM-DD');
+        handleUserUpdate(selectedStartMonth, endDate, parentCounter, false);
+      }
+    } else {
+      if (buttonState === 'toggle-button1') {
+        handleUserUpdate(firstStartDate, firstStartDate, parentCounter, false);
+        setTimeout(
+          () =>
+            handleUserUpdate(
+              secondStartDate,
+              secondStartDate,
+              parentCounter,
+              true
+            ),
+          1000
+        );
+      } else if (buttonState === 'toggle-button2') {
+        let firstEndDate = moment(
+          moment(firstStartDate, 'YYYY-MM-DD').add(6, 'days')
+        ).format('YYYY-MM-DD');
+        handleUserUpdate(firstStartDate, firstEndDate, parentCounter, false);
+
+        let secondEndDate = moment(
+          moment(secondStartDate, 'YYYY-MM-DD').add(6, 'days')
+        ).format('YYYY-MM-DD');
+        handleUserUpdate(secondStartDate, secondEndDate, parentCounter, true);
+      } else if (buttonState === 'toggle-button3') {
+        let firstSelectedStartMonth = moment(firstStartDate, 'YYYY-MM-DD')
+          .startOf('month')
+          .format('YYYY-MM-DD');
+        endDate = moment(firstStartDate, 'YYYY-MM-DD')
+          .endOf('month')
+          .format('YYYY-MM-DD');
+        handleUserUpdate(
+          firstSelectedStartMonth,
+          endDate,
+          parentCounter,
+          false
+        );
+
+        let secondSelectedStartMonth = moment(secondStartDate, 'YYYY-MM-DD')
+          .startOf('month')
+          .format('YYYY-MM-DD');
+        endDate = moment(secondStartDate, 'YYYY-MM-DD')
+          .endOf('month')
+          .format('YYYY-MM-DD');
+        handleUserUpdate(
+          secondSelectedStartMonth,
+          endDate,
+          parentCounter,
+          true
+        );
       }
     }
   }
 
   return (
     <div>
-      <div
-        className='modal modal-large'
-        id='basic-modal'
-      >
+      <div className='modal modal-large' id='basic-modal'>
         <a
           href='#searchModalDialog'
           className='modal-overlay close-btn'
@@ -92,7 +147,15 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
               className='oneDate'
               style={{ display: compare ? 'none' : 'block' }}
             >
-              <Toggler buttonState={buttonState} setButtonState={setButtonState}/>
+              <Toggler
+                buttonState={buttonState}
+                setButtonState={setButtonState}
+              />
+              <h6 className='mt-2'>Please select type of counter</h6>
+              <CounterToggle
+                parentCounter={parentCounter}
+                setParentCounter={setParentCounter}
+              />
               <h6 className='mt-2'>Please select a start date</h6>
               <DatePicker
                 selected={startDate}
@@ -104,21 +167,55 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
                 yearDropdownItemNumber={15}
                 scrollableYearDropdown
               />
-              <h6 className='mt-2'>Please select type of counter</h6>
-              <CounterToggle parentCounter={parentCounter} setParentCounter={setParentCounter} />
             </div>
             <div
               className='compare'
               style={{ display: compare ? 'block' : 'none' }}
             >
-              <h4>Compare</h4>
+              <Toggler
+                buttonState={buttonState}
+                setButtonState={setButtonState}
+              />
+              <h6 className='mt-2'>Please select type of counter</h6>
+              <CounterToggle
+                parentCounter={parentCounter}
+                setParentCounter={setParentCounter}
+              />
+              <h6 className='mt-2'>
+                Please select a start date for first graph
+              </h6>
+              <DatePicker
+                selected={firstStartDate}
+                onChange={(date) => setFirstStartDate(date)}
+                minDate={new Date('2021-08-10')}
+                maxDate={new Date('2021-08-22')}
+                showYearDropdown
+                dateFormatCalendar='MMMM'
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
+              />
+              <h6 className='mt-2'>
+                Please select a start date for second graph
+              </h6>
+              <DatePicker
+                selected={secondStartDate}
+                onChange={(date) => setSecondStartDate(date)}
+                minDate={new Date('2021-08-10')}
+                maxDate={new Date('2021-08-22')}
+                showYearDropdown
+                dateFormatCalendar='MMMM'
+                yearDropdownItemNumber={15}
+                scrollableYearDropdown
+              />
             </div>
           </div>
 
           <div className='modal-footer' onClick={tempFunction}>
-            <button className='u-pull-right bg-info text-white'>
-              Confirm Choice
-            </button>
+            <a href='#components'>
+              <button className='u-pull-right bg-info text-white'>
+                Confirm Choice
+              </button>
+            </a>
           </div>
         </div>
       </div>

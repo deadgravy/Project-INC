@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const Legend = ({ equipmentFrequencyData, colorScheme }) => {
+const Legend = ({ equipmentFrequencyData, colorScheme, name }) => {
   const equipments = [];
   for (let i = 0; i < equipmentFrequencyData.length; i++) {
     equipments.push(
@@ -24,7 +24,7 @@ const Legend = ({ equipmentFrequencyData, colorScheme }) => {
           aria-controls='panel1a-content'
           id='panel1a-header'
         >
-          <Typography>Legend</Typography>
+          <Typography>{name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {equipments}
