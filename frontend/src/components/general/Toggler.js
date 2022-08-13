@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-const Toggler = () => {
-  const [buttonState, setButtonState] = useState('toggle-button1');
+const Toggler = ({ buttonState, setButtonState }) => {
 
   function handleClick(e) {
     if (buttonState !== e.target.id) {
