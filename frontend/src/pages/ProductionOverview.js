@@ -80,9 +80,13 @@ const ProductionOverview = () => {
         res.json()
       ),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       fetch('http://localhost:4000/api/data/data1').then((res) => res.json()),
 >>>>>>> a64352ec (bar chart now works fully)
+=======
+      fetch('http://localhost:4000/api/getAllRecipe').then((res) => res.json()),
+>>>>>>> 8815b3dc (fixing data1 endpoint for api documentation)
       fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
     ])
       .then(([result1, result2, result3]) => {
