@@ -17,10 +17,12 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
+    
 }
 
 .overlay {
     background: rgba(49,49,49,0.8);
+    z-index: 1;
 }
 .modal-content {
     position: absolute;
@@ -35,6 +37,7 @@ body.active-modal {
     min-width: 300px;
     max-height: calc(100vh - 210px);
     overflow-y: auto;
+    z-index: 9999;
 }
 
 .close-modal {

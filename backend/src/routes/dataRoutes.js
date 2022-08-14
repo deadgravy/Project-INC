@@ -55,7 +55,20 @@ router.get(
   spfdController.getSingleProductWithNameDate
 );
 
+<<<<<<< HEAD
 router.get('/prodCount', dataController.prodCount);
+=======
+// getting single recipe equipment usage (eud)
+router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
+
+// getting multiple recipe equipment usage (eud)
+router.get(
+  '/getMultipleUsage/:startdate/:enddate',
+  eudController.getMultipleUsage
+);
+
+router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
+>>>>>>> 9c502b1a (date picker not working)
 
 // getting the name of all recipes
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
