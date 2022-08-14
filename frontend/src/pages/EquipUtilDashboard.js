@@ -74,7 +74,7 @@ const EquipUtilDashboard = () => {
         hour: count,
       });
       setMultipleUnused({
-        data: result5.data,
+        data: result6.data,
         date: enddate,
         hour: count,
       });

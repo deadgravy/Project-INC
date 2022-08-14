@@ -138,7 +138,6 @@ module.exports.getSingleEquipmentLeftUnused = async function (
   enddate,
   hour
 ) {
-  console.log(startdate);
   try {
     const { rows } = await pool.query(
       `WITH query as (
@@ -151,7 +150,7 @@ module.exports.getSingleEquipmentLeftUnused = async function (
     )
 
     SELECT pd.name as equipment, r.name as recipe, start_time, end_time, 
-	  (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) as difference
+	  (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) as difference
     FROM query q, physical_devices pd, recipes r
     WHERE log_action = 2
     AND q.equip_id = pd.id
@@ -159,7 +158,7 @@ module.exports.getSingleEquipmentLeftUnused = async function (
     AND pd.mac_property = 1
     AND DATE(start_time) >= $2
     AND DATE(end_time) = $1
-    AND (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) > $3
+    AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
     ORDER BY equip_id, recipe_id;
     `,
       [startdate, enddate, hour]
@@ -178,7 +177,6 @@ module.exports.getMultipleEquipmentLeftUnused = async function (
   enddate,
   hour
 ) {
-  console.log(startdate);
   try {
     const { rows } = await pool.query(
       `WITH query as (
@@ -191,15 +189,15 @@ module.exports.getMultipleEquipmentLeftUnused = async function (
     )
 
     SELECT pd.name as equipment, r.name as recipe, start_time, end_time, 
-	  (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) as difference
+	  (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) as difference
     FROM query q, physical_devices pd, recipes r
     WHERE log_action = 2
     AND q.equip_id = pd.id
     AND q.recipe_id = r.id
-    AND pd.mac_property = 1
+    AND pd.mac_property = 2
     AND DATE(start_time) >= $2
     AND DATE(end_time) = $1
-    AND (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) > $3
+    AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
     ORDER BY equip_id, recipe_id;
     `,
       [startdate, enddate, hour]

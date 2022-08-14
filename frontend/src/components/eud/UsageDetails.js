@@ -73,12 +73,12 @@ export function UsageDetailsForNotUsed(data) {
   return (
     <>
       {detailsArr.length === 0 ? (
-        <div>
-          <WarningAmberIcon />
-          <p>
+        <div className='usageDetails'>
+          <WarningAmberIcon style={{ fill: 'red' }} />
+          <span key={data.toString()} className='ml-1'>
             None of the equipment were <b>left unused</b> for more than {hours}{' '}
             hours.
-          </p>
+          </span>
         </div>
       ) : (
         detailsArr.map((data) => (

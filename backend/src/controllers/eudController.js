@@ -183,7 +183,7 @@ module.exports.getMultipleEquipmentLeftUnused = async function (
 ) {
   try {
     console.log('hello');
-    const results = await eudManager.getSingleEquipmentLeftUnused(
+    const results = await eudManager.getMultipleEquipmentLeftUnused(
       req.params.startdate,
       req.params.enddate,
       req.params.hour
