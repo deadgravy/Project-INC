@@ -62,4 +62,16 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
+// getting single recipe equipment unused details WEEKLY (eud)
+router.get(
+  '/getSingleUnusedWeekly/:startdate/:enddate/:hour',
+  eudController.getSingleUnusedWeekly
+);
+
+// getting multiple recipe equipment unused details WEEKLY (eud)
+router.get(
+  '/getMultipleUnusedWeekly/:startdate/:enddate/:hour',
+  eudController.getMultipleUnusedWeekly
+);
+
 module.exports = router;

@@ -349,3 +349,78 @@ module.exports.getMultipleWeeklyDetails = async function (
     console.log(error);
   }
 };
+
+module.exports.getSingleUnusedWeekly = async function (
+  startdate,
+  enddate,
+  hour
+) {
+  console.log(startdate);
+  try {
+    const { rows } = await pool.query(
+      `WITH query as (
+    SELECT id, equip_id, recipe_id, log_action,
+    LAG(log_time,1) OVER (
+        ORDER BY recipe_id asc, id
+    ) start_time, log_time as end_time
+    FROM 
+    log_times 
+    )
+
+    SELECT to_char(DATE(start_time), 'Day') AS day, TO_CHAR(start_time, 'DD/MM/YYYY') as date,
+	pd.name as equipment, start_time, end_time, 
+	(start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) as difference
+    FROM query q, physical_devices pd, recipes r
+    WHERE log_action = 2
+    AND q.equip_id = pd.id
+    AND q.recipe_id = r.id
+    AND pd.mac_property = 1
+	AND DATE(end_time) BETWEEN $1 AND $2
+    AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
+    ORDER BY DATE(start_time);
+    `,
+      [startdate, enddate, hour]
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getMultipleUnusedWeekly = async function (
+  startdate,
+  enddate,
+  hour
+) {
+  try {
+    const { rows } = await pool.query(
+      `WITH query as (
+SELECT id, equip_id, recipe_id, log_action,
+    LAG(log_time,1) OVER (
+        ORDER BY recipe_id asc, id
+    ) start_time, log_time as end_time
+    FROM 
+    log_times 
+    )
+
+    SELECT to_char(DATE(start_time), 'Day') AS day, TO_CHAR(start_time, 'DD/MM/YYYY') as date,
+	pd.name as equipment, start_time, end_time, 
+	(start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) as difference
+    FROM query q, physical_devices pd, recipes r
+    WHERE log_action = 2
+    AND q.equip_id = pd.id
+    AND q.recipe_id = r.id
+    AND pd.mac_property = 2
+	AND DATE(end_time) BETWEEN $1 AND $2
+    AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
+    ORDER BY DATE(start_time);
+    `,
+      [startdate, enddate, hour]
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
