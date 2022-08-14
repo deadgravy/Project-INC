@@ -55,7 +55,7 @@ router.get('/getAllRecipeName', spfdController.getAllRecipeName);
 // Getting all equipments from log times table
 router.get('/getAllEquipments', dataController.getAllEquipments);
 
-// Getting start / stop count of specific equipment
+// Getting start / stop count of specific equipment (eud)
 router.post(
   '/getEquipmentStartOrStopCount',
   dataController.getEquipmentStartOrStopCount
@@ -65,6 +65,8 @@ router.post(
   '/getAllEquipmentStartOrStop',
   dataController.getAllEquipmentStartOrStopCount
 );
+
+router.post('/getAnomolies', dataController.getAnomolies);
 
 router.post('/getAnomolies', dataController.getAnomolies);
 
