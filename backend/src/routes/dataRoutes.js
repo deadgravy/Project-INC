@@ -61,30 +61,6 @@ router.get('/prodCount', dataController.prodCount);
 // getting the name of all recipes
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
 
-// get weekly usage for single recipe equipment
-router.get(
-  '/getSingleUsageWeekly/:startdate/:enddate',
-  eudController.getSingleWeekly
-);
-
-// get weekly usage for multiple recipe equipment
-router.get(
-  '/getMultipleUsageWeekly/:startdate/:enddate',
-  eudController.getMultipleWeekly
-);
-
-// get weekly usage details  for single recipe equipment
-router.get(
-  '/getSingleUsageDetailsWeekly/:startdate/:enddate/:hour',
-  eudController.getSingleWeeklyDetails
-);
-
-// get weekly usage details for multiple recipe equipment
-router.get(
-  '/getMultipleUsageDetailsWeekly/:startdate/:enddate/:hour',
-  eudController.getMultipleWeeklyDetails
-);
-
 // Getting all equipments from log times table
 router.get('/getAllEquipments', dataController.getAllEquipments);
 
