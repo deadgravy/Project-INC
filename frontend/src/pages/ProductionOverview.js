@@ -14,6 +14,7 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import SearchBar from '../components/pod/SearchBar';
 import moment from 'moment';
 
 const ProductionOverview = () => {
@@ -27,7 +28,7 @@ const ProductionOverview = () => {
     endDate: '2021-08-21',
   });
   const [startDate, setStartDate] = useState(new Date('2021-08-10'));
-  const [endDate, setEndDate] = useState(new Date('2021-08-11'));
+  const [endDate, setEndDate] = useState(new Date('2021-08-21'));
   const [isOpen, setIsOpen] = useState(false);
 
   const params = useParams();
@@ -51,10 +52,10 @@ const ProductionOverview = () => {
     // console.log(data.data.length);
     for (let i = 0; i < data.data.length; i++) {
       const avg = data.data[i].avg;
-      let mins = avg?.minutes;
-      let seconds = avg?.seconds;
-      let hours = avg?.hours;
-      let days = avg?.days;
+      let mins = avg.minutes;
+      let seconds = avg.seconds;
+      let hours = avg.hours;
+      let days = avg.days;
 
       if (hours === undefined || hours == null) {
         hours = 0;
@@ -167,11 +168,7 @@ const ProductionOverview = () => {
         <h1>Production Overview Dashboard</h1>
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
-            <div className='col-3'>
-              <form action='../equipmentUtilisationSnapshot'>
-                <input type='search' placeholder='Search' />
-              </form>
-            </div>
+            <SearchBar data1={allProductData} />
             <div>
               <Modal data1={allProductData} />
             </div>
@@ -223,7 +220,11 @@ const ProductionOverview = () => {
                 className='row'
                 style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
               >
-                {prodCount.data?.length > 0 && <LineChart data={prodCount} />}
+                {prodCount.data?.length > 0 ? (
+                  <LineChart data={prodCount} />
+                ) : (
+                  <h1>No data for this date range</h1>
+                )}
               </div>
               <div
                 className='row'

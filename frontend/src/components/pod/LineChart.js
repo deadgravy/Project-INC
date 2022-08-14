@@ -50,6 +50,7 @@ function DataForGraph(data) {
     count = Number(data.data[i].count);
     dataArr.push([data.data[i].date, count]);
   }
+  console.log(dataArr + 'jessielim');
   // dataArr.push(['A', 50]);
   return dataArr;
 }

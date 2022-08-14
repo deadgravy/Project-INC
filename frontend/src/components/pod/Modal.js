@@ -21,8 +21,12 @@ export default function Modal({ data1 }) {
   };
   return (
     <>
-      <button onClick={toggleModal} className='btn-modal'>
-        Open
+      <button
+        onClick={toggleModal}
+        className='btn-modal'
+        class='text-primary-500 bg-primary-100'
+      >
+        View Recipes
       </button>
 
       {modal && (
