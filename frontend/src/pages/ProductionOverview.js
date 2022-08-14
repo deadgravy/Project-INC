@@ -14,6 +14,7 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
@@ -25,8 +26,9 @@ const ProductionOverview = () => {
     startDate: '2021-08-10',
     endDate: '2021-08-21',
   });
-  const [dateRange, setDateRange] = useState(['2021-08-10', '2021-08-21']);
-  // const [startDate, endDate] = [];
+  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
+  const [endDate, setEndDate] = useState(new Date('2021-08-11'));
+  const [isOpen, setIsOpen] = useState(false);
 
   const params = useParams();
   // This is for the select (Do it yourself) - George
@@ -70,10 +72,10 @@ const ProductionOverview = () => {
         seconds = 0;
       }
 
-      console.log('Days: ' + days);
-      console.log('Hours: ' + hours);
-      console.log('Mins: ' + mins);
-      console.log('Seconds: ' + seconds);
+      // console.log("Days: " + days);
+      // console.log("Hours: " + hours);
+      // console.log("Mins: " + mins);
+      // console.log("Seconds: " + seconds);
 
       const milliseconds = convertToMilli(days, hours, seconds, mins);
 
@@ -83,11 +85,14 @@ const ProductionOverview = () => {
     return dataArr;
   }
 
-  console.log(dateRange[0] + 'shelby');
+  // console.log(dateRange[0] + "shelby");
   console.log(selectedProductFlow.startDate);
 
   useEffect(() => {
     setIsloading(true);
+    const startDateStr = moment(startDate).format('YYYY-MM-DD');
+    const endDateStr = moment(endDate).format('YYYY-MM-DD');
+
     Promise.all([
       fetch(`http://localhost:4000/api/getRecipesById/${params.id}`).then(
         (res) => res.json()
@@ -110,7 +115,7 @@ const ProductionOverview = () => {
       fetch('http://localhost:4000/api/prodCount').then((res) => res.json()),
 =======
       fetch(
-        `http://localhost:4000/api/prodCount/${dateRange[0]}/${dateRange[0]}`
+        `http://localhost:4000/api/prodCount/${startDateStr}/${endDateStr}`
       ).then((res) => res.json()),
 >>>>>>> 9c502b1a (date picker not working)
     ])
@@ -125,7 +130,7 @@ const ProductionOverview = () => {
         setProdCount({
           data: result3.data,
         });
-        console.log(result3.data);
+        console.log('john', result3.data);
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
@@ -140,10 +145,18 @@ const ProductionOverview = () => {
     //     });
     //     setIsloading(false);
     //   });
-  }, [dateRange[1]]);
+  }, [endDate]);
   const [modal, setModal] = useState(false);
   var x = 30;
 
+  const onDateSelected = (dates) => {
+    const [start, end] = dates;
+    if (end) {
+      setIsOpen(false);
+    }
+    setStartDate(start);
+    setEndDate(end);
+  };
   //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0'>
@@ -155,7 +168,7 @@ const ProductionOverview = () => {
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
             <div className='col-3'>
-              <form action='53'>
+              <form action='../equipmentUtilisationSnapshot'>
                 <input type='search' placeholder='Search' />
               </form>
             </div>
@@ -179,14 +192,15 @@ const ProductionOverview = () => {
                     placeholderText='Please Select Date'
                     dateFormat='yyyy-MM-dd'
                     selectsRange={true}
-                    startDate={dateRange[0]}
-                    endDate={dateRange[1]}
-                    // minDate={startDate}
-                    // maxDate={addDays(startDate, 4)}
-                    onChange={(update) => {
-                      setDateRange(update);
-                    }}
+                    startDate={startDate}
+                    endDate={endDate}
+                    // minDate={new Date(dateRange[0])}
+                    // maxDate={addDays(new Date(dateRange[0], 4))}
+                    onChange={onDateSelected}
                     isClearable={true}
+                    open={isOpen}
+                    onInputClick={() => setIsOpen(true)}
+                    onClickOutside={() => setIsOpen(false)}
                   />
                 </div>
                 <FormControl className='col-3'>
@@ -209,13 +223,13 @@ const ProductionOverview = () => {
                 className='row'
                 style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
               >
-                <LineChart data={prodCount} />
+                {prodCount.data?.length > 0 && <LineChart data={prodCount} />}
               </div>
               <div
                 className='row'
                 style={{ display: graph === 'BarChart' ? 'block' : 'none' }}
               >
-                <BarChart data={prodCount} />
+                {prodCount.data?.length > 0 && <BarChart data={prodCount} />}
               </div>
             </div>
           ) : (
