@@ -4,11 +4,17 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 export function UsageDetails(data) {
   let data1 = data.data.data;
-
+  let hours = data.data.hour;
   return (
     <>
       {data1.length === 0 ? (
-        <p>NO DATA</p>
+        <div className='usageDetails'>
+          <ErrorOutlineIcon />
+          <p className='ml-1'>
+            {' '}
+            <b>None of the equipment were used for more than {hours} hours.</b>
+          </p>
+        </div>
       ) : (
         data1.map((data) => (
           <div className='usageDetails'>
@@ -46,6 +52,9 @@ export function WeeklyDetails(data) {
 
 export function UsageDetailsForNotUsed(data) {
   let data1 = data.data.data;
+  let date = data.data.date;
+  let hours = data.data.hour;
+
   let detailsArr = [];
 
   for (var i = 0; i < data1.length; i++) {
@@ -54,21 +63,31 @@ export function UsageDetailsForNotUsed(data) {
       detailsArr.push({
         equipment: data1[i].equipment,
         recipe: data1[i].recipe,
-        duration: data1[i].duration,
+        duration: data1[i].difference,
+        date: date,
       });
     }
   }
+  console.log(detailsArr);
 
   return (
     <>
-      {data1.length === 0 ? (
-        <p>NO DATA</p>
+      {detailsArr.length === 0 ? (
+        <div>
+          <WarningAmberIcon />
+          <p>
+            None of the equipment were <b>left unused</b> for more than {hours}{' '}
+            hours.
+          </p>
+        </div>
       ) : (
-        data1.map((data) => (
+        detailsArr.map((data) => (
           <div className='usageDetails'>
             <WarningAmberIcon style={{ fill: 'red' }} />
             <span key={data.toString()} className='ml-1'>
-              test
+              <b>{data.equipment}</b> was not used for {data.duration.hours}:
+              {data.duration.minutes}:{data.duration.seconds} from{' '}
+              <b>{data.date} 12AM</b>
             </span>
           </div>
         ))

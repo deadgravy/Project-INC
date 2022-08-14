@@ -133,6 +133,86 @@ module.exports.getMultipleUsageDetails = async function (
   }
 };
 
+module.exports.getSingleEquipmentLeftUnused = async function (
+  startdate,
+  enddate,
+  hour
+) {
+  console.log(startdate);
+  try {
+    const { rows } = await pool.query(
+      `WITH query as (
+    SELECT id, equip_id, recipe_id, log_action,
+    LAG(log_time,1) OVER (
+        ORDER BY recipe_id asc, id
+    ) start_time, log_time as end_time
+    FROM 
+    log_times 
+    )
+
+    SELECT pd.name as equipment, r.name as recipe, start_time, end_time, 
+	  (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) as difference
+    FROM query q, physical_devices pd, recipes r
+    WHERE log_action = 2
+    AND q.equip_id = pd.id
+    AND q.recipe_id = r.id
+    AND pd.mac_property = 1
+    AND DATE(start_time) >= $2
+    AND DATE(end_time) = $1
+    AND (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) > $3
+    ORDER BY equip_id, recipe_id;
+    `,
+      [startdate, enddate, hour]
+    );
+    console.log('Results:');
+    console.log(rows);
+    console.log('End of results...');
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getMultipleEquipmentLeftUnused = async function (
+  startdate,
+  enddate,
+  hour
+) {
+  console.log(startdate);
+  try {
+    const { rows } = await pool.query(
+      `WITH query as (
+    SELECT id, equip_id, recipe_id, log_action,
+    LAG(log_time,1) OVER (
+        ORDER BY recipe_id asc, id
+    ) start_time, log_time as end_time
+    FROM 
+    log_times 
+    )
+
+    SELECT pd.name as equipment, r.name as recipe, start_time, end_time, 
+	  (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) as difference
+    FROM query q, physical_devices pd, recipes r
+    WHERE log_action = 2
+    AND q.equip_id = pd.id
+    AND q.recipe_id = r.id
+    AND pd.mac_property = 1
+    AND DATE(start_time) >= $2
+    AND DATE(end_time) = $1
+    AND (start_time - CONCAT(DATE(start_time), ' 00:00:00')::timestamp) > $3
+    ORDER BY equip_id, recipe_id;
+    `,
+      [startdate, enddate, hour]
+    );
+    console.log('Results:');
+    console.log(rows);
+    console.log('End of results...');
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // weekly
 module.exports.getSingleWeekly = async function (startdate, enddate) {
   try {
