@@ -6,7 +6,6 @@ const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
-const eudController = require('../controllers/eudController');
 const tpdController = require('../controllers/tpdController');
 
 // get all recipes and ID
@@ -74,9 +73,6 @@ router.post(
   '/getAllEquipmentStartOrStop',
   dataController.getAllEquipmentStartOrStopCount
 );
-
-// get all equipment
-router.get('/getAllEquipment', eudController.getAllEquipment);
 
 router.post('/getAnomolies', dataController.getAnomolies);
 

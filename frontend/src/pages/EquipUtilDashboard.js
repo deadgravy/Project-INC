@@ -9,6 +9,7 @@ import '../styles/toggler.css';
 import {
   UsageDetails,
   UsageDetailsForNotUsed,
+  UsageDetailsForNotUsedInBtwnDaily,
 } from '../components/eud/UsageDetails';
 
 const EquipUtilDashboard = () => {
@@ -57,6 +58,7 @@ const EquipUtilDashboard = () => {
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
         data: result1.data,
+        count: count,
       });
       setMultipleUsage({
         data: result2.data,
@@ -165,6 +167,9 @@ const EquipUtilDashboard = () => {
                           <div>
                             <UsageDetails data={singleDetails} />
                             <UsageDetailsForNotUsed data={singleUnused} />
+                            <UsageDetailsForNotUsedInBtwnDaily
+                              data={singleUsage}
+                            />
                           </div>
                         )}
                       </div>
@@ -181,6 +186,9 @@ const EquipUtilDashboard = () => {
                           <div>
                             <UsageDetails data={multipleDetails} />
                             <UsageDetailsForNotUsed data={multipleUnused} />
+                            <UsageDetailsForNotUsedInBtwnDaily
+                              data={multipleUsage}
+                            />
                           </div>
                         )}
                       </div>
