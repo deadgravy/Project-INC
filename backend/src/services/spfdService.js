@@ -91,6 +91,7 @@ module.exports.getEquipmentUsageByName = async function (name,ename) {
       WHERE log_action = 2 AND recipe_name = $1 AND equip_name = $2;`,
       [name,ename]
     ); // end of query; 
+
     return rows;
   } catch (error) {
     console.log(error);
