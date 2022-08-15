@@ -1,8 +1,6 @@
 import { Chart } from 'react-google-charts';
 import CircleIcon from '@mui/icons-material/Circle';
 import './styles/style.css';
-import CircleIcon from '@mui/icons-material/Circle';
-import './styles/style.css';
 import { UsageChartColours } from './UsageChartData';
 import { useEffect, useState } from 'react';
 

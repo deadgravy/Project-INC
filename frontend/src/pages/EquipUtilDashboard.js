@@ -174,7 +174,8 @@ const EquipUtilDashboard = () => {
                           Multiple Recipe Equipment
                         </h6>
 
-                        {singleDetails.data.length === 0 ? (
+                        {multipleDetails.data.length === 0 &&
+                        multipleUnused.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>

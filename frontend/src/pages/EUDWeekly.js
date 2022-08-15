@@ -6,13 +6,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
 import { WeeklyChart } from '../components/eud/weeklyChart';
-import { WeeklyDetails } from '../components/eud/UsageDetails';
+import {
+  UsageDetailsForNotUsedInBtwn,
+  UsageDetailsForNotUsedWeekly,
+  WeeklyDetails,
+} from '../components/eud/UsageDetails';
 
 const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
   const [multipleUsage, setMultipleUsage] = useState(null);
   const [singleDetails, setSingleDetails] = useState(null);
   const [multipleDetails, setMultipleDetails] = useState(null);
+  const [singleUnused, setSingleUnused] = useState(null);
+  const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
@@ -43,9 +49,16 @@ const EUDWeekly = () => {
       fetch(
         `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
-    ]).then(([result1, result2, result3, result4]) => {
+      fetch(
+        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+    ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
         data: result1.data,
+        count: count,
       });
       setMultipleUsage({
         data: result2.data,
@@ -56,10 +69,18 @@ const EUDWeekly = () => {
       setMultipleDetails({
         data: result4.data,
       });
+      setSingleUnused({
+        data: result5.data,
+        hour: count,
+      });
+      setMultipleUnused({
+        data: result6.data,
+        hour: count,
+      });
 
       setIsloading(false);
     });
-  }, [startDate, hour]);
+  }, [startDate, hour, count]);
 
   function handleHours(hourinput) {
     setCount(hourinput);
@@ -124,8 +145,8 @@ const EUDWeekly = () => {
                     <WeeklyChart data={multipleUsage} />
                   )}
                 </div>
-                <div className='row'>
-                  <h5 className='col-9'>Equipment Usage Details</h5>
+                <div className='row mt-4'>
+                  <h3 className='col-9'>Equipment Usage Details</h3>
                   {/* Start of Input Box code */}
                   <div className='col-2 level-item mr-2'>
                     <input
@@ -142,24 +163,38 @@ const EUDWeekly = () => {
                   <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname' className='title mb-0'>
+                        <h5 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
-                        </h6>
-                        {singleDetails.length === 0 ? (
+                        </h5>
+                        {singleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          <WeeklyDetails data={singleDetails} />
+                          <div>
+                            <WeeklyDetails data={singleDetails} />
+                            <br></br>
+                            <UsageDetailsForNotUsedWeekly data={singleUnused} />
+                            <UsageDetailsForNotUsedInBtwn data={singleUsage} />
+                          </div>
                         )}
                       </div>
 
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname2' className='title mb-0'>
+                        <h5 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
-                        </h6>
-                        {multipleDetails.length === 0 ? (
+                        </h5>
+                        {multipleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          <WeeklyDetails data={multipleDetails} />
+                          <div>
+                            <WeeklyDetails data={multipleDetails} />
+                            <br></br>
+                            <UsageDetailsForNotUsedWeekly
+                              data={multipleUnused}
+                            />
+                            <UsageDetailsForNotUsedInBtwn
+                              data={multipleUsage}
+                            />
+                          </div>
                         )}
                       </div>
                     </div>
