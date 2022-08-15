@@ -3,7 +3,6 @@ import CircleIcon from '@mui/icons-material/Circle';
 import './styles/style.css';
 import { UsageChartColours } from './UsageChartData';
 import { useEffect, useState } from 'react';
-import { useEffect, useState } from 'react';
 
 export function WeeklyChart({ data }) {
   let data1 = data.data; // returns equipment, equipment, start_time, end_time
