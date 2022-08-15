@@ -1,10 +1,6 @@
-.table.fixed-head tbody {
-    height: 500px;
-}
-
 .tableComponent {
     display: flex;
-    height: 530px;
+    height: 500px;
     overflow-y: scroll;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
@@ -13,6 +9,14 @@
 .fixed-header thead th { /* the thead selector is required because there are th elements in the body */
     position: sticky;
     top: 0;
-    z-index: 10;
     background-color: white;
-  }
+}
+
+.table {
+    margin-top: -40px;
+}
+
+#table-scroll {
+    overflow-y: visible;
+}
+
