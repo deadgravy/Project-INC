@@ -8,9 +8,6 @@ const MODAL_STYLES = {                                     //Styles for the cont
   position: 'fixed',
   top: '50%',
   left: '50%',
-  // width: "10rem",
-  // height: "10rem",
-
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
@@ -24,7 +21,8 @@ const OVERLAY_STYLES = {                                   //Styles for the back
   right: 0,
   bottom: 0,
   backgroundColor: 'rgba(0,0,0,0.7)',
-  zIndex: 1000
+  zIndex: 1000,
+  overflowY: "auto"
 }
 
 export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProductFlow }) {
