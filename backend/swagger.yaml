@@ -1,0 +1,429 @@
+swagger: 2.0.0
+info:
+  title: FIRC API Documentation
+  description: We will be using this to page to document all the API's used by FIRC
+  version: 0.1.0
+servers:
+  - url: http://localhost:4000/
+    description: default URL for FIRC
+paths:
+  /api/getAllRecipeAndID:
+    get:
+      summary: Get All Recipe and ID for POD
+      tags:
+        - Production Overview Dashboard
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fr_recipe_id: 
+                      type: string
+                    name: 
+                      type: string
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getRecipesById/{id}:
+    get:
+      summary: Getting recipes by ID for POD
+      tags:
+        - Production Overview Dashboard
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of Recipe
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fr_recipe_id: 
+                      type: string
+                    name: 
+                      type: string
+                    queue:
+                      type: integer
+                    fr_process_steps:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        hours:
+                          type: number
+                        minutes: 
+                          type: number
+                        seconds:
+                          type: number
+                        milliseconds:
+                          type: number
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+          
+  /api/machineConnectivity:
+    get:
+      summary: Get machine connectivity of all machines in EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    client_no: 
+                      type: string
+                    ttl:
+                      type: integer
+                    created_at:
+                      type: string
+                    machine_name:
+                      type: string
+                    location_id:
+                      type: integer
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/machines:
+    get:
+      summary: Get all machines in EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    machine_name: 
+                      type: string
+                    machine_id:
+                      type: string
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string      
+
+  /api/getAllEquipments:
+    get:
+      summary: Getting all equipments in the log_time table for EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipmentid:
+                      type: integer
+                    equipment_name:
+                      type: string
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string   
+
+  /api/getEquipmentStartOrStopCount:
+    post:
+      summary: Get a particular equipment start or stop count for EUS (Have to run /getAllEquipmentStartOrStop first)
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: equipmentDetails
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - startOrStop
+              - equipmentId
+              - totalDataLength
+            properties:
+              start:
+                type: string
+                example: '2022-08-10'
+              end:
+                type: string
+                example: '2022-08-10'
+              startOrStop:
+                type: integer
+                example: 1
+              equipmentid:
+                type: integer
+              totalDataLength:
+                type: integer
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    x: 
+                      type: string
+                    y: 
+                      type: string
+                    equipmentName:
+                      type: string
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string   
+
+  /api/getAllEquipmentStartOrStop:
+    post:
+      summary: Getting total start and stop count during a time frame
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: details
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - startOrStop
+            properties:
+              start:
+                type: string
+                example: '2022-08-10'
+              end:
+                type: string
+                example: '2022-08-10'
+              startOrStop:
+                type: string
+                example: 1
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipmentid:
+                      type: integer
+                    recipeid:
+                      type: integer
+                    equipment_name:
+                      type: string
+                    log_action:
+                      type: integer
+                    log_time:
+                      type: string
+        500: 
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string   
+
+  /api/getAnomolies:
+    post:
+      summary: Getting anomolies of equipments
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: requestBody
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - equipmentid
+            properties:
+              start:
+                type: string
+              end:
+                type: string
+              equipmentid:
+                type: array
+                items:
+                  type: integer
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    x:
+                      type: integer
+                    equipmentName:
+                      type: string
+                    y: 
+                      type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getAllRecipeName:
+    get:
+      summary: Getting all recipe name
+      tags:
+        - Single Product Flow Dashboard
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status: 
+                type: string
+              data:
+                type: string
+
+  /api/getSingleProductWithNameDate/{startDate}/{endDate}/{name}:
+    get:
+      summary: Getting distinct product using date and name
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: name
+          schema: 
+            type: string
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+                    recipe_name:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
