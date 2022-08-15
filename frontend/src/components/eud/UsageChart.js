@@ -70,24 +70,8 @@ export function UsageChart({ data }) {
           usageArr.push(arr);
         }
 
-      if (dayNum !== firstDay) {
-        if (dayNum === 0) {
-          dayNum = 7;
-        } else if (dayNum < firstDay) {
-          dayNum += 7;
-        }
-        let diff = dayNum - firstDay;
-        let diffInMs = diff * 86400000;
-        startMilli -= diffInMs;
-        endMilli -= diffInMs;
-      }
-      usageArr[i][2] = startMilli;
-      usageArr[i][3] = endMilli;
-    }
-  } else {
-          for (let i = 1; i < usageArr.length; i++) {
-              usageArr[i][3] = new Date(usageArr[i][3]);
-    }
+        for (let i = 1; i < usageArr.length; i++) {
+          usageArr[i][3] = new Date(usageArr[i][3]);
           usageArr[i][4] = new Date(usageArr[i][4]);
         }
 
