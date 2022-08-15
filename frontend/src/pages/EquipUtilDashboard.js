@@ -10,6 +10,7 @@ import {
   UsageDetails,
   UsageDetailsForNotUsed,
 } from '../components/eud/UsageDetails';
+import { useNavigate } from 'react-router-dom';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -23,6 +24,8 @@ const EquipUtilDashboard = () => {
   const [startDate, setStartDate] = useState(new Date('2021-08-11'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
+  const [buttonState, setButtonState] = useState('toggle-button1'); // for toggler
+  let navigate = useNavigate();
 
   // useEffect
   useEffect(() => {
@@ -94,6 +97,10 @@ const EquipUtilDashboard = () => {
     setHours(hourinput);
   }
 
+  if (buttonState === 'toggle-button2') {
+    navigate('/equipmentUtilisationDashboard/weekly');
+  }
+
   return (
     <React.StrictMode>
       <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
@@ -121,7 +128,10 @@ const EquipUtilDashboard = () => {
                     />
                   </div>
                   <div className='col-10 mr-3 u-flex u-justify-flex-end'>
-                    <Toggler />
+                    <Toggler
+                      buttonState={buttonState}
+                      setButtonState={setButtonState}
+                    />
                   </div>
                 </div>
                 <div className='Row3'>
