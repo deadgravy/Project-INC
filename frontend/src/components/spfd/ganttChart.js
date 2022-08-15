@@ -3,6 +3,7 @@ import { Chart } from "react-google-charts";
 
 
 export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
+<<<<<<< HEAD
   // const [ganttChart, setGanttChart] = useState([]);
   const columns = [
     { type: "string", id: "Equipment" },
@@ -89,6 +90,49 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
      
     
 
+=======
+  const [ganttChart, setGanttChart] = useState([]);
+  const columns = [
+    { type: "string", label: "Equipment Name" },
+    { type: "string", label: "Recipe Name" },
+    { type: "date", label: "Start Time" },
+    { type: "date", label: "End Time" },
+    // { type: "object", label: "Total Duration" },
+    { type: 'number', label: "Date" },
+  ];
+  // const rows = ganttChart.map(flow => Object.values(flow)) ;
+  const rows = [['Small Cooker Mixer','Sub E', new Date (2021,8,10), new Date (2021,8,13), 100 ]]
+  
+  const data = [columns, ...rows];
+  const options = {height: 400, gantt: {trackHeight: 30}};
+// 2021-08-10/2021-08-13/Sub%20E
+
+const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+
+const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+
+  useEffect(() =>{
+    fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
+      .then((res) => res.json())
+      .then(data => {
+        if(data.status === "success") {
+          const t = data.data.map(flow => Object.values(flow))
+          console.log(t)       
+          setGanttChart(data.data)
+        }
+    })
+  },[])
+
+  return (
+
+    <Chart
+      chartType="Gantt"
+      width="100%"
+      height="50%"
+      data={data}
+      options={options}
+    />
+>>>>>>> a9336ea6 (got problem with GanntChart)
   );
 }
 
