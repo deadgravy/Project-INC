@@ -16,6 +16,8 @@ import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import SearchBar from '../components/pod/SearchBar';
 import moment from 'moment';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
@@ -30,9 +32,55 @@ const ProductionOverview = () => {
   const [startDate, setStartDate] = useState(new Date('2021-08-10'));
   const [endDate, setEndDate] = useState(new Date('2021-08-21'));
   const [isOpen, setIsOpen] = useState(false);
+  const stepsEnabled = true;
+  const initialStep = 0;
 
   const params = useParams();
   // This is for the select (Do it yourself) - George
+
+  //Intro.js
+  const steps = [
+    {
+      element: ".title",
+      intro: "test1"
+    },
+    {
+      element: ".searchComponent",
+      intro: "test2"
+    },
+    {
+      element: ".modalComponent",
+      intro: "test3"
+    },
+    {
+      element: ".chartComponent",
+      intro: "test4"
+    },
+    {
+      element: ".boxComponent",
+      intro: "test5"
+    },
+    {
+      element: ".datePicker",
+      intro: "test6"
+    },
+    {
+      element: "#graphPicker",
+      intro: "test7"
+    },
+    {
+      element: "#lineChart",
+      intro: "test8"
+    },
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
 
   function handleChange(e) {
     setGraph(() => e.target.value);
@@ -146,11 +194,20 @@ const ProductionOverview = () => {
   //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0'>
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+      />
       <div className='po-sidebar sidebar col-2'>
         <SideBar />
       </div>
+      
       <div className='po-display col-10 px-4 py-6'>
+      <div className='title'>
         <h1>Production Overview Dashboard</h1>
+        </div>
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
             <SearchBar data1={allProductData} />
@@ -164,12 +221,16 @@ const ProductionOverview = () => {
             <div>
               <div className='row'>
                 <ErrorPage>
-                  <ChartComponent data={prodOverviewData} />
-                  <BoxComponent data={prodOverviewData} />
+                  <div className='chartComponent'>
+                    <ChartComponent data={prodOverviewData} />
+                    </div>
+                    <div className='boxComponent'>
+                      <BoxComponent data={prodOverviewData} />
+                    </div>
                 </ErrorPage>
               </div>
               <div className='usersChoice col-12 w-100p mt-4'>
-                <div>
+                <div className='datePicker'>
                   <DatePicker
                     placeholderText='Please Select Date'
                     dateFormat='yyyy-MM-dd'
@@ -185,7 +246,7 @@ const ProductionOverview = () => {
                     onClickOutside={() => setIsOpen(false)}
                   />
                 </div>
-                <FormControl className='col-3'>
+                <FormControl className='col-3' id='graphPicker'>
                   <InputLabel id='demo-simple-select-label'>
                     Pick a Graph
                   </InputLabel>
@@ -202,6 +263,7 @@ const ProductionOverview = () => {
                 </FormControl>
               </div>
               <div
+                id='lineChart'
                 className='row'
                 style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
               >
