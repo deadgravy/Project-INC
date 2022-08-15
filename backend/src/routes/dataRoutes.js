@@ -57,17 +57,6 @@ router.get(
 );
 
 router.get('/prodCount', dataController.prodCount);
-// getting single recipe equipment usage details
-router.get(
-  '/getSingleUsageDetails/:date/:hour',
-  eudController.getSingleUsageDetails
-);
-
-// getting multiple recipe equipment usage details
-router.get(
-  '/getMultipleUsageDetails/:date/:hour',
-  eudController.getMultipleUsageDetails
-);
 
 // getting the name of all recipes (eud)
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
