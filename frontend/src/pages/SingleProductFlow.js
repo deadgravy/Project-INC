@@ -3,14 +3,15 @@ import SideBar from '../components/sidebar/Sidebar';
 import Modal from '../components/spfd/modal';
 import '../styles/spfd.css';
 import {GanttChart } from "../components/spfd/ganttChart";
-
+import DropDown from '../components/spfd/dropDown';
+import { LineChart } from '../components/spfd/lineChart';
 
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedProductFlow, setSelectedProductFlow] = useState({
-    "recipeName": "Product H",
-    "startDate": new Date('2021-08-09'),
-    "endDate": new Date('2021-08-13')
+    "recipeName": "",
+    "startDate": null,
+    "endDate": null
   })
   console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
@@ -73,13 +74,39 @@ const SingleProductFlow = () => {
             <div className='col-12'>
               {
                 selectedProductFlow.startDate !== null && (
-                  <GanttChart selectedProductFlow={selectedProductFlow} setSelectedProductFlow={setSelectedProductFlow}/>
+                  <GanttChart selectedProductFlow={selectedProductFlow}/>
                 )
               }
               
             </div>
           </div>
 
+          <div className='pt-2 Row5'>
+            {selectedProductFlow.startDate !== null && (
+              <h4>Equipment Production Analysis</h4>
+            )}
+          </div>
+
+          <div className='Row6'>
+              <div className='col-3'>
+                {
+                  selectedProductFlow.startDate !== null && (
+                    <DropDown selectedProductFlow={selectedProductFlow}/>
+                  )
+                }
+              </div>
+          </div>
+
+          <div className='pt-3 Row7'>
+              <div className='col-12'>
+                {
+                  selectedProductFlow.startDate !== null && (
+                    <LineChart/>
+                  )
+                }
+              </div>
+          </div>
+          
         </div>
       </div>
   )
