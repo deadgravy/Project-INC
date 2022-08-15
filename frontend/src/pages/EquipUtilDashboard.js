@@ -49,10 +49,10 @@ const EquipUtilDashboard = () => {
         `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getSingleUnusedDetails/${enddate}/${startdate}/${hour}`
+        `http://localhost:4000/api/getSingleUnusedDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUnusedDetails/${enddate}/${startdate}/${hour}`
+        `http://localhost:4000/api/getMultipleUnusedDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({

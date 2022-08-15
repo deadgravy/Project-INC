@@ -3,7 +3,6 @@ import CircleIcon from '@mui/icons-material/Circle';
 import './styles/style.css';
 import { UsageChartColours } from './UsageChartData';
 import { useEffect, useState } from 'react';
-import CircleIcon from '@mui/icons-material/Circle';
 
 export function UsageChart({ data }) {
   let data1 = data.data; // returns equipment, recipe, start_time, end_time
@@ -18,7 +17,6 @@ export function UsageChart({ data }) {
     fetch(`http://localhost:4000/api/getAllRecipeName`)
       .then((res) => res.json())
       .then((result) => {
-        // loops through colours in UsageChartData.js and assigns it to each recipe
         for (let i = 0; i < result.data.length; i++) {
           colourAndRecipeArr.push({
             recipe: result.data[i].name,
@@ -72,24 +70,8 @@ export function UsageChart({ data }) {
           usageArr.push(arr);
         }
 
-      if (dayNum !== firstDay) {
-        if (dayNum === 0) {
-          dayNum = 7;
-        } else if (dayNum < firstDay) {
-          dayNum += 7;
-        }
-        let diff = dayNum - firstDay;
-        let diffInMs = diff * 86400000;
-        startMilli -= diffInMs;
-        endMilli -= diffInMs;
-      }
-      usageArr[i][2] = startMilli;
-      usageArr[i][3] = endMilli;
-    }
-  } else {
-          for (let i = 1; i < usageArr.length; i++) {
-              usageArr[i][3] = new Date(usageArr[i][3]);
-    }
+        for (let i = 1; i < usageArr.length; i++) {
+          usageArr[i][3] = new Date(usageArr[i][3]);
           usageArr[i][4] = new Date(usageArr[i][4]);
         }
 
@@ -119,6 +101,7 @@ export function UsageChart({ data }) {
           width='99%'
           height='450px'
           options={{
+            // colors: coloursArrChart,
             timeline: {
               groupByRowLabel: true,
               showBarLabels: false,

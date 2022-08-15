@@ -156,8 +156,8 @@ module.exports.getSingleEquipmentLeftUnused = async function (
     AND q.equip_id = pd.id
     AND q.recipe_id = r.id
     AND pd.mac_property = 1
-    AND DATE(start_time) >= $2
-    AND DATE(end_time) = $1
+    AND DATE(start_time) >= $1
+    AND DATE(end_time) = $2
     AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
     ORDER BY equip_id, recipe_id;
     `,
@@ -195,8 +195,8 @@ module.exports.getMultipleEquipmentLeftUnused = async function (
     AND q.equip_id = pd.id
     AND q.recipe_id = r.id
     AND pd.mac_property = 2
-    AND DATE(start_time) >= $2
-    AND DATE(end_time) = $1
+    AND DATE(start_time) >= $1
+    AND DATE(end_time) = $2
     AND (start_time - CONCAT(DATE(end_time), ' 00:00:00')::timestamp) > $3
     ORDER BY equip_id, recipe_id;
     `,
@@ -417,6 +417,19 @@ SELECT id, equip_id, recipe_id, log_action,
     ORDER BY DATE(start_time);
     `,
       [startdate, enddate, hour]
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getAllEquipment = async function () {
+  try {
+    const { rows } = await pool.query(
+      `SELECT name from physical_devices ORDER BY mac_property, name
+    `
     );
     console.log(rows);
     return rows;
