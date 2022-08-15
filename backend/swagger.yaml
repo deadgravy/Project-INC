@@ -399,6 +399,7 @@ paths:
           name: name
           schema: 
             type: string
+          required: true
       responses:
         200:
           schema:
@@ -427,3 +428,274 @@ paths:
                 type: string
               data:
                 type: string
+          
+  /api/getCompletedProducts/{date}:
+    get:
+      summary: Getting completed products by date
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id: 
+                      type: integer
+                    name:
+                      type: string
+                    batchescompleted:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string  
+
+  /api/getProductsToComplete/{date}:
+    get:
+      summary: Getting products to complete
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id: 
+                      type: integer
+                    name:
+                      type: string
+                    batchestocomplete:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getSingleEquipmentStatus/{date}:
+    get:
+      summary: Getting single equipment status
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object 
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: 
+                      type: integer
+                    equipid:
+                      type: string
+                    name:
+                      type: string
+                    productname:
+                      type: string
+                    fr_process_steps:
+                      type: integer  
+                    log_time:
+                      type: string
+                    singleormultiple:
+                      type: integer
+                    log_action:
+                      type: integer
+                    timetostarted:
+                      type: object
+                      properties:
+                        hours: 
+                          type: integer
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milleseconds:
+                          type: number   
+                    queue:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milliseconds:
+                          type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string         
+          
+  /api/getMultiEquipmentStatus/{date}:
+    get:
+      summary: Get multiple equipment status
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema: 
+            type: string
+            example: '2021-08-20'
+          required: true        
+      responses:
+        200:
+          schema:
+            type: object 
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: 
+                      type: integer
+                    equipid:
+                      type: string
+                    name:
+                      type: string
+                    productname:
+                      type: string
+                    fr_process_steps:
+                      type: integer  
+                    log_time:
+                      type: string
+                    singleormultiple:
+                      type: integer
+                    log_action:
+                      type: integer
+                    timetostarted:
+                      type: object
+                      properties:
+                        hours: 
+                          type: integer
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milleseconds:
+                          type: number   
+                    queue:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milliseconds:
+                          type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/prodCount/{startDate}/{endDate}:
+    get:
+      summary: Getting production count
+      tags:
+        - Production Overview Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                    count:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
