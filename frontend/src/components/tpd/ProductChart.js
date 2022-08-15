@@ -36,7 +36,7 @@ const DonutChart = ({ data1, data2 }) => {
           .style("flex-direction", "row")
           .style("flex-shrink", 0)
           .style("position", "relative")
-          .style("overflow", "scroll")
+          // .style("overflow", "scroll")
           .append("div") // Wrap a div element in each svg eg. each pie chart
           .attr("id", `${data2?.data[i].recipe_id}`) // assign each div with an id so we can select it later
           .append("svg")
@@ -152,9 +152,11 @@ const DonutChart = ({ data1, data2 }) => {
 
   return (
     <>
-    <button onClick={toggleModal} className='btn-modal'>
-        All Products
-      </button>
+    <div className="allProducts" style={{width: 170}}>
+      <button onClick={toggleModal} className='btn-modal'>
+          All Products
+        </button>
+      </div>
       {modal && (
         <div className=''>
           <div onClick={toggleModal} className='overlay'>
@@ -178,14 +180,13 @@ const DonutChart = ({ data1, data2 }) => {
     <div className="row1">
       
     <div className="productStatus">
-      <p style={{display: 'flex'}}><p style={{color: "#22C55E", marginRight: 10}}>{completed}</p>Completed</p>
-      <p style={{marginLeft: 20, display: 'flex'}}><p style={{color: "#8C0014", marginRight: 10}}>{data2?.data.length - completed}</p>In Production</p>
+      <p style={{display: 'flex'}}><span style={{color: "#22C55E", marginRight: 10}}>{completed}</span>Completed</p>
+      <p style={{marginLeft: 20, display: 'flex'}}><span style={{color: "#8C0014", marginRight: 10}}>{data2?.data.length - completed}</span>In Production</p>
     </div>
     </div>
-    <div class="p-3 bg-white-500 u-shadow-lg u-round-xs">
       <div ref={containerChartRef} className="containerChart">
         <div className="graph" ref={ref} />
-      </div>
+
     </div>
     </>
   );

@@ -1,10 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../tpd/styles/table.css";
+import CloseIcon from '@mui/icons-material/Close';
 import TextField from "@mui/material/TextField";
+import "./styles/modal.css";
 
-const TableComponent = ({ data1, data2 }) => {
+export default function TableComponent({ data1, data2 }) {
   const [singleProductData, setSingleProductData] = useState([]);
   const [multiProductData, setmultiProductData] = useState([]);
+  const [multiModalData, setmultiModalData] = useState([]);
+  const [singleModal, setSingleModal] = useState(false);
+  const [multiModal, setMultiModal] = useState(false);
+  const tableRef = useRef(null);
+
+  const toggleSingleModal = () => {
+    setSingleModal(!singleModal);
+  };
+
+  const toggleMultiModal = () => {
+    setMultiModal(!multiModal);
+  };
 
   const countData = (data1 = [], processStep) => {
     return data1.filter((value) => {
@@ -55,9 +69,20 @@ const TableComponent = ({ data1, data2 }) => {
     });
   };
 
+  //Scroll to function
+  const onEquipSelect = (id) => {
+    const containerChartEle = tableRef.current;
+    const equipEle = document.getElementById(id);
+    containerChartEle.scrollTo({
+      top: equipEle.offsetTop - 70,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     const filteredSingleProductData = singleProductFilter(data1?.data);
     const filteredMultiProductData = MultiProductFilter(data2?.data);
+    const filteredMultiModalData = MultiProductFilter(data2?.data);
 
     const result = Object.values(
       filteredSingleProductData.reduce((r, o) => {
@@ -67,7 +92,16 @@ const TableComponent = ({ data1, data2 }) => {
       }, {})
     );
 
+    const result2 = Object.values(
+      filteredMultiModalData.reduce((r, o) => {
+        r[o.name] = r[o.name] && r[o.name].id > o.id ? r[o.name] : o;
+
+        return r;
+      }, {})
+    );
+
     setSingleProductData(result);
+    setmultiModalData(result2);
 
     //Get the equipment and precess_step with start issue
     let eqpWithIssueArrTemp = [];
@@ -101,21 +135,67 @@ const TableComponent = ({ data1, data2 }) => {
 
   return (
     <>
-    {/* <div className="search-row">
-      <div className="textField">
-      <TextField 
-      id="outlined-basic"
-      variant="outlined"
-      fullWidth
-      label="Search equipment"
-      />
+    <div>
+      <div className="row">
+        <div className="singleProduct">
+          <button onClick={toggleSingleModal} className='btn-modal'>
+            Single Product
+          </button>
+        </div>
+        <div className="multiProduct">
+          <button onClick={toggleMultiModal} className='btn-modal'>
+            Multi Product
+          </button>
+        </div>
       </div>
-    </div> */}
-    <div className="tableComponent">
+      {singleModal && (
+        <div className=''>
+          <div onClick={toggleSingleModal} className='overlay'>
+          <div className='modal-content'>
+            <h4>Equipments currently running:</h4>
+              {singleProductData.map((equip) => {
+                while (countData(data1?.data, equip.fr_process_steps) % 2 !== 0)
+                return(
+                    <button
+                      key={equip.equipid}
+                      onClick={() => onEquipSelect(equip.equipid)}
+                    >
+                      {equip.name}
+                    </button>
+            )})}
+            <button className='close-modal' onClick={toggleSingleModal}>
+              <CloseIcon />
+            </button>
+          </div>
+        </div>
+        </div>
+      )}
+      {multiModal && (
+        <div className=''>
+          <div onClick={toggleMultiModal} className='overlay'>
+          <div className='modal-content'>
+            <h4>Equipments currently running:</h4>
+              {multiModalData.map((equip) => (
+                    <button
+                      key={equip.equipid}
+                      onClick={() => onEquipSelect(equip.equipid)}
+                    >
+                      {equip.name}
+                    </button>
+              ))}
+            <button className='close-modal' onClick={toggleMultiModal}>
+              <CloseIcon />
+            </button>
+          </div>
+        </div>
+        </div>
+        
+      )}
+    <div ref={tableRef} className="tableComponent">
     <div id="table-scroll">
-      <div class="p-4 bg-white-500 u-shadow-lg u-round-xs">
+      <div className="p-4 bg-white-500 u-round-xs">
         <div className="table">
-          <table class="fixed-header">
+          <table className="fixed-header">
             <thead>
               <tr>
                 <th>Equipment:</th>
@@ -129,7 +209,7 @@ const TableComponent = ({ data1, data2 }) => {
               {singleProductData.map((value, index) => {
                 while (countData(data1?.data, value.fr_process_steps) % 2 !== 0)
                   return (
-                    <tr key={index}>
+                    <tr key={index} id={value.equipid}>
                       <td>{value.name}</td>
                       <td>{value.productname}</td>
                       <td>
@@ -157,7 +237,7 @@ const TableComponent = ({ data1, data2 }) => {
 
               {multiProductData?.map((value, index) => {
                 return (
-                  <tr key={index}>
+                  <tr key={index} id={value.equipid}>
                     <td>{`${value.name}`}</td>
                     <td>{value.productname}</td>
                     <td>
@@ -186,8 +266,7 @@ const TableComponent = ({ data1, data2 }) => {
       </div>
     </div>
     </div>
+    </div>
     </>
   );
 };
-
-export default TableComponent;
