@@ -34,9 +34,9 @@ export function WeeklyChart({ data }) {
           let foundCR = colourAndEquipArr.find(
             (cr) => cr.equipment === item.equipment
           );
-          // console.log(
-          //   `equipment: ${item.equipment} color is ${foundCR.colour}`
-          // );
+          // // console.log(
+          // //   `equipment: ${item.equipment} color is ${foundCR.colour}`
+          // // );
           return foundCR.colour;
         });
 
@@ -65,9 +65,10 @@ export function WeeklyChart({ data }) {
 
         // formats data such that react-google-charts can take in
         for (let i = 0; i < data1.length; i++) {
+          // console.log(Object.values(data1[i]));
           const arr = Object.values(data1[i]);
           arr.splice(2, 0, `color: ${colorArr[i]}`);
-          // console.log(arr);
+          // // console.log(arr);
           // usageArr.push(Object.values(data1[i]));
           usageArr.push(arr);
         }
