@@ -18,15 +18,20 @@ const SearchBar = ({ data1 }) => {
     }
   }
   return (
-    <div>
+    <div style={{flexDirection:'row', display:'flex'}} className='searchComponent'>
       <input
         type='search'
         ref={inputRef}
         placeholder='Search'
         id='message'
         name='message'
+        style={{height: 50}}
       />
-      <button onClick={handleClick}>Submit</button>
+      <button onClick={handleClick}
+      class='bg-blue-600'
+      style={{marginLeft:10, width: 150, height: 50, color: 'white'}}>
+        <em style={{fontWeight: 'bold'}}>Submit</em>
+        </button>
       <div
         className='row'
         style={{ display: NotFound ? 'block' : 'none' }}
