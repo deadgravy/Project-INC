@@ -699,3 +699,259 @@ paths:
                 type: string
               data:
                 type: string 
+      
+  /api/getSingleUsageDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment details
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-11'
+          required: true
+        - in: path
+          name: hour
+          schema: 
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object  
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours: 
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getMultipleUsageDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment details 
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-11'
+          required: true
+        - in: path
+          name: hour
+          schema: 
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object  
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours: 
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getSingleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    day:
+                      type: string
+                    date:
+                      type: string
+                    equipment:
+                      type: string
+                    recipe: 
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    duration: 
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getMultipleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting multiple usage of equipment weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    day:
+                      type: string
+                    date:
+                      type: string
+                    equipment:
+                      type: string
+                    recipe: 
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    duration: 
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
