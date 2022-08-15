@@ -112,7 +112,4 @@ router.get(
   spfdController.getEquipmentUsageByName
 );
 
-// get all equipment
-router.get('/getAllEquipment', eudController.getAllEquipment);
-
 module.exports = router;
