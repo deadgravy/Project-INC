@@ -49,10 +49,10 @@ const EquipUtilDashboard = () => {
         `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getSingleUnusedDetails/${enddate}/${startdate}/${hour}`
+        `http://localhost:4000/api/getSingleUnusedDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUnusedDetails/${enddate}/${startdate}/${hour}`
+        `http://localhost:4000/api/getMultipleUnusedDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
@@ -112,8 +112,8 @@ const EquipUtilDashboard = () => {
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
-                      minDate={new Date('2021-08-10')}
-                      maxDate={new Date('2021-08-22')}
+                      // minDate={new Date()}
+                      // maxDate={new Date()}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}
@@ -151,7 +151,7 @@ const EquipUtilDashboard = () => {
                   {/* End of Input Box code */}
                 </div>
                 <div className='Row8'>
-                  <div className='card eudCard'>
+                  <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
                         <h6 id='projectname' className='title mb-1'>
@@ -174,7 +174,8 @@ const EquipUtilDashboard = () => {
                           Multiple Recipe Equipment
                         </h6>
 
-                        {multipleDetails.data.length === 0 ? (
+                        {multipleDetails.data.length === 0 &&
+                        multipleUnused.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>

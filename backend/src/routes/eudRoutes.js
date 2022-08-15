@@ -74,4 +74,6 @@ router.get(
   eudController.getMultipleUnusedWeekly
 );
 
+// get all equipment
+router.get('/getAllEquipment', eudController.getAllEquipment);
 module.exports = router;
