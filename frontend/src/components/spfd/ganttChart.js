@@ -93,15 +93,27 @@ export function GanttChart({selectedProductFlow, setSelectedProductFlow}) {
 =======
   const [ganttChart, setGanttChart] = useState([]);
   const columns = [
+    { type: "string", label: "LogTimes ID" },
     { type: "string", label: "Equipment Name" },
     { type: "string", label: "Recipe Name" },
     { type: "date", label: "Start Time" },
     { type: "date", label: "End Time" },
+    { type: "number", label: "Total Duration" },
+    { type: "number", label: "Percent Complete" },
+    { type: "string", label: "Dependencies" },
+    // { type: "string", label: "Equipment Name" },
+    // { type: "string", label: "Recipe Name" },
+    // { type: "date", label: "Start Time" },
+    // { type: "date", label: "End Time" },
     // { type: "object", label: "Total Duration" },
-    { type: 'number', label: "Date" },
+    // { type: 'number', label: "Date" },
   ];
   // const rows = ganttChart.map(flow => Object.values(flow)) ;
-  const rows = [['Small Cooker Mixer','Sub E', new Date (2021,8,10), new Date (2021,8,13), 100 ]]
+  const rows = [
+    ['4', 'Coconut Grater','Sub E', new Date (2021,8,10,0,10), new Date (2021,8,11,0,40), null, 50, null ],
+    ['9', 'Small Cooker Mixer', 'Sub E', new Date (2021,8,10), new Date (2021,8,11), null, 100, null],
+    ['203', 'Coconut Grater', 'Sub E', new Date (2021,8,13), new Date (2021,8,14), null, 100, null]
+  ]
   
   const data = [columns, ...rows];
   const options = {height: 400, gantt: {trackHeight: 30}};
