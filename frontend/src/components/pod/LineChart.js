@@ -1,94 +1,77 @@
-import * as d3 from 'd3';
-import React, { useEffect, useRef } from 'react';
+// import React, { Component } from 'react';
+// import Chart from 'react-google-charts';
 
-// import "./index.css";
+// class LineChart extends Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Line Chart for Student marks in subjects</h1>
+//         <Chart
+//           width={'500px'}
+//           height={'500px'}
+//           chartType='LineChart'
+//           loader={<div>Loading Line Chart</div>}
+// data={[
+//   ['Student', 'English', 'Maths', 'History', 'Geography'],
+//   ['A', 80, 70, 45, 87],
+//   ['B', 90, 47, 88, 90],
+//   ['C', 88, 67, 82, 95],
+//   ['D', 50, 70, 56, 63],
+// ]}
+//           options={{
+//             title: 'Exam Performance',
+//             hAxis: { title: 'Student', titleTextStyle: { color: '#333' } },
+//             vAxis: { title: 'marks', minValue: 0 },
+//             chartArea: { width: '50%', height: '50%' },
+//           }}
+//         />
+//       </div>
+//     );
+//   }
+// }
 
-function LineChart() {
-  const isMounted = useRef(false);
-  useEffect(() => {
-    console.log('LineChart');
+// export default LineChart;
 
-    if (!isMounted.current) {
-      isMounted.current = true;
-      // set the dimensions and margins of the graph
-      const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+import React from 'react';
+import { Chart } from 'react-google-charts';
 
-      // append the svg object to the body of the page
-      const svg = d3
-        .select('#LineGraph')
-        .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
+var temp = [
+  ['Date', 'English'],
+  ['A', 80],
+  ['B', 90],
+  ['C', 88],
+  ['D', 50],
+];
 
-      //Read the data
-      d3.csv(
-        // 'http://localhost:4000/api/prodCount',
-        'https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv',
-
-        // When reading the csv, I must format variables:
-        function (d) {
-          return {
-            date: d3.timeParse('%Y-%m-%d')(d.date),
-            count: d.count,
-          };
-        }
-      ).then(
-        // Now I can use this dataset:
-        function (data) {
-          console.log(data);
-          // Add X axis --> it is a date format
-          const x = d3
-            .scaleTime()
-            .domain(
-              d3.extent(data, function (d) {
-                return d.data_trunc;
-              })
-            )
-            .range([0, width]);
-          svg
-            .append('g')
-            .attr('transform', `translate(0, ${height})`)
-            .call(d3.axisBottom(x));
-
-          // Add Y axis
-          const y = d3
-            .scaleLinear()
-            .domain([
-              0,
-              d3.max(data, function (d) {
-                return +d.value;
-              }),
-            ])
-            .range([height, 0]);
-          svg.append('g').call(d3.axisLeft(y));
-
-          // Add the line
-          svg
-            .append('path')
-            .datum(data)
-            .attr('fill', 'none')
-            .attr('stroke', 'steelblue')
-            .attr('stroke-width', 1.5)
-            .attr(
-              'd',
-              d3
-                .line()
-                .x(function (d) {
-                  return x(d.date);
-                })
-                .y(function (d) {
-                  return y(d.value);
-                })
-            );
-        }
-      );
-    }
-  }, []);
-  return <div id='LineGraph' />;
+function DataForGraph(data) {
+  var dataArr = [['Date', 'Production Count']];
+  var count = 0;
+  for (let i = 0; i < data.data.length; i++) {
+    count = Number(data.data[i].count);
+    dataArr.push([data.data[i].date, count]);
+  }
+  // dataArr.push(['A', 50]);
+  return dataArr;
 }
+// export const BarChartData = [['Date', 'Coun']];
 
-export default LineChart;
+export const options = {
+  chart: {
+    title: 'Production Count for FIRC',
+    subtitle: 'Recipes produced',
+  },
+};
+
+export default function Barchart({ data }) {
+  console.log(data + '9-8');
+  return (
+    <Chart
+      chartType='LineChart'
+      width='100%'
+      height='400px'
+      data={DataForGraph(data)}
+      //data={temp}
+      options={options}
+    />
+  );
+}

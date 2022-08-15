@@ -59,7 +59,7 @@ router.get(
   eudController.getMultipleUsage
 );
 
-router.get('/prodCount', dataController.prodCount);
+router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
 
 // getting single recipe equipment usage details (eud)
 router.get(
@@ -100,14 +100,16 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
-// Getting all equipments from log times table
-router.get('/getAllEquipments', dataController.getAllEquipments);
+// getting the equipment name for single product
+router.get(
+  '/getSingleProductEquipment/:startDate/:endDate/:name',
+  spfdController.getSingleProductEquipment
+);
 
-// Getting start / stop count of specific equipment
-router.post('/getEquipmentStartOrStopCount', dataController.getEquipmentStartOrStopCount)
-
-router.post('/getAllEquipmentStartOrStop', dataController.getAllEquipmentStartOrStopCount)
-
-router.post('/getAnomolies', dataController.getAnomolies)
+// getting the equipment usage by name for single product
+router.get(
+  '/getEquipmentUsageByName/:name/:ename',
+  spfdController.getEquipmentUsageByName
+);
 
 module.exports = router;

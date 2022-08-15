@@ -6,16 +6,21 @@ import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import {
+  UsageDetails,
+  UsageDetailsForNotUsed,
+} from '../components/eud/UsageDetails';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
   const [multipleUsage, setMultipleUsage] = useState(null);
   const [singleDetails, setSingleDetails] = useState(null);
   const [multipleDetails, setMultipleDetails] = useState(null);
+  const [singleUnused, setSingleUnused] = useState(null);
+  const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-10'));
+  const [startDate, setStartDate] = useState(new Date('2021-08-11'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 
@@ -43,7 +48,13 @@ const EquipUtilDashboard = () => {
       fetch(
         `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
-    ]).then(([result1, result2, result3, result4]) => {
+      fetch(
+        `http://localhost:4000/api/getSingleUnusedDetails/${enddate}/${startdate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUnusedDetails/${enddate}/${startdate}/${hour}`
+      ).then((res) => res.json()),
+    ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
         data: result1.data,
       });
@@ -52,14 +63,25 @@ const EquipUtilDashboard = () => {
       });
       setSingleDetails({
         data: result3.data,
+        hour: count,
       });
       setMultipleDetails({
         data: result4.data,
       });
+      setSingleUnused({
+        data: result5.data,
+        date: enddate,
+        hour: count,
+      });
+      setMultipleUnused({
+        data: result6.data,
+        date: enddate,
+        hour: count,
+      });
 
       setIsloading(false);
     });
-  }, [startDate, hour]);
+  }, [startDate, hour, count]);
 
   function handleHours(hourinput) {
     setCount(hourinput);
@@ -136,20 +158,14 @@ const EquipUtilDashboard = () => {
                           Single Recipe Equipment
                         </h6>
 
-                        {singleDetails.data.length === 0 ? (
+                        {singleDetails.data.length === 0 &&
+                        singleUnused.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          singleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>.
-                              </span>
-                            </div>
-                          ))
+                          <div>
+                            <UsageDetails data={singleDetails} />
+                            <UsageDetailsForNotUsed data={singleUnused} />
+                          </div>
                         )}
                       </div>
 
@@ -161,17 +177,10 @@ const EquipUtilDashboard = () => {
                         {multipleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
-                          multipleDetails.data.map((data) => (
-                            <div className='usageDetails'>
-                              <ErrorOutlineIcon />
-                              <span key={data.toString()} className='ml-1'>
-                                <b>{data.equipment}</b> was used for{' '}
-                                {data.duration.hours}:{data.duration.minutes}:
-                                {data.duration.seconds} producing{' '}
-                                <b>{data.recipe}</b>
-                              </span>
-                            </div>
-                          ))
+                          <div>
+                            <UsageDetails data={multipleDetails} />
+                            <UsageDetailsForNotUsed data={multipleUnused} />
+                          </div>
                         )}
                       </div>
                     </div>
