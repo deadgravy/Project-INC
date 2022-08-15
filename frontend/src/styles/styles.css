@@ -64,10 +64,6 @@
     width: 950px;
 }
 
-::-webkit-scrollbar {
-    display:none;
-}
-
 .textField {
     display: flex;
     flex: 1;

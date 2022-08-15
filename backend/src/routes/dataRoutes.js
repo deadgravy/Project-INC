@@ -7,6 +7,7 @@ const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
 const eudController = require('../controllers/eudController');
+const tpdController = require('../controllers/tpdController');
 
 // get all recipes and ID
 router.get('/getAllRecipeAndID', dataController.getData1);
@@ -21,20 +22,21 @@ router.post('/login', loginController.verify);
 // add user
 router.post('/addUser', userController.addUser);
 
+//=================================================================================
+
 //getting completed products
-router.get('/getCompletedProducts', dataController.getCompletedProducts);
+router.get('/getCompletedProducts/:date', tpdController.getCompletedProducts);
 
 // getting products to complete
-router.get('/getProductsToComplete', dataController.getProductsToComplete);
+router.get('/getProductsToComplete/:date', tpdController.getProductsToComplete);
 
 //getting single equipment status
-router.get(
-  '/getSingleEquipmentStatus',
-  dataController.getSingleEquipmentStatus
-);
+router.get('/getSingleEquipmentStatus/:date', tpdController.getSingleEquipmentStatus);
 
 //getting multi equipment status
-router.get('/getMultiEquipmentStatus', dataController.getMultiEquipmentStatus);
+router.get('/getMultiEquipmentStatus/:date', tpdController.getMultiEquipmentStatus);
+
+//==================================================================================
 
 // getting machine connectivity (eus)
 router.get('/machineConnectivity', dataController.getMachineConnectivity);
