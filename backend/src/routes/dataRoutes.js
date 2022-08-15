@@ -76,4 +76,6 @@ router.post(
 
 router.post('/getAnomolies', dataController.getAnomolies);
 
+>>>>>>> a472e12dff1462eb61da9b73a46379385928c9ff
 module.exports = router;
+

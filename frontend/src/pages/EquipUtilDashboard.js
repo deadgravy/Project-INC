@@ -80,6 +80,16 @@ const EquipUtilDashboard = () => {
         date: enddate,
         hour: count,
       });
+      setSingleUnused({
+        data: result5.data,
+        date: enddate,
+        hour: count,
+      });
+      setMultipleUnused({
+        data: result6.data,
+        date: enddate,
+        hour: count,
+      });
 
       setIsloading(false);
     });
@@ -161,6 +171,7 @@ const EquipUtilDashboard = () => {
                         </h6>
 
                         {singleDetails.data.length === 0 &&
+                        singleUnused.data.length === 0 &&
                         singleUnused.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
