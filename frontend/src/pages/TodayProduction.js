@@ -2,30 +2,94 @@ import React, { useEffect, useState } from "react";
 import "../styles/tpd.css";
 import ProductChart from "../components/tpd/ProductChart";
 import TableComponent from "../components/tpd/TableComponent";
-// import Modal from '../components/tpd/Modal';
-import TextField from "@mui/material/TextField";
 import { Tab } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
-// import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
-// import "../styles/todayProduction.css"
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
   const [toBeCompletedProductsData, setToBeCompletedProductsData] = useState(null);
-  const [equipmentStatusData, setEquipmentStatusData] = useState(null);
+  const [singleEquipmentStatusData, setSingleEquipmentStatusData] = useState(null);
+  const [multiEquipmentStatusData, setMultiEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
+  const [date, setDate] = useState(new Date());
+  const stepsEnabled = true;
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: ".col-3",
+      intro: "You may select a date to view its data e.g. 2021/08/20"
+    },
+    {
+      element: ".singleProduct",
+      intro: "View single product equipments currently running"
+    },
+    {
+      element: ".multiProduct",
+      intro: "View multi product equipments currently running"
+    },
+    {
+      element: ".tableComponent",
+      intro: "Live equipment status table"
+    },
+    {
+      element: ".allProducts",
+      intro: "View all product status"
+    },
+    {
+      element: ".productStatus",
+      intro: "Displays total count of completed and incomplete products respectively"
+    },
+    {
+      element: ".containerChart",
+      intro: "This is the Product Status Chart"
+    }
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
 
   // useEffect
   useEffect(() => {
 
     setIsloading(true);
 
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0');
+    var yyyy = date.getFullYear();
+
+    let filtereddate = `${yyyy}-${mm}-${dd}`;
+
     Promise.all([
-      fetch("http://localhost:4000/api/getCompletedProducts").then((res) => res.json()),
-      fetch("http://localhost:4000/api/getProductsToComplete").then((res) => res.json()),
-      fetch("http://localhost:4000/api/getEquipmentStatus").then((res) => res.json()),
+      // fetch(`http://localhost:4000/api/getCompletedProducts`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     date: filtereddate
+      //   })
+      // }),
+      fetch(`http://localhost:4000/api/getCompletedProducts/${filtereddate}`).then((res) => res.json()),
+      fetch(`http://localhost:4000/api/getProductsToComplete/${filtereddate}`).then((res) => res.json()),
+      fetch(`http://localhost:4000/api/getSingleEquipmentStatus/${filtereddate}`).then((res) => res.json()),
+      fetch(`http://localhost:4000/api/getMultiEquipmentStatus/${filtereddate}`).then((res) => res.json()),
     ])
-      .then(([result1, result2, result3]) => {
+      .then(([result1, result2, result3, result4]) => {
+        console.log(result1.data);
+        console.log(result2.data);
+        console.log(result3.data);
+        console.log(result4.data);
         setCompletedProductsData({
           data: result1.data,
           value: [{ value: 50 }, { value: 50 }],
@@ -33,15 +97,18 @@ const TodayProduction = () => {
         setToBeCompletedProductsData({
           data: result2.data
         });
-        setEquipmentStatusData({
+        setSingleEquipmentStatusData({
           data: result3.data
+        });
+        setMultiEquipmentStatusData({
+          data: result4.data
         });
         setIsloading(false);
       })
       .catch((error) => console.log("error", error));
 
    
-  }, []);
+  }, [date]);
 
   return (
     <React.StrictMode>
@@ -53,41 +120,45 @@ const TodayProduction = () => {
       {!isLoading ? (
         
         <div>
+          <Steps
+            enabled={stepsEnabled}
+            steps={steps}
+            initialStep={initialStep}
+            onExit={onExit}
+          />
           <div className="tpdHeader">
-            Today's Production Dashboard
+            <h1>Today's Production Dashboard</h1>
           </div>
+          
           <div className="liveEquipHeader">
-            Live Equipment Usage
+            <h3>Live Equipment Usage</h3>
           </div>
-          <div className="textField">
-                <TextField 
-                id="outlined-basic"
-                variant="outlined"
-                fullWidth
-                label="Search"
-                />
+          <br/>
+          <div className="liveEquipSection">
+                <div className='col-3' onClick={toggleSteps}>
+                  <DatePicker
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    placeholderText="Please Select Date"
+                    dateFormat="yyyy/MM/dd"
+                    maxDate={new Date('2021-08-22')}
+                    isClearable={false}
+                    showYearDropdown
+                    />
+                </div>
+            <div className="Row1">
+                <TableComponent data1={singleEquipmentStatusData} data2={multiEquipmentStatusData}/>
+            </div>
           </div>
-          <div className="Row1">
-              <TableComponent data={equipmentStatusData}/>
-          </div>
+          <br/>
           <div className="productHeader">
-            Completed Products as of Today
+            <h3>Completed Products as of Today</h3>
           </div>
-          <div className="searchAndButtonRow">
-          <div className="textField">
-                <TextField 
-                id="outlined-basic"
-                variant="outlined"
-                fullWidth
-                label="Search"
-                />
-          </div>
-          {/* <Modal data={toBeCompletedProductsData}/> */}
-          </div>
-          <div className="Row2">
-            <div className="chartContainer">
-              <div class="p-3 bg-white-500 u-shadow-lg u-round-xs">
-                <ProductChart data1={completedProductsData} data2={toBeCompletedProductsData} />
+          <br/>
+          <div className="chartSection">
+            <div className="Row2">
+              <div className="chartContainer">
+                  <ProductChart data1={completedProductsData} data2={toBeCompletedProductsData} />
               </div>
             </div>
           </div>

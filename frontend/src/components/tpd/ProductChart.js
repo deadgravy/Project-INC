@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import CloseIcon from '@mui/icons-material/Close';
 import "./styles/container.css";
-// import "./styles/modal.css";
+import "./styles/modal.css";
+import { flexbox } from "@mui/system";
 
 const colors = ["#22C55E", "#8C0014"];
 const boxSize = 500;
@@ -11,6 +12,7 @@ const DonutChart = ({ data1, data2 }) => {
   //data1 is batches completed and data2 is batchestocomplete
   const ref = useRef(null);
   const containerChartRef = useRef(null);
+  const [completed, setCompleted] = useState(0);
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -19,6 +21,7 @@ const DonutChart = ({ data1, data2 }) => {
 
   const hasMounted = useRef(false);
   var count = 0;
+  var count2 = 1;
   var value = [{ value: 0 }, { value: 100 }];
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const DonutChart = ({ data1, data2 }) => {
           .style("flex-direction", "row")
           .style("flex-shrink", 0)
           .style("position", "relative")
-          .style("overflow", "scroll")
+          // .style("overflow", "scroll")
           .append("div") // Wrap a div element in each svg eg. each pie chart
           .attr("id", `${data2?.data[i].recipe_id}`) // assign each div with an id so we can select it later
           .append("svg")
@@ -118,6 +121,10 @@ const DonutChart = ({ data1, data2 }) => {
                 data2?.data[i].batchestocomplete
             );
 
+            if(data1?.data[count].batchescompleted / data2?.data[i].batchestocomplete == 1){
+              setCompleted(count2++);
+            }
+
           arcs
             .append("path")
             .attr("d", arcGenerator)
@@ -145,10 +152,11 @@ const DonutChart = ({ data1, data2 }) => {
 
   return (
     <>
-    <div className="row1">
+    <div className="allProducts" style={{width: 170}}>
       <button onClick={toggleModal} className='btn-modal'>
-        All Products
-      </button>
+          All Products
+        </button>
+      </div>
       {modal && (
         <div className=''>
           <div onClick={toggleModal} className='overlay'>
@@ -169,14 +177,17 @@ const DonutChart = ({ data1, data2 }) => {
         </div>
         </div>
       )}
+    <div className="row1">
+      
     <div className="productStatus">
-      <p><p style={{color: "#22C55E"}}>{}</p>Completed</p>
-      <p style={{marginLeft: 20}}><p style={{color: "#8C0014"}}>{}</p>In Production</p>
+      <p style={{display: 'flex'}}><span style={{color: "#22C55E", marginRight: 10}}>{completed}</span>Completed</p>
+      <p style={{marginLeft: 20, display: 'flex'}}><span style={{color: "#8C0014", marginRight: 10}}>{data2?.data.length - completed}</span>In Production</p>
     </div>
     </div>
       <div ref={containerChartRef} className="containerChart">
         <div className="graph" ref={ref} />
-      </div>
+
+    </div>
     </>
   );
 };

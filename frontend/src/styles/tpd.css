@@ -1,3 +1,7 @@
+.App{
+    margin-left: 20px;
+}
+
 .Row1 {
     display: flex;
     flex-direction: row;
@@ -31,20 +35,17 @@
 }
 
 .chartContainer {
-    width: 950px;
-    overflow-x: scroll;
-    scrollbar-width: none;
+    width:950px;
+    overflow-x: none;
 }
 
-::-webkit-scrollbar {
-    display:none;
+.liveEquipSection {
+    margin-left: 80px;
 }
 
-.scrolling-wrapper-flexbox {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-} 
+.chartSection {
+    margin-left: 80px;
+}
 
 .textField {
     display: flex;

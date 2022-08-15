@@ -1,4 +1,3 @@
-import { UsageChart } from '../components/eud/UsageChart';
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
 import DatePicker from 'react-datepicker';
@@ -6,12 +5,14 @@ import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggler from '../components/general/Toggler';
 import '../styles/toggler.css';
+import { WeeklyChart } from '../components/eud/weeklyChart';
 import {
-  UsageDetails,
-  UsageDetailsForNotUsed,
+  UsageDetailsForNotUsedInBtwn,
+  UsageDetailsForNotUsedWeekly,
+  WeeklyDetails,
 } from '../components/eud/UsageDetails';
 
-const EquipUtilDashboard = () => {
+const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
   const [multipleUsage, setMultipleUsage] = useState(null);
   const [singleDetails, setSingleDetails] = useState(null);
@@ -20,7 +21,7 @@ const EquipUtilDashboard = () => {
   const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-11'));
+  const [startDate, setStartDate] = useState(new Date());
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
 
@@ -32,50 +33,48 @@ const EquipUtilDashboard = () => {
     var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = startDate.getFullYear();
 
-    let enddate = yyyy + '-' + mm + '-' + dd;
-    let startdate = `${yyyy}-${mm}-${dd - 1}`;
+    let startdate = yyyy + '-' + mm + '-' + dd;
+    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 7}`;
 
     Promise.all([
       fetch(
-        `http://localhost:4000/api/getSingleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getSingleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsage/${startdate}/${enddate}`
+        `http://localhost:4000/api/getMultipleUsageWeekly/${startdate}/${enddate}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getSingleUsageDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getSingleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getSingleUnusedDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUnusedDetails/${startdate}/${enddate}/${hour}`
+        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
         data: result1.data,
+        count: count,
       });
       setMultipleUsage({
         data: result2.data,
       });
       setSingleDetails({
         data: result3.data,
-        hour: count,
       });
       setMultipleDetails({
         data: result4.data,
       });
       setSingleUnused({
         data: result5.data,
-        date: enddate,
         hour: count,
       });
       setMultipleUnused({
         data: result6.data,
-        date: enddate,
         hour: count,
       });
 
@@ -112,8 +111,8 @@ const EquipUtilDashboard = () => {
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
-                      // minDate={new Date()}
-                      // maxDate={new Date()}
+                      minDate={new Date('2021-08-10')}
+                      maxDate={new Date('2021-08-22')}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}
@@ -128,16 +127,26 @@ const EquipUtilDashboard = () => {
                   <h3>Single Recipe Equipment</h3>
                 </div>
                 <div className='Row4'>
-                  <UsageChart data={singleUsage} />
+                  {singleUsage.data.length === 0 ||
+                  singleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <WeeklyChart data={singleUsage} />
+                  )}
                 </div>
                 <div className='Row5'>
                   <h3>Multiple Recipe Equipment</h3>
                 </div>
                 <div className='Row6'>
-                  <UsageChart data={multipleUsage} />
+                  {multipleUsage.data.length === 0 ||
+                  multipleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <WeeklyChart data={multipleUsage} />
+                  )}
                 </div>
-                <div className='row'>
-                  <h5 className='col-9'>Equipment Usage Details</h5>
+                <div className='row mt-4'>
+                  <h3 className='col-9'>Equipment Usage Details</h3>
                   {/* Start of Input Box code */}
                   <div className='col-2 level-item mr-2'>
                     <input
@@ -154,33 +163,37 @@ const EquipUtilDashboard = () => {
                   <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname' className='title mb-1'>
+                        <h5 id='projectname' className='title mb-0'>
                           Single Recipe Equipment
-                        </h6>
-
-                        {singleDetails.data.length === 0 &&
-                        singleUnused.data.length === 0 ? (
+                        </h5>
+                        {singleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>
-                            <UsageDetails data={singleDetails} />
-                            <UsageDetailsForNotUsed data={singleUnused} />
+                            <WeeklyDetails data={singleDetails} />
+                            <br></br>
+                            <UsageDetailsForNotUsedWeekly data={singleUnused} />
+                            <UsageDetailsForNotUsedInBtwn data={singleUsage} />
                           </div>
                         )}
                       </div>
 
                       <div className='singleContent mb-4'>
-                        <h6 id='projectname2' className='title mb-1'>
+                        <h5 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
-                        </h6>
-
-                        {multipleDetails.data.length === 0 &&
-                        multipleUnused.data.length === 0 ? (
+                        </h5>
+                        {multipleDetails.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>
-                            <UsageDetails data={multipleDetails} />
-                            <UsageDetailsForNotUsed data={multipleUnused} />
+                            <WeeklyDetails data={multipleDetails} />
+                            <br></br>
+                            <UsageDetailsForNotUsedWeekly
+                              data={multipleUnused}
+                            />
+                            <UsageDetailsForNotUsedInBtwn
+                              data={multipleUsage}
+                            />
                           </div>
                         )}
                       </div>
@@ -198,4 +211,4 @@ const EquipUtilDashboard = () => {
   );
 };
 
-export default EquipUtilDashboard;
+export default EUDWeekly;

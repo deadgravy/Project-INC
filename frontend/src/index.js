@@ -7,6 +7,7 @@ import TodayProduction from './pages/TodayProduction';
 import SingleProductFlow from './pages/SingleProductFlow';
 import SignUp from './pages/SignUp';
 import EquipUtilDashboard from './pages/EquipUtilDashboard';
+import EUDWeekly from './pages/EUDWeekly';
 import EUS from './pages/EUS';
 import moment from 'moment';
 
@@ -28,6 +29,10 @@ root.render(
         <Route
           path='equipmentUtilisationDashboard'
           element={<EquipUtilDashboard />}
+        />
+        <Route
+          path='equipmentUtilisationDashboard/weekly'
+          element={<EUDWeekly />}
         />
       </Routes>
     </BrowserRouter>

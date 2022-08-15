@@ -4,9 +4,15 @@ import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
+<style>
+  .modal {{
+    top: '0 !important'
+  }}
+</style>
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
+  const [allEquipments, setAllEquipments] = useState(null);
   const [isLoading, setIsloading] = useState(true);
 
   // Calling /machines/ & /machinesConnecitivity/
@@ -16,12 +22,11 @@ const EUS = () => {
         res.json()
       ),
       fetch('http://localhost:4000/api/machines').then((res) => res.json()),
+      fetch('http://localhost:4000/api/getAllEquipments').then((res) =>
+        res.json()
+      ),
     ])
-      .then(([machineConnectivityData, machinesData]) => {
-        // Filtering the data
-        // 1. Check if machines exists in machine connectivity
-        // 2. If yes, then just let the data be
-        // 3. use a json object and add to the back of machineConnectivityData
+      .then(([machineConnectivityData, machinesData, allEquipments]) => {
         let tempArr = machineConnectivityData.data;
         for (let m = 0; m < machinesData.data.length; m++) {
           let found = false;
@@ -50,6 +55,9 @@ const EUS = () => {
         setMachineConnectivityData({
           data: tempArr,
         });
+        setAllEquipments({
+          data: allEquipments,
+        });
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
@@ -68,7 +76,7 @@ const EUS = () => {
               <MachineConnectivity data={machineConnectivityData} />
             </div>
             <div className='equipmentDetails mt-4'>
-              <EquipmentFrequency />
+              <EquipmentFrequency allEquipments={allEquipments} />
             </div>
           </div>
         ) : (

@@ -7,12 +7,14 @@ const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
 const eudController = require('../controllers/eudController');
+const tpdController = require('../controllers/tpdController');
 
-router.get('/data/data1', dataController.getData1);
+// get all recipes and ID
+router.get('/getAllRecipeAndID', dataController.getData1);
 
 // getting recipe by ID
 // router.get('/data/data2', dataController.getRecipebyRecipeID);
-router.get('/data/data2/:id', dataController.getRecipebyRecipeID);
+router.get('/getRecipesById/:id', dataController.getRecipebyRecipeID);
 
 // login
 router.post('/login', loginController.verify);
@@ -20,23 +22,21 @@ router.post('/login', loginController.verify);
 // add user
 router.post('/addUser', userController.addUser);
 
+//=================================================================================
+
 //getting completed products
-router.get('/getCompletedProducts', dataController.getCompletedProducts);
+router.get('/getCompletedProducts/:date', tpdController.getCompletedProducts);
 
 // getting products to complete
-router.get('/getProductsToComplete', dataController.getProductsToComplete);
+router.get('/getProductsToComplete/:date', tpdController.getProductsToComplete);
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+//getting single equipment status
+router.get('/getSingleEquipmentStatus/:date', tpdController.getSingleEquipmentStatus);
 
-// getting multiple recipe equipment usage
-router.get(
-  '/getMultipleUsage/:startdate/:enddate',
-  eudController.getMultipleUsage
-);
+//getting multi equipment status
+router.get('/getMultiEquipmentStatus/:date', tpdController.getMultiEquipmentStatus);
 
-// getting equipment status
-router.get('/getEquipmentStatus', dataController.getEquipmentStatus);
+//==================================================================================
 
 // getting machine connectivity (eus)
 router.get('/machineConnectivity', dataController.getMachineConnectivity);
@@ -50,33 +50,54 @@ router.get(
   spfdController.getSingleProductWithNameDate
 );
 
-// getting single recipe equipment usage
-router.get('/getSingleUsage/:date', eudController.getSingleUsage);
+// getting single recipe equipment usage (eud)
+router.get('/getSingleUsage/:startdate/:enddate', eudController.getSingleUsage);
 
-// getting multiple recipe equipment usage
+// getting multiple recipe equipment usage (eud)
 router.get(
   '/getMultipleUsage/:startdate/:enddate',
   eudController.getMultipleUsage
 );
 
-router.get('/prodCount', dataController.prodCount);
+router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
 
-// getting single recipe equipment usage details
+// getting single recipe equipment usage details (eud)
 router.get(
   '/getSingleUsageDetails/:startdate/:enddate/:hour',
   eudController.getSingleUsageDetails
 );
 
-// getting multiple recipe equipment usage details
+// getting multiple recipe equipment usage details (eud)
 router.get(
   '/getMultipleUsageDetails/:startdate/:enddate/:hour',
   eudController.getMultipleUsageDetails
 );
 
 // getting the name of all recipes
+router.get('/getAllRecipeName', spfdController.getAllRecipeName);
+
+// get weekly usage for single recipe equipment
 router.get(
-  '/getAllRecipeName',
-  spfdController.getAllRecipeName
+  '/getSingleUsageWeekly/:startdate/:enddate',
+  eudController.getSingleWeekly
+);
+
+// get weekly usage for multiple recipe equipment
+router.get(
+  '/getMultipleUsageWeekly/:startdate/:enddate',
+  eudController.getMultipleWeekly
+);
+
+// get weekly usage details  for single recipe equipment
+router.get(
+  '/getSingleUsageDetailsWeekly/:startdate/:enddate/:hour',
+  eudController.getSingleWeeklyDetails
+);
+
+// get weekly usage details for multiple recipe equipment
+router.get(
+  '/getMultipleUsageDetailsWeekly/:startdate/:enddate/:hour',
+  eudController.getMultipleWeeklyDetails
 );
 
 // getting the equipment name for single product
@@ -90,5 +111,8 @@ router.get(
   '/getEquipmentUsageByName/:name/:ename',
   spfdController.getEquipmentUsageByName
 );
+
+// get all equipment
+router.get('/getAllEquipment', eudController.getAllEquipment);
 
 module.exports = router;

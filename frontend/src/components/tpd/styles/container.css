@@ -1,5 +1,19 @@
-.tpd-container {
+.containerChart {
     display: flex;
-    width: 100%;
+    width: 900px;
     overflow-x: scroll;
+    border-radius: 20px;
+    box-shadow: 4px 8px 0 rgba(211, 211, 211, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.productStatus {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+}
+
+.mostly-customized-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; /* or add it to the track */
 }

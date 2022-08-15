@@ -7,3 +7,9 @@
     height: 4.75rem; 
     width: 4.75rem;
 }
+
+.alignIcon {
+    display: flex;
+    align-items: center;
+}
+
