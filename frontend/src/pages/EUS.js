@@ -4,6 +4,8 @@ import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 <style>
   .modal {{
     top: '0 !important'
@@ -14,6 +16,48 @@ const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
   const [allEquipments, setAllEquipments] = useState(null);
   const [isLoading, setIsloading] = useState(true);
+  const stepsEnabled = true;
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: "#title",
+      intro: "test1"
+    },
+    {
+      element: "#panel1a-header",
+      intro: "test2"
+    },
+    {
+      element: "#cards",
+      intro: "test3"
+    },
+    {
+      element: ".equipFreq",
+      intro: "test4"
+    },
+    {
+      element: "#freqData",
+      intro: "test5"
+    },
+    {
+      element: "#modal",
+      intro: "test6"
+    },
+    {
+      element: "#legend",
+      intro: "test7"
+    },
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
 
   // Calling /machines/ & /machinesConnecitivity/
   useEffect(() => {
@@ -69,7 +113,13 @@ const EUS = () => {
         <Sidebar />
       </div>
       <div className='eus-display col-10 px-4 py-6'>
-        <h1>Equipment Utilisation Snapshot</h1>
+        <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={onExit}
+        />
+        <h1 id='title'>Equipment Utilisation Snapshot</h1>
         {!isLoading ? (
           <div className='eus-components'>
             <div className='machineConnectivity'>

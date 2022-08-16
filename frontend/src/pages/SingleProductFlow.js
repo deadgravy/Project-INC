@@ -5,6 +5,8 @@ import '../styles/spfd.css';
 import {GanttChart } from "../components/spfd/ganttChart";
 import DropDown from '../components/spfd/dropDown';
 import { LineChart } from '../components/spfd/lineChart';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,10 +14,28 @@ const SingleProductFlow = () => {
     "recipeName": "",
     "startDate": null,
     "endDate": null
-  })
+  });
+  const stepsEnabled = true;
+  const initialStep = 0;
   console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
   // const [ganttChart, setGanttChart] = useState([])
+
+  //Intro.js
+  const steps = [
+    {
+      element: "#title",
+      intro: "test1"
+    }
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
   
   useEffect(() =>{
     Promise.all([
@@ -50,14 +70,19 @@ const SingleProductFlow = () => {
 
   return (
       <div className='singlProductFlow row p-0 w-100p'>
-
+        <Steps
+            enabled={stepsEnabled}
+            steps={steps}
+            initialStep={initialStep}
+            onExit={onExit}
+          />
         <div className='po-sidebar sidebar col-2'>         {/* sidebar */}
           <SideBar/>
         </div>
         
         <div className='po-display col-10'>
           
-          <div className='pt-2 Row1'>                      {/* Title */}
+          <div className='pt-2 Row1' id='title'>                      {/* Title */}
             <h3>Single Product Flow Dashboard</h3>
           </div>
 
