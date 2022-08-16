@@ -101,7 +101,6 @@ export function UsageChart({ data }) {
           width='99%'
           height='450px'
           options={{
-            // colors: coloursArrChart,
             timeline: {
               groupByRowLabel: true,
               showBarLabels: true,

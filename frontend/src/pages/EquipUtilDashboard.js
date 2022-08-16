@@ -9,6 +9,7 @@ import '../styles/toggler.css';
 import {
   UsageDetails,
   UsageDetailsForNotUsed,
+  UsageDetailsForNotUsedInBtwnDaily,
 } from '../components/eud/UsageDetails';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -59,6 +60,7 @@ const EquipUtilDashboard = () => {
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
         data: result1.data,
+        count: count,
       });
       setMultipleUsage({
         data: result2.data,
@@ -69,6 +71,16 @@ const EquipUtilDashboard = () => {
       });
       setMultipleDetails({
         data: result4.data,
+      });
+      setSingleUnused({
+        data: result5.data,
+        date: enddate,
+        hour: count,
+      });
+      setMultipleUnused({
+        data: result6.data,
+        date: enddate,
+        hour: count,
       });
       setSingleUnused({
         data: result5.data,
@@ -178,12 +190,16 @@ const EquipUtilDashboard = () => {
                         </h6>
 
                         {singleDetails.data.length === 0 &&
+                        singleUnused.data.length === 0 &&
                         singleUnused.data.length === 0 ? (
                           <p>NO DATA</p>
                         ) : (
                           <div>
                             <UsageDetails data={singleDetails} />
                             <UsageDetailsForNotUsed data={singleUnused} />
+                            <UsageDetailsForNotUsedInBtwnDaily
+                              data={singleUsage}
+                            />
                           </div>
                         )}
                       </div>
@@ -200,6 +216,9 @@ const EquipUtilDashboard = () => {
                           <div>
                             <UsageDetails data={multipleDetails} />
                             <UsageDetailsForNotUsed data={multipleUnused} />
+                            <UsageDetailsForNotUsedInBtwnDaily
+                              data={multipleUsage}
+                            />
                           </div>
                         )}
                       </div>

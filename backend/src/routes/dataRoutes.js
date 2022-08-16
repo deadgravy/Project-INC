@@ -6,7 +6,6 @@ const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
-const eudController = require('../controllers/eudController');
 const tpdController = require('../controllers/tpdController');
 
 // get all recipes and ID
@@ -56,21 +55,25 @@ router.get(
   spfdController.getSingleProductWithNameDate
 );
 
-router.get('/prodCount/:startDate/:endDate', dataController.prodCount);
+router.get('/prodCount', dataController.prodCount);
 
-// getting the name of all recipes
+// getting the name of all recipes (eud)
 router.get('/getAllRecipeName', spfdController.getAllRecipeName);
 
-// getting the equipment name for single product
-router.get(
-  '/getSingleProductEquipment/:startDate/:endDate/:name',
-  spfdController.getSingleProductEquipment
+// Getting all equipments from log times table
+router.get('/getAllEquipments', dataController.getAllEquipments);
+
+// Getting start / stop count of specific equipment
+router.post(
+  '/getEquipmentStartOrStopCount',
+  dataController.getEquipmentStartOrStopCount
 );
 
-// getting the equipment usage by name for single product
-router.get(
-  '/getEquipmentUsageByName/:name/:ename',
-  spfdController.getEquipmentUsageByName
+router.post(
+  '/getAllEquipmentStartOrStop',
+  dataController.getAllEquipmentStartOrStopCount
 );
+
+router.post('/getAnomolies', dataController.getAnomolies);
 
 module.exports = router;

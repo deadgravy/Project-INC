@@ -20,7 +20,7 @@ module.exports.getSingleUsage = async function (startdate, enddate) {
     AND pd.mac_property = 1
     AND DATE(start_time) >= $1 
     AND DATE(end_time) = $2
-    ORDER BY equip_id, recipe_id;
+    ORDER BY DATE(start_time), equipment, start_time ASC;
     `,
       [startdate, enddate]
     );
@@ -50,7 +50,7 @@ module.exports.getMultipleUsage = async function (startdate, enddate) {
     AND pd.mac_property = 2
     AND DATE(start_time) >= $1 
     AND DATE(end_time) = $2
-    ORDER BY equip_id, recipe_id;
+    ORDER BY DATE(start_time), equipment, start_time ASC;
     `,
       [startdate, enddate]
     );
@@ -349,7 +349,6 @@ module.exports.getMultipleWeeklyDetails = async function (
     console.log(error);
   }
 };
-
 module.exports.getSingleUnusedWeekly = async function (
   startdate,
   enddate,
