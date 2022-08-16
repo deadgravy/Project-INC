@@ -24,11 +24,11 @@ paths:
                 items:
                   type: object
                   properties:
-                    fr_recipe_id: 
+                    fr_recipe_id:
                       type: string
-                    name: 
+                    name:
                       type: string
-        500: 
+        500:
           schema:
             type: object
             properties:
@@ -61,9 +61,9 @@ paths:
                 items:
                   type: object
                   properties:
-                    fr_recipe_id: 
+                    fr_recipe_id:
                       type: string
-                    name: 
+                    name:
                       type: string
                     queue:
                       type: integer
@@ -78,13 +78,13 @@ paths:
                       properties:
                         hours:
                           type: number
-                        minutes: 
+                        minutes:
                           type: number
                         seconds:
                           type: number
                         milliseconds:
                           type: number
-        500: 
+        500:
           schema:
             type: object
             properties:
@@ -92,7 +92,7 @@ paths:
                 type: string
               data:
                 type: string
-          
+
   /api/machineConnectivity:
     get:
       summary: Get machine connectivity of all machines in EUS
@@ -110,7 +110,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    client_no: 
+                    client_no:
                       type: string
                     ttl:
                       type: integer
@@ -120,7 +120,7 @@ paths:
                       type: string
                     location_id:
                       type: integer
-        500: 
+        500:
           schema:
             type: object
             properties:
@@ -146,18 +146,18 @@ paths:
                 items:
                   type: object
                   properties:
-                    machine_name: 
+                    machine_name:
                       type: string
                     machine_id:
                       type: string
-        500: 
+        500:
           schema:
             type: object
             properties:
               status:
                 type: string
               data:
-                type: string      
+                type: string
 
   /api/getAllEquipments:
     get:
@@ -180,14 +180,14 @@ paths:
                       type: integer
                     equipment_name:
                       type: string
-        500: 
+        500:
           schema:
             type: object
             properties:
               status:
                 type: string
               data:
-                type: string   
+                type: string
 
   /api/getEquipmentStartOrStopCount:
     post:
@@ -231,20 +231,20 @@ paths:
                 items:
                   type: object
                   properties:
-                    x: 
+                    x:
                       type: string
-                    y: 
+                    y:
                       type: string
                     equipmentName:
                       type: string
-        500: 
+        500:
           schema:
             type: object
             properties:
               status:
                 type: string
               data:
-                type: string   
+                type: string
 
   /api/getAllEquipmentStartOrStop:
     post:
@@ -292,14 +292,14 @@ paths:
                       type: integer
                     log_time:
                       type: string
-        500: 
+        500:
           schema:
             type: object
             properties:
               status:
                 type: string
               data:
-                type: string   
+                type: string
 
   /api/getAnomolies:
     post:
@@ -340,7 +340,7 @@ paths:
                       type: integer
                     equipmentName:
                       type: string
-                    y: 
+                    y:
                       type: number
         500:
           schema:
@@ -374,7 +374,7 @@ paths:
           schema:
             type: object
             properties:
-              status: 
+              status:
                 type: string
               data:
                 type: string
@@ -397,7 +397,7 @@ paths:
           required: true
         - in: path
           name: name
-          schema: 
+          schema:
             type: string
           required: true
       responses:
@@ -428,7 +428,7 @@ paths:
                 type: string
               data:
                 type: string
-          
+
   /api/getCompletedProducts/{date}:
     get:
       summary: Getting completed products by date
@@ -453,7 +453,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    recipe_id: 
+                    recipe_id:
                       type: integer
                     name:
                       type: string
@@ -466,7 +466,7 @@ paths:
               status:
                 type: string
               data:
-                type: string  
+                type: string
 
   /api/getProductsToComplete/{date}:
     get:
@@ -492,7 +492,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    recipe_id: 
+                    recipe_id:
                       type: integer
                     name:
                       type: string
@@ -505,7 +505,7 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
 
   /api/getSingleEquipmentStatus/{date}:
     get:
@@ -522,7 +522,7 @@ paths:
       responses:
         200:
           schema:
-            type: object 
+            type: object
             properties:
               status:
                 type: string
@@ -531,7 +531,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    id: 
+                    id:
                       type: integer
                     equipid:
                       type: string
@@ -540,7 +540,7 @@ paths:
                     productname:
                       type: string
                     fr_process_steps:
-                      type: integer  
+                      type: integer
                     log_time:
                       type: string
                     singleormultiple:
@@ -550,14 +550,14 @@ paths:
                     timetostarted:
                       type: object
                       properties:
-                        hours: 
+                        hours:
                           type: integer
                         minutes:
                           type: integer
                         seconds:
                           type: integer
                         milleseconds:
-                          type: number   
+                          type: number
                     queue:
                       type: integer
                     process_name:
@@ -580,8 +580,8 @@ paths:
               status:
                 type: string
               data:
-                type: string         
-          
+                type: string
+
   /api/getMultiEquipmentStatus/{date}:
     get:
       summary: Get multiple equipment status
@@ -590,14 +590,14 @@ paths:
       parameters:
         - in: path
           name: date
-          schema: 
+          schema:
             type: string
             example: '2021-08-20'
-          required: true        
+          required: true
       responses:
         200:
           schema:
-            type: object 
+            type: object
             properties:
               status:
                 type: string
@@ -606,7 +606,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    id: 
+                    id:
                       type: integer
                     equipid:
                       type: string
@@ -615,7 +615,7 @@ paths:
                     productname:
                       type: string
                     fr_process_steps:
-                      type: integer  
+                      type: integer
                     log_time:
                       type: string
                     singleormultiple:
@@ -625,14 +625,14 @@ paths:
                     timetostarted:
                       type: object
                       properties:
-                        hours: 
+                        hours:
                           type: integer
                         minutes:
                           type: integer
                         seconds:
                           type: integer
                         milleseconds:
-                          type: number   
+                          type: number
                     queue:
                       type: integer
                     process_name:
@@ -655,7 +655,7 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
 
   /api/prodCount/{startDate}/{endDate}:
     get:
@@ -698,8 +698,8 @@ paths:
               status:
                 type: string
               data:
-                type: string 
-      
+                type: string
+
   /api/getSingleUsageDetails/{startDate}/{endDate}/{hour}:
     get:
       summary: Getting single usage of equipment details
@@ -720,7 +720,7 @@ paths:
           required: true
         - in: path
           name: hour
-          schema: 
+          schema:
             type: string
             example: '01:00:00'
           required: true
@@ -734,7 +734,7 @@ paths:
               data:
                 type: array
                 items:
-                  type: object  
+                  type: object
                   properties:
                     equipment:
                       type: string
@@ -747,7 +747,7 @@ paths:
                     difference:
                       type: object
                       properties:
-                        hours: 
+                        hours:
                           type: string
                         minutes:
                           type: integer
@@ -760,11 +760,11 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
 
   /api/getMultipleUsageDetails/{startDate}/{endDate}/{hour}:
     get:
-      summary: Getting single usage of equipment details 
+      summary: Getting single usage of equipment details
       tags:
         - Equipment Utilisation Dashboard
       parameters:
@@ -782,7 +782,7 @@ paths:
           required: true
         - in: path
           name: hour
-          schema: 
+          schema:
             type: string
             example: '01:00:00'
           required: true
@@ -796,7 +796,7 @@ paths:
               data:
                 type: array
                 items:
-                  type: object  
+                  type: object
                   properties:
                     equipment:
                       type: string
@@ -809,7 +809,7 @@ paths:
                     difference:
                       type: object
                       properties:
-                        hours: 
+                        hours:
                           type: string
                         minutes:
                           type: integer
@@ -822,7 +822,7 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
 
   /api/getSingleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
     get:
@@ -857,7 +857,7 @@ paths:
                 type: string
               data:
                 type: array
-                items: 
+                items:
                   type: object
                   properties:
                     day:
@@ -866,13 +866,13 @@ paths:
                       type: string
                     equipment:
                       type: string
-                    recipe: 
+                    recipe:
                       type: string
                     start_time:
                       type: string
                     end_time:
                       type: string
-                    duration: 
+                    duration:
                       type: object
                       properties:
                         hours:
@@ -888,7 +888,7 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
 
   /api/getMultipleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
     get:
@@ -923,7 +923,7 @@ paths:
                 type: string
               data:
                 type: array
-                items: 
+                items:
                   type: object
                   properties:
                     day:
@@ -932,13 +932,13 @@ paths:
                       type: string
                     equipment:
                       type: string
-                    recipe: 
+                    recipe:
                       type: string
                     start_time:
                       type: string
                     end_time:
                       type: string
-                    duration: 
+                    duration:
                       type: object
                       properties:
                         hours:
@@ -954,4 +954,102 @@ paths:
               status:
                 type: string
               data:
-                type: string 
+                type: string
+
+  /api/getSingleProductEquipment/{startDate}/}{endDate}/{name}:
+    get:
+      summary: Getting single product equipment
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-09'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-13'
+          required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: Sub E
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getEquipmentUsageByName/{name}/{ename}:
+    get:
+      summary: Getting usage by equipment
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: 'Sub E'
+          required: true
+        - in: path
+          name: ename
+          schema:
+            type: string
+            example: 'Coconut Grater'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+                    date:
+                      type: string
+                    total_time:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string     
+
