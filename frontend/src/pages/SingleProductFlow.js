@@ -83,7 +83,7 @@ const setEquipmentNameFromDropdown = (selectedEquipment) => {
                 )
  
               }
-               {
+              {
                 selectedProductFlow.startDate === null && (
                   <div>Welcome to Single Product Flow Dashboard. Please Select Date and Recipe Above!</div>
                 )
@@ -92,8 +92,6 @@ const setEquipmentNameFromDropdown = (selectedEquipment) => {
               
             </div>
           </div>
-
-          { }
 
           <div className='pt-2 Row5'>
             {selectedProductFlow.startDate !== null && (
@@ -118,7 +116,6 @@ const setEquipmentNameFromDropdown = (selectedEquipment) => {
                     <LineChart selectedProductFlow={selectedProductFlow}/>
                   )
                 }
-                { selectedProductFlow.equipment.length === 0 && selectedProductFlow.startDate !== null && <div>Please select an equipment</div> }
               </div>
           </div>
           

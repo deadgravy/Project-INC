@@ -14,7 +14,6 @@ export function GanttChart({selectedProductFlow}) {
 
 
   useEffect(() =>{
-    // if(!selectedProductFlow){
       const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
       const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
     fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
@@ -36,23 +35,24 @@ export function GanttChart({selectedProductFlow}) {
           setGanttData([columns, ...rows]);
         }
       }
+
     })
-  // }
   },[])
 
   return (
     <>
-    {ganttData.length > 0 ? (
-        <Chart
-          chartType="Timeline"
-          width="100%"
-          height="50%"
-          data={ganttData}
-          options={options}
-        />
-      ) : <div>No Data Found! Please select again.</div>
-    }
-      </>
+      {ganttData.length > 0 ? (
+          <Chart
+            chartType="Timeline"
+            width="100%"
+            height="50%"
+            data={ganttData}
+            options={options}
+          />
+
+        ) : <div>No Data Found! Please select again.</div>
+      }
+    </>
       
   );
 }

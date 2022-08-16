@@ -4,15 +4,15 @@ import moment from 'moment';
 
 export function LineChart({selectedProductFlow}) {
   const [data,setData]= useState(null);
-  const datatest = [
-    [
-      "Date",
-      "L-Sealer"
-    ],
-    ["2021-08-12T16:00:00.000Z", 34],
-    ["2021-08-15T16:00:00.000Z", 22],
-    ["2021-08-19T16:00:00.000Z", 14],
-  ];
+  // const datatest = [
+  //   [
+  //     "Date",
+  //     "L-Sealer"
+  //   ],
+  //   ["2021-08-12T16:00:00.000Z", 34],
+  //   ["2021-08-15T16:00:00.000Z", 22],
+  //   ["2021-08-19T16:00:00.000Z", 14],
+  // ];
   const options = {
     chart: {
       title: "Legend",
@@ -58,8 +58,7 @@ export function LineChart({selectedProductFlow}) {
       data={data}
       options={options}
     />}
-    
     </>
-    
+
   );
 }
