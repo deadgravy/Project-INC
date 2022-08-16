@@ -86,7 +86,7 @@ module.exports.getEquipmentUsageByName = async function (name,ename) {
         ON log_times.equip_id = physical_devices.id
         INNER JOIN recipes ON log_times.recipe_id = recipes.id  
       )
-      SELECT equip_name, date, -(start_time - end_time) as total_time
+      SELECT date, ROUND(EXTRACT(EPOCH FROM -(start_time - end_time))/60) as total_time
       FROM MFK
       WHERE log_action = 2 AND recipe_name = $1 AND equip_name = $2;`,
       [name,ename]
