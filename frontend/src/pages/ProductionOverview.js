@@ -176,8 +176,8 @@ const ProductionOverview = () => {
                     selectsRange={true}
                     startDate={startDate}
                     endDate={endDate}
-                    // minDate={new Date(dateRange[0])}
-                    // maxDate={addDays(new Date(dateRange[0], 4))}
+                    // minDate={startDate}
+                    // maxDate={addDays(startDate,1)}
                     onChange={onDateSelected}
                     isClearable={true}
                     open={isOpen}
