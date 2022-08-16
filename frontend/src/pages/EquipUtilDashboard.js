@@ -21,7 +21,7 @@ const EquipUtilDashboard = () => {
   const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date('2021-08-11'));
+  const [startDate, setStartDate] = useState(new Date());
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
   const [buttonState, setButtonState] = useState('toggle-button1'); // for toggler
@@ -119,8 +119,8 @@ const EquipUtilDashboard = () => {
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
-                      // minDate={new Date()}
-                      // maxDate={new Date()}
+                      minDate={new Date('2021-08-10')}
+                      maxDate={new Date()}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}
@@ -138,13 +138,23 @@ const EquipUtilDashboard = () => {
                   <h3>Single Recipe Equipment</h3>
                 </div>
                 <div className='Row4'>
-                  <UsageChart data={singleUsage} />
+                  {singleUsage.data.length === 0 ||
+                  singleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <UsageChart data={singleUsage} />
+                  )}
                 </div>
                 <div className='Row5'>
                   <h3>Multiple Recipe Equipment</h3>
                 </div>
                 <div className='Row6'>
-                  <UsageChart data={multipleUsage} />
+                  {singleUsage.data.length === 0 ||
+                  singleUsage.data.length === undefined ? (
+                    <p>NO DATA</p>
+                  ) : (
+                    <UsageChart data={multipleUsage} />
+                  )}
                 </div>
                 <div className='row'>
                   <h5 className='col-9'>Equipment Usage Details</h5>

@@ -33,7 +33,7 @@ export function UsageChart({ data }) {
           let foundCR = colourAndRecipeArr.find(
             (cr) => cr.recipe === item.recipe
           );
-          console.log(`Recipe: ${item.recipe} color is ${foundCR.colour}`);
+          // console.log(`Recipe: ${item.recipe} color is ${foundCR.colour}`);
           return foundCR.colour;
         });
 
@@ -62,32 +62,16 @@ export function UsageChart({ data }) {
 
         // formats data such that react-google-charts can take in
         for (let i = 0; i < data1.length; i++) {
-          console.log(Object.values(data1[i]));
+          // console.log(Object.values(data1[i]));
           const arr = Object.values(data1[i]);
           arr.splice(2, 0, `color: ${colorArr[i]}`);
-          console.log(arr);
+          // console.log(arr);
           // usageArr.push(Object.values(data1[i]));
           usageArr.push(arr);
         }
 
-      if (dayNum !== firstDay) {
-        if (dayNum === 0) {
-          dayNum = 7;
-        } else if (dayNum < firstDay) {
-          dayNum += 7;
-        }
-        let diff = dayNum - firstDay;
-        let diffInMs = diff * 86400000;
-        startMilli -= diffInMs;
-        endMilli -= diffInMs;
-      }
-      usageArr[i][2] = startMilli;
-      usageArr[i][3] = endMilli;
-    }
-  } else {
-          for (let i = 1; i < usageArr.length; i++) {
-              usageArr[i][3] = new Date(usageArr[i][3]);
-    }
+        for (let i = 1; i < usageArr.length; i++) {
+          usageArr[i][3] = new Date(usageArr[i][3]);
           usageArr[i][4] = new Date(usageArr[i][4]);
         }
 
@@ -120,7 +104,7 @@ export function UsageChart({ data }) {
             // colors: coloursArrChart,
             timeline: {
               groupByRowLabel: true,
-              showBarLabels: true,
+              showBarLabels: false,
             },
           }}
         />
