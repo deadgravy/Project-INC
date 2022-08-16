@@ -88,8 +88,8 @@ module.exports.getEquipmentUsageByName = async function (name,ename) {
       )
       SELECT date, ROUND(EXTRACT(EPOCH FROM -(start_time - end_time))/60) as total_time
       FROM MFK
-      WHERE log_action = 2 AND recipe_name = $1 AND equip_name = $2;`,
-      [name,ename]
+      WHERE log_action = 2 AND recipe_name = $1 AND equip_name = $2 AND (date BETWEEN $3 and $4);`,
+      [name, ename, startDate, endDate]
     ); // end of query; 
     return rows;
   } catch (error) {

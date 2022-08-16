@@ -108,7 +108,7 @@ router.get(
 
 // getting the equipment usage by name for single product
 router.get(
-  '/getEquipmentUsageByName/:name/:ename',
+  '/getEquipmentUsageByName/:name/:ename/:startDate/:endDate',
   spfdController.getEquipmentUsageByName
 );
 
