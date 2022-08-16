@@ -1,0 +1,1566 @@
+swagger: 2.0.0
+info:
+  title: FIRC API Documentation
+  description: We will be using this to page to document all the API's used by FIRC
+  version: 0.1.0
+servers:
+  - url: http://localhost:4000/
+    description: default URL for FIRC
+paths:
+  /api/getAllRecipeAndID:
+    get:
+      summary: Get All Recipe and ID for POD
+      tags:
+        - Production Overview Dashboard
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fr_recipe_id:
+                      type: string
+                    name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getRecipesById/{id}:
+    get:
+      summary: Getting recipes by ID for POD
+      tags:
+        - Production Overview Dashboard
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID of Recipe
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fr_recipe_id:
+                      type: string
+                    name:
+                      type: string
+                    queue:
+                      type: integer
+                    fr_process_steps:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        hours:
+                          type: number
+                        minutes:
+                          type: number
+                        seconds:
+                          type: number
+                        milliseconds:
+                          type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/machineConnectivity:
+    get:
+      summary: Get machine connectivity of all machines in EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    client_no:
+                      type: string
+                    ttl:
+                      type: integer
+                    created_at:
+                      type: string
+                    machine_name:
+                      type: string
+                    location_id:
+                      type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/machines:
+    get:
+      summary: Get all machines in EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    machine_name:
+                      type: string
+                    machine_id:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getAllEquipments:
+    get:
+      summary: Getting all equipments in the log_time table for EUS
+      tags:
+        - Equipment Utilisation Snapshot
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipmentid:
+                      type: integer
+                    equipment_name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getEquipmentStartOrStopCount:
+    post:
+      summary: Get a particular equipment start or stop count for EUS (Have to run /getAllEquipmentStartOrStop first)
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: equipmentDetails
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - startOrStop
+              - equipmentId
+              - totalDataLength
+            properties:
+              start:
+                type: string
+                example: '2022-08-10'
+              end:
+                type: string
+                example: '2022-08-10'
+              startOrStop:
+                type: integer
+                example: 1
+              equipmentid:
+                type: integer
+              totalDataLength:
+                type: integer
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    x:
+                      type: string
+                    y:
+                      type: string
+                    equipmentName:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getAllEquipmentStartOrStop:
+    post:
+      summary: Getting total start and stop count during a time frame
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: details
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - startOrStop
+            properties:
+              start:
+                type: string
+                example: '2022-08-10'
+              end:
+                type: string
+                example: '2022-08-10'
+              startOrStop:
+                type: string
+                example: 1
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipmentid:
+                      type: integer
+                    recipeid:
+                      type: integer
+                    equipment_name:
+                      type: string
+                    log_action:
+                      type: integer
+                    log_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getAnomolies:
+    post:
+      summary: Getting anomolies of equipments
+      tags:
+        - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: requestBody
+          schema:
+            type: object
+            required:
+              - start
+              - end
+              - equipmentid
+            properties:
+              start:
+                type: string
+              end:
+                type: string
+              equipmentid:
+                type: array
+                items:
+                  type: integer
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    x:
+                      type: integer
+                    equipmentName:
+                      type: string
+                    y:
+                      type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getAllRecipeName:
+    get:
+      summary: Getting all recipe name
+      tags:
+        - Single Product Flow Dashboard
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleProductWithNameDate/{startDate}/{endDate}/{name}:
+    get:
+      summary: Getting distinct product using date and name
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+                    recipe_name:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getCompletedProducts/{date}:
+    get:
+      summary: Getting completed products by date
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id:
+                      type: integer
+                    name:
+                      type: string
+                    batchescompleted:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getProductsToComplete/{date}:
+    get:
+      summary: Getting products to complete
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe_id:
+                      type: integer
+                    name:
+                      type: string
+                    batchestocomplete:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleEquipmentStatus/{date}:
+    get:
+      summary: Getting single equipment status
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    equipid:
+                      type: string
+                    name:
+                      type: string
+                    productname:
+                      type: string
+                    fr_process_steps:
+                      type: integer
+                    log_time:
+                      type: string
+                    singleormultiple:
+                      type: integer
+                    log_action:
+                      type: integer
+                    timetostarted:
+                      type: object
+                      properties:
+                        hours:
+                          type: integer
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milleseconds:
+                          type: number
+                    queue:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milliseconds:
+                          type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getMultiEquipmentStatus/{date}:
+    get:
+      summary: Get multiple equipment status
+      tags:
+        - Today Production Dashboard
+      parameters:
+        - in: path
+          name: date
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    equipid:
+                      type: string
+                    name:
+                      type: string
+                    productname:
+                      type: string
+                    fr_process_steps:
+                      type: integer
+                    log_time:
+                      type: string
+                    singleormultiple:
+                      type: integer
+                    log_action:
+                      type: integer
+                    timetostarted:
+                      type: object
+                      properties:
+                        hours:
+                          type: integer
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milleseconds:
+                          type: number
+                    queue:
+                      type: integer
+                    process_name:
+                      type: string
+                    desc_translate:
+                      type: string
+                    avg:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+                        milliseconds:
+                          type: number
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/prodCount/{startDate}/{endDate}:
+    get:
+      summary: Getting production count
+      tags:
+        - Production Overview Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-20'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                    count:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleUsageDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment details
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-11'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getMultipleUsageDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment details
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-11'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single usage of equipment weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    day:
+                      type: string
+                    date:
+                      type: string
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    duration:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getMultipleUsageDetailsWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting multiple usage of equipment weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    day:
+                      type: string
+                    date:
+                      type: string
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    duration:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleProductEquipment/{startDate}/}{endDate}/{name}:
+    get:
+      summary: Getting single product equipment
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-09'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-13'
+          required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: Sub E
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getEquipmentUsageByName/{name}/{ename}:
+    get:
+      summary: Getting usage by equipment
+      tags:
+        - Single Product Flow Dashboard
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+            example: 'Sub E'
+          required: true
+        - in: path
+          name: ename
+          schema:
+            type: string
+            example: 'Coconut Grater'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equip_name:
+                      type: string
+                    date:
+                      type: string
+                    total_time:
+                      type: object
+                      properties:
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string     
+
+  /api/login:
+    post:
+      summary: Logging in of user
+      tags:
+        - General
+      parameters:
+        - in: body
+          name: user
+          description: Details of user
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              userId:
+                type: integer
+              user:
+                type: string
+        401:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data: 
+                type: string
+
+  /api/addUser: 
+    post:
+      summary: Adding of user
+      tags:
+        - General
+      parameters:
+        - in: body
+          name: user
+          description: Details of new user
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              contact_number:
+                type: string
+              first_name:
+                type: string
+              last_name:
+                type: string
+              password:
+                type: string
+      responses:
+        201:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status: 
+                type: string
+              data:
+                type: string
+
+  /api/getSingleUsage/{startDate}/{endDate}:
+    get:
+      summary: Getting single usage
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-10'
+      responses:
+        200:
+          schema:
+            type: object  
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getMultipleUsage/{startDate}/{endDate}:
+    get:
+      summary: Getting multiple usage
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-10'
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+  /api/getSingleUsageWeekly/{startDate}/{endDate}:
+    get:
+      summary: Single Usage Weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string   
+
+  /api/getMultipleUsageWeekly/{startDate}/{endDate}:
+    get:
+      summary: Multiple Usage Weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string   
+
+  /api/getSingleUnusedDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single unused details
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+        
+  /api/getMultipleUnusedDetails/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting multiple unused details
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+            example: '2021-08-10'
+          required: true
+        - in: path
+          name: endDate
+          schema:
+            type: string
+            example: '2021-08-16'
+          required: true
+        - in: path
+          name: hour
+          schema:
+            type: string
+            example: '01:00:00'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getSingleUnusedWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting single unused weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+      - in: path
+        name: startDate
+        schema:
+          type: string
+          example: '2021-08-10'
+        required: true
+      - in: path
+        name: endDate
+        schema:
+          type: string
+          example: '2021-08-16'
+        required: true
+      - in: path
+        name: hour
+        schema:
+          type: string
+          example: '01:00:00'
+        required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string      
+
+  /api/getMultipleUnusedWeekly/{startDate}/{endDate}/{hour}:
+    get:
+      summary: Getting multiple unused weekly
+      tags:
+        - Equipment Utilisation Dashboard
+      parameters:
+      - in: path
+        name: startDate
+        schema:
+          type: string
+          example: '2021-08-10'
+        required: true
+      - in: path
+        name: endDate
+        schema:
+          type: string
+          example: '2021-08-16'
+        required: true
+      - in: path
+        name: hour
+        schema:
+          type: string
+          example: '01:00:00'
+        required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipment:
+                      type: string
+                    recipe:
+                      type: string
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                    difference:
+                      type: object
+                      properties:
+                        hours:
+                          type: string
+                        minutes:
+                          type: integer
+                        seconds:
+                          type: integer
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
