@@ -3,7 +3,7 @@ import SideBar from '../components/sidebar/Sidebar';
 import DatePicker from 'react-datepicker';
 import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import Toggler from '../components/general/Toggler';
+import EUDToggler from '../components/eud/EUDToggler';
 import '../styles/toggler.css';
 import { WeeklyChart } from '../components/eud/weeklyChart';
 import {
@@ -145,8 +145,8 @@ const EUDWeekly = () => {
                       scrollableYearDropdown
                     />
                   </div>
-                  <div className='col-10 mr-3 u-flex u-justify-flex-end'>
-                    <Toggler
+                  <div className='col-9 mr-3 u-flex u-justify-flex-end'>
+                    <EUDToggler
                       buttonState={buttonState}
                       setButtonState={setButtonState}
                     />

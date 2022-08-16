@@ -118,7 +118,7 @@ export function WeeklyChart({ data }) {
             <div className='alignIcon mr-2'>
               <CircleIcon
                 className='mr-1'
-                style={{ fill: data.colour, fontSize: 20, fontSize: 20 }}
+                style={{ fill: data.colour, fontSize: 20 }}
               />
               <span>
                 <span>{data.equipment}</span>
