@@ -12,6 +12,7 @@ import {
   WeeklyDetails,
 } from '../components/eud/UsageDetails';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -32,12 +33,12 @@ const EUDWeekly = () => {
   useEffect(() => {
     setIsloading(true);
 
-    var dd = String(startDate.getDate()).padStart(2, '0');
-    var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = startDate.getFullYear();
-
-    let startdate = yyyy + '-' + mm + '-' + dd;
-    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 7}`;
+    let startdate = moment(moment(startDate, 'YYYY-MM-DD')).format(
+      'YYYY-MM-DD'
+    );
+    let enddate = moment(moment(startDate, 'YYYY-MM-DD').add(6, 'days')).format(
+      'YYYY-MM-DD'
+    );
 
     Promise.all([
       fetch(

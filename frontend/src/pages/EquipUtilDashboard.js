@@ -11,6 +11,7 @@ import {
   UsageDetailsForNotUsed,
 } from '../components/eud/UsageDetails';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -31,12 +32,10 @@ const EquipUtilDashboard = () => {
   useEffect(() => {
     setIsloading(true);
 
-    var dd = String(startDate.getDate()).padStart(2, '0');
-    var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = startDate.getFullYear();
-
-    let enddate = yyyy + '-' + mm + '-' + dd;
-    let startdate = `${yyyy}-${mm}-${dd - 1}`;
+    let enddate = moment(moment(startDate, 'YYYY-MM-DD')).format('YYYY-MM-DD');
+    let startdate = moment(
+      moment(startDate, 'YYYY-MM-DD').subtract(1, 'days')
+    ).format('YYYY-MM-DD');
 
     Promise.all([
       fetch(
