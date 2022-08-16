@@ -3,7 +3,7 @@ const config = require('./config');
 
 const db = new Pool({
   user: config.databaseUsername,
-  host: '10.211.55.6',
+  host: 'localhost',
   password: config.databasePassword,
   database: config.userDBName,
   port: config.portname,

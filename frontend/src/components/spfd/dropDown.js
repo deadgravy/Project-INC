@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
 
 export default function DropDown({selectedProductFlow}) {
   const [dropDown, setDropDown] = useState([]);
@@ -27,7 +27,10 @@ export default function DropDown({selectedProductFlow}) {
 
   return( 
     
-    <Dropdown options={dropDown}  placeholder='Please Select a Equipment' />
+    // <Dropdown options={dropDown}  placeholder='Please Select a Equipment' />
+    <div>
+      
+    </div>
 
   );
 }

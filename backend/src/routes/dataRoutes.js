@@ -6,6 +6,7 @@ const dataController = require('../controllers/dataController');
 const loginController = require('../controllers/loginController');
 const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
+const eudController = require('../controllers/eudController');
 const tpdController = require('../controllers/tpdController');
 
 // get all recipes and ID
