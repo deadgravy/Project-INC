@@ -11,6 +11,7 @@ import {
   UsageDetailsForNotUsed,
 } from '../components/eud/UsageDetails';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
