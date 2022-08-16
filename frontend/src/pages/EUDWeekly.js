@@ -3,7 +3,7 @@ import SideBar from '../components/sidebar/Sidebar';
 import DatePicker from 'react-datepicker';
 import '../styles/eud.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import Toggler from '../components/general/Toggler';
+import EUDToggler from '../components/eud/EUDToggler';
 import '../styles/toggler.css';
 import { WeeklyChart } from '../components/eud/weeklyChart';
 import {
@@ -11,6 +11,8 @@ import {
   UsageDetailsForNotUsedWeekly,
   WeeklyDetails,
 } from '../components/eud/UsageDetails';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const EUDWeekly = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -24,17 +26,19 @@ const EUDWeekly = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
+  const [buttonState, setButtonState] = useState('toggle-button2'); // for toggler
+  let navigate = useNavigate();
 
   // useEffect
   useEffect(() => {
     setIsloading(true);
 
-    var dd = String(startDate.getDate()).padStart(2, '0');
-    var mm = String(startDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = startDate.getFullYear();
-
-    let startdate = yyyy + '-' + mm + '-' + dd;
-    let enddate = `${yyyy}-${mm}-${parseInt(dd) + 7}`;
+    let startdate = moment(moment(startDate, 'YYYY-MM-DD')).format(
+      'YYYY-MM-DD'
+    );
+    let enddate = moment(moment(startDate, 'YYYY-MM-DD').add(6, 'days')).format(
+      'YYYY-MM-DD'
+    );
 
     Promise.all([
       fetch(
@@ -48,6 +52,12 @@ const EUDWeekly = () => {
       ).then((res) => res.json()),
       fetch(
         `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
         `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
@@ -77,6 +87,14 @@ const EUDWeekly = () => {
         data: result6.data,
         hour: count,
       });
+      setSingleUnused({
+        data: result5.data,
+        hour: count,
+      });
+      setMultipleUnused({
+        data: result6.data,
+        hour: count,
+      });
 
       setIsloading(false);
     });
@@ -91,6 +109,14 @@ const EUDWeekly = () => {
     }
     console.log(hourinput);
     setHours(hourinput);
+  }
+
+  if (buttonState === 'toggle-button1') {
+    navigate('/equipmentUtilisationDashboard');
+  }
+
+  if (buttonState === 'toggle-button1') {
+    navigate('/equipmentUtilisationDashboard');
   }
 
   return (
@@ -112,15 +138,18 @@ const EUDWeekly = () => {
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       minDate={new Date('2021-08-10')}
-                      maxDate={new Date('2021-08-22')}
+                      maxDate={new Date()}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}
                       scrollableYearDropdown
                     />
                   </div>
-                  <div className='col-10 mr-3 u-flex u-justify-flex-end'>
-                    <Toggler />
+                  <div className='col-9 mr-3 u-flex u-justify-flex-end'>
+                    <EUDToggler
+                      buttonState={buttonState}
+                      setButtonState={setButtonState}
+                    />
                   </div>
                 </div>
                 <div className='Row3'>
