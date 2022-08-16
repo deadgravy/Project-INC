@@ -104,7 +104,7 @@ export function UsageChart({ data }) {
             // colors: coloursArrChart,
             timeline: {
               groupByRowLabel: true,
-              showBarLabels: false,
+              showBarLabels: true,
             },
           }}
         />

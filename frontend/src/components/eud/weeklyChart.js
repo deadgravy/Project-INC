@@ -65,7 +65,6 @@ export function WeeklyChart({ data }) {
 
         // formats data such that react-google-charts can take in
         for (let i = 0; i < data1.length; i++) {
-          // console.log(Object.values(data1[i]));
           const arr = Object.values(data1[i]);
           arr.splice(2, 0, `color: ${colorArr[i]}`);
           // // console.log(arr);
@@ -119,9 +118,11 @@ export function WeeklyChart({ data }) {
             <div className='alignIcon mr-2'>
               <CircleIcon
                 className='mr-1'
-                style={{ fill: data.colour, fontSize: 20 }}
+                style={{ fill: data.colour, fontSize: 20, fontSize: 20 }}
               />
-              <span>{data.equipment}</span>
+              <span>
+                <span>{data.equipment}</span>
+              </span>
             </div>
           ))
         )}

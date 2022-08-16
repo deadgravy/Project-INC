@@ -21,6 +21,8 @@ const EUDWeekly = () => {
   const [multipleDetails, setMultipleDetails] = useState(null);
   const [singleUnused, setSingleUnused] = useState(null);
   const [multipleUnused, setMultipleUnused] = useState(null);
+  const [singleUnused, setSingleUnused] = useState(null);
+  const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
@@ -59,32 +61,58 @@ const EUDWeekly = () => {
       fetch(
         `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
-    ]).then(([result1, result2, result3, result4, result5, result6]) => {
-      setSingleUsage({
-        data: result1.data,
-        count: count,
-      });
-      setMultipleUsage({
-        data: result2.data,
-      });
-      setSingleDetails({
-        data: result3.data,
-      });
-      setMultipleDetails({
-        data: result4.data,
-      });
-      setSingleUnused({
-        data: result5.data,
-        hour: count,
-      });
-      setMultipleUnused({
-        data: result6.data,
-        hour: count,
-      });
+      fetch(
+        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
+      ).then((res) => res.json()),
+    ]).then(
+      ([
+        result1,
+        result2,
+        result3,
+        result4,
+        result5,
+        result6,
+        result5,
+        result6,
+      ]) => {
+        setSingleUsage({
+          data: result1.data,
+          count: count,
+          count: count,
+        });
+        setMultipleUsage({
+          data: result2.data,
+        });
+        setSingleDetails({
+          data: result3.data,
+        });
+        setMultipleDetails({
+          data: result4.data,
+        });
+        setSingleUnused({
+          data: result5.data,
+          hour: count,
+        });
+        setMultipleUnused({
+          data: result6.data,
+          hour: count,
+        });
+        setSingleUnused({
+          data: result5.data,
+          hour: count,
+        });
+        setMultipleUnused({
+          data: result6.data,
+          hour: count,
+        });
 
-      setIsloading(false);
-    });
-  }, [startDate, hour, count]);
+        setIsloading(false);
+      }
+    );
+  }, [startDate, hour, count, count]);
 
   function handleHours(hourinput) {
     setCount(hourinput);
@@ -95,6 +123,10 @@ const EUDWeekly = () => {
     }
     console.log(hourinput);
     setHours(hourinput);
+  }
+
+  if (buttonState === 'toggle-button1') {
+    navigate('/equipmentUtilisationDashboard');
   }
 
   if (buttonState === 'toggle-button1') {
@@ -129,6 +161,8 @@ const EUDWeekly = () => {
                   </div>
                   <div className='col-10 mr-3 u-flex u-justify-flex-end'>
                     <Toggler
+                      buttonState={buttonState}
+                      setButtonState={setButtonState}
                       buttonState={buttonState}
                       setButtonState={setButtonState}
                     />
