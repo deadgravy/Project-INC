@@ -6,6 +6,8 @@ import { Tab } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
@@ -19,10 +21,6 @@ const TodayProduction = () => {
 
   //Intro.js
   const steps = [
-    {
-      element: "#title",
-      intro: "Today's Production Dashboard: This dashboard system provides the current status of equipments and the current product status"
-    },
     {
       element: ".col-3",
       intro: "You may select a date to view its data e.g. 2021/08/20"
@@ -73,6 +71,15 @@ const TodayProduction = () => {
     let filtereddate = `${yyyy}-${mm}-${dd}`;
 
     Promise.all([
+      // fetch(`http://localhost:4000/api/getCompletedProducts`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     date: filtereddate
+      //   })
+      // }),
       fetch(`http://localhost:4000/api/getCompletedProducts/${filtereddate}`).then((res) => res.json()),
       fetch(`http://localhost:4000/api/getProductsToComplete/${filtereddate}`).then((res) => res.json()),
       fetch(`http://localhost:4000/api/getSingleEquipmentStatus/${filtereddate}`).then((res) => res.json()),
@@ -119,7 +126,7 @@ const TodayProduction = () => {
             initialStep={initialStep}
             onExit={onExit}
           />
-          <div className="tpdHeader" id="title">
+          <div className="tpdHeader">
             <h1>Today's Production Dashboard</h1>
           </div>
           
@@ -128,7 +135,7 @@ const TodayProduction = () => {
           </div>
           <br/>
           <div className="liveEquipSection">
-                <div className='col-3'>
+                <div className='col-3' onClick={toggleSteps}>
                   <DatePicker
                     selected={date}
                     onChange={(date) => setDate(date)}
