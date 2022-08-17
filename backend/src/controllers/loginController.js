@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config/database');
+const config = require('../config/config');
 const loginService = require('../services/loginService');
 const bcrypt = require('bcrypt');
 
@@ -10,11 +10,21 @@ module.exports.verify = async function (req, res, next) {
 
     if (bcrypt.compareSync(password, results[0].password_hash)) {
       console.log('it matches');
-      res.status(200).json({
-        status: 'successfully logged in',
-        userId: results[0].user_id,
-        user: results[0].first_name,
-      });
+      let data = {
+        displayName: results[0].first_name + ' ' + results[0].last_name,
+        email: results[0].email,
+        token: jwt.sign(
+          {
+            userId: results[0].user_id,
+            email: results[0].email,
+          },
+          config.JWTKey,
+          {
+            expiresIn: 3 * 60, //Expires in 3 mins
+          }
+        ),
+      };
+      return res.status(200).send(data);
     } else {
       console.log('invalid password');
       res.status(401).json({
