@@ -121,6 +121,8 @@ router.get(
   eudController.getMultipleWeeklyDetails
 );
 
+router.post('/getAnomolies', dataController.getAnomolies);
+
 // getting the equipment name for single product
 router.get(
   '/getSingleProductEquipment/:startDate/:endDate/:name',
@@ -132,5 +134,6 @@ router.get(
   '/getEquipmentUsageByName/:name/:ename',
   spfdController.getEquipmentUsageByName
 );
+
 
 module.exports = router;
