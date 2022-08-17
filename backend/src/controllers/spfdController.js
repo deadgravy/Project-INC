@@ -63,25 +63,9 @@ module.exports.getSingleProductEquipment = async function (req, res, next) {
 module.exports.getEquipmentUsageByName = async function (req, res, next) {
   let name = req.params.name;
   let ename = req.params.ename;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  let startDate = req.params.startDate;
-  let endDate = req.params.endDate;
-  
+
   try {
-    const results = await itzy.getEquipmentUsageByName(name, ename, startDate, endDate);
-=======
-  try {
-    const results = await itzy.getEquipmentUsageByName(name, ename);
->>>>>>> 8fc1839e (somehow got the ganttchart working but is still hard coded)
-=======
-  let startDate = req.params.startDate;
-  let endDate = req.params.endDate;
-  
-  try {
-    const results = await itzy.getEquipmentUsageByName(name, ename, startDate, endDate);
->>>>>>> 9a1e1323ce26410ff797164eca61b08a54a81865
-    
+    const results = await itzy.getEquipmentUsageByName(name, ename);   
     console.log(results);
     res.status(200).json({
       status: 'success',

@@ -1,8 +1,9 @@
+import { grey } from '@mui/material/colors';
 import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
  
  
-export function GanttChart({selectedProductFlow}) {
+export function GanttChart({selectedProductFlow, plsShowEPA, resetSelectedProductFlow}) {
   const columns = [
     { type: "string", id: "Equipment" },
     { type: "string", id: "Recipe" },
@@ -33,11 +34,15 @@ export function GanttChart({selectedProductFlow}) {
         console.log("rows", rows);
         if(rows.length > 0){
           setGanttData([columns, ...rows]);
+          plsShowEPA(true);
+          resetSelectedProductFlow()
+        } else {
+          setGanttData([]);
+          plsShowEPA(false);
         }
       }
- 
     })
-  },[])
+  },[selectedProductFlow.endDate])
  
  
  
@@ -53,7 +58,11 @@ export function GanttChart({selectedProductFlow}) {
             options={options}
           />
  
-        ) : <div>No Data Found! Please select again.</div>
+        ) : <div>
+            <h6 style={{backgroundColor: '#d3d3d3' ,color: '#f36b25' ,display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200}}>
+              No Data Found! Please Select Again.
+            </h6>
+          </div>
       }
     </>
      

@@ -70,11 +70,11 @@ router.post(
   dataController.getEquipmentStartOrStopCount
 );
 
-<<<<<<< HEAD
 router.post(
   '/getAllEquipmentStartOrStop',
   dataController.getAllEquipmentStartOrStopCount
-=======
+)
+
 // get weekly usage details  for single recipe equipment
 router.get(
   '/getSingleUsageDetailsWeekly/:startdate/:enddate/:hour',
@@ -97,23 +97,15 @@ router.get(
 router.get(
   '/getEquipmentUsageByName/:name/:ename/:startDate/:endDate',
   spfdController.getEquipmentUsageByName
->>>>>>> 25ca2a5a (added line graph and error handling)
 );
 
-<<<<<<< HEAD
 router.post('/getAnomolies', dataController.getAnomolies);
-=======
-// getting the equipment name for single product
-router.get(
-  '/getSingleProductEquipment/:startDate/:endDate/:name',
-  spfdController.getSingleProductEquipment
-);
 
 // getting the equipment usage by name for single product
 router.get(
   '/getEquipmentUsageByName/:name/:ename',
   spfdController.getEquipmentUsageByName
 );
->>>>>>> 8fc1839e (somehow got the ganttchart working but is still hard coded)
+
 
 module.exports = router;

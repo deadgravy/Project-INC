@@ -11,7 +11,9 @@ const MODAL_STYLES = {                                     //Styles for the cont
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
-  zIndex: 1000
+  zIndex: 1000,
+  width: 300,
+  // height: 800
 }
  
 const OVERLAY_STYLES = {                                   //Styles for the background
@@ -29,8 +31,7 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [recipes, setRecipes] = useState([]);
- 
- 
+  const [recipeSelected, setRecipeSelected] = useState('');
  
   useEffect(() =>{
     fetch('http://localhost:4000/api/getAllRecipeName')
@@ -43,53 +44,61 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
     })
   },[])
  
+  const onContinue = () => {
+    setIsOpen(false);
+    setSelectedProductFlow({...selectedProductFlow, recipeName: recipeSelected, startDate: dateRange[0], endDate: dateRange[1]})
+  }
+
   return ReactDom.createPortal (
     <>
       <div style={OVERLAY_STYLES}/>
       <div style={MODAL_STYLES}>
         {
-          <form>
+          <div>
             <div>
-                  <DatePicker
-                    placeholderText="Please Select Date"
-                    dateFormat="yyyy/MM/dd"
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate}
-                    maxDate={addDays(startDate, 4)}
-                    onChange={(update) => {
-                      setDateRange(update)
-                    }}
-                    isClearable={true}
-                  />
-                </div>
+              <DatePicker    
+                placeholderText="Please Select Date"
+                dateFormat="yyyy/MM/dd"
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                maxDate={addDays(startDate, 4)}
+                onChange={(update) => {
+                  setDateRange(update)
+                }}
+                isClearable={true}
+              />
+            </div>
  
-                <div>
-                  {recipes.map((recipe, index) => {
-                    return (
-                      <div key={index} style={{height: "1rem"}} className='radioButton'>
-                        <input
-                          id={recipe.name}
-                          name={recipe.name}
-                          className='form-ext-input'
-                          type='radio'
-                          onChange={() => {
-                            setSelectedProductFlow({...selectedProductFlow, recipeName: recipe.name, startDate: dateRange[0], endDate: dateRange[1]})
-                          }}
-                        />
-                        <label className='form-ext-label' htmlFor={recipe.name}>
-                          {recipe.name}
-                        </label>
-                      </div>
-                    )
-                  })}
-                </div>
-          </form>
+            <div>
+              {recipes.map((recipe, index) => {
+                return (
+                  <div key={index} style={{height: "1rem"}} className='radioButton'>
+                    <input
+                      id={recipe.name}
+                      name={recipe.name}
+                      value={recipe.name}
+                      className='form-ext-input'
+                      type='radio'
+                      onChange={(e) => {
+                        // setSelectedProductFlow({...selectedProductFlow, recipeName: recipe.name, startDate: dateRange[0], endDate: dateRange[1]})
+                        console.log(e.target.value)
+                        setRecipeSelected(e.target.value)
+                      }}
+                    />
+                    <label className='form-ext-label' htmlFor={recipe.name}>
+                      {recipe.name}
+                    </label>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         }
         {}
-        <button onClick={() => setIsOpen(false)}>Continue</button>
-        <button onClick={() => setIsOpen(false)}>Close</button>
+        <button onClick={onContinue} style={{backgroundColor: 'green' ,color: '#FFFF'}}>Continue</button>
+        <button onClick={() => setIsOpen(false)} style={{backgroundColor: 'red' ,color: '#FFFF'}}>Close</button>
       </div>
     </>,
     document.getElementById('portal')
