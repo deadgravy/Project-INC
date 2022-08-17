@@ -15,7 +15,6 @@ export function GanttChart({selectedProductFlow}) {
   useEffect(() =>{
     const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
     const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
-
     fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
     .then((res) => res.json())
     .then(data => {
