@@ -35,7 +35,6 @@ export function GanttChart({selectedProductFlow}) {
           setGanttData([columns, ...rows]);
         }
       }
- 
     })
   },[])
 
