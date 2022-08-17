@@ -57,6 +57,74 @@ module.exports.getRecipebyRecipeID = async function (req, res, next) {
   }
 }; // End of async function(req,res,next)
 
+module.exports.getCompletedProducts = async function (req, res, next) {
+  try {
+    const results = await dataManager.getCompletedProducts();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)
+
+module.exports.getProductsToComplete = async function (req, res, next) {
+  try {
+    const results = await dataManager.getProductsToComplete();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)
+
+module.exports.getSingleEquipmentStatus = async function (req, res, next) {
+  try {
+    const results = await dataManager.getSingleEquipmentStatus();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)
+
+module.exports.getMultiEquipmentStatus = async function (req, res, next) {
+  try {
+    const results = await dataManager.getMultiEquipmentStatus();
+    console.log(results);
+    res.status(200).json({
+      status: 'success',
+      data: results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)
+
 module.exports.getMachineConnectivity = async function (req, res, next) {
   try {
     const results = await dataManager.getMachineConnectivity();
@@ -150,7 +218,11 @@ module.exports.getEquipmentStartOrStopCount = async function (req, res, next) {
   }
 };
 
-module.exports.getAllEquipmentStartOrStopCount = async function (req, res, next) {
+module.exports.getAllEquipmentStartOrStopCount = async function (
+  req,
+  res,
+  next
+) {
   try {
     const results = await dataManager.getAllEquipmentStartOrStop(
       req.body.start + ' 00:00:00',
@@ -176,7 +248,7 @@ module.exports.getAnomolies = async function (req, res, next) {
     const results = await dataManager.getAnomolies(
       req.body.start + ' 00:00:00',
       req.body.end + ' 23:59:59',
-      req.body.equipmentid,
+      req.body.equipmentid
     );
     res.status(200).json({
       status: 'success',
@@ -189,4 +261,4 @@ module.exports.getAnomolies = async function (req, res, next) {
       data: null,
     });
   }
-}
+};
