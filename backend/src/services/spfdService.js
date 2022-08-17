@@ -40,6 +40,7 @@ module.exports.getAllRecipeName = async function () {
   }
 };
 
+
 module.exports.getSingleProductEquipment = async function (name,startDate,endDate) {
   try {
     const { rows } = await Pool.query(
