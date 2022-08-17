@@ -109,4 +109,3 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
     </>,
     document.getElementById('portal')
   )
-}
