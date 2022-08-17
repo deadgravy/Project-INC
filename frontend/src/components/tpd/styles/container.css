@@ -12,8 +12,8 @@
     margin-left: 5px;
 }
 
-.mostly-customized-scrollbar::-webkit-scrollbar {
+/* .mostly-customized-scrollbar::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: #aaa; /* or add it to the track */
-}
+    background-color: #aaa;
+} */

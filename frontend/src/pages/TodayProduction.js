@@ -16,7 +16,7 @@ const TodayProduction = () => {
   const [multiEquipmentStatusData, setMultiEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
   const [date, setDate] = useState(new Date());
-  const stepsEnabled = true;
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const initialStep = 0;
 
   //Intro.js
@@ -56,11 +56,11 @@ const TodayProduction = () => {
   ];
 
   const onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    setStepsEnabled(false);
   };
 
   const toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    setStepsEnabled(true);
   };
 
   // useEffect
@@ -109,7 +109,7 @@ const TodayProduction = () => {
     <React.StrictMode>
     <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
     <div className='po-sidebar sidebar col-2'>
-          <Sidebar />
+      <Sidebar />
     </div>
     <div className="App">
       {!isLoading ? (
@@ -121,8 +121,11 @@ const TodayProduction = () => {
             initialStep={initialStep}
             onExit={onExit}
           />
-          <div className="tpdHeader" id="title">
-            <h1>Today's Production Dashboard</h1>
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div className="tpdHeader" id="title">
+              <h1>Today's Production Dashboard</h1>
+            </div>
+            <button style={{marginLeft: 20, height: 60, marginTop: 20}} onClick={toggleSteps}>Toggle Steps</button>
           </div>
           
           <div className="liveEquipHeader">
@@ -130,7 +133,7 @@ const TodayProduction = () => {
           </div>
           <br/>
           <div className="liveEquipSection">
-                <div className='col-3' onClick={toggleSteps}>
+                <div className='col-3'>
                   <DatePicker
                     selected={date}
                     onChange={(date) => setDate(date)}

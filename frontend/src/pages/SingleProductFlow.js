@@ -15,7 +15,7 @@ const SingleProductFlow = () => {
     "startDate": null,
     "endDate": null
   });
-  const stepsEnabled = true;
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const initialStep = 0;
   console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
@@ -30,11 +30,11 @@ const SingleProductFlow = () => {
   ];
 
   const onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    setStepsEnabled(false);
   };
 
   const toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    setStepsEnabled(true);
   };
   
   useEffect(() =>{

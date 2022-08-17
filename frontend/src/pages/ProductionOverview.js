@@ -32,7 +32,7 @@ const ProductionOverview = () => {
   const [startDate, setStartDate] = useState(new Date('2021-08-10'));
   const [endDate, setEndDate] = useState(new Date('2021-08-21'));
   const [isOpen, setIsOpen] = useState(false);
-  const stepsEnabled = true;
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const initialStep = 0;
 
   const params = useParams();
@@ -82,11 +82,11 @@ const ProductionOverview = () => {
   ];
 
   const onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    setStepsEnabled(false);
   };
 
   const toggleSteps = () => {
-    this.setState((prevState) => ({ stepsEnabled: !prevState.stepsEnabled }));
+    setStepsEnabled(true);
   };
 
   function handleChange(e) {
@@ -212,8 +212,11 @@ const ProductionOverview = () => {
       </div>
 
       <div className='po-display col-10 px-4 py-6'>
+      <div style={{display: 'flex', flexDirection: 'row'}}>
         <div className='title'>
           <h1>Production Overview Dashboard</h1>
+          </div>
+          <button style={{marginLeft: 20}} onClick={toggleSteps}>Toggle Steps</button>
         </div>
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>

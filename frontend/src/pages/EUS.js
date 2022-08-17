@@ -6,6 +6,7 @@ import '../styles/eus.css';
 import '../styles/toggler.css';
 import 'intro.js/introjs.css';
 import { Steps, Hints } from "intro.js-react";
+import introJs from 'intro.js';
 <style>
   .modal {{
     top: '0 !important'
@@ -16,7 +17,7 @@ const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
   const [allEquipments, setAllEquipments] = useState(null);
   const [isLoading, setIsloading] = useState(true);
-  const stepsEnabled = true;
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const initialStep = 0;
 
   //Intro.js
@@ -52,11 +53,11 @@ const EUS = () => {
   ];
 
   const onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    setStepsEnabled(false);
   };
 
   const toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    setStepsEnabled(true);
   };
 
   // Calling /machines/ & /machinesConnecitivity/
@@ -119,7 +120,10 @@ const EUS = () => {
           initialStep={initialStep}
           onExit={onExit}
         />
+        <div style={{display: 'flex', flexDirection: 'row'}}>
         <h1 id='title'>Equipment Utilisation Snapshot</h1>
+        <button style={{marginLeft: 20}} onClick={toggleSteps}>Toggle Steps</button>
+        </div>
         {!isLoading ? (
           <div className='eus-components'>
             <div className='machineConnectivity'>

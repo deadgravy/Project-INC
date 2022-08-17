@@ -195,7 +195,7 @@ export default function TableComponent({ data1, data2 }) {
     <div id="table-scroll">
       <div className="p-4 bg-white-500 u-round-xs">
         <div className="table">
-          <table className="fixed-header">
+          <table className="fixed-header"  >
             <thead>
               <tr>
                 <th>Equipment:</th>

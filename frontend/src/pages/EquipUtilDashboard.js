@@ -30,7 +30,7 @@ const EquipUtilDashboard = () => {
   const [count, setCount] = useState(1);
   const [buttonState, setButtonState] = useState('toggle-button1'); // for toggler
   let navigate = useNavigate();
-  const stepsEnabled = true;
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const initialStep = 0;
 
   //Intro.js
@@ -74,13 +74,12 @@ const EquipUtilDashboard = () => {
   ];
 
   const onExit = () => {
-    this.setState(() => ({ stepsEnabled: false }));
+    setStepsEnabled(false);
   };
 
   const toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    setStepsEnabled(true);
   };
-
   // useEffect
   useEffect(() => {
     setIsloading(true);
@@ -180,8 +179,11 @@ const EquipUtilDashboard = () => {
           <div className='App'>
             {!isLoading ? (
               <div>
-                <div className='pt-2 Row1' id='title'>
-                  <h2>Equipment Utilisation Dashboard</h2>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                  <div className='pt-2 Row1' id='title'>
+                    <h2>Equipment Utilisation Dashboard</h2>
+                  </div>
+                  <button style={{marginLeft: 20, height: 60, marginTop: 20}} onClick={toggleSteps}>Toggle Steps</button>
                 </div>
                 <div className='Row2'>
                   <div className='col-2' id='datePicker'>
