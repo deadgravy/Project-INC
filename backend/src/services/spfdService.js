@@ -91,7 +91,7 @@ module.exports.getEquipmentUsageByName = async function (name,ename) {
       FROM MFK
       WHERE log_action = 2 AND recipe_name = $1 AND equip_name = $2 AND (date BETWEEN $3 and $4);`,
       [name,ename, startDate, endDate]
-    ); // end of query; 
+    ); // end of query;
     return rows;
   } catch (error) {
     console.log(error);
