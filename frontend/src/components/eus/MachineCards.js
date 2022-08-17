@@ -2,7 +2,9 @@ import moment from 'moment';
 import React, { useState } from 'react';
 
 const MachineCards = ({ data }) => {
-  let [connection, setConnection] = useState(data.ttl === 10 ? 'disconnected' : 'connected');
+  let [connection, setConnection] = useState(
+    data.ttl === 10 ? 'disconnected' : 'connected'
+  );
 
   return (
     <div className='card'>

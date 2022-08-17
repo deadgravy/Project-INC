@@ -156,12 +156,13 @@ const EquipmentDetails = ({ allEquipments }) => {
         expandIcon={<ExpandMoreIcon />}
         aria-controls='panel1a-content'
         id='panel1a-header'
+        className='equipFreq'
       >
         <Typography className='text-xl font-bold pl-2'>
           Equipment Frequency
         </Typography>
       </AccordionSummary>
-      <AccordionDetails className='row py-2'>
+      <AccordionDetails className='row py-2' id='freqData'>
         <div className='col-10'>
           <div className='w-60p u-text-center'>
             <h4 className='mt-2'>{date}</h4>
@@ -225,17 +226,19 @@ const EquipmentDetails = ({ allEquipments }) => {
             parentCounter={parentCounter}
             setParentCounter={setParentCounter}
           />
-          <Legend
-            equipmentFrequencyData={equipmentFrequencyData}
-            colorScheme={colorScheme}
-            name={'Initial Legend'}
-          />
+          <div id='legend'>
+            <Legend
+              equipmentFrequencyData={equipmentFrequencyData}
+              colorScheme={colorScheme}
+              name={'Initial Legend'}
+            />
+          </div>
           <div style={{ display: compare ? 'block' : 'none' }}>
-          <Legend
-            equipmentFrequencyData={compareFrequencyData}
-            colorScheme={colorScheme}
-            name={'Comparison Legend'}
-          />
+            <Legend
+              equipmentFrequencyData={compareFrequencyData}
+              colorScheme={colorScheme}
+              name={'Comparison Legend'}
+            />
           </div>
         </div>
       </AccordionDetails>

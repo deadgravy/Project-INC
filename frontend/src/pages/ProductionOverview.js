@@ -16,6 +16,8 @@ import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import SearchBar from '../components/pod/SearchBar';
 import moment from 'moment';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from 'intro.js-react';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
@@ -30,9 +32,62 @@ const ProductionOverview = () => {
   const [startDate, setStartDate] = useState(new Date('2021-08-10'));
   const [endDate, setEndDate] = useState(new Date('2021-08-21'));
   const [isOpen, setIsOpen] = useState(false);
+  const [stepsEnabled, setStepsEnabled] = useState(false);
+  const initialStep = 0;
 
   const params = useParams();
   // This is for the select (Do it yourself) - George
+
+  //Intro.js
+  const steps = [
+    {
+      element: '.title',
+      intro:
+        ' Welcome to the Production Overview Dashboard. The production Overview dashboard provides the user with the ability to view the trend in production while simultaneously showing the user the average time taken to complete an individual recipe.',
+    },
+    {
+      element: '.searchComponent',
+      intro:
+        'Through the search bar, the user can search for a specific recipe.',
+    },
+    {
+      element: '.modalComponent',
+      intro:
+        'Upon pressing this radio button the user will be prompted with a pop-up window to select the product that they wish to view.',
+    },
+    {
+      element: '.chartComponent',
+      intro:
+        'This chart will allow the user to view the average time taken for the recipe to be produced.',
+    },
+    {
+      element: '.boxComponent',
+      intro: 'A complete breakdown of the production steps can be seen here.',
+    },
+    {
+      element: '.datePicker',
+      intro:
+        'The date picker allows the user to select a date range to view the number of products produced .',
+    },
+    {
+      element: '#graphPicker',
+      intro:
+        'The graph picker allows the user to select a graph to view the number of products produced .',
+    },
+    {
+      element: '#lineChart',
+      intro:
+        'This is the chart you can use to view the trend in production and see how many recipes were produed in that given day.Hover your mouse over to view the production count.',
+    },
+  ];
+
+  const onExit = () => {
+    setStepsEnabled(false);
+  };
+
+  const toggleSteps = () => {
+    setStepsEnabled(true);
+  };
 
   function handleChange(e) {
     setGraph(() => e.target.value);
@@ -146,11 +201,25 @@ const ProductionOverview = () => {
   //http://localhost:4000/api/data/data1
   return (
     <div className='productionOverview row p-0'>
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+      />
       <div className='po-sidebar sidebar col-2'>
         <SideBar />
       </div>
+
       <div className='po-display col-10 px-4 py-6'>
-        <h1>Production Overview Dashboard</h1>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div className='title'>
+            <h1>Production Overview Dashboard</h1>
+          </div>
+          <button style={{ marginLeft: 20 }} onClick={toggleSteps}>
+            Toggle Steps
+          </button>
+        </div>
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
             <SearchBar data1={allProductData} />
@@ -164,12 +233,16 @@ const ProductionOverview = () => {
             <div>
               <div className='row'>
                 <ErrorPage>
-                  <ChartComponent data={prodOverviewData} />
-                  <BoxComponent data={prodOverviewData} />
+                  <div className='chartComponent'>
+                    <ChartComponent data={prodOverviewData} />
+                  </div>
+                  <div className='boxComponent'>
+                    <BoxComponent data={prodOverviewData} />
+                  </div>
                 </ErrorPage>
               </div>
               <div className='usersChoice col-12 w-100p mt-4'>
-                <div>
+                <div className='datePicker'>
                   <DatePicker
                     placeholderText='Please Select Date'
                     dateFormat='yyyy-MM-dd'
@@ -185,7 +258,7 @@ const ProductionOverview = () => {
                     onClickOutside={() => setIsOpen(false)}
                   />
                 </div>
-                <FormControl className='col-3'>
+                <FormControl className='col-3' id='graphPicker'>
                   <InputLabel id='demo-simple-select-label'>
                     Pick a Graph
                   </InputLabel>
@@ -202,6 +275,7 @@ const ProductionOverview = () => {
                 </FormControl>
               </div>
               <div
+                id='lineChart'
                 className='row'
                 style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
               >

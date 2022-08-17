@@ -10,7 +10,7 @@ const Legend = ({ equipmentFrequencyData, colorScheme, name }) => {
   const equipments = [];
   for (let i = 0; i < equipmentFrequencyData.length; i++) {
     equipments.push(
-      <span style={{display: 'flex', verticalAlign: 'middle'}} key={i}>
+      <span style={{ display: 'flex', verticalAlign: 'middle' }} key={i}>
         <i className='fas fa-circle mt-1' style={{ color: colorScheme[i] }}></i>
         <p className='ml-1'>{equipmentFrequencyData[i].equipmentName}</p>
       </span>
@@ -26,9 +26,7 @@ const Legend = ({ equipmentFrequencyData, colorScheme, name }) => {
         >
           <Typography>{name}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          {equipments}
-        </AccordionDetails>
+        <AccordionDetails>{equipments}</AccordionDetails>
       </Accordion>
     </div>
   );

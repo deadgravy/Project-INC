@@ -4,16 +4,69 @@ import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from 'intro.js-react';
+import introJs from 'intro.js';
 <style>
-  .modal {{
-    top: '0 !important'
+  .modal{' '}
+  {{
+    top: '0 !important',
   }}
-</style>
+</style>;
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
   const [allEquipments, setAllEquipments] = useState(null);
   const [isLoading, setIsloading] = useState(true);
+  const [stepsEnabled, setStepsEnabled] = useState(false);
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: '#title',
+      intro:
+        'Welcome to the Equipment Utilisation Snapshot! This page aims to give you a better understanding of the equipment frequency and machine status in real time',
+    },
+    {
+      element: '#panel1a-header',
+      intro:
+        'This is the machine connectivity section! This will give you an indication whether a machine is connected to the database currently. ',
+    },
+    {
+      element: '#cards',
+      intro:
+        'This part shows all the machines in your database. For your reference, red means disconnected whilst green means connected',
+    },
+    {
+      element: '.equipFreq',
+      intro:
+        'This section will show the equipment frequency based on type of counter and date selected',
+    },
+    {
+      element: '#freqData',
+      intro:
+        'Here will show the data upon the current date by default but as there is no data currently, it will show no data is shown.',
+    },
+    {
+      element: '#modal',
+      intro:
+        'To make changes to what is displayed on the graph, we have created a modal for you to make your choice. Here is where you can change the date and type of counters. Furthermore, there is a data comparison choice.',
+    },
+    {
+      element: '#legend',
+      intro:
+        'The legend will correspond with the equipments in the graph shown by color coding.',
+    },
+  ];
+
+  const onExit = () => {
+    setStepsEnabled(false);
+  };
+
+  const toggleSteps = () => {
+    setStepsEnabled(true);
+  };
 
   // Calling /machines/ & /machinesConnecitivity/
   useEffect(() => {
@@ -69,7 +122,18 @@ const EUS = () => {
         <Sidebar />
       </div>
       <div className='eus-display col-10 px-4 py-6'>
-        <h1>Equipment Utilisation Snapshot</h1>
+        <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={onExit}
+        />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <h1 id='title'>Equipment Utilisation Snapshot</h1>
+          <button style={{ marginLeft: 20 }} onClick={toggleSteps}>
+            Toggle Steps
+          </button>
+        </div>
         {!isLoading ? (
           <div className='eus-components'>
             <div className='machineConnectivity'>

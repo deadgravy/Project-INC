@@ -6,6 +6,8 @@ import { Tab } from '@mui/material';
 import Sidebar from '../components/sidebar/Sidebar';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from 'intro.js-react';
 
 const TodayProduction = () => {
   const [completedProductsData, setCompletedProductsData] = useState(null);
@@ -17,6 +19,54 @@ const TodayProduction = () => {
     useState(null);
   const [isLoading, setIsloading] = useState(true);
   const [date, setDate] = useState(new Date());
+  const [stepsEnabled, setStepsEnabled] = useState(false);
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: '#title',
+      intro:
+        "Today's Production Dashboard: This dashboard system provides the current status of equipments and the current product status",
+    },
+    {
+      element: '.col-3',
+      intro: 'You may select a date to view its data e.g. 2021/08/20',
+    },
+    {
+      element: '.singleProduct',
+      intro: 'View single product equipments currently running',
+    },
+    {
+      element: '.multiProduct',
+      intro: 'View multi product equipments currently running',
+    },
+    {
+      element: '.tableComponent',
+      intro: 'Live equipment status table',
+    },
+    {
+      element: '.allProducts',
+      intro: 'View all product status',
+    },
+    {
+      element: '.productStatus',
+      intro:
+        'Displays total count of completed and incomplete products respectively',
+    },
+    {
+      element: '.containerChart',
+      intro: 'This is the Product Status Chart',
+    },
+  ];
+
+  const onExit = () => {
+    setStepsEnabled(false);
+  };
+
+  const toggleSteps = () => {
+    setStepsEnabled(true);
+  };
 
   // useEffect
   useEffect(() => {
@@ -29,15 +79,6 @@ const TodayProduction = () => {
     let filtereddate = `${yyyy}-${mm}-${dd}`;
 
     Promise.all([
-      // fetch(`http://localhost:4000/api/getCompletedProducts`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     date: filtereddate
-      //   })
-      // }),
       fetch(
         `http://localhost:4000/api/getCompletedProducts/${filtereddate}`
       ).then((res) => res.json()),
@@ -83,8 +124,22 @@ const TodayProduction = () => {
         <div className='App'>
           {!isLoading ? (
             <div>
-              <div className='tpdHeader'>
-                <h1>Today's Production Dashboard</h1>
+              <Steps
+                enabled={stepsEnabled}
+                steps={steps}
+                initialStep={initialStep}
+                onExit={onExit}
+              />
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div className='tpdHeader' id='title'>
+                  <h1>Today's Production Dashboard</h1>
+                </div>
+                <button
+                  style={{ marginLeft: 20, height: 60, marginTop: 20 }}
+                  onClick={toggleSteps}
+                >
+                  Toggle Steps
+                </button>
               </div>
 
               <div className='liveEquipHeader'>
