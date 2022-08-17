@@ -9,9 +9,9 @@ import { LineChart } from '../components/spfd/lineChart';
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedProductFlow, setSelectedProductFlow] = useState({
-    "recipeName": "Product H",
-    "startDate": new Date('2021-08-09'),
-    "endDate": new Date('2021-08-13')
+    "recipeName": "",
+    "startDate": null,
+    "endDate": null
   })
   console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
