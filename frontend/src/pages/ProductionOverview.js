@@ -17,7 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import SearchBar from '../components/pod/SearchBar';
 import moment from 'moment';
 import 'intro.js/introjs.css';
-import { Steps, Hints } from "intro.js-react";
+import { Steps, Hints } from 'intro.js-react';
 
 const ProductionOverview = () => {
   const [prodOverviewData, setProdOverviewData] = useState('');
@@ -41,36 +41,43 @@ const ProductionOverview = () => {
   //Intro.js
   const steps = [
     {
-      element: ".title",
-      intro: "test1"
+      element: '.title',
+      intro:
+        ' Welcome to the Production Overview Dashboard. The production Overview dashboard provides the user with the ability to view the trend in production while simultaneously showing the user the average time taken to complete an individual recipe.',
     },
     {
-      element: ".searchComponent",
-      intro: "test2"
+      element: '.searchComponent',
+      intro:
+        'Through the search bar, the user can search for a specific recipe.',
     },
     {
-      element: ".modalComponent",
-      intro: "test3"
+      element: '.modalComponent',
+      intro:
+        'Upon pressing this radio button the user will be prompted with a pop-up window to select the product that they wish to view.',
     },
     {
-      element: ".chartComponent",
-      intro: "test4"
+      element: '.chartComponent',
+      intro:
+        'This chart will allow the user to view the average time taken for the recipe to be produced.',
     },
     {
-      element: ".boxComponent",
-      intro: "test5"
+      element: '.boxComponent',
+      intro: 'A complete breakdown of the production steps can be seen here.',
     },
     {
-      element: ".datePicker",
-      intro: "test6"
+      element: '.datePicker',
+      intro:
+        'The date picker allows the user to select a date range to view the number of products produced .',
     },
     {
-      element: "#graphPicker",
-      intro: "test7"
+      element: '#graphPicker',
+      intro:
+        'The graph picker allows the user to select a graph to view the number of products produced .',
     },
     {
-      element: "#lineChart",
-      intro: "test8"
+      element: '#lineChart',
+      intro:
+        'This is the chart you can use to view the trend in production and see how many recipes were produed in that given day.Hover your mouse over to view the production count.',
     },
   ];
 
@@ -79,7 +86,7 @@ const ProductionOverview = () => {
   };
 
   const toggleSteps = () => {
-    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+    this.setState((prevState) => ({ stepsEnabled: !prevState.stepsEnabled }));
   };
 
   function handleChange(e) {
@@ -203,10 +210,10 @@ const ProductionOverview = () => {
       <div className='po-sidebar sidebar col-2'>
         <SideBar />
       </div>
-      
+
       <div className='po-display col-10 px-4 py-6'>
-      <div className='title'>
-        <h1>Production Overview Dashboard</h1>
+        <div className='title'>
+          <h1>Production Overview Dashboard</h1>
         </div>
         <div className='row level mb-2'>
           <div className='col-12 search w-100p'>
@@ -223,10 +230,10 @@ const ProductionOverview = () => {
                 <ErrorPage>
                   <div className='chartComponent'>
                     <ChartComponent data={prodOverviewData} />
-                    </div>
-                    <div className='boxComponent'>
-                      <BoxComponent data={prodOverviewData} />
-                    </div>
+                  </div>
+                  <div className='boxComponent'>
+                    <BoxComponent data={prodOverviewData} />
+                  </div>
                 </ErrorPage>
               </div>
               <div className='usersChoice col-12 w-100p mt-4'>

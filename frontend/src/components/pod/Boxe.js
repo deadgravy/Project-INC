@@ -23,7 +23,6 @@ const Boxe = ({ data }) => {
           <Box
             className='offset-1 col-3'
             sx={{
-              height: 70,
               backgroundColor: bgColor[count],
               '&:hover': {
                 backgroundColor: 'primary.main',
