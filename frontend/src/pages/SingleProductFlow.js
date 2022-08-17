@@ -6,7 +6,6 @@ import {GanttChart } from "../components/spfd/ganttChart";
 import DropDown from '../components/spfd/dropDown';
 import { LineChart } from '../components/spfd/lineChart';
 
-
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedProductFlow, setSelectedProductFlow] = useState({
