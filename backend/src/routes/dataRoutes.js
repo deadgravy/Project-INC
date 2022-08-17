@@ -86,10 +86,33 @@ router.get(
   eudController.getMultipleWeekly
 );
 
+router.post(
+  '/getAllEquipmentStartOrStop',
+  dataController.getAllEquipmentStartOrStopCount
+);
+
 // get weekly usage details  for single recipe equipment
 router.get(
   '/getSingleUsageDetailsWeekly/:startdate/:enddate/:hour',
   eudController.getSingleWeeklyDetails
+);
+
+// get weekly usage details for multiple recipe equipment
+router.get(
+  '/getMultipleUsageDetailsWeekly/:startdate/:enddate/:hour',
+  eudController.getMultipleWeeklyDetails
+);
+
+// getting the equipment name for single product
+router.get(
+  '/getSingleProductEquipment/:startDate/:endDate/:name',
+  spfdController.getSingleProductEquipment
+);
+
+// getting the equipment usage by name for single product
+router.get(
+  '/getEquipmentUsageByName/:name/:ename/:startDate/:endDate',
+  spfdController.getEquipmentUsageByName
 );
 
 // get weekly usage details for multiple recipe equipment

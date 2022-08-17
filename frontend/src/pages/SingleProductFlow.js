@@ -11,40 +11,45 @@ const SingleProductFlow = () => {
   const [selectedProductFlow, setSelectedProductFlow] = useState({
     "recipeName": "",
     "startDate": null,
-    "endDate": null
+    "endDate": null,
+    "equipment": ""
   })
   console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
   // const [ganttChart, setGanttChart] = useState([])
   
-  useEffect(() =>{
-    Promise.all([
-        // fetch('http://localhost:4000/api/getAllRecipeName').then((res) => res.json()),
+//   useEffect(() =>{
+//     Promise.all([
+//         // fetch('http://localhost:4000/api/getAllRecipeName').then((res) => res.json()),
 
-        // fetch('http://localhost:4000/api/getSingleProductWithNameDate/${dateRange[0]}/${dateRange[1]}/${recipe.name}').then((res) => res.json()),
+//         // fetch('http://localhost:4000/api/getSingleProductWithNameDate/${dateRange[0]}/${dateRange[1]}/${recipe.name}').then((res) => res.json()),
 
-        // fetch('http://localhost:4000/api/getSingleProductEquipment/:startDate/:endDate/:name').then((res) => res.json()),
+//         // fetch('http://localhost:4000/api/getSingleProductEquipment/:startDate/:endDate/:name').then((res) => res.json()),
 
-        // fetch('http://localhost:4000/api/getEquipmentUsageByName/:name/:ename').then((res) => res.json())
+//         // fetch('http://localhost:4000/api/getEquipmentUsageByName/:name/:ename').then((res) => res.json())
         
-        ])
-        // .then(([result1, result2, result3, result4]) => {
-        //   console.log("result1", result1);
-        //   setRecipes(result1.data);
-        //   const recipes = result1.data
+//         ])
+//         // .then(([result1, result2, result3, result4]) => {
+//         //   console.log("result1", result1);
+//         //   setRecipes(result1.data);
+//         //   const recipes = result1.data
           
-        //   // setGanttChart({
-        //   //   data: result2.data
-        //   // })
-        // })
-        .catch((error) => console.log('error', error));
-},[])
+//         //   // setGanttChart({
+//         //   //   data: result2.data
+//         //   // })
+//         // })
+//         .catch((error) => console.log('error', error));
+// },[])
 
 
 
 // const radioButtonStyle = {
 //   hight: 
 // }
+
+const setEquipmentNameFromDropdown = (selectedEquipment) => {
+  setSelectedProductFlow({...selectedProductFlow, equipment: selectedEquipment})
+}
 
 
 
@@ -76,10 +81,19 @@ const SingleProductFlow = () => {
                 selectedProductFlow.startDate !== null && (
                   <GanttChart selectedProductFlow={selectedProductFlow}/>
                 )
+ 
+              }
+               {
+                selectedProductFlow.startDate === null && (
+                  <div>Welcome to Single Product Flow Dashboard. Please Select Date and Recipe Above!</div>
+                )
+ 
               }
               
             </div>
           </div>
+
+          { }
 
           <div className='pt-2 Row5'>
             {selectedProductFlow.startDate !== null && (
@@ -91,7 +105,7 @@ const SingleProductFlow = () => {
               <div className='col-3'>
                 {
                   selectedProductFlow.startDate !== null && (
-                    <DropDown selectedProductFlow={selectedProductFlow}/>
+                    <DropDown selectedProductFlow={selectedProductFlow} setEquipmentNameFromDropdown={setEquipmentNameFromDropdown}/>
                   )
                 }
               </div>
@@ -100,10 +114,11 @@ const SingleProductFlow = () => {
           <div className='pt-3 Row7'>
               <div className='col-12'>
                 {
-                  selectedProductFlow.startDate !== null && (
-                    <LineChart/>
+                  selectedProductFlow.equipment && (
+                    <LineChart selectedProductFlow={selectedProductFlow}/>
                   )
                 }
+                { selectedProductFlow.equipment.length === 0 && selectedProductFlow.startDate !== null && <div>Please select an equipment</div> }
               </div>
           </div>
           
