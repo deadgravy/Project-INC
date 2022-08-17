@@ -22,6 +22,10 @@ const TodayProduction = () => {
   //Intro.js
   const steps = [
     {
+      element: "#title",
+      intro: "Today's Production Dashboard: This dashboard system provides the current status of equipments and the current product status"
+    },
+    {
       element: ".col-3",
       intro: "You may select a date to view its data e.g. 2021/08/20"
     },
@@ -71,15 +75,6 @@ const TodayProduction = () => {
     let filtereddate = `${yyyy}-${mm}-${dd}`;
 
     Promise.all([
-      // fetch(`http://localhost:4000/api/getCompletedProducts`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     date: filtereddate
-      //   })
-      // }),
       fetch(`http://localhost:4000/api/getCompletedProducts/${filtereddate}`).then((res) => res.json()),
       fetch(`http://localhost:4000/api/getProductsToComplete/${filtereddate}`).then((res) => res.json()),
       fetch(`http://localhost:4000/api/getSingleEquipmentStatus/${filtereddate}`).then((res) => res.json()),
@@ -126,7 +121,7 @@ const TodayProduction = () => {
             initialStep={initialStep}
             onExit={onExit}
           />
-          <div className="tpdHeader">
+          <div className="tpdHeader" id="title">
             <h1>Today's Production Dashboard</h1>
           </div>
           
