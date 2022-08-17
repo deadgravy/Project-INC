@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+=======
+import React from "react";
+import ReactDom from 'react-dom'
+>>>>>>> 0f3a7814 (complete frontend for modal)
 
 const MODAL_STYLES = {                                     //Styles for the content
   position: 'fixed',
@@ -21,6 +26,7 @@ const OVERLAY_STYLES = {                                   //Styles for the back
   right: 0,
   bottom: 0,
   backgroundColor: 'rgba(0,0,0,0.7)',
+<<<<<<< HEAD
   zIndex: 1000,
   overflowY: "auto"
 }
@@ -42,6 +48,13 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
         }
     })
   },[])
+=======
+  zIndex: 1000
+}
+
+export default function Modal({ open, children, onClose }) {
+  if(!open) return null
+>>>>>>> 0f3a7814 (complete frontend for modal)
 
   return ReactDom.createPortal (
     <>
@@ -49,6 +62,7 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
       <div style={MODAL_STYLES}>
         {
           <form>
+<<<<<<< HEAD
             <div>
                   <DatePicker
                     placeholderText="Please Select Date"
@@ -90,6 +104,12 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
         {}
         <button onClick={() => setIsOpen(false)}>Continue</button>
         <button onClick={() => setIsOpen(false)}>Close</button>
+=======
+            {modal}
+          </form>
+        }
+        <button onClick={onClose}>Close</button>
+>>>>>>> 0f3a7814 (complete frontend for modal)
       </div>
     </>,
     document.getElementById('portal')
