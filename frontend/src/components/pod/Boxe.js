@@ -33,8 +33,8 @@ const Boxe = ({ data }) => {
               borderColor: 'red',
               fontSize: 12,
               borderRadius: 1,
-              // marginTop: 5,
-              // marginLeft: 30,
+              marginTop: 5,
+              marginLeft: 30,
             }}
           >
             <div className='BoxHeader'>{data.data[count].process_name}</div>
