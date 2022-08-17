@@ -25,7 +25,7 @@ const Login = () => {
     fetch('http://localhost:4000/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data),,
     }).then((response) => {
       // checks if response status was 200-299
       if (response.ok) {
@@ -50,6 +50,7 @@ const Login = () => {
       }
     });
   };
+
 
   return (
     <div className='row loginPage'>
