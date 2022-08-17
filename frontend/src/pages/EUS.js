@@ -23,31 +23,31 @@ const EUS = () => {
   const steps = [
     {
       element: "#title",
-      intro: "test1"
+      intro: "Welcome to the Equipment Utilisation Snapshot! This page aims to give you a better understanding of the equipment frequency and machine status in real time!"
     },
     {
       element: "#panel1a-header",
-      intro: "test2"
+      intro: "This is the machine connectivity section! This will give you an indication whether a machine is connected to the database currently. "
     },
     {
       element: "#cards",
-      intro: "test3"
+      intro: "This part shows all the machines in your database. For your reference, red means disconnected whilst green means connected"
     },
     {
       element: ".equipFreq",
-      intro: "test4"
+      intro: "This section will show the equipment frequency based on type of counter and date selected"
     },
     {
       element: "#freqData",
-      intro: "test5"
+      intro: "Here will show the data upon the current date by default but as there is no data currently, it will show no data is shown."
     },
     {
       element: "#modal",
-      intro: "test6"
+      intro: "To make changes to what is displayed on the graph, we have created a modal for you to make your choice. Here is where you can change the date and type of counters. Furthermore, there is a data comparison choice."
     },
     {
       element: "#legend",
-      intro: "test7"
+      intro: "The legend will correspond with the equipments in the graph shown by color coding."
     },
   ];
 

@@ -49,7 +49,7 @@ const EquipmentDetails = ({ allEquipments }) => {
     } else if (counter === '3') {
       setCounterType('Completed');
       setCounter(2);
-    } else {
+    } else if (counter === '4'){
       setCounterType('Anomolies');
     }
   };
