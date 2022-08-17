@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
-
-
+ 
+ 
 export function GanttChart({selectedProductFlow}) {
   const columns = [
     { type: "string", id: "Equipment" },
@@ -11,10 +11,11 @@ export function GanttChart({selectedProductFlow}) {
   ];
   const [ganttData, setGanttData] = useState([]);
   const options = {height: 400, gantt: {trackHeight: 30}};
-
+ 
+ 
   useEffect(() =>{
-    const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
-    const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+      const formattedStartDate = selectedProductFlow.startDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
+      const formattedEndDate = selectedProductFlow.endDate.toLocaleDateString('zh-CN').substring(0,10).replaceAll("/", "-");
     fetch(`http://localhost:4000/api/getSingleProductWithNameDate/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
     .then((res) => res.json())
     .then(data => {
@@ -34,9 +35,13 @@ export function GanttChart({selectedProductFlow}) {
           setGanttData([columns, ...rows]);
         }
       }
+ 
     })
   },[])
-
+ 
+ 
+ 
+ 
   return (
     <>
       {ganttData.length > 0 ? (
@@ -51,5 +56,6 @@ export function GanttChart({selectedProductFlow}) {
         ) : <div>No Data Found! Please select again.</div>
       }
     </>
+     
   );
 }
