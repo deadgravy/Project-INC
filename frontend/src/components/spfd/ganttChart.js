@@ -35,7 +35,6 @@ export function GanttChart({selectedProductFlow, plsShowEPA, resetSelectedProduc
         if(rows.length > 0){
           setGanttData([columns, ...rows]);
           plsShowEPA(true);
-          resetSelectedProductFlow()
         } else {
           setGanttData([]);
           plsShowEPA(false);
@@ -59,10 +58,10 @@ export function GanttChart({selectedProductFlow, plsShowEPA, resetSelectedProduc
           />
  
         ) : <div>
-            <h6 style={{backgroundColor: '#d3d3d3' ,color: '#f36b25' ,display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200}}>
-              No Data Found! Please Select Again.
-            </h6>
-          </div>
+              <h6 style={{backgroundColor: '#d3d3d3' ,color: '#f36b25' ,display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200}}>
+                No Data Found! Please Select Again.
+              </h6>
+            </div>
       }
     </>
      

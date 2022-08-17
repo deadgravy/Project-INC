@@ -5,7 +5,6 @@ import '../styles/spfd.css';
 import {GanttChart } from "../components/spfd/ganttChart";
 import DropDown from '../components/spfd/dropDown';
 import { LineChart } from '../components/spfd/lineChart';
-import { rgbToHex } from '@mui/material';
  
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -24,22 +23,6 @@ const setEquipmentNameFromDropdown = (selectedEquipment) => {
 
 const plsShowEPA = (status)=>{
   setShowEPA(status);
-}
-
-// const showEPA = () => {
-//   if(havedata){
-    
-//   }
-// }
-
-const resetSelectedProductFlow = () => {
-  setSelectedProductFlow(
-    {
-  "recipeName": "",
-  "startDate": null,
-  "endDate": null,
-  "equipment": ""
-  })
 }
 
 const [showEPA,setShowEPA] = useState(false);
@@ -67,7 +50,7 @@ return (
           <div className='col-12'>
             {
               selectedProductFlow.startDate !== null && (
-                <GanttChart selectedProductFlow={selectedProductFlow} resetSelectedProductFlow={resetSelectedProductFlow}
+                <GanttChart selectedProductFlow={selectedProductFlow}
                 plsShowEPA={plsShowEPA}/>
               )
             }
@@ -75,11 +58,8 @@ return (
               selectedProductFlow.startDate === null && (
                 <div>
                   <h4 style={{color: '#f36b25' ,display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200}}>
-                    Welcome to Single Product Flow Dashboard.
-                  </h4>
-                  <p style={{textAlign: 'center', height: 100}}>
                     Please Select Date and Recipe Above!
-                  </p>
+                  </h4>
                 </div>
               )
             }
@@ -102,10 +82,20 @@ return (
             <div className='pt-3 Row7'>
               <div className='col-12'>
                 {
-                  selectedProductFlow.equipment && (
+                  selectedProductFlow.equipment === null && (
+                    <div>
+                      <h4 style={{color: '#f36b25' ,display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200}}>
+                        Please Select Date and Recipe Above!
+                      </h4>
+                    </div>
+                  )
+                }
+                {
+                  selectedProductFlow.equipment !== null && (
                     <LineChart selectedProductFlow={selectedProductFlow}/>
                   )
                 }
+                
               </div>
             </div>
           </>

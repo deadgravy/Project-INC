@@ -93,12 +93,6 @@ router.get(
   spfdController.getSingleProductEquipment
 );
 
-// getting the equipment usage by name for single product
-router.get(
-  '/getEquipmentUsageByName/:name/:ename/:startDate/:endDate',
-  spfdController.getEquipmentUsageByName
-);
-
 router.post('/getAnomolies', dataController.getAnomolies);
 
 // getting the equipment usage by name for single product
