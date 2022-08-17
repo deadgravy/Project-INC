@@ -63,9 +63,15 @@ module.exports.getSingleProductEquipment = async function (req, res, next) {
 module.exports.getEquipmentUsageByName = async function (req, res, next) {
   let name = req.params.name;
   let ename = req.params.ename;
+<<<<<<< HEAD
  
   try {
     const results = await itzy.getEquipmentUsageByName(name, ename);  
+=======
+
+  try {
+    const results = await itzy.getEquipmentUsageByName(name, ename);   
+>>>>>>> 8cb15f3d (updates)
     console.log(results);
     res.status(200).json({
       status: 'success',
