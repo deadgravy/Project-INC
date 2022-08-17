@@ -1,27 +1,56 @@
 import '../styles/login.css';
-import { useState } from 'react';
+import '../styles/styles.css';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
+  const { setAuth, auth } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('user') || auth) {
+      navigate('/equipmentUtilisationSnapshot');
+    }
+  }, [auth, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {email, password}
-    console.log(data)
+    const data = { email, password };
+    // console.log(data);
+
     fetch('http://localhost:4000/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }).then((response) => {
-      if (response.status === 200) {
-        // TODO: redirect to EUS
-        console.log('Logged In');
+      // checks if response status was 200-299
+      if (response.ok) {
+        response.json().then((result) => {
+          const accessToken = result?.token;
+          setAuth({ email, accessToken });
+          console.log('Successful login, redirect to EUS');
+          navigate('/equipmentUtilisationSnapshot', { replace: true });
+          localStorage.setItem('user', email);
+        });
       } else {
-        // Alert error popup
-        console.log("Couldn't sign in");
+        console.log(response);
+        if (!response?.status) {
+          alert('No server response');
+        } else if (response?.status === 400) {
+          alert('Missing username or password');
+        } else if (response?.status === 401) {
+          alert('Wrong email or password');
+        } else {
+          alert('Login failed!');
+        }
       }
     });
   };
+
   return (
     <div className='row loginPage'>
       <div className='loginContainer col-12'>

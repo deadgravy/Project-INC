@@ -103,7 +103,7 @@ export function UsageChart({ data }) {
           options={{
             timeline: {
               groupByRowLabel: true,
-              showBarLabels: true,
+              showBarLabels: false,
             },
           }}
         />
