@@ -124,7 +124,6 @@ router.get(
   spfdController.getSingleProductEquipment
 );
 
-
 router.post('/getAnomolies', dataController.getAnomolies);
 
 // getting the equipment usage by name for single product
