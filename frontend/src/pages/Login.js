@@ -1,17 +1,21 @@
 import '../styles/login.css';
 import '../styles/styles.css';
-import { useState } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, auth } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('user') || auth) {
+      navigate('/equipmentUtilisationSnapshot');
+    }
+  }, [auth, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,11 +31,10 @@ const Login = () => {
       if (response.ok) {
         response.json().then((result) => {
           const accessToken = result?.token;
-          setAuth({ email, password, accessToken });
-          console.log(result);
+          setAuth({ email, accessToken });
           console.log('Successful login, redirect to EUS');
           navigate('/equipmentUtilisationSnapshot', { replace: true });
-          // localStorage.setItem('user', email);
+          localStorage.setItem('user', email);
         });
       } else {
         console.log(response);
