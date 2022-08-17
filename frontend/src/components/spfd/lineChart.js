@@ -40,7 +40,7 @@ export function LineChart({selectedProductFlow}) {
   },[selectedProductFlow.equipment, selectedProductFlow.recipeName])
  
   return (
- 
+
     <>
       {data && selectedProductFlow.equipment &&
         <Chart
