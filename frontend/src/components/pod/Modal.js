@@ -21,16 +21,10 @@ export default function Modal({ data1 }) {
   };
   return (
     <>
-      <div className='modalComponent'>
-        <button
-          onClick={toggleModal}
-          className='btn-modal '
-          class='bg-blue-600'
-        >
-          <em class='title font-bold' style={{ color: 'white' }}>
-            View All Recipes{' '}
-          </em>
-        </button>
+    <div className='modalComponent'>
+      <button onClick={toggleModal} className='btn-modal ' class='bg-blue-600'>
+        <em class='title font-bold' style={{color:'white'}}>View All Recipes </em>
+      </button>
       </div>
       {modal && (
         <div className=''>
