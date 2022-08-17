@@ -6,7 +6,6 @@ import {GanttChart } from "../components/spfd/ganttChart";
 import DropDown from '../components/spfd/dropDown';
 import { LineChart } from '../components/spfd/lineChart';
 
-
 const SingleProductFlow = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedProductFlow, setSelectedProductFlow] = useState({
@@ -15,7 +14,7 @@ const SingleProductFlow = () => {
     "endDate": null,
     "equipment": ""
   })
-  console.log("selectedProductFlow: ", selectedProductFlow);
+  // console.log("selectedProductFlow: ", selectedProductFlow);
   // const [selectedEquipment, setSelectedEquipment] = useState([])
   // const [ganttChart, setGanttChart] = useState([])
   
@@ -47,12 +46,6 @@ const SingleProductFlow = () => {
 // const radioButtonStyle = {
 //   hight: 
 // }
-
-const setEquipmentNameFromDropdown = (selectedEquipment) => {
-  setSelectedProductFlow({...selectedProductFlow, equipment: selectedEquipment})
-}
-
-
 
   return (
       <div className='singlProductFlow row p-0 w-100p'>
