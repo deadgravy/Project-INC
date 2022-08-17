@@ -38,7 +38,7 @@ export function GanttChart({selectedProductFlow}) {
  
     })
   },[])
- 
+
   return (
     <>
       {ganttData.length > 0 ? (
