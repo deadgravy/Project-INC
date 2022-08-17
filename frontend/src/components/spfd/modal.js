@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
-=======
-import React from "react";
-import ReactDom from 'react-dom'
->>>>>>> 0f3a7814 (complete frontend for modal)
-
+ 
 const MODAL_STYLES = {                                     //Styles for the content
   position: 'fixed',
   top: '50%',
@@ -18,7 +13,7 @@ const MODAL_STYLES = {                                     //Styles for the cont
   padding: '50px',
   zIndex: 1000
 }
-
+ 
 const OVERLAY_STYLES = {                                   //Styles for the background
   position: 'fixed',
   top: 0,
@@ -26,18 +21,17 @@ const OVERLAY_STYLES = {                                   //Styles for the back
   right: 0,
   bottom: 0,
   backgroundColor: 'rgba(0,0,0,0.7)',
-<<<<<<< HEAD
   zIndex: 1000,
   overflowY: "auto"
 }
-
+ 
 export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProductFlow }) {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [recipes, setRecipes] = useState([]);
-  
-  
-
+ 
+ 
+ 
   useEffect(() =>{
     fetch('http://localhost:4000/api/getAllRecipeName')
       .then((res) => res.json())
@@ -48,21 +42,13 @@ export default function Modal({ setIsOpen, selectedProductFlow, setSelectedProdu
         }
     })
   },[])
-=======
-  zIndex: 1000
-}
-
-export default function Modal({ open, children, onClose }) {
-  if(!open) return null
->>>>>>> 0f3a7814 (complete frontend for modal)
-
+ 
   return ReactDom.createPortal (
     <>
       <div style={OVERLAY_STYLES}/>
       <div style={MODAL_STYLES}>
         {
           <form>
-<<<<<<< HEAD
             <div>
                   <DatePicker
                     placeholderText="Please Select Date"
@@ -78,7 +64,7 @@ export default function Modal({ open, children, onClose }) {
                     isClearable={true}
                   />
                 </div>
-
+ 
                 <div>
                   {recipes.map((recipe, index) => {
                     return (
@@ -99,17 +85,11 @@ export default function Modal({ open, children, onClose }) {
                     )
                   })}
                 </div>
-          </form> 
+          </form>
         }
         {}
         <button onClick={() => setIsOpen(false)}>Continue</button>
         <button onClick={() => setIsOpen(false)}>Close</button>
-=======
-            {modal}
-          </form>
-        }
-        <button onClick={onClose}>Close</button>
->>>>>>> 0f3a7814 (complete frontend for modal)
       </div>
     </>,
     document.getElementById('portal')
