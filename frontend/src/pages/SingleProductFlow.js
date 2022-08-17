@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
-import Modal from '../components/spfd/modal';
 import '../styles/spfd.css';
-import {GanttChart } from "../components/spfd/ganttChart";
+import Modal from '../components/spfd/modal';
+import { GanttChart } from "../components/spfd/ganttChart";
 import DropDown from '../components/spfd/dropDown';
 import { LineChart } from '../components/spfd/lineChart';
 
@@ -41,11 +41,14 @@ const SingleProductFlow = () => {
 //         .catch((error) => console.log('error', error));
 // },[])
 
-
-
 // const radioButtonStyle = {
 //   hight: 
 // }
+
+  const setEquipmentNameFromDropdown = (selectedEquipment) => {
+    setSelectedProductFlow({...selectedProductFlow, equipment: selectedEquipment})
+  }
+
 
   return (
       <div className='singlProductFlow row p-0 w-100p'>
