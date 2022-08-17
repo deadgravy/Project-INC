@@ -1,13 +1,9 @@
-const client = require('../config/userDatabase');
+const pool = require('../config/userDatabase');
 
-// const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.verify = async function (email) {
-  client.connect();
-  console.log('Connected!');
   try {
-    const { rows } = await client.query(
-      `
-        SELECT
+    const { rows } = await pool.query(
+      `SELECT
           u.user_id,
           u.email,
           u.first_name,
@@ -18,7 +14,8 @@ module.exports.verify = async function (email) {
           public.account a
         WHERE
           u.user_id = a.user_id 
-          AND u.email = $1`, // end of sql query
+          AND u.email = $1
+    `,
       [email]
     );
     return rows;
