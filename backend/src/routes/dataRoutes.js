@@ -129,5 +129,4 @@ router.get(
   spfdController.getEquipmentUsageByName
 );
 
-
 module.exports = router;
