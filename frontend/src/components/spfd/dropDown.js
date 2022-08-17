@@ -13,12 +13,7 @@ export default function DropDown({selectedProductFlow}) {
   // 'NMIXX'
   // ];
   // const options = dropDown
- 
- 
- 
- 
- 
- 
+  
   useEffect(() =>{
     fetch(`http://localhost:4000/api/getSingleProductEquipment/${formattedStartDate}/${formattedEndDate}/${selectedProductFlow.recipeName}`)
       .then((res) => res.json())

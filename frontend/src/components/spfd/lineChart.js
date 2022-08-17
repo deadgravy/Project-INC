@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9a1e1323ce26410ff797164eca61b08a54a81865
 import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
 import moment from 'moment';
 
 export function LineChart({selectedProductFlow}) {
   const [data,setData]= useState(null);
+<<<<<<< HEAD
   const datatest = [
     [
       "Date",
@@ -14,6 +18,17 @@ export function LineChart({selectedProductFlow}) {
     ["2021-08-15T16:00:00.000Z", 22],
     ["2021-08-19T16:00:00.000Z", 14],
   ];
+=======
+  // const datatest = [
+  //   [
+  //     "Date",
+  //     "L-Sealer"
+  //   ],
+  //   ["2021-08-12T16:00:00.000Z", 34],
+  //   ["2021-08-15T16:00:00.000Z", 22],
+  //   ["2021-08-19T16:00:00.000Z", 14],
+  // ];
+>>>>>>> 9a1e1323ce26410ff797164eca61b08a54a81865
   const options = {
     chart: {
       title: "Legend",
@@ -53,6 +68,7 @@ export function LineChart({selectedProductFlow}) {
 
     <>
     {data && <Chart
+<<<<<<< HEAD
 =======
 import React from "react";
 import { Chart } from "react-google-charts";
@@ -81,11 +97,14 @@ export function LineChart() {
   return (
     <Chart
 >>>>>>> 693d3699 (added drop down and line chart)
+=======
+>>>>>>> 9a1e1323ce26410ff797164eca61b08a54a81865
       chartType="Line"
       width="100%"
       height="400px"
       data={data}
       options={options}
+<<<<<<< HEAD
 <<<<<<< HEAD
     />}
     
@@ -94,5 +113,10 @@ export function LineChart() {
 =======
     />
 >>>>>>> 693d3699 (added drop down and line chart)
+=======
+    />}
+    </>
+
+>>>>>>> 9a1e1323ce26410ff797164eca61b08a54a81865
   );
 }
