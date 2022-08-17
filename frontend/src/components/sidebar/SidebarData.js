@@ -21,7 +21,7 @@ export const SidebarData = [
   {
     title: "Today's Production",
     icon: <TodayIcon />,
-    link: '/todayProduction',
+    link: '/todaysProduction',
   },
   {
     title: 'Single Product Flow',
