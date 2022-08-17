@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import 'intro.js/introjs.css';
-import { Steps, Hints } from "intro.js-react";
+import { Steps, Hints } from 'intro.js-react';
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -36,41 +36,57 @@ const EquipUtilDashboard = () => {
   //Intro.js
   const steps = [
     {
-      element: "#title",
-      intro: "test1"
+      element: '#title',
+      intro: `Welcome to the Equipment Utilisation Dashboard! In this page,
+              you will be able to view the equipment usage during a day or
+              throughout a week. You will also be able to view the anomalies
+              in equipment usages such as equipment that were used or left 
+              unused for too long.`,
     },
     {
-      element: "#datePicker",
-      intro: "test2"
+      element: '#datePicker',
+      intro: `This is a datepicker. In here you will have to pick a date to view
+              a date to see the equipment usage on that day. Dates with data
+              available are : 10 Aug 2021 - 22 Aug 2021`,
     },
     {
-      element: "#toggler",
-      intro: "test3"
+      element: '#toggler',
+      intro: `This is a toggler for you to switch from the daily view to the weekly view.`,
     },
     {
-      element: "#singleUsage",
-      intro: "test4"
+      element: '#singleUsage',
+      intro: `In this chart, you will be able to see all the equipment usage for
+              SINGLE recipe equipment on the date chosen.
+              On hover of any bar, there will be a pop up showing the recipe the
+              equipment worked on, time and duration.`,
     },
     {
-      element: "#multipleUsage",
-      intro: "test5"
+      element: '#multipleUsage',
+      intro: `Similar to the chart above, this chart serves to display the equipment
+              usage for the MULTIPLE recipe equipment.`,
     },
     {
-      element: "#equipUsage",
-      intro: "test6"
+      element: '#equipUsage',
+      intro: `In this section, the system will display the anomalies discovered in 
+              the usage of equipment. Should the equipment be used or left unused
+              for a set period of time, it will be shown here!`,
     },
     {
-      element: "#input",
-      intro: "test7"
+      element: '#input',
+      intro: `This is an input field for the number of hours, you can change the
+              hours value in the field by clicking on the up or down button to see which
+              equipment was used or left unused for more than the hour value you set.`,
     },
     {
-      element: "#singleDetails",
-      intro: "test8"
+      element: '#singleDetails',
+      intro: `Here you will be able to see the anomalies discovered for the SINGLE recipe
+              equipment`,
     },
     {
-      element: "#multiDetails",
-      intro: "test8"
-    }
+      element: '#multiDetails',
+      intro: `Here you will be able to see the anomalies discovered for the MULTIPLE recipe
+              equipment`,
+    },
   ];
 
   const onExit = () => {
@@ -179,11 +195,16 @@ const EquipUtilDashboard = () => {
           <div className='App'>
             {!isLoading ? (
               <div>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <div className='pt-2 Row1' id='title'>
                     <h2>Equipment Utilisation Dashboard</h2>
                   </div>
-                  <button style={{marginLeft: 20, height: 60, marginTop: 20}} onClick={toggleSteps}>Toggle Steps</button>
+                  <button
+                    style={{ marginLeft: 20, height: 60, marginTop: 20 }}
+                    onClick={toggleSteps}
+                  >
+                    Toggle Steps
+                  </button>
                 </div>
                 <div className='Row2'>
                   <div className='col-2' id='datePicker'>
@@ -200,10 +221,10 @@ const EquipUtilDashboard = () => {
                   </div>
                   <div className='col-9 mr-3 u-flex u-justify-flex-end'>
                     <div id='toggler'>
-                    <EUDToggler
-                      buttonState={buttonState}
-                      setButtonState={setButtonState}
-                    />
+                      <EUDToggler
+                        buttonState={buttonState}
+                        setButtonState={setButtonState}
+                      />
                     </div>
                   </div>
                 </div>
@@ -234,7 +255,9 @@ const EquipUtilDashboard = () => {
                   </div>
                 </div>
                 <div className='row'>
-                  <h5 className='col-9' id='equipUsage'>Equipment Usage Details</h5>
+                  <h5 className='col-9' id='equipUsage'>
+                    Equipment Usage Details
+                  </h5>
                   {/* Start of Input Box code */}
                   <div className='col-2 level-item mr-2'>
                     <input
