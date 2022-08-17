@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import Dropdown from 'react-dropdown';
-// import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export default function DropDown({selectedProductFlow}) {
   const [dropDown, setDropDown] = useState([]);
@@ -19,18 +19,20 @@ export default function DropDown({selectedProductFlow}) {
       .then(data => {
         if(data.status === "success") {
           const formattedEquip = data.data.map((equipment) => equipment.equip_name)
-          console.log(formattedEquip);
+          // console.log(formattedEquip);
           setDropDown(Array.from(new Set([...formattedEquip])))
         }
     })
   },[])
 
+  const onSelected = ({value, lable}) => {
+    // console.log(value);
+    setEquipmentNameFromDropdown(value)
+  };
+
   return( 
-    
-    // <Dropdown options={dropDown}  placeholder='Please Select a Equipment' />
-    <div>
-      
-    </div>
+
+    <Dropdown onChange={onSelected} options={dropDown}  placeholder='Please Select an Equipment' />
 
   );
 }
