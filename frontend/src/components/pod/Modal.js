@@ -21,15 +21,22 @@ export default function Modal({ data1 }) {
   };
   return (
     <>
-      <button onClick={toggleModal} className='btn-modal'>
-        Open
-      </button>
-
+      <div className='modalComponent'>
+        <button
+          onClick={toggleModal}
+          className='btn-modal '
+          class='bg-blue-600'
+        >
+          <em class='title font-bold' style={{ color: 'white' }}>
+            View All Recipes{' '}
+          </em>
+        </button>
+      </div>
       {modal && (
         <div className=''>
           <div onClick={toggleModal} className='overlay'></div>
           <div className='modal-content'>
-            <h2>Hello Modal</h2>
+            <h2>All recipes</h2>
             <form>
               {data1.data.map((item, count) => {
                 return (
