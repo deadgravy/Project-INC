@@ -53,6 +53,5 @@ export function GanttChart({selectedProductFlow}) {
         ) : <div>No Data Found! Please select again.</div>
       }
     </>
-     
   );
 }
