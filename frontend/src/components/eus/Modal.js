@@ -220,7 +220,7 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
         </div>
       </div>
 
-      <a href='#basic-modal'>Open Modal</a>
+      <a href='#basic-modal' id='modal'>Open Modal</a>
     </div>
   );
 };

@@ -14,6 +14,52 @@ const TodayProduction = () => {
   const [multiEquipmentStatusData, setMultiEquipmentStatusData] = useState(null);
   const [isLoading, setIsloading] = useState(true);
   const [date, setDate] = useState(new Date());
+  const stepsEnabled = true;
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: "#title",
+      intro: "Today's Production Dashboard: This dashboard system provides the current status of equipments and the current product status"
+    },
+    {
+      element: ".col-3",
+      intro: "You may select a date to view its data e.g. 2021/08/20"
+    },
+    {
+      element: ".singleProduct",
+      intro: "View single product equipments currently running"
+    },
+    {
+      element: ".multiProduct",
+      intro: "View multi product equipments currently running"
+    },
+    {
+      element: ".tableComponent",
+      intro: "Live equipment status table"
+    },
+    {
+      element: ".allProducts",
+      intro: "View all product status"
+    },
+    {
+      element: ".productStatus",
+      intro: "Displays total count of completed and incomplete products respectively"
+    },
+    {
+      element: ".containerChart",
+      intro: "This is the Product Status Chart"
+    }
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
 
   // useEffect
   useEffect(() => {
@@ -67,7 +113,13 @@ const TodayProduction = () => {
       {!isLoading ? (
         
         <div>
-          <div className="tpdHeader">
+          <Steps
+            enabled={stepsEnabled}
+            steps={steps}
+            initialStep={initialStep}
+            onExit={onExit}
+          />
+          <div className="tpdHeader" id="title">
             <h1>Today's Production Dashboard</h1>
           </div>
           

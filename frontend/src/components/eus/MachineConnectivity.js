@@ -18,7 +18,7 @@ const MachineConnectivity = (props) => {
           Machine Connectivity
         </Typography>
       </AccordionSummary>
-      <AccordionDetails className='row py-2'>
+      <AccordionDetails className='row py-2' id="cards">
         {machinesData.map((item, count) => {
           return (
             <div className='col-4' key={count}>

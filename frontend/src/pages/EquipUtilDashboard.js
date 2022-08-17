@@ -13,6 +13,8 @@ import {
 } from '../components/eud/UsageDetails';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import 'intro.js/introjs.css';
+import { Steps, Hints } from "intro.js-react";
 
 const EquipUtilDashboard = () => {
   const [singleUsage, setSingleUsage] = useState(null);
@@ -23,11 +25,61 @@ const EquipUtilDashboard = () => {
   const [multipleUnused, setMultipleUnused] = useState(null);
 
   const [isLoading, setIsloading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date('2021-08-21'));
   const [hour, setHours] = useState('01:00:00');
   const [count, setCount] = useState(1);
   const [buttonState, setButtonState] = useState('toggle-button1'); // for toggler
   let navigate = useNavigate();
+  const stepsEnabled = true;
+  const initialStep = 0;
+
+  //Intro.js
+  const steps = [
+    {
+      element: "#title",
+      intro: "test1"
+    },
+    {
+      element: "#datePicker",
+      intro: "test2"
+    },
+    {
+      element: "#toggler",
+      intro: "test3"
+    },
+    {
+      element: "#singleUsage",
+      intro: "test4"
+    },
+    {
+      element: "#multipleUsage",
+      intro: "test5"
+    },
+    {
+      element: "#equipUsage",
+      intro: "test6"
+    },
+    {
+      element: "#input",
+      intro: "test7"
+    },
+    {
+      element: "#singleDetails",
+      intro: "test8"
+    },
+    {
+      element: "#multiDetails",
+      intro: "test8"
+    }
+  ];
+
+  const onExit = () => {
+    this.setState(() => ({ stepsEnabled: false }));
+  };
+
+  const toggleSteps = () => {
+    this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+  };
 
   // useEffect
   useEffect(() => {
@@ -115,6 +167,12 @@ const EquipUtilDashboard = () => {
   return (
     <React.StrictMode>
       <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
+        <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={onExit}
+        />
         <div className='po-sidebar sidebar col-2'>
           <SideBar />
         </div>
@@ -122,11 +180,11 @@ const EquipUtilDashboard = () => {
           <div className='App'>
             {!isLoading ? (
               <div>
-                <div className='pt-2 Row1'>
+                <div className='pt-2 Row1' id='title'>
                   <h2>Equipment Utilisation Dashboard</h2>
                 </div>
                 <div className='Row2'>
-                  <div className='col-2'>
+                  <div className='col-2' id='datePicker'>
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
@@ -139,39 +197,46 @@ const EquipUtilDashboard = () => {
                     />
                   </div>
                   <div className='col-9 mr-3 u-flex u-justify-flex-end'>
+                    <div id='toggler'>
                     <EUDToggler
                       buttonState={buttonState}
                       setButtonState={setButtonState}
                     />
+                    </div>
                   </div>
                 </div>
-                <div className='Row3'>
-                  <h3>Single Recipe Equipment</h3>
+                <div id='singleUsage'>
+                  <div className='Row3'>
+                    <h3>Single Recipe Equipment</h3>
+                  </div>
+                  <div className='Row4'>
+                    {singleUsage.data.length === 0 ||
+                    singleUsage.data.length === undefined ? (
+                      <p>NO DATA</p>
+                    ) : (
+                      <UsageChart data={singleUsage} />
+                    )}
+                  </div>
                 </div>
-                <div className='Row4'>
-                  {singleUsage.data.length === 0 ||
-                  singleUsage.data.length === undefined ? (
-                    <p>NO DATA</p>
-                  ) : (
-                    <UsageChart data={singleUsage} />
-                  )}
-                </div>
-                <div className='Row5'>
-                  <h3>Multiple Recipe Equipment</h3>
-                </div>
-                <div className='Row6'>
-                  {singleUsage.data.length === 0 ||
-                  singleUsage.data.length === undefined ? (
-                    <p>NO DATA</p>
-                  ) : (
-                    <UsageChart data={multipleUsage} />
-                  )}
+                <div id='multipleUsage'>
+                  <div className='Row5'>
+                    <h3>Multiple Recipe Equipment</h3>
+                  </div>
+                  <div className='Row6'>
+                    {singleUsage.data.length === 0 ||
+                    singleUsage.data.length === undefined ? (
+                      <p>NO DATA</p>
+                    ) : (
+                      <UsageChart data={multipleUsage} />
+                    )}
+                  </div>
                 </div>
                 <div className='row'>
-                  <h5 className='col-9'>Equipment Usage Details</h5>
+                  <h5 className='col-9' id='equipUsage'>Equipment Usage Details</h5>
                   {/* Start of Input Box code */}
                   <div className='col-2 level-item mr-2'>
                     <input
+                      id='input'
                       type='number'
                       min='1'
                       max='24'
@@ -184,7 +249,7 @@ const EquipUtilDashboard = () => {
                 <div className='Row8'>
                   <div className='card mr-6'>
                     <div className='content pt-2 px-3'>
-                      <div className='singleContent mb-4'>
+                      <div className='singleContent mb-4' id='singleDetails'>
                         <h6 id='projectname' className='title mb-1'>
                           Single Recipe Equipment
                         </h6>
@@ -204,7 +269,7 @@ const EquipUtilDashboard = () => {
                         )}
                       </div>
 
-                      <div className='singleContent mb-4'>
+                      <div className='singleContent mb-4' id='multiDetails'>
                         <h6 id='projectname2' className='title mb-1'>
                           Multiple Recipe Equipment
                         </h6>
