@@ -26,7 +26,11 @@ export const SidebarData = [
   {
     title: 'Single Product Flow',
     icon: <InventoryIcon />,
+<<<<<<< HEAD
     link: '/SingleProductFlow',
+=======
+    link: '/singleProductFlow',
+>>>>>>> ac2a8846 (fix merge conflic)
   },
   {
     title: 'Production Overview',
