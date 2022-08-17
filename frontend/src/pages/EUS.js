@@ -23,7 +23,7 @@ const EUS = () => {
   const steps = [
     {
       element: "#title",
-      intro: "Welcome to the Equipment Utilisation Snapshot! This page aims to give you a better understanding of the equipment frequency and machine status in real time!"
+      intro: "Welcome to the Equipment Utilisation Snapshot! This page aims to give you a better understanding of the equipment frequency and machine status in real time"
     },
     {
       element: "#panel1a-header",
@@ -48,7 +48,7 @@ const EUS = () => {
     {
       element: "#legend",
       intro: "The legend will correspond with the equipments in the graph shown by color coding."
-    },
+    }
   ];
 
   const onExit = () => {

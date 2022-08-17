@@ -112,4 +112,20 @@ router.get(
   spfdController.getEquipmentUsageByName
 );
 
+// Getting all equipments from log times table
+router.get('/getAllEquipments', dataController.getAllEquipments);
+
+// Getting start / stop count of specific equipment
+router.post(
+  '/getEquipmentStartOrStopCount',
+  dataController.getEquipmentStartOrStopCount
+);
+
+router.post(
+  '/getAllEquipmentStartOrStop',
+  dataController.getAllEquipmentStartOrStopCount
+);
+
+router.post('/getAnomolies', dataController.getAnomolies);
+
 module.exports = router;
