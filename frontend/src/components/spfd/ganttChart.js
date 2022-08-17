@@ -1,8 +1,7 @@
 import { grey } from '@mui/material/colors';
 import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
- 
- 
+
 export function GanttChart({selectedProductFlow, plsShowEPA, resetSelectedProductFlow}) {
   const columns = [
     { type: "string", id: "Equipment" },
