@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/login/RequireAuth';
 import Login from './pages/Login';
 import UserManagement from './pages/UserManagement';
+import Unauthorized from './pages/Unauthorized';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +23,7 @@ root.render(
           <Route path='/' element={<Login />} />
 
           {/* Protected routes */}
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth allowedRoles={['admin', 'user']} />}>
             <Route
               path='productionOverview/:id'
               element={<ProductionOverview />}
@@ -45,6 +46,10 @@ root.render(
               element={<EUDWeekly />}
             />
 
+            <Route path='unauthorized' element={<Unauthorized />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={['admin']} />}>
             <Route path='users' element={<UserManagement />} />
             <Route path='addUser' element={<AddUser />} />
           </Route>

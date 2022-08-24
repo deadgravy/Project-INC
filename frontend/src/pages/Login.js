@@ -30,11 +30,13 @@ const Login = () => {
       // checks if response status was 200-299
       if (response.ok) {
         response.json().then((result) => {
+          console.log(result);
           const accessToken = result?.token;
           setAuth({ email, accessToken });
           console.log('Successful login, redirect to EUS');
           navigate('/equipmentUtilisationSnapshot', { replace: true });
           localStorage.setItem('user', email);
+          localStorage.setItem('role', result?.role);
         });
       } else {
         console.log(response);
