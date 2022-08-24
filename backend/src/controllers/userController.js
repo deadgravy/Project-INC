@@ -48,3 +48,20 @@ module.exports.getAllUsers = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+
+module.exports.deleteUserByID = async function (req, res, next) {
+  let id = req.params.id;
+  try {
+    const results = await userService.deleteUserByID(id);
+    console.log(results);
+    res.status(200).json({
+      status: 'User deleted successfully!',
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'fail',
+      data: null,
+    });
+  }
+}; // End of async function(req,res,next)

@@ -36,3 +36,19 @@ module.exports.getAllUsers = async function () {
     console.log(error);
   }
 };
+
+module.exports.deleteUserByID = async function (id) {
+  try {
+    const { rows } = await pool.query(
+      `WITH ins1 AS (
+	      DELETE FROM public."account" WHERE user_id = $1
+      )
+      DELETE FROM public."user" WHERE user_id = $1`,
+      [id]
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
