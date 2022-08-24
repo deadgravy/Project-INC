@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b825cc2f.css",
+    "main.js": "/static/js/main.23ffdcd7.js",
+    "static/media/firc-logo.png": "/static/media/firc-logo.403d94df091a40fa2260.png",
+    "index.html": "/index.html",
+    "main.b825cc2f.css.map": "/static/css/main.b825cc2f.css.map",
+    "main.23ffdcd7.js.map": "/static/js/main.23ffdcd7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b825cc2f.css",
+    "static/js/main.23ffdcd7.js"
+  ]
+}
