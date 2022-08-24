@@ -26,3 +26,8 @@
   background-size: cover;
   height: 100vh;
 }
+
+input[type='submit'] {
+  height: 36px;
+  width: 124px;
+}

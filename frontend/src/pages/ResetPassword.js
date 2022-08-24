@@ -12,7 +12,7 @@ const ResetPW = () => {
         <div className='card offset-4 p-4 px-6'>
           <h2>Forgot Your Password?</h2>
           <p>
-            Please fill in the email you use to sign in and your new password
+            Please fill in your email and your new password.
           </p>
           <form>
             <h6 className='m-0'>Email</h6>
@@ -36,7 +36,7 @@ const ResetPW = () => {
                 <input
                   type='password'
                   className='input-contains-icon'
-                  placeholder='Password'
+                  placeholder='New Password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -47,6 +47,11 @@ const ResetPW = () => {
             </div>
             <button className='btn-danger mt-2 u-pull-right'>Reset Password</button>
           </form>
+          <div className='mt-3'>
+            <a href='http://localhost:3000' className='u u-LR text-white'>
+              Back to Login
+            </a>
+          </div>
         </div>
       </div>
     </div>
