@@ -11,6 +11,7 @@ import EUS from './pages/EUS';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/login/RequireAuth';
 import Login from './pages/Login';
+import ResetPW from './pages/ResetPassword'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='signUp' element={<SignUp />} />
+          <Route path='resetPassword' element={<ResetPW />} />
 
           {/* Protected routes */}
           <Route element={<RequireAuth />}>
