@@ -88,4 +88,6 @@ router.post(
 
 router.post('/getAnomolies', dataController.getAnomolies);
 
+router.get('/getAllUsers', userController.getAllUsers);
+
 module.exports = router;
