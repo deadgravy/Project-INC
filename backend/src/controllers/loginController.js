@@ -13,6 +13,7 @@ module.exports.verify = async function (req, res, next) {
       let data = {
         displayName: results[0].first_name + ' ' + results[0].last_name,
         email: results[0].email,
+        role: results[0].role,
         token: jwt.sign(
           {
             userId: results[0].user_id,

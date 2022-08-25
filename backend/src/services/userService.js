@@ -1,6 +1,5 @@
-const client = require('../config/userDatabase');
+const pool = require('../config/userDatabase');
 
-// const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
 module.exports.addUser = async function (
   email,
   contact_number,
@@ -8,28 +7,47 @@ module.exports.addUser = async function (
   last_name,
   password_hash
 ) {
-  client.connect();
-  console.log('Connected!');
   try {
-    client.query(
-      `
-        WITH ins1 AS (
+    const { rows } = await pool.query(
+      `WITH ins1 AS (
             INSERT INTO public."user"(email, contact_number, first_name, last_name)
             VALUES ($1, $2, $3, $4)
             RETURNING user_id AS sample_id
             )
          INSERT INTO public.account(user_id, password_hash)
-         SELECT sample_id, $5 FROM ins1;`, // end of sql query
-      [email, contact_number, first_name, last_name, password_hash],
-      (err, results) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(results);
-          console.log(results.rows);
-        }
-      }
+         SELECT sample_id, $5 FROM ins1;`,
+      [email, contact_number, first_name, last_name, password_hash]
     );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getAllUsers = async function () {
+  try {
+    const { rows } = await pool.query(
+      `SELECT * FROM public."user" ORDER BY user_id ASC`
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.deleteUserByID = async function (id) {
+  try {
+    const { rows } = await pool.query(
+      `WITH ins1 AS (
+	      DELETE FROM public."account" WHERE user_id = $1
+      )
+      DELETE FROM public."user" WHERE user_id = $1`,
+      [id]
+    );
+    console.log(rows);
+    return rows;
   } catch (error) {
     console.log(error);
   }

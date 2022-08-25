@@ -88,4 +88,10 @@ router.post(
 
 router.post('/getAnomolies', dataController.getAnomolies);
 
+// get all users for users page
+router.get('/getAllUsers', userController.getAllUsers);
+
+// delete user based on id
+router.delete('/deleteUserByID/:id', userController.deleteUserByID);
+
 module.exports = router;

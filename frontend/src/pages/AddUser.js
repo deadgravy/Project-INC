@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 
-const SignUp = () => {
+const AddUser = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
   const [password, setPassword] = useState('');
+  let navigate = useNavigate();
 
   // Reading form inputs
   const handleSubmit = (e) => {
@@ -16,34 +18,32 @@ const SignUp = () => {
       contact_number: contact,
       first_name: firstName,
       last_name: lastName,
-      password
+      password,
     };
 
     fetch('http://localhost:4000/api/addUser', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(postData)
-    })
-    .then((response) => {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(postData),
+    }).then((response) => {
       if (response.status === 201) {
         // TODO: Redirect to EUS
-        console.log("Successful sign up, redirect to EUS");
+        console.log('Successful sign up, redirect to EUS');
+        alert('User successfully added');
+        navigate('/equipmentUtilisationSnapshot');
         return;
       } else {
-        // TODO: An error pop up will show
+        alert('Unsuccessful!');
       }
-    })
+    });
   };
 
   return (
     <div className='row loginPage'>
       <div className='loginContainer col-12'>
         <div className='card offset-4 p-4 px-6'>
-          <h2>Welcome Back to FIRC!</h2>
-          <p>
-            Please fill in your relevant details to sign up for a new account
-            with FIRC!
-          </p>
+          <h2>Add User</h2>
+          <p>Please fill in your relevant details to add a user for FIRC!</p>
           <form onSubmit={handleSubmit}>
             <div className='row level'>
               <div className='col-6'>
@@ -134,4 +134,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default AddUser;

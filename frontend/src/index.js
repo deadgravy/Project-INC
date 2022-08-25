@@ -4,13 +4,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductionOverview from './pages/ProductionOverview';
 import TodayProduction from './pages/TodayProduction';
 import SingleProductFlow from './pages/SingleProductFlow';
-import SignUp from './pages/SignUp';
+import AddUser from './pages/AddUser';
 import EquipUtilDashboard from './pages/EquipUtilDashboard';
 import EUDWeekly from './pages/EUDWeekly';
 import EUS from './pages/EUS';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/login/RequireAuth';
 import Login from './pages/Login';
+import UserManagement from './pages/UserManagement';
+import Unauthorized from './pages/Unauthorized';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,10 +21,9 @@ root.render(
       <AuthProvider>
         <Routes>
           <Route path='/' element={<Login />} />
-          <Route path='signUp' element={<SignUp />} />
 
           {/* Protected routes */}
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth allowedRoles={['admin', 'user']} />}>
             <Route
               path='productionOverview/:id'
               element={<ProductionOverview />}
@@ -44,6 +45,13 @@ root.render(
               path='equipmentUtilisationDashboard/weekly'
               element={<EUDWeekly />}
             />
+
+            <Route path='unauthorized' element={<Unauthorized />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={['admin']} />}>
+            <Route path='users' element={<UserManagement />} />
+            <Route path='addUser' element={<AddUser />} />
           </Route>
         </Routes>
       </AuthProvider>
