@@ -1,5 +1,4 @@
 const itzy = require('../services/spfdService');
-// Still in progress
  
 module.exports.getSingleProductWithNameDate = async function (req, res, next) {
   let name = req.params.name;
