@@ -11,7 +11,7 @@ const ResetPW = () => {
   const successAlert = () => {
     Swal.fire({
       title: 'Reset Password',
-      text: "SUCCESS!",
+      text: "Success! Please return to login page.",
       type: 'success',
       
     })
@@ -19,8 +19,8 @@ const ResetPW = () => {
   const errorAlert = () => {
     Swal.fire({
       title: 'Reset Password',
-      text: "OPPS!",
-      type: 'warning',
+      text: "Opps!",
+      type: 'error',
       
     })
   }
@@ -91,7 +91,11 @@ const ResetPW = () => {
                 </span>
               </div>
             </div>
-
+            {
+              email && password === null && (
+                errorAlert()
+              )
+            }
             <button type='submit' className='btn-danger mt-2 u-pull-right'>Reset Password</button>
           </form>
           <div className='mt-3'>
