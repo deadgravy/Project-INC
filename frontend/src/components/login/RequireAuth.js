@@ -2,7 +2,6 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const RequireAuth = ({ allowedRoles }) => {
-  const location = useLocation();
   const { auth } = useAuth();
   const isAuth = auth || localStorage.getItem('user');
   const role = localStorage.getItem('role');
