@@ -24,15 +24,15 @@ module.exports.getUserIDbyEmail = async function (req, res, next) {
 module.exports.changePWbyID = async function (req, res) {
   try {
     console.log(req.body);
-    const { password, id } = req.body;
+    const { password, email } = req.body;
     console.log('password: ', password)
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(password, salt, function (err, hash) {
         // returns hash
         console.log(hash);
 
-        let data = { hash, id };
-        resetpw.changePWbyID(hash, id);
+        let data = { hash, email };
+        resetpw.changePWbyID(hash, email);
         console.log(data);
       });
     });

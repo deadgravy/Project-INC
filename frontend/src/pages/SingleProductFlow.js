@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SideBar from '../components/sidebar/Sidebar';
 import Modal from '../components/spfd/modal';
 import {GanttChart } from "../components/spfd/ganttChart";

@@ -1,10 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/resetpw.css';
 import '../styles/styles.css';
+import Swal from 'sweetalert2'
 
 const ResetPW = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const successAlert = () => {
+    Swal.fire({
+      title: 'Reset Password',
+      text: "SUCCESS!",
+      type: 'success',
+      
+    })
+  }
+  const errorAlert = () => {
+    Swal.fire({
+      title: 'Reset Password',
+      text: "OPPS!",
+      type: 'warning',
+      
+    })
+  }
+
+  const handelSubmit = (e) => {
+
+    e.preventDefault();
+    const data = {
+      email,
+      password
+    }
+    fetch(`http://localhost:4000/api/changePWbyID`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }) .then((response) => {
+      if(response.ok) {
+        console.log('Password successfully changed to:', password ,'for', email)
+      } else {
+        console.log('OPPS! There is an error, please try again!')
+      }
+    })
+    
+    console.log('email: ', email)
+    console.log('password: ', password)
+  }
 
   return (
     <div className='row resetPWPage'>
@@ -14,9 +56,11 @@ const ResetPW = () => {
           <p>
             Please fill in your email and your new password.
           </p>
-          <form>
-            <h6 className='m-0'>Email</h6>
-            <div className='row level'>
+          <form onSubmit={handelSubmit}>
+
+            <h6 className='m-0'>Email</h6>                                {/* Email title and input */}
+
+            <div className='row level'>                               
               <div className='input-control w-100p'>
                 <input
                   type='email'
@@ -30,7 +74,9 @@ const ResetPW = () => {
                 </span>
               </div>
             </div>
-            <h6 className='m-0'>New Password</h6>
+
+            <h6 className='m-0'>New Password</h6>                         {/* Password title and input */}
+
             <div className='row level'>
               <div className='input-control w-100p'>
                 <input
@@ -45,7 +91,8 @@ const ResetPW = () => {
                 </span>
               </div>
             </div>
-            <button className='btn-danger mt-2 u-pull-right'>Reset Password</button>
+
+            <button type='submit' className='btn-danger mt-2 u-pull-right'>Reset Password</button>
           </form>
           <div className='mt-3'>
             <a href='http://localhost:3000' className='u u-LR text-white'>
@@ -55,9 +102,9 @@ const ResetPW = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
 
-}
+};
 
 export default ResetPW;
