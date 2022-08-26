@@ -23,8 +23,6 @@ root.render(
         <Routes>
           <Route path='/' element={<Login />} />
 
-          <Route path='signUp' element={<SignUp />} />
-
           <Route path='resetPassword' element={<ResetPW />} />
 
           {/* Protected routes */}
