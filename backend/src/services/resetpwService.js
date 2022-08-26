@@ -1,4 +1,4 @@
-const pool = require('../config/userDatabase');
+const Pool = require('../config/userDatabase');
 
 module.exports.getUserIDbyEmail = async function (email) {
   try {
@@ -7,11 +7,23 @@ module.exports.getUserIDbyEmail = async function (email) {
         SELECT public."user".user_id as user_id, public."user".email, public."account".password_hash
         FROM public."user"
         INNER JOIN public."account"
-        ON public."user".user_id = public."account".user_id
+        ON public."user".user_id = public.account.user_id
         )
         
         SELECT user_id FROM GETID WHERE email = $1`,
       [email]
+    ); // end of query;
+    return rows;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.changePWbyID = async function (password, id) {
+  try {
+    const { rows } = await Pool.query(
+      `UPDATE account SET password_hash = $1 WHERE user_id = $2;`,
+      [password, id]
     ); // end of query;
     return rows;
   } catch (error) {

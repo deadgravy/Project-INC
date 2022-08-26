@@ -60,18 +60,4 @@ const ResetPW = () => {
 
 }
 
-// WITH KILLME as (
-// 	SELECT public."user".user_id as user_id, public."user".email, public."account".user_id as account_id , public."account".password_hash
-// 	FROM public."user"
-// 	INNER JOIN public."account"
-// 	ON public."user".user_id = public."account".user_id
-// )
-
-// SELECT user_id, account_id, email, password_hash FROM KILLME;
-// -- UPDATE account SET password_hash = '24846z2015' WHERE email = 'guanxi.20@ichat.sp.edu.sg'
-
-// UPDATE account SET password_hash = 'helpME' WHERE user_id = 37
-
-
-
 export default ResetPW;
