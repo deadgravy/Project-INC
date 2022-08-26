@@ -56,7 +56,7 @@ const ResetPW = () => {
       </div>
     </div>
   )
- 
+
 
 }
 
