@@ -6,6 +6,8 @@ const RequireAuth = ({ allowedRoles }) => {
   const isAuth = auth || localStorage.getItem('user');
   const role = localStorage.getItem('role');
 
+  // need to test smth
+
   return isAuth && allowedRoles?.includes(role) ? (
     <Outlet />
   ) : isAuth ? (
