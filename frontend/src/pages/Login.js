@@ -72,6 +72,7 @@ const Login = () => {
               <div className='input-control w-100p'>
                 <input
                   type='email'
+                  name='email-nw'
                   className='input-contains-icon'
                   placeholder='Email'
                   value={email}
@@ -87,6 +88,7 @@ const Login = () => {
               <div className='input-control w-100p'>
                 <input
                   type='password'
+                  name='password-nw'
                   className='input-contains-icon'
                   placeholder='Password'
                   value={password}
@@ -97,7 +99,9 @@ const Login = () => {
                 </span>
               </div>
             </div>
-            <button className='btn-danger mt-2 u-pull-right'>SIGN IN</button>
+            <button className='signInBtn btn-danger mt-2 u-pull-right'>
+              SIGN IN
+            </button>
           </form>
           <div className='mt-3'>
             <a href='http://localhost:3000/ResetPassword' className='u u-LR text-white'>
