@@ -5,6 +5,12 @@ import { SidebarData } from './SidebarData';
 import PeopleIcon from '@mui/icons-material/People';
 
 const Sidebar = () => {
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  }
+
   return (
     <div className='card h-screen p-2'>
       <img src={require('../../logos/firc-logo.png')} alt='' />
@@ -46,6 +52,7 @@ const Sidebar = () => {
         ) : (
           <div></div>
         )}
+        <button style={{marginLeft: 15, marginTop: 20}} onClick={logout}>Logout</button>
       </ul>
     </div>
   );
