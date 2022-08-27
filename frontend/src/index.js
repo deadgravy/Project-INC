@@ -8,6 +8,7 @@ import AddUser from './pages/AddUser';
 import EquipUtilDashboard from './pages/EquipUtilDashboard';
 import EUDWeekly from './pages/EUDWeekly';
 import EUS from './pages/EUS';
+import Profile from './pages/Profile';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/login/RequireAuth';
 import Login from './pages/Login';
@@ -38,6 +39,7 @@ root.render(
               element={<EquipUtilDashboard />}
             />
             <Route path='equipmentUtilisationSnapshot' element={<EUS />} />
+            <Route path='profile' element={<Profile />} />
             <Route path='singleProductFlow' element={<SingleProductFlow />} />
             <Route
               exact

@@ -65,3 +65,18 @@ module.exports.deleteUserByID = async function (req, res, next) {
     });
   }
 }; // End of async function(req,res,next)
+
+module.exports.updateUserByID = async function (req, res, next) {
+  let id = req.params.id;
+  try {
+    await userService.updateUserByID(id, req.body);
+    res.status(200).json({
+      status: 'User details updated successfully!'
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'Failed to update user details'
+    })
+  }
+}

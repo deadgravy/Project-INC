@@ -101,4 +101,8 @@ router.get('/getUserIDbyEmail/:email', resetpwController.getUserIDbyEmail);
 // Change PW by id
 router.post('/changePWbyID', resetpwController.changePWbyID);
 
+// update user details 
+router.put('/updateUserByID/:id', userController.updateUserByID);
+
+
 module.exports = router;

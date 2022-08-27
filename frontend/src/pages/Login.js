@@ -37,6 +37,10 @@ const Login = () => {
           navigate('/equipmentUtilisationSnapshot', { replace: true });
           localStorage.setItem('user', email);
           localStorage.setItem('role', result?.role);
+          localStorage.setItem('firstName', result?.firstName);
+          localStorage.setItem('lastName', result?.lastName);
+          localStorage.setItem('userID', result?.userID);
+          localStorage.setItem('phone', result?.phone);
         });
       } else {
         console.log(response);
