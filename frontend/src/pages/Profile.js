@@ -2,13 +2,45 @@ import { useState } from 'react';
 import '../styles/profile.css';
 
 const Profile = () => {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState(localStorage.getItem('user'));
+  const [firstName, setFirstName] = useState(localStorage.getItem('firstName'));
+  const [lastName, setLastName] = useState(localStorage.getItem('lastName'));
+  const [phone, setPhone] = useState(localStorage.getItem('phone'));
+
+  let userID = localStorage.getItem('userID');
 
   const handleSubmit = (e) => {
+    e.preventDefault();
 
+    const data = {
+      email,
+      firstName,
+      lastName,
+      phone
+    }
+
+    fetch(`http://localhost:4000/api/updateUserByID/${userID}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then((response) => {
+      if (response.ok) {
+        alert('Update Successful');
+        localStorage.setItem('user', email)
+        localStorage.setItem('firstName', firstName)
+        localStorage.setItem('lastName', lastName)
+        localStorage.setItem('phone', phone)
+      } else {
+        console.log(response);
+        if (!response?.status) {
+          alert('No server response');
+        } else if (response?.status === 400) {
+          alert('Missing fields');
+        } else {
+          alert('Update failed!');
+        }
+      }
+    })
   }
 
   return (

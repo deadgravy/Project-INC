@@ -10,6 +10,7 @@ module.exports.verify = async function (req, res, next) {
 
     if (bcrypt.compareSync(password, results[0].password_hash)) {
       console.log('it matches');
+      console.log(results[0]);
       let data = {
         displayName: results[0].first_name + ' ' + results[0].last_name,
         email: results[0].email,
@@ -17,6 +18,7 @@ module.exports.verify = async function (req, res, next) {
         firstName: results[0].first_name,
         lastName: results[0].last_name,
         userID: results[0].user_id,
+        phone: results[0].contact_number,
         token: jwt.sign(
           {
             userId: results[0].user_id,
