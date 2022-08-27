@@ -19,5 +19,8 @@
     "validator": "^13.7.0",
     "yamljs": "^0.3.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
 }

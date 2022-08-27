@@ -14,6 +14,9 @@ module.exports.verify = async function (req, res, next) {
         displayName: results[0].first_name + ' ' + results[0].last_name,
         email: results[0].email,
         role: results[0].role,
+        firstName: results[0].first_name,
+        lastName: results[0].last_name,
+        userID: results[0].user_id,
         token: jwt.sign(
           {
             userId: results[0].user_id,

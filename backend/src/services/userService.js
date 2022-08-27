@@ -52,3 +52,25 @@ module.exports.deleteUserByID = async function (id) {
     console.log(error);
   }
 };
+
+module.exports.updateUserByID = async function (id, requestBody) {
+  try {
+    const {rows} = await pool.query(
+      `
+      UPDATE
+        public.user
+      SET
+        email = $1,
+        contact_number = $2,
+        first_name = $3,
+        last_name = $4
+      WHERE
+        user_id = $5`,
+        [requestBody.email, requestBody.phone, requestBody.firstName, requestBody.lastName, id]
+    )
+
+    return rows;
+  } catch (error) {
+    console.log(error)
+  }
+}
