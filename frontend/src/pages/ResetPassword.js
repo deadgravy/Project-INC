@@ -19,7 +19,7 @@ const ResetPW = () => {
   const errorAlert = () => {
     Swal.fire({
       title: 'Reset Password',
-      text: "Opps!",
+      text: "Opps! Please make sure that you fill in your email and new password.",
       type: 'error',
       
     })
@@ -36,13 +36,19 @@ const ResetPW = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }) .then((response) => {
-      if(response.ok) {
-        console.log('Password successfully changed to:', password ,'for', email)
-      } else {
-        console.log('OPPS! There is an error, please try again!')
-      }
+    }) 
+    .then((response) => {
+      console.log(response)
+      // if(response.ok) {
+      //   console.log('Password successfully changed to:', password ,'for', email)
+      // }
     })
+    
+      if(email.length && password.length !== 0) {
+        successAlert(e)
+      } else {
+        errorAlert(e)
+      }
     
     console.log('email: ', email)
     console.log('password: ', password)
