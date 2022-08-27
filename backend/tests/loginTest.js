@@ -11,7 +11,6 @@ module.exports = {
       .setValue(pwTest, 'password')
       .click('.signInBtn')
       .assert.urlContains('equipmentUtilisationSnapshot', 'Successful login!')
-      .waitForElementVisible('.EUS')
-      .saveScreenshot('tests_output/login.png');
+      .waitForElementVisible('.EUS');
   },
 };
