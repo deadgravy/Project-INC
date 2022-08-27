@@ -9,7 +9,8 @@ module.exports.verify = async function (email) {
           u.first_name,
           u.last_name,
           a.role,
-          a.password_hash
+          a.password_hash,
+          u.contact_number
         FROM
           public."user" u,
           public.account a

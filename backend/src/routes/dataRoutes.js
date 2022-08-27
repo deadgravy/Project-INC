@@ -94,4 +94,7 @@ router.get('/getAllUsers', userController.getAllUsers);
 // delete user based on id
 router.delete('/deleteUserByID/:id', userController.deleteUserByID);
 
+// update user details 
+router.put('/updateUserByID/:id', userController.updateUserByID);
+
 module.exports = router;
