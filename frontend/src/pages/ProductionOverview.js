@@ -204,6 +204,7 @@ const ProductionOverview = () => {
               <div
                 className='row'
                 style={{ display: graph === 'LineChart' ? 'block' : 'none' }}
+                id='lineChart'
               >
                 {prodCount.data?.length > 0 ? (
                   <LineChart data={prodCount} />
@@ -214,6 +215,7 @@ const ProductionOverview = () => {
               <div
                 className='row'
                 style={{ display: graph === 'BarChart' ? 'block' : 'none' }}
+                id='barChart'
               >
                 {prodCount.data?.length > 0 && <BarChart data={prodCount} />}
               </div>
