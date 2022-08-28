@@ -138,7 +138,7 @@ const EUDWeekly = () => {
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       minDate={new Date('2021-08-10')}
-                      maxDate={new Date()}
+                      maxDate={new Date('2021-08-31')}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
                       yearDropdownItemNumber={15}
@@ -207,7 +207,7 @@ const EUDWeekly = () => {
                         )}
                       </div>
 
-                      <div className='singleContent mb-4'>
+                      <div className='multipleContent mb-4'>
                         <h5 id='projectname2' className='title mb-0'>
                           Multiple Recipe Equipment
                         </h5>

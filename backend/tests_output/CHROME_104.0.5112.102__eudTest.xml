@@ -3,11 +3,11 @@
             failures="0"
             tests="1">
 
-  <testsuite name="eusTest"
-    errors="0" failures="0" hostname="" id="" package="eusTest" skipped="0"
-    tests="1" time="6.819" timestamp="">
+  <testsuite name="eudTest"
+    errors="0" failures="0" hostname="" id="" package="eudTest" skipped="0"
+    tests="1" time="11.28" timestamp="">
   
-    <testcase name="EUS Test Case" classname="eusTest" time="6.819" assertions="18">
+    <testcase name="EUD Test Case" classname="eudTest" time="11.28" assertions="18">
 
     
 

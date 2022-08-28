@@ -82,7 +82,7 @@ export function UsageChart({ data }) {
 
   return (
     <>
-      <div className='row mb-2'>
+      <div className='row mb-2 colourLegend'>
         {legend.length === 0 ? (
           <br></br>
         ) : (
