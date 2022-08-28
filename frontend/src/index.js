@@ -14,6 +14,7 @@ import RequireAuth from './components/login/RequireAuth';
 import Login from './pages/Login';
 import UserManagement from './pages/UserManagement';
 import Unauthorized from './pages/Unauthorized';
+import ResetPW from './pages/ResetPassword'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,8 @@ root.render(
       <AuthProvider>
         <Routes>
           <Route path='/' element={<Login />} />
+
+          <Route path='resetPassword' element={<ResetPW />} />
 
           {/* Protected routes */}
           <Route element={<RequireAuth allowedRoles={['admin', 'user']} />}>

@@ -8,6 +8,7 @@ const userController = require('../controllers/userController');
 const spfdController = require('../controllers/spfdController');
 const eudController = require('../controllers/eudController');
 const tpdController = require('../controllers/tpdController');
+const resetpwController = require('../controllers/resetpwController');
 
 // get all recipes and ID
 router.get('/getAllRecipeAndID', dataController.getData1);
@@ -94,7 +95,14 @@ router.get('/getAllUsers', userController.getAllUsers);
 // delete user based on id
 router.delete('/deleteUserByID/:id', userController.deleteUserByID);
 
+// get user id by email
+router.get('/getUserIDbyEmail/:email', resetpwController.getUserIDbyEmail);
+
+// Change PW by id
+router.post('/changePWbyID', resetpwController.changePWbyID);
+
 // update user details 
 router.put('/updateUserByID/:id', userController.updateUserByID);
+
 
 module.exports = router;

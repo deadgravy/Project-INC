@@ -10,7 +10,7 @@ const RequireAuth = ({ allowedRoles }) => {
   return isAuth && allowedRoles?.includes(role) ? (
     <Outlet />
   ) : isAuth ? (
-    <Navigate to='/unauthorized' replace />
+    <Navigate to='/unauthorized' />
   ) : (
     <Navigate to='/' replace />
   ); // else return to login page
