@@ -114,7 +114,7 @@ const EquipUtilDashboard = () => {
 
   return (
     <React.StrictMode>
-      <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
+      <div className='equipmentUtilisationDashboard row p-0 w-100p'>
         <div className='po-sidebar sidebar col-2'>
           <SideBar />
         </div>
@@ -128,13 +128,13 @@ const EquipUtilDashboard = () => {
                 <div className='Row2'>
                   <div className='col-2'>
                     <DatePicker
+                      id='datepicker-nw'
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       minDate={new Date('2021-08-10')}
-                      maxDate={new Date()}
+                      maxDate={new Date('2021-08-31')}
                       showYearDropdown
                       dateFormatCalendar='MMMM'
-                      yearDropdownItemNumber={15}
                       scrollableYearDropdown
                     />
                   </div>
@@ -167,11 +167,12 @@ const EquipUtilDashboard = () => {
                     <UsageChart data={multipleUsage} />
                   )}
                 </div>
-                <div className='row'>
+                <div className='row Row7'>
                   <h5 className='col-9'>Equipment Usage Details</h5>
                   {/* Start of Input Box code */}
                   <div className='col-2 level-item mr-2'>
                     <input
+                      id='input-nw'
                       type='number'
                       min='1'
                       max='24'
@@ -204,7 +205,7 @@ const EquipUtilDashboard = () => {
                         )}
                       </div>
 
-                      <div className='singleContent mb-4'>
+                      <div className='multipleContent mb-4'>
                         <h6 id='projectname2' className='title mb-1'>
                           Multiple Recipe Equipment
                         </h6>
