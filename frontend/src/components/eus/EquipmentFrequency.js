@@ -49,7 +49,7 @@ const EquipmentDetails = ({ allEquipments }) => {
     } else if (counter === '3') {
       setCounterType('Completed');
       setCounter(2);
-    } else {
+    } else if (counter === '4'){
       setCounterType('Anomolies');
     }
   };
@@ -164,11 +164,12 @@ const EquipmentDetails = ({ allEquipments }) => {
       <AccordionDetails className='row py-2'>
         <div className='col-10'>
           <div className='w-60p u-text-center'>
-            <h4 className='mt-2'>{date}</h4>
+            <h4 className='mt-2' id='timeFrame'>{date}</h4>
             <div
               style={{
                 display: equipmentFrequencyData.length > 0 ? 'block' : 'none',
               }}
+              id='defaultChart'
             >
               <VictoryPie
                 colorScale={colorScheme}
@@ -189,8 +190,8 @@ const EquipmentDetails = ({ allEquipments }) => {
             >
               <h4 className='text-danger'>No Data Found</h4>
             </div>
-            <div style={{ display: compare ? 'block' : 'none' }}>
-              <h4 className='mt-2'>{compareDate}</h4>
+            <div style={{ display: compare ? 'block' : 'none' }} id='comparisonChart'>
+              <h4 className='mt-2' id='compareDate'>{compareDate}</h4>
               <div
                 style={{
                   display: compareFrequencyData.length > 0 ? 'block' : 'none',
@@ -219,7 +220,7 @@ const EquipmentDetails = ({ allEquipments }) => {
           </div>
         </div>
         <div className='col-2' align='center'>
-          <h4>{counterType} Count</h4>
+          <h4 id='counterType'>{counterType} Count</h4>
           <Modal
             handleUserUpdate={handleUserUpdate}
             parentCounter={parentCounter}
