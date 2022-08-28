@@ -5,9 +5,9 @@
 
   <testsuite name="eusTest"
     errors="0" failures="0" hostname="" id="" package="eusTest" skipped="0"
-    tests="1" time="6.819" timestamp="">
+    tests="1" time="6.441" timestamp="">
   
-    <testcase name="EUS Test Case" classname="eusTest" time="6.819" assertions="18">
+    <testcase name="EUS Test Case" classname="eusTest" time="6.441" assertions="18">
 
     
 
