@@ -293,7 +293,7 @@ module.exports.getMultiEquipmentStatus = async function () {
   }
 };
 
-module.exports.getMachineConnectivity = async function () {
+module.exports.getMachineConnectivity = async function (currentDate) {
   try {
     const { rows } = await pool.query(`
       SELECT DISTINCT ON (client_no) 
@@ -309,10 +309,11 @@ module.exports.getMachineConnectivity = async function () {
       ON 
         a.client_no = b.machine_id
       WHERE 
-        a.created_at >= '2021-08-21 00:00:00' AND a.created_at < '2021-08-22 00:00:00'
+        a.created_at >= $1 AND a.created_at < $1
       ORDER BY 
         client_no, created_at DESC;
-      `);
+      `,
+      [currentDate]);
     return rows;
   } catch (error) {
     console.log(error);

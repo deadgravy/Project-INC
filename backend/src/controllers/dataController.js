@@ -127,7 +127,7 @@ module.exports.getMultiEquipmentStatus = async function (req, res, next) {
 
 module.exports.getMachineConnectivity = async function (req, res, next) {
   try {
-    const results = await dataManager.getMachineConnectivity();
+    const results = await dataManager.getMachineConnectivity(req.body.currentDate);
     console.log(results);
     res.status(200).json({
       status: 'success',
