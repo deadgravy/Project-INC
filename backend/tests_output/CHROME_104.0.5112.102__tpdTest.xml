@@ -5,9 +5,9 @@
 
   <testsuite name="tpdTest"
     errors="0" failures="0" hostname="" id="" package="tpdTest" skipped="0"
-    tests="1" time="6.614" timestamp="">
+    tests="1" time="6.284" timestamp="">
   
-    <testcase name="TPD Test Case" classname="tpdTest" time="6.614" assertions="9">
+    <testcase name="TPD Test Case" classname="tpdTest" time="6.284" assertions="9">
 
     
 
@@ -46,6 +46,24 @@ C:\Project-INC-1\backend\tests\podTest.js:
  16 |         selector: &#39;.row.level.px-1&#39;,
  17 |         index: 4
 –––––––––––––––––––––––––––––––––––––––––––
+
+ → NoSuchElementError
+
+    An element could not be located on the page using the given search parameters.
+
+    Try fixing by :
+1. Please inspect the html before the step
+2. Verify if an element with the mentioned selector is present in the DOM tree
+
+    Error location:
+C:\Project-INC-1\backend\tests\userTest.js:
+––––––––––––––––––––––––––––––––––––––––––––
+ 42 | 
+ 43 |     browser.refresh;
+ 44 |     browser.click(&#39;#Night&#39;); 
+ 45 |     browser.acceptAlert();
+ 46 |     browser.assert.textContains(
+––––––––––––––––––––––––––––––––––––––––––––
 
     </system-err>
   
