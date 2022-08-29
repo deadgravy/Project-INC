@@ -22,18 +22,18 @@ module.exports = {
         selector: '.row-id',
         index: 0,
       },
-      '37',
-      'Louis Pang',
-      '87870866',
-      'guanxi.20@ichat.sp.edu.sg'
+      '36',
+      'Javier Fok',
+      '96434639',
+      'javierfokjf11.21@ichat.sp.edu.sg'
     );
 
     // test to add user
     browser
       .click('.btn-link')
-      .setValue('.firstname-nw', 'Hello')
-      .setValue('.lastname-nw', 'Bye')
-      .setValue('.email-nw', 'bye@email.com')
+      .setValue('.firstname-nw', 'Night')
+      .setValue('.lastname-nw', 'Watch')
+      .setValue('.email-nw', 'nightwatch@email.com')
       .setValue('.contact-nw', '90001111')
       .setValue('.password-nw', 'password')
       .click('.btn-danger')
@@ -41,16 +41,16 @@ module.exports = {
       .pause(1000);
 
     browser.refresh;
-    browser.click('#Hello');
+    browser.click('#Night');
     browser.acceptAlert();
     browser.assert.textContains(
       {
         selector: '.row-id',
-        index: 5,
+        index: 6,
       },
-      '60',
-      'Night Watch',
-      '87889988',
+      '42',
+      'first last',
+      '80082900',
       'email@email.com'
     );
   },
