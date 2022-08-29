@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.17d9e4dc.css",
-    "main.js": "/static/js/main.12352ac6.js",
+    "main.css": "/static/css/main.27a382dd.css",
+    "main.js": "/static/js/main.58949c0b.js",
     "static/media/firc-logo.png": "/static/media/firc-logo.403d94df091a40fa2260.png",
     "index.html": "/index.html",
-    "main.17d9e4dc.css.map": "/static/css/main.17d9e4dc.css.map",
-    "main.12352ac6.js.map": "/static/js/main.12352ac6.js.map"
+    "main.27a382dd.css.map": "/static/css/main.27a382dd.css.map",
+    "main.58949c0b.js.map": "/static/js/main.58949c0b.js.map"
   },
   "entrypoints": [
-    "static/css/main.17d9e4dc.css",
-    "static/js/main.12352ac6.js"
+    "static/css/main.27a382dd.css",
+    "static/js/main.58949c0b.js"
   ]
 }

@@ -12,7 +12,7 @@ export function UserTable(users) {
   function deleteUser(userID) {
     let confirmText = 'Are you sure you want to delete this user?';
     if (window.confirm(confirmText)) {
-      fetch(`http://localhost:4000/api/deleteUserByID/${userID}`, {
+      fetch(`/api/deleteUserByID/${userID}`, {
         method: 'DELETE',
       }).then((response) => {
         response.json().then((result) => {

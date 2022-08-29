@@ -100,7 +100,10 @@ const Login = () => {
             <button className='btn-danger mt-2 u-pull-right'>SIGN IN</button>
           </form>
           <div className='mt-3'>
-            <a href='http://localhost:3000/ResetPassword' className='u u-LR text-white'>
+            <a
+              href='http://54.209.249.105/resetPassword'
+              className='u u-LR text-white'
+            >
               Forgot Password
             </a>
           </div>

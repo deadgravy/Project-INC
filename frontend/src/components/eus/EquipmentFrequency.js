@@ -78,7 +78,7 @@ const EquipmentDetails = ({ allEquipments }) => {
 
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:4000/api/getAllEquipmentStartOrStop', {
+      fetch('/api/getAllEquipmentStartOrStop', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const EquipmentDetails = ({ allEquipments }) => {
 
   useEffect(() => {
     if (totalData && update && counter !== '4') {
-      fetch(`http://localhost:4000/api/getEquipmentStartOrStopCount`, {
+      fetch(`/api/getEquipmentStartOrStopCount`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ const EquipmentDetails = ({ allEquipments }) => {
 
   useEffect(() => {
     if (counter === '4') {
-      fetch(`http://localhost:4000/api/getAnomolies`, {
+      fetch(`/api/getAnomolies`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -231,11 +231,11 @@ const EquipmentDetails = ({ allEquipments }) => {
             name={'Initial Legend'}
           />
           <div style={{ display: compare ? 'block' : 'none' }}>
-          <Legend
-            equipmentFrequencyData={compareFrequencyData}
-            colorScheme={colorScheme}
-            name={'Comparison Legend'}
-          />
+            <Legend
+              equipmentFrequencyData={compareFrequencyData}
+              colorScheme={colorScheme}
+              name={'Comparison Legend'}
+            />
           </div>
         </div>
       </AccordionDetails>

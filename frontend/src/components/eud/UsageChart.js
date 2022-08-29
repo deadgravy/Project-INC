@@ -14,7 +14,7 @@ export function UsageChart({ data }) {
     const colourAndRecipeArr = [];
     let usageArr = [];
 
-    fetch(`http://localhost:4000/api/getAllRecipeName`)
+    fetch(`/api/getAllRecipeName`)
       .then((res) => res.json())
       .then((result) => {
         for (let i = 0; i < result.data.length; i++) {

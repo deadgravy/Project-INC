@@ -2,11 +2,14 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const loginService = require('../services/loginService');
 const bcrypt = require('bcrypt');
+const dotenv = require('dotenv');
+dotenv.config(); //Build the process.env object.
 
 module.exports.verify = async function (req, res, next) {
   try {
     const { email, password } = req.body;
     const results = await loginService.verify(email);
+    const jwt_key = 'LFJICLUPUUDJBABVBNMEEFMISCTHZSOAPS';
 
     if (bcrypt.compareSync(password, results[0].password_hash)) {
       console.log('it matches');
@@ -24,7 +27,7 @@ module.exports.verify = async function (req, res, next) {
             userId: results[0].user_id,
             email: results[0].email,
           },
-          config.JWTKey,
+          jwt_key,
           {
             expiresIn: 3 * 60, //Expires in 3 mins
           }

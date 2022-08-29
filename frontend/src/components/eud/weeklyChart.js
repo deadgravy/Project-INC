@@ -14,7 +14,7 @@ export function WeeklyChart({ data }) {
     const colourAndEquipArr = [];
     let usageArr = [];
 
-    fetch(`http://localhost:4000/api/getAllEquipment`)
+    fetch(`/api/getAllEquipment`)
       .then((res) => res.json())
       .then((result) => {
         // loops through colours in UsageChartData.js and assigns it to each equipment
