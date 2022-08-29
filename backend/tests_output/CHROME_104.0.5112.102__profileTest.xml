@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
-  <testsuite name="eudTest"
-    errors="0" failures="0" hostname="" id="" package="eudTest" skipped="0"
-    tests="1" time="10.46" timestamp="">
+  <testsuite name="profileTest"
+    errors="0" failures="1" hostname="" id="" package="profileTest" skipped="0"
+    tests="1" time="9.304" timestamp="">
   
-    <testcase name="EUD Test Case" classname="eudTest" time="10.46" assertions="18">
+    <testcase name="Profile Test Case" classname="profileTest" time="9.304" assertions="6">
 
     
 
@@ -17,31 +17,8 @@
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Timed out while waiting for element &lt;.profileContainer&gt; to be present for 5000 milliseconds. - expected &#34;visible&#34; but got: &#34;not found&#34; (5340ms)">    at Object.Profile Test Case (C:\Users\georgeyinxu\Project-INC\backend\tests\profileTest.js:23:6)
+    at runMicrotasks (&lt;anonymous&gt;)</failure>
 
     
     </testcase>

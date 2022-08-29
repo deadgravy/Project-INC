@@ -46,7 +46,7 @@ const Profile = () => {
   return (
     <div className='profileContainer'>
       <div className='profile w-100p px-20 row'>
-        <div className='card col-12 p-4 px-16'>
+        <div className='card col-12 p-4 px-16' style={{maxWidth: '80rem'}}>
           <h3 className='mb-2' style={{textAlign: 'center'}}>
             Profile
           </h3>
