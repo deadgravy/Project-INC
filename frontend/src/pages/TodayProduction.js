@@ -29,7 +29,7 @@ const TodayProduction = () => {
     let filtereddate = `${yyyy}-${mm}-${dd}`;
 
     Promise.all([
-      // fetch(`http://localhost:4000/api/getCompletedProducts`, {
+      // fetch(`/api/getCompletedProducts`, {
       //   method: 'POST',
       //   headers: {
       //     'Content-Type': 'application/json',
@@ -38,18 +38,18 @@ const TodayProduction = () => {
       //     date: filtereddate
       //   })
       // }),
-      fetch(
-        `http://localhost:4000/api/getCompletedProducts/${filtereddate}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getProductsToComplete/${filtereddate}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleEquipmentStatus/${filtereddate}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultiEquipmentStatus/${filtereddate}`
-      ).then((res) => res.json()),
+      fetch(`/api/getCompletedProducts/${filtereddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getProductsToComplete/${filtereddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getSingleEquipmentStatus/${filtereddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getMultiEquipmentStatus/${filtereddate}`).then((res) =>
+        res.json()
+      ),
     ])
       .then(([result1, result2, result3, result4]) => {
         console.log(result1.data);

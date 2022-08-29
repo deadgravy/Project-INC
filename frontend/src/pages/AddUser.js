@@ -21,7 +21,7 @@ const AddUser = () => {
       password,
     };
 
-    fetch('http://localhost:4000/api/addUser', {
+    fetch('/api/addUser', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(postData),

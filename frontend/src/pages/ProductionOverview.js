@@ -95,15 +95,11 @@ const ProductionOverview = () => {
     const endDateStr = moment(endDate).format('YYYY-MM-DD');
 
     Promise.all([
-      fetch(`http://localhost:4000/api/getRecipesById/${params.id}`).then(
-        (res) => res.json()
-      ),
-      fetch('http://localhost:4000/api/getAllRecipeAndID').then((res) =>
+      fetch(`/api/getRecipesById/${params.id}`).then((res) => res.json()),
+      fetch('/api/getAllRecipeAndID').then((res) => res.json()),
+      fetch(`/api/prodCount/${startDateStr}/${endDateStr}`).then((res) =>
         res.json()
       ),
-      fetch(
-        `http://localhost:4000/api/prodCount/${startDateStr}/${endDateStr}`
-      ).then((res) => res.json()),
     ])
       .then(([result1, result2, result3]) => {
         setProdOverviewData({
@@ -120,7 +116,7 @@ const ProductionOverview = () => {
         setIsloading(false);
       })
       .catch((error) => console.log('error', error));
-    // fetch(`http://localhost:4000/api/data/data2/${params.id}`)
+    // fetch(`/api/data/data2/${params.id}`)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     // Below should be just setProdOverviewData(data), where data is your full backend data.
@@ -143,7 +139,7 @@ const ProductionOverview = () => {
     setStartDate(start);
     setEndDate(end);
   };
-  //http://localhost:4000/api/data/data1
+  ///api/data/data1
   return (
     <div className='productionOverview row p-0'>
       <div className='po-sidebar sidebar col-2'>
