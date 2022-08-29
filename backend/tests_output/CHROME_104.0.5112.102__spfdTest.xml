@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="1"
-            failures="1"
+<testsuites errors="0"
+            failures="0"
             tests="1">
 
   <testsuite name="spfdTest"
     errors="0" failures="0" hostname="" id="" package="spfdTest" skipped="0"
-    tests="1" time="3.702" timestamp="">
+    tests="1" time="6.377" timestamp="">
   
-    <testcase name="SPFD Test Case" classname="spfdTest" time="3.702" assertions="15">
+    <testcase name="SPFD Test Case" classname="spfdTest" time="6.377" assertions="15">
 
     
 
@@ -21,23 +21,22 @@
 
     
 
-      <failure message="Testing if value of element &lt;input[type=&#39;text&#39;]&gt; equals &#39;2021/08/09 - 2021/08/13&#39; in 5000ms - expected &#34;equals &#39;2021/08/09 - 2021/08/13&#39;&#34; but got: &#34;2021/08/09 - &#34; (5079ms)">    at Object.SPFD Test Case (C:\Users\georgeyinxu\Project-INC\backend\tests\spfdTest.js:54:15)
-    at runMicrotasks (&lt;anonymous&gt;)</failure>
+    
 
     
-    <error message="Testing if value of element [0;33m&lt;input[type=&#39;text&#39;]&gt;[0m equals [0;33m&#39;2021/08/09 - 2021/08/13&#39;[0m in 5000ms - expected [0;32m&#34;equals &#39;2021/08/09 - 2021/08/13&#39;&#34;[0m but got: [0;31m&#34;2021/08/09 - &#34;[0m [0;90m(5079ms)[0m" type="error"><![CDATA[
-    Error
-    at Proxy.&lt;anonymous&gt; (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\api\index.js:145:30)
-    at Object.SPFD Test Case (C:\Users\georgeyinxu\Project-INC\backend\tests\spfdTest.js:54:15)
-    at Context.call (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\context.js:430:35)
-    at TestCase.run (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\testcase.js:58:31)
-    at Runnable.__runFn (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\index.js:693:80)
-    at Runnable.run (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\runnable.js:126:21)
-    at TestSuite.createRunnable (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\index.js:800:33)
-    at TestSuite.handleRunnable (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\index.js:805:33)
-    at C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\testsuite\index.js:693:21
-    at runMicrotasks (&lt;anonymous&gt;)
-    ]]></error>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
     </testcase>
   

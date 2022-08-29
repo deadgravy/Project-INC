@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="1"
-            failures="1"
+<testsuites errors="0"
+            failures="0"
             tests="1">
 
   <testsuite name="userTest"
     errors="0" failures="0" hostname="" id="" package="userTest" skipped="0"
-    tests="1" time="10.75" timestamp="">
+    tests="1" time="9.102" timestamp="">
   
-    <testcase name="Users Page Test Case" classname="userTest" time="10.75" assertions="7">
+    <testcase name="Users Page Test Case" classname="userTest" time="9.102" assertions="7">
 
     
 
@@ -19,48 +19,12 @@
 
     
 
-      <failure message="first last in 5000ms - expected &#34;contains text &#39;42&#39;&#34; but got: &#34;element could not be located&#34; (5266ms)">    at Object.Users Page Test Case (C:\Users\georgeyinxu\Project-INC\backend\tests\userTest.js:46:20)
-    at runMicrotasks (&lt;anonymous&gt;)</failure>
-
     
-    <error message="Element .row-id not found. An element could not be located on the page using the given search parameters." type="error"><![CDATA[
-    Error: Element .row-id not found. An element could not be located on the page using the given search parameters.
-    at LocateElement.filterElements (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\element\locator.js:283:11)
-    at C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\element\locator.js:220:23
-    at runMicrotasks (&lt;anonymous&gt;)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async LocateElement.findElement (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\element\locator.js:146:20)
-    at async GetText.findElement (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\element\command.js:215:14)
-    at async PeriodicPromise.perform (C:\Users\georgeyinxu\AppData\Roaming\npm\node_modules\nightwatch\lib\utils\periodic-promise.js:81:23)
-    ]]></error>
+
     
     </testcase>
   
 
-  
-    <system-err>
-       → NoSuchElementError
-
-    An element could not be located on the page using the given search parameters.
-
-    Try fixing by :
-1. Please inspect the html before the step
-2. Verify if an element with the mentioned selector is present in the DOM tree
-
-    Error location:
-C:\Users\georgeyinxu\Project-INC\backend\tests\spfdTest.js:
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
- 51 |       .click(&#39;.react-datepicker__day--009&#39;)
- 52 |       .click(&#39;.spfd-modal&#39;)
- 53 |       .click(&#39;.react-datepicker__day--013&#39;) 
- 54 |       .assert.valueEquals(&#34;input[type=&#39;text&#39;]&#34;, &#39;2021/08/09 - 2021/08/13&#39;)
- 55 |       .waitForElementVisible(&#39;.spfd-modal&#39;)
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
- → Error
-
-    Element .row-id not found. An element could not be located on the page using the given search parameters.
-    </system-err>
   
 
     
