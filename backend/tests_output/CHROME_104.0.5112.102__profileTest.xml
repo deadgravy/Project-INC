@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="1"
+            failures="0"
             tests="1">
 
   <testsuite name="profileTest"
-    errors="0" failures="1" hostname="" id="" package="profileTest" skipped="0"
-    tests="1" time="9.304" timestamp="">
+    errors="0" failures="0" hostname="" id="" package="profileTest" skipped="0"
+    tests="1" time="7.170" timestamp="">
   
-    <testcase name="Profile Test Case" classname="profileTest" time="9.304" assertions="6">
+    <testcase name="Profile Test Case" classname="profileTest" time="7.170" assertions="13">
 
     
 
@@ -17,37 +17,26 @@
 
     
 
-      <failure message="Timed out while waiting for element &lt;.profileContainer&gt; to be present for 5000 milliseconds. - expected &#34;visible&#34; but got: &#34;not found&#34; (5340ms)">    at Object.Profile Test Case (C:\Users\georgeyinxu\Project-INC\backend\tests\profileTest.js:23:6)
-    at runMicrotasks (&lt;anonymous&gt;)</failure>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
     </testcase>
   
 
-  
-    <system-err>
-       → NoSuchElementError
-
-    An element could not be located on the page using the given search parameters.
-
-    Try fixing by :
-1. Please inspect the html before the step
-2. Verify if an element with the mentioned selector is present in the DOM tree
-
-    Error location:
-C:\Users\georgeyinxu\Project-INC\backend\tests\spfdTest.js:
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
- 51 |       .click(&#39;.react-datepicker__day--009&#39;)
- 52 |       .click(&#39;.spfd-modal&#39;)
- 53 |       .click(&#39;.react-datepicker__day--013&#39;) 
- 54 |       .assert.valueEquals(&#34;input[type=&#39;text&#39;]&#34;, &#39;2021/08/09 - 2021/08/13&#39;)
- 55 |       .waitForElementVisible(&#39;.spfd-modal&#39;)
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
- → Error
-
-    Element .row-id not found. An element could not be located on the page using the given search parameters.
-    </system-err>
   
 
     

@@ -50,6 +50,7 @@ module.exports = {
     browser
       .click('.react-datepicker__day--009')
       .click('.spfd-modal')
+      .pause(500)
       .click('.react-datepicker__day--013')
       .assert.valueEquals("input[type='text']", '2021/08/09 - 2021/08/13')
       .waitForElementVisible('.spfd-modal')
