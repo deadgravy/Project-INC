@@ -37,11 +37,16 @@ module.exports = {
       .setValue('.contact-nw', '90001111')
       .setValue('.password-nw', 'password')
       .click('.btn-danger')
-      .acceptAlert()
-      .pause(1000);
+      .pause(1000)
+      .acceptAlert();
 
     browser.refresh;
+
+    browser.pause(1000);
     browser.click('#Night');
+    browser.pause(500);
+    browser.acceptAlert();
+    browser.pause(500);
     browser.acceptAlert();
     browser.assert.textContains(
       {
