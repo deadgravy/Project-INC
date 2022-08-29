@@ -1564,3 +1564,175 @@ paths:
                 type: string
               data:
                 type: string 
+
+  /api/getAllUsers: 
+    get:
+      summary: Getting all users
+      tags:
+        - General
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user_id: 
+                      type: string
+                    email:
+                      type: string
+                    contact_number:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    created_at:
+                      type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/deleteUserByID/{id}:
+    delete:
+      summary: Delete user by ID
+      tags:
+        - General
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/getUserIDbyEmail/{email}:
+    get:
+      summary: Getting userID by email
+      tags:
+        - General
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+            example: 'georgeyin.21@ichat.sp.edu.sg'
+          required: true
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string 
+
+  /api/changePWbyID: 
+    post:
+      summary: Changing password based on user ID
+      tags:
+        - General
+      parameters:
+        - in: body
+          name: user
+          description: Details of user
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        201:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string  
+
+  /api/updateUserByID/{id}:
+    put:
+      summary: Updating user based on ID
+      tags:
+        - General
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: 41
+          required: true
+        - in: body
+          name: newDetails
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              phone:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+      responses:
+        200:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        500:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string  
