@@ -46,7 +46,7 @@ router.get(
 //==================================================================================
 
 // getting machine connectivity (eus)
-router.get('/machineConnectivity', dataController.getMachineConnectivity);
+router.post('/machineConnectivity', dataController.getMachineConnectivity);
 
 // getting machines (eus)
 router.get('/machines', dataController.getMachines);

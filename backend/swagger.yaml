@@ -94,10 +94,21 @@ paths:
                 type: string
 
   /api/machineConnectivity:
-    get:
+    post:
       summary: Get machine connectivity of all machines in EUS
       tags:
         - Equipment Utilisation Snapshot
+      parameters:
+        - in: body
+          name: timestamp
+          schema:
+            type: object
+            required:
+              - currentDate
+            properties:
+              currentDate:
+                type: string
+                example: '2022-08-10'
       responses:
         200:
           schema:

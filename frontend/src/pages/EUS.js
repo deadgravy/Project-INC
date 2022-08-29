@@ -4,6 +4,7 @@ import MachineConnectivity from '../components/eus/MachineConnectivity';
 import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
+import moment from 'moment';
 <style>
   .modal {{
     top: '0 !important'
@@ -14,11 +15,16 @@ const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
   const [allEquipments, setAllEquipments] = useState(null);
   const [isLoading, setIsloading] = useState(true);
+  let currentDate = moment().format('YYYY-MM-DD');
 
   // Calling /machines/ & /machinesConnecitivity/
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:4000/api/machineConnectivity').then((res) =>
+      fetch('http://localhost:4000/api/machineConnectivity', {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify({currentDate})
+      }).then((res) =>
         res.json()
       ),
       fetch('http://localhost:4000/api/machines').then((res) => res.json()),
