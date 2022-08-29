@@ -5,9 +5,9 @@
 
   <testsuite name="loginTest"
     errors="0" failures="0" hostname="" id="" package="loginTest" skipped="0"
-    tests="1" time="5.051" timestamp="">
+    tests="1" time="5.872" timestamp="">
   
-    <testcase name="Login Test Case" classname="loginTest" time="5.051" assertions="4">
+    <testcase name="Login Test Case" classname="loginTest" time="5.872" assertions="4">
 
     
 
@@ -28,22 +28,6 @@
     {&#34;error&#34;:{&#34;name&#34;:&#34;ElementNotInteractableError&#34;,&#34;remoteStacktrace&#34;:&#34;&#34;},&#34;status&#34;:-1,&#34;value&#34;:null}
 
     Error location:
-C:\Project-INC-1\backend\tests\eudTest.js:
-–––––––––––––––––––––––––––––––––––––––––––
- 11 |       .setValue(pwTest, &#39;password&#39;)
- 12 |       .click(&#39;.signInBtn&#39;)
- 13 |       .click({ 
- 14 |         selector: &#39;.row.level.px-1&#39;,
- 15 |         index: 4,
-–––––––––––––––––––––––––––––––––––––––––––
-
- → TimeoutError
-
-    An error occurred while running .click() command on &lt;.row.level.px-1&gt;: element not interactable
-  (Session info: chrome=104.0.5112.102)
-    {&#34;error&#34;:{&#34;name&#34;:&#34;ElementNotInteractableError&#34;,&#34;remoteStacktrace&#34;:&#34;&#34;},&#34;status&#34;:-1,&#34;value&#34;:null}
-
-    Error location:
 C:\Project-INC-1\backend\tests\podTest.js:
 –––––––––––––––––––––––––––––––––––––––––––
  13 |       .assert.urlContains(&#39;equipmentUtilisationSnapshot&#39;, &#39;Successful login!&#39;)
@@ -51,25 +35,6 @@ C:\Project-INC-1\backend\tests\podTest.js:
  15 |       .click({ 
  16 |         selector: &#39;.row.level.px-1&#39;,
  17 |         index: 4
-–––––––––––––––––––––––––––––––––––––––––––
-
- → NoSuchElementError
-
-    An element could not be located on the page using the given search parameters.
-    {&#34;error&#34;:{&#34;name&#34;:&#34;InvalidSelectorError&#34;,&#34;remoteStacktrace&#34;:&#34;&#34;},&#34;status&#34;:-1,&#34;value&#34;:null}
-
-    Try fixing by :
-1. Please inspect the html before the step
-2. Verify if an element with the mentioned selector is present in the DOM tree
-
-    Error location:
-C:\Project-INC-1\backend\tests\tpdTest.js:
-–––––––––––––––––––––––––––––––––––––––––––
- 10 |       .setValue(pwTest, &#39;password&#39;)
- 11 |       .click(&#39;.signInBtn&#39;)
- 12 |       .click(&#34;//*[@id=&#39;Today&#39;s Production&#39;]&#34;) 
- 13 |       .waitForElementVisible(&#39;.App&#39;)
- 14 |       .waitForElementVisible(&#39;.react-datepicker-wrapper&#39;)
 –––––––––––––––––––––––––––––––––––––––––––
 
     </system-err>

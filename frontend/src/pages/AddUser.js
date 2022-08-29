@@ -30,7 +30,7 @@ const AddUser = () => {
         // TODO: Redirect to EUS
         console.log('Successful sign up, redirect to EUS');
         alert('User successfully added');
-        navigate('/equipmentUtilisationSnapshot');
+        navigate('/users');
         return;
       } else {
         alert('Unsuccessful!');
@@ -50,7 +50,7 @@ const AddUser = () => {
                 <div className='input-control w-100p'>
                   <input
                     type='text'
-                    className='input-contains-icon'
+                    className='firstname-nw input-contains-icon'
                     placeholder='First Name'
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -65,7 +65,7 @@ const AddUser = () => {
                 <div className='input-control w-100p'>
                   <input
                     type='text'
-                    className='input-contains-icon'
+                    className='lastname-nw input-contains-icon'
                     placeholder='Last Name'
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -82,7 +82,7 @@ const AddUser = () => {
                 <div className='input-control w-100p'>
                   <input
                     type='email'
-                    className='input-contains-icon'
+                    className='email-nw input-contains-icon'
                     placeholder='Email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +97,7 @@ const AddUser = () => {
                 <div className='input-control w-100p'>
                   <input
                     type='tel'
-                    className='input-contains-icon'
+                    className='contact-nw input-contains-icon'
                     placeholder='Contact'
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
@@ -113,7 +113,7 @@ const AddUser = () => {
               <div className='input-control w-100p'>
                 <input
                   type='password'
-                  className='input-contains-icon'
+                  className='password-nw input-contains-icon'
                   placeholder='Password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
