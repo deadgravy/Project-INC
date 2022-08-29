@@ -5,10 +5,11 @@ import EquipmentFrequency from '../components/eus/EquipmentFrequency';
 import '../styles/eus.css';
 import '../styles/toggler.css';
 <style>
-  .modal {{
-    top: '0 !important'
+  .modal{' '}
+  {{
+    top: '0 !important',
   }}
-</style>
+</style>;
 
 const EUS = () => {
   const [machineConnectivityData, setMachineConnectivityData] = useState(null);
@@ -18,13 +19,9 @@ const EUS = () => {
   // Calling /machines/ & /machinesConnecitivity/
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:4000/api/machineConnectivity').then((res) =>
-        res.json()
-      ),
-      fetch('http://localhost:4000/api/machines').then((res) => res.json()),
-      fetch('http://localhost:4000/api/getAllEquipments').then((res) =>
-        res.json()
-      ),
+      fetch('/api/machineConnectivity').then((res) => res.json()),
+      fetch('/api/machines').then((res) => res.json()),
+      fetch('/api/getAllEquipments').then((res) => res.json()),
     ])
       .then(([machineConnectivityData, machinesData, allEquipments]) => {
         let tempArr = machineConnectivityData.data;

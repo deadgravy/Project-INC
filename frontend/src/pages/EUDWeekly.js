@@ -41,29 +41,29 @@ const EUDWeekly = () => {
     );
 
     Promise.all([
+      fetch(`/api/getSingleUsageWeekly/${startdate}/${enddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getMultipleUsageWeekly/${startdate}/${enddate}`).then((res) =>
+        res.json()
+      ),
       fetch(
-        `http://localhost:4000/api/getSingleUsageWeekly/${startdate}/${enddate}`
+        `/api/getSingleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
       fetch(
-        `http://localhost:4000/api/getMultipleUsageWeekly/${startdate}/${enddate}`
+        `/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
+      fetch(`/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`).then(
+        (res) => res.json()
+      ),
       fetch(
-        `http://localhost:4000/api/getSingleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
+        `/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
+      fetch(`/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`).then(
+        (res) => res.json()
+      ),
       fetch(
-        `http://localhost:4000/api/getMultipleUsageDetailsWeekly/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleUnusedWeekly/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
+        `/api/getMultipleUnusedWeekly/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({

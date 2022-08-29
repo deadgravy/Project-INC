@@ -12,15 +12,15 @@ const EquipUtilDashboard = () => {
   useEffect(() => {
     setIsloading(true);
 
-    Promise.all([
-      fetch(`http://localhost:4000/api/getAllUsers`).then((res) => res.json()),
-    ]).then(([result]) => {
-      setUsers({
-        data: result.data,
-      });
+    Promise.all([fetch(`/api/getAllUsers`).then((res) => res.json())]).then(
+      ([result]) => {
+        setUsers({
+          data: result.data,
+        });
 
-      setIsloading(false);
-    });
+        setIsloading(false);
+      }
+    );
   }, []);
 
   return (

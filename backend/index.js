@@ -6,12 +6,12 @@ const cors = require('cors');
 app.use(cors());
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
+// const swaggerDocument = YAML.load('./swagger.yaml');
 
 //app.use(express.json());//Won't work to capture and reconstruct multipart/form-data
 //app.use(express.urlencoded({ extended: false }));//Won't work either
 app.use('/api/', dataRoutes);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/', eudRoutes);
 
 const server = app.listen('4000', 'localhost', function () {
