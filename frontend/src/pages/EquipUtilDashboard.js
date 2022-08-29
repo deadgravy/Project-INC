@@ -39,23 +39,23 @@ const EquipUtilDashboard = () => {
     ).format('YYYY-MM-DD');
 
     Promise.all([
+      fetch(`/api/getSingleUsage/${startdate}/${enddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getMultipleUsage/${startdate}/${enddate}`).then((res) =>
+        res.json()
+      ),
+      fetch(`/api/getSingleUsageDetails/${startdate}/${enddate}/${hour}`).then(
+        (res) => res.json()
+      ),
       fetch(
-        `http://localhost:4000/api/getSingleUsage/${startdate}/${enddate}`
+        `/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
+      fetch(`/api/getSingleUnusedDetails/${startdate}/${enddate}/${hour}`).then(
+        (res) => res.json()
+      ),
       fetch(
-        `http://localhost:4000/api/getMultipleUsage/${startdate}/${enddate}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleUsageDetails/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultipleUsageDetails/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getSingleUnusedDetails/${startdate}/${enddate}/${hour}`
-      ).then((res) => res.json()),
-      fetch(
-        `http://localhost:4000/api/getMultipleUnusedDetails/${startdate}/${enddate}/${hour}`
+        `/api/getMultipleUnusedDetails/${startdate}/${enddate}/${hour}`
       ).then((res) => res.json()),
     ]).then(([result1, result2, result3, result4, result5, result6]) => {
       setSingleUsage({
