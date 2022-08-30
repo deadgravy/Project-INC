@@ -14,8 +14,8 @@ module.exports.addUser = async function (
             VALUES ($1, $2, $3, $4)
             RETURNING user_id AS sample_id
             )
-         INSERT INTO public.account(user_id, password_hash)
-         SELECT sample_id, $5 FROM ins1;`,
+         INSERT INTO public.account(user_id, password_hash, role)
+         SELECT sample_id, $5, 'user' FROM ins1;`,
       [email, contact_number, first_name, last_name, password_hash]
     );
     console.log(rows);
@@ -28,7 +28,13 @@ module.exports.addUser = async function (
 module.exports.getAllUsers = async function () {
   try {
     const { rows } = await pool.query(
-      `SELECT * FROM public."user" ORDER BY user_id ASC`
+      `SELECT 
+        u.user_id, u.email, u.contact_number, u.first_name, u.last_name,
+        a.role
+        FROM public."user" u, public.account a
+        WHERE u.user_id = a.user_id
+        ORDER BY user_id;
+     `
     );
     console.log(rows);
     return rows;
@@ -55,7 +61,7 @@ module.exports.deleteUserByID = async function (id) {
 
 module.exports.updateUserByID = async function (id, requestBody) {
   try {
-    const {rows} = await pool.query(
+    const { rows } = await pool.query(
       `
       UPDATE
         public.user
@@ -66,11 +72,17 @@ module.exports.updateUserByID = async function (id, requestBody) {
         last_name = $4
       WHERE
         user_id = $5`,
-        [requestBody.email, requestBody.phone, requestBody.firstName, requestBody.lastName, id]
-    )
+      [
+        requestBody.email,
+        requestBody.phone,
+        requestBody.firstName,
+        requestBody.lastName,
+        id,
+      ]
+    );
 
     return rows;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

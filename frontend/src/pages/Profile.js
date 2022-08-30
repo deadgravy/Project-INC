@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/profile.css';
 
 const Profile = () => {
@@ -94,6 +95,11 @@ const Profile = () => {
             <button className='u-pull-right mr-1 mt-2 bg-info text-white'>
               Update Details
             </button>
+            <div className='mt-3'>
+              <a href='http://54.209.249.105/' className='u u-LR text-white'>
+                Back to Home
+              </a>
+            </div>
           </form>
         </div>
       </div>
