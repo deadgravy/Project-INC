@@ -21,7 +21,11 @@ const EUS = () => {
   // Calling /machines/ & /machinesConnecitivity/
   useEffect(() => {
     Promise.all([
-      fetch('/api/machineConnectivity').then((res) => res.json()),
+      fetch('/api/machineConnectivity', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentDate }),
+      }).then((res) => res.json()),
       fetch('/api/machines').then((res) => res.json()),
       fetch('/api/getAllEquipments').then((res) => res.json()),
     ])
