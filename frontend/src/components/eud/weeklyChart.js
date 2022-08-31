@@ -110,7 +110,7 @@ export function WeeklyChart({ data }) {
 
   return (
     <>
-      <div className='row mb-2'>
+      <div className='row mb-2 colourLegend'>
         {legend.length === 0 ? (
           <br></br>
         ) : (
@@ -129,6 +129,7 @@ export function WeeklyChart({ data }) {
       </div>
       {usageArrChart.length > 0 && (
         <Chart
+          className='chart'
           chartType='Timeline'
           data={usageArrChart}
           width='99%'

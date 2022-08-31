@@ -34,6 +34,7 @@ const SearchBar = ({ data1 }) => {
         onClick={handleClick}
         class='bg-blue-600'
         style={{ marginLeft: 10, width: 150, height: 50, color: 'white' }}
+        id='submit'
       >
         <em style={{ fontWeight: 'bold' }}>Submit</em>
       </button>

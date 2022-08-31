@@ -81,6 +81,7 @@ const DonutChart = ({ data1, data2 }) => {
             .append('path')
             .attr('d', arcGenerator)
             .style('fill', (d, i) => colors[i % data1?.value.length]);
+
         } else {
           var value3 = [
             { value: data1?.data[count].batchescompleted },
@@ -134,7 +135,6 @@ const DonutChart = ({ data1, data2 }) => {
             .append('path')
             .attr('d', arcGenerator)
             .style('fill', (d, i) => colors[i % data1?.value.length]);
-
           count++;
         }
       }
@@ -158,7 +158,7 @@ const DonutChart = ({ data1, data2 }) => {
   return (
     <>
       <div className='allProducts' style={{ width: 170 }}>
-        <button onClick={toggleModal} className='btn-modal'>
+        <button onClick={toggleModal} className='all-products btn-modal'>
           All Products
         </button>
       </div>
@@ -169,6 +169,8 @@ const DonutChart = ({ data1, data2 }) => {
               <h4>Products to be completed today:</h4>
               {data2.data.map((recipe) => (
                 <button
+                  className='modal-btn'
+                  name={recipe.recipe_id}
                   key={recipe.recipe_id}
                   onClick={() => onProductSelect(recipe.recipe_id)}
                 >
