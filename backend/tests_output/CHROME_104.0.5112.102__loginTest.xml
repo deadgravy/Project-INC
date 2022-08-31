@@ -5,9 +5,9 @@
 
   <testsuite name="loginTest"
     errors="0" failures="0" hostname="" id="" package="loginTest" skipped="0"
-    tests="1" time="3.056" timestamp="">
+    tests="1" time="3.633" timestamp="">
   
-    <testcase name="Login Test Case" classname="loginTest" time="3.056" assertions="4">
+    <testcase name="Login Test Case" classname="loginTest" time="3.633" assertions="4">
 
     
 
@@ -19,30 +19,6 @@
     </testcase>
   
 
-  
-    <system-err>
-       → NoSuchElementError
-
-    An element could not be located on the page using the given search parameters.
-
-    Try fixing by :
-1. Please inspect the html before the step
-2. Verify if an element with the mentioned selector is present in the DOM tree
-
-    Error location:
-C:\Users\georgeyinxu\Project-INC\backend\tests\spfdTest.js:
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
- 51 |       .click(&#39;.react-datepicker__day--009&#39;)
- 52 |       .click(&#39;.spfd-modal&#39;)
- 53 |       .click(&#39;.react-datepicker__day--013&#39;) 
- 54 |       .assert.valueEquals(&#34;input[type=&#39;text&#39;]&#34;, &#39;2021/08/09 - 2021/08/13&#39;)
- 55 |       .waitForElementVisible(&#39;.spfd-modal&#39;)
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
- → Error
-
-    Element .row-id not found. An element could not be located on the page using the given search parameters.
-    </system-err>
   
 
     

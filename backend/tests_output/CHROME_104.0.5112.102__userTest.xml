@@ -4,10 +4,10 @@
             tests="1">
 
   <testsuite name="userTest"
-    errors="1" failures="1" hostname="" id="" package="userTest" skipped="0"
-    tests="1" time="12.69" timestamp="">
+    errors="0" failures="0" hostname="" id="" package="userTest" skipped="0"
+    tests="1" time="9.102" timestamp="">
   
-    <testcase name="Users Page Test Case" classname="userTest" time="12.69" assertions="7">
+    <testcase name="Users Page Test Case" classname="userTest" time="9.102" assertions="7">
 
     
 
