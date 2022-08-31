@@ -34,11 +34,6 @@ export const SidebarData = [
     link: '/productionOverview/63',
   },
   {
-    title: 'Settings',
-    icon: <SettingsIcon />,
-    link: '/settings',
-  },
-  {
     title: 'Profile',
     icon: <PersonIcon />,
     link: '/profile',

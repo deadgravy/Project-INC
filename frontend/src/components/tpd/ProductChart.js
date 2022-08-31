@@ -48,8 +48,9 @@ const DonutChart = ({ data1, data2 }) => {
           .attr('transform', `translate(${boxSize / 2}, ${boxSize / 2})`);
 
         const arcGenerator = d3.arc().innerRadius(160).outerRadius(220);
-
-        if (data1?.data[count].recipe_id != data2?.data[i].recipe_id) {
+        var data1ID = data1?.data[count]?.recipe_id;
+        var data2ID = data2?.data[i]?.recipe_id;
+        if (data1ID !== data2ID) {
           //Check if recipeIDs match
 
           const pieGenerator = d3.pie().value((d) => d.value);
@@ -79,13 +80,14 @@ const DonutChart = ({ data1, data2 }) => {
           arcs
             .append('path')
             .attr('d', arcGenerator)
-            .style('fill', (d, i) => colors[i % data1.value.length]);
+            .style('fill', (d, i) => colors[i % data1?.value.length]);
+
         } else {
           var value3 = [
             { value: data1?.data[count].batchescompleted },
             {
               value:
-                data2.data[i].batchestocomplete -
+                data2?.data[i].batchestocomplete -
                 data1?.data[count].batchescompleted,
             },
           ];
@@ -132,8 +134,7 @@ const DonutChart = ({ data1, data2 }) => {
           arcs
             .append('path')
             .attr('d', arcGenerator)
-            .style('fill', (d, i) => colors[i % data1.value.length]);
-
+            .style('fill', (d, i) => colors[i % data1?.value.length]);
           count++;
         }
       }

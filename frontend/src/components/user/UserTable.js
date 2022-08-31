@@ -40,6 +40,9 @@ export function UserTable(users) {
               <abbr title='Title4'>Email</abbr>
             </th>
             <th>
+              <abbr title='Title5'>Role</abbr>
+            </th>
+            <th>
               <button className='btn-link' onClick={handleAddUser}>
                 ADD USER
               </button>
@@ -56,6 +59,7 @@ export function UserTable(users) {
               </td>
               <td>{data.contact_number}</td>
               <td>{data.email}</td>
+              <td>{data.role}</td>
               <td>
                 <button
                   className='delete-user-btn btn-primary'
