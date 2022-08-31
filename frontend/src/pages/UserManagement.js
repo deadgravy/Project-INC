@@ -36,7 +36,7 @@ const EquipUtilDashboard = () => {
                 <div className='pt-2 Row1'>
                   <h2>Users</h2>
                 </div>
-                <div className='Row1'>
+                <div className='Row2'>
                   <UserTable data={users} />
                 </div>
               </div>

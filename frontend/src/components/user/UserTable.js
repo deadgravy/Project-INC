@@ -24,10 +24,10 @@ export function UserTable(users) {
   }
   return (
     <>
-      <table className='table bordered mt-3'>
+      <table className='user-tb table bordered mt-3'>
         <thead>
           <tr>
-            <th>
+            <th className='tb-head-nw'>
               <abbr title='Title1'>User ID</abbr>
             </th>
             <th>
@@ -49,7 +49,7 @@ export function UserTable(users) {
 
         <tbody>
           {usersArr.data.map((data) => (
-            <tr>
+            <tr className='row-id'>
               <th>{data.user_id}</th>
               <td>
                 {data.first_name} {data.last_name}
@@ -58,7 +58,8 @@ export function UserTable(users) {
               <td>{data.email}</td>
               <td>
                 <button
-                  className='btn-primary'
+                  className='delete-user-btn btn-primary'
+                  id={data.first_name}
                   onClick={() => deleteUser(data.user_id)}
                 >
                   DELETE USER

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import "../tpd/styles/table.css";
+import React, { useEffect, useState, useRef } from 'react';
+import '../tpd/styles/table.css';
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from "@mui/material/TextField";
-import "./styles/modal.css";
+import TextField from '@mui/material/TextField';
+import './styles/modal.css';
 
 export default function TableComponent({ data1, data2 }) {
   const [singleProductData, setSingleProductData] = useState([]);
@@ -75,7 +75,7 @@ export default function TableComponent({ data1, data2 }) {
     const equipEle = document.getElementById(id);
     containerChartEle.scrollTo({
       top: equipEle.offsetTop - 70,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -135,138 +135,155 @@ export default function TableComponent({ data1, data2 }) {
 
   return (
     <>
-    <div>
-      <div className="row">
-        <div className="singleProduct">
-          <button onClick={toggleSingleModal} className='btn-modal'>
-            Single Product
-          </button>
-        </div>
-        <div className="multiProduct">
-          <button onClick={toggleMultiModal} className='btn-modal'>
-            Multi Product
-          </button>
-        </div>
-      </div>
-      {singleModal && (
-        <div className=''>
-          <div onClick={toggleSingleModal} className='overlay'>
-          <div className='modal-content'>
-            <h4>Equipments currently running:</h4>
-              {singleProductData.map((equip) => {
-                while (countData(data1?.data, equip.fr_process_steps) % 2 !== 0)
-                return(
-                    <button
-                      key={equip.equipid}
-                      onClick={() => onEquipSelect(equip.equipid)}
-                    >
-                      {equip.name}
-                    </button>
-            )})}
-            <button className='close-modal' onClick={toggleSingleModal}>
-              <CloseIcon />
+      <div>
+        <div className='row'>
+          <div className='singleProduct'>
+            <button
+              onClick={toggleSingleModal}
+              className='single-btn btn-modal'
+            >
+              Single Product
+            </button>
+          </div>
+          <div className='multiProduct'>
+            <button onClick={toggleMultiModal} className='multi-btn btn-modal'>
+              Multi Product
             </button>
           </div>
         </div>
-        </div>
-      )}
-      {multiModal && (
-        <div className=''>
-          <div onClick={toggleMultiModal} className='overlay'>
-          <div className='modal-content'>
-            <h4>Equipments currently running:</h4>
-              {multiModalData.map((equip) => (
-                    <button
-                      key={equip.equipid}
-                      onClick={() => onEquipSelect(equip.equipid)}
-                    >
-                      {equip.name}
-                    </button>
-              ))}
-            <button className='close-modal' onClick={toggleMultiModal}>
-              <CloseIcon />
-            </button>
+        {singleModal && (
+          <div className=''>
+            <div onClick={toggleSingleModal} className='overlay'>
+              <div className='modal-content'>
+                <h4>Equipments currently running:</h4>
+                {singleProductData.map((equip) => {
+                  while (
+                    countData(data1?.data, equip.fr_process_steps) % 2 !==
+                    0
+                  )
+                    return (
+                      <button
+                        className='single-prod-btn'
+                        key={equip.equipid}
+                        onClick={() => onEquipSelect(equip.equipid)}
+                      >
+                        {equip.name}
+                      </button>
+                    );
+                })}
+                <button className='close-modal' onClick={toggleSingleModal}>
+                  <CloseIcon />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
-        
-      )}
-    <div ref={tableRef} className="tableComponent">
-    <div id="table-scroll">
-      <div className="p-4 bg-white-500 u-round-xs">
-        <div className="table">
-          <table className="fixed-header">
-            <thead>
-              <tr>
-                <th>Equipment:</th>
-                <th>Current Recipe:</th>
-                <th>Equipment running for:</th>
-                <th>Stage:</th>
-                <th>Average time taken:</th>
-              </tr>
-            </thead>
-            <tbody>
-              {singleProductData.map((value, index) => {
-                while (countData(data1?.data, value.fr_process_steps) % 2 !== 0)
-                  return (
-                    <tr key={index} id={value.equipid}>
-                      <td>{value.name}</td>
-                      <td>{value.productname}</td>
-                      <td>
-                        {value.timetostarted.days
-                          ? `${value.timetostarted.days} days`
-                          : ""}{" "}
-                        {value.timetostarted.hours
-                          ? `${value.timetostarted.hours} hours`
-                          : ""}{" "}
-                        {value.timetostarted.minutes
-                          ? `${value.timetostarted.minutes} mins`
-                          : "0 mins"}{" "}
-                      </td>
-                      <td>{value.queue}</td>
-                      <td>
-                        {value.avg.days ? `${value.avg.days} days` : ""}{" "}
-                        {value.avg.hours ? `${value.avg.hours} hours` : ""}{" "}
-                        {value.avg.minutes ? `${value.avg.minutes} mins` : ""}{" "}
-                      </td>
+        )}
+        {multiModal && (
+          <div className=''>
+            <div onClick={toggleMultiModal} className='overlay'>
+              <div className='modal-content'>
+                <h4>Equipments currently running:</h4>
+                {multiModalData.map((equip) => (
+                  <button
+                    className='multi-prod-btn'
+                    key={equip.equipid}
+                    onClick={() => onEquipSelect(equip.equipid)}
+                  >
+                    {equip.name}
+                  </button>
+                ))}
+                <button className='close-modal' onClick={toggleMultiModal}>
+                  <CloseIcon />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        <div ref={tableRef} className='tableComponent'>
+          <div id='table-scroll'>
+            <div className='p-4 bg-white-500 u-round-xs'>
+              <div className='table'>
+                <table className='fixed-header'>
+                  <thead>
+                    <tr>
+                      <th>Equipment:</th>
+                      <th>Current Recipe:</th>
+                      <th>Equipment running for:</th>
+                      <th>Stage:</th>
+                      <th>Average time taken:</th>
                     </tr>
-                  );
-              })}
+                  </thead>
+                  <tbody>
+                    {singleProductData.map((value, index) => {
+                      while (
+                        countData(data1?.data, value.fr_process_steps) % 2 !==
+                        0
+                      )
+                        return (
+                          <tr key={index} id={value.equipid}>
+                            <td>{value.name}</td>
+                            <td>{value.productname}</td>
+                            <td>
+                              {value.timetostarted.days
+                                ? `${value.timetostarted.days} days`
+                                : ''}{' '}
+                              {value.timetostarted.hours
+                                ? `${value.timetostarted.hours} hours`
+                                : ''}{' '}
+                              {value.timetostarted.minutes
+                                ? `${value.timetostarted.minutes} mins`
+                                : '0 mins'}{' '}
+                            </td>
+                            <td>{value.queue}</td>
+                            <td>
+                              {value.avg.days ? `${value.avg.days} days` : ''}{' '}
+                              {value.avg.hours
+                                ? `${value.avg.hours} hours`
+                                : ''}{' '}
+                              {value.avg.minutes
+                                ? `${value.avg.minutes} mins`
+                                : ''}{' '}
+                            </td>
+                          </tr>
+                        );
+                    })}
 
-              {/*Return the same table row ui logic */}
+                    {/*Return the same table row ui logic */}
 
-              {multiProductData?.map((value, index) => {
-                return (
-                  <tr key={index} id={value.equipid}>
-                    <td>{`${value.name}`}</td>
-                    <td>{value.productname}</td>
-                    <td>
-                      {value.timetostarted.days
-                        ? `${value.timetostarted?.days} days`
-                        : null}
-                      {value.timetostarted.hours
-                        ? `${value.timetostarted.hours} hours`
-                        : ""}{" "}
-                      {value.timetostarted.minutes
-                        ? `${value.timetostarted.minutes} mins`
-                        : "0 mins"}{" "}
-                    </td>
-                    <td>{value.queue}</td>
-                    <td>
-                      {value.avg.days ? `${value.avg?.days} days` : ""}{" "}
-                      {value.avg.hours ? `${value.avg.hours} hours` : ""}{" "}
-                      {value.avg.minutes ? `${value.avg.minutes} mins` : ""}{" "}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                    {multiProductData?.map((value, index) => {
+                      return (
+                        <tr key={index} id={value.equipid}>
+                          <td>{`${value.name}`}</td>
+                          <td>{value.productname}</td>
+                          <td>
+                            {value.timetostarted.days
+                              ? `${value.timetostarted?.days} days`
+                              : null}
+                            {value.timetostarted.hours
+                              ? `${value.timetostarted.hours} hours`
+                              : ''}{' '}
+                            {value.timetostarted.minutes
+                              ? `${value.timetostarted.minutes} mins`
+                              : '0 mins'}{' '}
+                          </td>
+                          <td>{value.queue}</td>
+                          <td>
+                            {value.avg.days ? `${value.avg?.days} days` : ''}{' '}
+                            {value.avg.hours ? `${value.avg.hours} hours` : ''}{' '}
+                            {value.avg.minutes
+                              ? `${value.avg.minutes} mins`
+                              : ''}{' '}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
     </>
   );
-};
+}
