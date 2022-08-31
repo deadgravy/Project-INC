@@ -81,7 +81,6 @@ const DonutChart = ({ data1, data2 }) => {
             .append('path')
             .attr('d', arcGenerator)
             .style('fill', (d, i) => colors[i % data1?.value.length]);
-
         } else {
           var value3 = [
             { value: data1?.data[count].batchescompleted },
