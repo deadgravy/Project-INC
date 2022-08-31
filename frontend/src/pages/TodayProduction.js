@@ -76,7 +76,7 @@ const TodayProduction = () => {
 
   return (
     <React.StrictMode>
-      <div className='equipmentuUtilisationDashboard row p-0 w-100p'>
+      <div className='todaysProd row p-0 w-100p'>
         <div className='po-sidebar sidebar col-2'>
           <Sidebar />
         </div>
@@ -98,6 +98,7 @@ const TodayProduction = () => {
                     onChange={(date) => setDate(date)}
                     placeholderText='Please Select Date'
                     dateFormat='yyyy/MM/dd'
+                    minDate={new Date('2021-08-10')}
                     maxDate={new Date('2021-08-22')}
                     isClearable={false}
                     showYearDropdown

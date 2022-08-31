@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/profile.css';
 
 const Profile = () => {
@@ -16,20 +17,20 @@ const Profile = () => {
       email,
       firstName,
       lastName,
-      phone
-    }
+      phone,
+    };
 
     fetch(`http://localhost:4000/api/updateUserByID/${userID}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }).then((response) => {
       if (response.ok) {
         alert('Update Successful');
-        localStorage.setItem('user', email)
-        localStorage.setItem('firstName', firstName)
-        localStorage.setItem('lastName', lastName)
-        localStorage.setItem('phone', phone)
+        localStorage.setItem('user', email);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('lastName', lastName);
+        localStorage.setItem('phone', phone);
       } else {
         console.log(response);
         if (!response?.status) {
@@ -40,14 +41,14 @@ const Profile = () => {
           alert('Update failed!');
         }
       }
-    })
-  }
+    });
+  };
 
   return (
     <div className='profileContainer'>
       <div className='profile w-100p px-20 row'>
         <div className='card col-12 p-4 px-16'>
-          <h3 className='mb-2' style={{textAlign: 'center'}}>
+          <h3 className='mb-2' style={{ textAlign: 'center' }}>
             Profile
           </h3>
           <form onSubmit={handleSubmit}>
@@ -94,6 +95,14 @@ const Profile = () => {
             <button className='u-pull-right mr-1 mt-2 bg-info text-white'>
               Update Details
             </button>
+            <div className='mt-3'>
+              <a
+                href='/equipmentUtilisationSnapshot'
+                className='u u-LR text-white'
+              >
+                Back to Home
+              </a>
+            </div>
           </form>
         </div>
       </div>
