@@ -99,7 +99,7 @@ const TodayProduction = () => {
                     placeholderText='Please Select Date'
                     dateFormat='yyyy/MM/dd'
                     minDate={new Date('2021-08-10')}
-                    maxDate={new Date('2021-08-22')}
+                    maxDate={new Date()}
                     isClearable={false}
                     showYearDropdown
                   />
