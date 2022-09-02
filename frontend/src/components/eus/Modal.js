@@ -161,7 +161,7 @@ const Modal = ({ handleUserUpdate, parentCounter, setParentCounter }) => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 minDate={new Date('2021-08-10')}
-                maxDate={new Date('2021-08-22')}
+                maxDate={new Date()}
                 showYearDropdown
                 dateFormatCalendar='MMMM'
                 yearDropdownItemNumber={15}
