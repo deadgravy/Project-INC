@@ -86,7 +86,7 @@ const DonutChart = ({ data1, data2 }) => {
             { value: data1?.data[count].batchescompleted },
             {
               value:
-                data2?.data[i].batchestocomplete -
+                data2??.data[i].batchestocomplete -
                 data1?.data[count].batchescompleted,
             },
           ];
